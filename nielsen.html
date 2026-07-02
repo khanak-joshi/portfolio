@@ -104,7 +104,7 @@
       background: #32261E;
     }
     /* 44px minimum touch targets */
-    nav .nav-links a, .footer-col ul a {
+    nav .nav-links a, .footer-nav a {
       display: inline-flex;
       align-items: center;
       min-height: 44px;
@@ -477,22 +477,17 @@
       margin-top: 120px;
       padding: 36px 40px 0;
     }
-    .footer-inner {
-      display: flex;
-      align-items: stretch;
-      justify-content: space-between;
-      padding-bottom: 24px;
-      border-top: 1px solid rgba(0,0,0,0.08);
-      padding-top: 36px;
-    }
-    .footer-cols { display: flex; gap: 64px; }
-    .footer-col ul {
+    /* Nav links in a single horizontal row above the wordmark. */
+    .footer-nav {
       list-style: none;
       display: flex;
-      flex-direction: column;
-      gap: 14px;
+      flex-wrap: wrap;
+      gap: 36px;
+      align-items: center;
+      padding-top: 36px;
+      border-top: 1px solid rgba(0,0,0,0.08);
     }
-    .footer-col ul a {
+    .footer-nav a {
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       letter-spacing: 0.1em;
@@ -501,18 +496,18 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-    .footer-col ul a:hover { color: #4F3D30; }
+    .footer-nav a:hover { color: #4F3D30; }
+    /* Full-width wordmark anchored at the bottom. */
     .footer-name {
       font-family: 'Lora', serif;
       font-style: italic;
-      font-size: 72px;
+      font-size: clamp(44px, 15.3vw, 220px);
       font-weight: 400;
       color: rgba(79, 61, 48, 0.3);
-      line-height: 1;
-      letter-spacing: -0.02em;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
       white-space: nowrap;
-      display: flex;
-      align-items: center;
+      margin-top: 24px;
     }
     .footer-bottom {
       border-top: 1px solid rgba(0,0,0,0.08);
@@ -525,9 +520,7 @@
       color: var(--text-label);
     }
     @media (max-width: 768px) {
-      .footer-inner { flex-direction: column; gap: 40px; }
-      .footer-name { font-size: 26px; }
-      .footer-cols { gap: 36px; }
+      .footer-name { font-size: 15vw; margin-top: 20px; }
     }
 
     /* ── DIVIDERS ── */
@@ -598,9 +591,8 @@
         margin-right: 0 !important;
         margin-top: 60px;
       }
-      .footer-inner { flex-direction: column !important; gap: 20px !important; }
-      .footer-name { font-size: 26px; }
-      .footer-cols { gap: 28px; }
+      .footer-nav { gap: 20px 24px; padding-top: 28px; }
+      .footer-name { font-size: 15vw; margin-top: 20px; }
 
       /* Tap targets */
       nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
@@ -986,24 +978,14 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      <div class="footer-cols">
-        <div class="footer-col">
-          <ul>
-            <li><a href="index.html#work">Work</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="resume.pdf">Resume</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <ul>
-            <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
-            <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-name">Khanak Joshi</div>
-    </div>
+    <ul class="footer-nav">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="resume.pdf">Resume</a></li>
+      <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
+      <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
+    </ul>
+    <div class="footer-name">Khanak Joshi</div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
     </div>
