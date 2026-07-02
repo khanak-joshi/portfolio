@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Khanak Joshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #fafcfd;
+      --bg-warm: #E8E6DD;
+      --card: #EDE3D8;
+      --border: #D4C4B8;
+      --accent: #4F3D30;
+      --accent-link: #2C1A0E;
+      --text-primary: #1A1A1A;
+      --text-secondary: #3D3D3D;
+      --text-label: #888888;
+      /* Shared layout system (matches homepage + case study pages) */
+      --max-w: 780px;       /* narrow reading column */
+      --max-wide: 1320px;   /* hero + wide content */
+      --section-h: 40px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+      /* Same gutters as the rest of the site so the content edge never shifts. */
+      padding-left: 180px;
+      padding-right: 180px;
+    }
+    a { cursor: none; }
+
+    /* ── SHARED CONTAINERS ── */
+    .wide-inner {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+      box-sizing: border-box;
+    }
+    /* Wide sections break out of the body gutters, then re-center. */
+    #about-hero, #art-builds, footer {
+      margin-left: -180px;
+      margin-right: -180px;
+    }
+    @media (max-width: 960px) {
+      body { padding-left: 0; padding-right: 0; }
+      #about-hero, #art-builds, footer { margin-left: 0; margin-right: 0; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250,252,253,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+      text-decoration: none;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    nav .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:not(.nav-contact)::after {
+      content: '';
+      position: absolute;
+      bottom: 11px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #4F3D30;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
+    nav .nav-links a:hover { color: #4F3D30; }
+    nav .nav-links a.active {
+      color: #4F3D30;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+    nav .nav-links a.nav-contact {
+      color: #fff;
+      background: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background-color 0.35s ease;
+    }
+    nav .nav-links a.nav-contact:hover {
+      background: #32261E;
+    }
+    /* 44px minimum touch targets */
+    nav .nav-links a, .footer-col ul a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    /* ── HAMBURGER ── */
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-toggle span {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      height: 2.5px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: transform 0.4s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 17px; }
+    .nav-toggle span:nth-child(2) { top: 25px; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+    body.nav-open nav { z-index: 300; }
+
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 200;
+      padding: 24px 20px 40px;
+      flex-direction: column;
+    }
+    .mobile-nav-overlay.open { display: flex; }
+    .mobile-nav-header { display: none; }
+    .mobile-nav-logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+    }
+    .mobile-nav-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--accent);
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-nav-links {
+      position: static;
+      background: none;
+      height: auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-top: 92px;
+    }
+    .mobile-nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 26px;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--text-label);
+      text-decoration: none;
+      padding: 12px 0;
+      transition: color 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-nav-links a:hover { color: #4F3D30; }
+    .mobile-nav-links a.active { color: #4F3D30; }
+
+    /* ── ABOUT HERO ── */
+    #about-hero {
+      padding-top: 160px;
+      padding-bottom: 110px;
+    }
+    .about-grid {
+      display: grid;
+      /* asymmetric: text ~57%, portrait ~43% */
+      grid-template-columns: minmax(0, 1.32fr) minmax(0, 1fr);
+      gap: 72px;
+      align-items: center;
+      /* Fill the wide-inner so the hero content starts at the same
+         left edge as the homepage's wide content (no inset). */
+      max-width: none;
+      margin: 0 auto;
+    }
+    .about-kicker {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      display: block;
+      margin-bottom: 22px;
+    }
+    .about-text h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(32px, 4.2vw, 46px);
+      font-weight: 400;
+      color: #2B313D;
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+    }
+    .about-body {
+      margin-top: 32px;
+      max-width: 32em;
+    }
+    .about-body p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    .about-body p + p { margin-top: 20px; }
+
+    /* Portrait with a subtle offset panel for depth */
+    .about-photo {
+      position: relative;
+      margin: 0;
+    }
+    .about-photo::before {
+      content: '';
+      position: absolute;
+      inset: 16px -16px -16px 16px;
+      background: var(--card);
+      border-radius: 2px;
+      z-index: 0;
+    }
+    .about-photo img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+      display: block;
+      background: var(--bg-warm);
+    }
+    .about-photo-placeholder {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 2px;
+      background: var(--bg-warm);
+      border: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-photo-placeholder span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-label);
+    }
+
+    /* ── ART BUILDS DESIGN (the hinge) ── */
+    #art-builds {
+      padding-top: 72px;
+      padding-bottom: 160px;
+    }
+    .statement {
+      /* Same wide container as the gallery so the block starts at the
+         section's left edge, then the text keeps its narrow measure. */
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+    }
+    .statement > * { max-width: 720px; }
+    .statement h2 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #2B313D;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    .statement-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 20px;
+    }
+    /* Pull quote — same device as the "What I Learned" pullout on the case studies */
+    .statement-quote {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2B313D;
+      border-left: 2px solid var(--accent-link);
+      padding-left: 16px;
+      margin-top: 36px;
+    }
+
+    /* ── ART GALLERY (editorial, sits on the page — not in cards) ── */
+    .art-gallery {
+      --art-gap: 32px;   /* matches the homepage case-study grid gap */
+      /* Same wide container as the homepage: 1320 cap, 40px padding → 1240
+         usable, re-centered after #art-builds breaks out of the gutters.
+         Images grow to fill the extra width; the gap stays fixed. */
+      max-width: var(--max-wide);
+      margin: 80px auto 0;
+      padding: 0 var(--section-h);
+    }
+    .art-gallery figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .art-gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+      background: var(--bg-warm);
+      transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .art-gallery figure:hover img { transform: scale(1.025); }
+
+    /* Movement 1 — lead piece + a smaller companion dropped low */
+    .art-movement {
+      display: flex;
+      gap: var(--art-gap);
+      align-items: flex-start;
+    }
+    .art-lead { flex: 0 0 60%; }
+    /* .art-gallery prefix needed to outrank `.art-gallery figure { margin: 0 }` */
+    .art-gallery .art-companion {
+      flex: 0 0 calc(40% - var(--art-gap));
+      margin-top: 104px;
+    }
+
+    /* Movement 2 — panoramic band, inset to the right */
+    .art-gallery .art-wide {
+      width: 86%;
+      margin: var(--art-gap) 0 0 auto;
+    }
+
+    /* Movement 3 — a pair, the square dropped low */
+    .art-pair {
+      display: flex;
+      gap: var(--art-gap);
+      align-items: flex-start;
+      margin-top: var(--art-gap);
+    }
+    .art-pair .a-square { flex: 0 0 44%; margin-top: 88px; }
+    .art-pair .a-wide  { flex: 0 0 calc(56% - var(--art-gap)); }
+
+    /* Scroll reveal (progressive enhancement — no-JS shows everything) */
+    .js-reveal .art-gallery figure {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .js-reveal .art-gallery figure.in {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .js-reveal .art-gallery figure { opacity: 1; transform: none; transition: none; }
+      .art-gallery img { transition: none; }
+    }
+
+    /* Staggered load reveal */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .about-kicker { animation: fadeUp 0.6s ease both 0.05s; }
+    .about-text h1 { animation: fadeUp 0.6s ease both 0.12s; }
+    .about-body { animation: fadeUp 0.6s ease both 0.2s; }
+    .about-photo { animation: fadeUp 0.7s ease both 0.28s; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      padding: 36px 40px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 36px;
+    }
+    .footer-cols { display: flex; gap: 64px; }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-col ul a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: #4F3D30; }
+    .footer-name {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 72px;
+      font-weight: 400;
+      color: rgba(79, 61, 48, 0.3);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 20px 0;
+    }
+    .footer-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--text-label);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+        max-width: 560px;
+      }
+      /* Photo above text reads better when stacked */
+      .about-photo { order: -1; max-width: 420px; }
+    }
+    @media (max-width: 768px) {
+      html, body { overflow-x: hidden; }
+
+      nav { padding: 0 20px; }
+      nav .nav-links { display: none; }
+      .nav-toggle { display: block; }
+
+      #about-hero { padding: 116px 0 72px; }
+      .wide-inner { padding-left: 20px; padding-right: 20px; }
+      .statement { padding-left: 20px; padding-right: 20px; }
+      #art-builds { padding-top: 48px; padding-bottom: 96px; }
+      .art-gallery { padding-left: 20px; padding-right: 20px; margin-top: 48px; }
+      .art-movement { flex-direction: column; gap: 24px; }
+      .art-pair { flex-direction: column; gap: 24px; margin-top: 24px; }
+      .art-gallery .art-companion, .art-pair .a-square { margin-top: 0; }
+      .art-gallery .art-wide { width: 100%; margin: 24px 0 0 0; }
+      .about-text h1 { font-size: 32px; }
+      .about-body p { font-size: 18px; }
+
+      footer { padding: 40px 20px 0; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+      .footer-name { font-size: 56px; }
+      .footer-cols { gap: 32px; }
+      .footer-bottom { padding: 16px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-kicker, .about-text h1, .about-body, .about-photo { animation: none; }
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #custom-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      background: #4F3D30;
+      top: 0; left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.15s ease;
+    }
+    #custom-cursor.active { opacity: 1; }
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      a { cursor: pointer; }
+      #custom-cursor { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">Khanak Joshi</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="resume.pdf">Resume</a></li>
+      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-logo">Khanak Joshi</span>
+      <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html#work" onclick="toggleMobileNav()">Work</a>
+      <a href="about.html" class="active" onclick="toggleMobileNav()">About</a>
+      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+    </nav>
+  </div>
+
+  <!-- ABOUT HERO -->
+  <section id="about-hero">
+    <div class="wide-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <h1>I started as an artist before I<br>knew what UX was.</h1>
+          <div class="about-body">
+            <p>Sketchbooks before wireframes, learning to communicate what can't be said directly. That's still the question I'm asking, just in Figma now.</p>
+            <p>I'm currently a product design intern at Oxy and a UI/UX Designer Aide at ASU's Learning Engineering Institute, designing AI-powered tools for student learning outcomes.</p>
+            <p>Studying Media Arts and Sciences at Barrett Honors College, graduating May 2027.</p>
+          </div>
+        </div>
+        <figure class="about-photo">
+          <div class="about-photo-placeholder" aria-label="Portrait placeholder">
+            <span>Photo</span>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ART BUILDS DESIGN (the hinge) -->
+  <section id="art-builds">
+    <div class="statement">
+      <h2>Art builds design.</h2>
+      <p class="statement-body">Traditional art shaped how I see the world. This series from my AP Studio Art portfolio explored mental health through portraiture, symbolism, and body language. Developed during my time as President of the Awareness Committee at the Teen Mental Health Initiative, each piece asked the same question: how do you make invisible experiences visible?</p>
+      <p class="statement-quote">It's the same question I bring to design.</p>
+    </div>
+
+    <div class="art-gallery">
+      <!-- Movement 1: lead + companion -->
+      <div class="art-movement">
+        <figure class="art-lead">
+          <img src="images/art3.jpg" alt="Lead piece from a mental health portraiture series" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="art-companion">
+          <img src="images/art.jpg" alt="Portrait study exploring mental health through body language" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+
+      <!-- Movement 2: panoramic band -->
+      <figure class="art-wide">
+        <img src="images/art1.jpg" alt="Wide composition from the mental health art series" loading="lazy" decoding="async" />
+      </figure>
+
+      <!-- Movement 3: a pair -->
+      <div class="art-pair">
+        <figure class="a-square">
+          <img src="images/art2.jpg" alt="Symbolic portrait study from the series" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="a-wide">
+          <img src="images/art4.jpg" alt="Portrait exploring invisible experiences" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.pdf">Resume</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
+            <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-name">Khanak Joshi</div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="custom-cursor"></div>
+
+  <script>
+    const cursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      cursor.classList.add('active');
+    });
+    document.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+
+    // Staggered scroll reveal for the art gallery (progressive enhancement)
+    if ('IntersectionObserver' in window) {
+      document.body.classList.add('js-reveal');
+      const figs = document.querySelectorAll('.art-gallery figure');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      figs.forEach((f, i) => { f.style.transitionDelay = (i * 90) + 'ms'; io.observe(f); });
+    }
+
+    function toggleMobileNav() {
+      const overlay = document.getElementById('mobileNav');
+      const open = !overlay.classList.contains('open');
+      overlay.classList.toggle('open', open);
+      document.querySelector('.nav-toggle').classList.toggle('open', open);
+      document.body.classList.toggle('nav-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+  </script>
+
+</body>
+</html>

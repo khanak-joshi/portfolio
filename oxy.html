@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oxy Design Agency — Khanak Joshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #fafcfd;
+      --bg-warm: #E8E6DD;
+      --card: #EDE3D8;
+      --border: #D4C4B8;
+      --accent: #4F3D30;
+      --accent-link: #2C1A0E;
+      --text-primary: #1A1A1A;
+      --text-secondary: #3D3D3D;
+      --text-label: #888888;
+      --max-w: 780px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    /* ── NAV ── */
+    nav:not(.side-nav) {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(251,251,251,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+      text-decoration: none;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    nav .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:not(.nav-contact)::after {
+      content: '';
+      position: absolute;
+      bottom: 11px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #4F3D30;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
+    nav .nav-links a:hover { color: #4F3D30; }
+    nav .nav-links a.active {
+      color: #4F3D30;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+    nav .nav-links a.nav-contact {
+      color: #fff;
+      background: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background-color 0.35s ease;
+    }
+    nav .nav-links a.nav-contact:hover {
+      background: #32261E;
+    }
+    /* 44px minimum touch targets */
+    nav .nav-links a, .footer-col ul a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+
+
+    /* ── UTILITIES ── */
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+      box-sizing: border-box;
+    }
+    .container img {
+      max-width: 100%;
+    }
+    .img-placeholder {
+      width: 100%;
+      background: var(--card);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-label);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: var(--white);
+      padding-top: 100px;
+      padding-bottom: var(--section-v);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #hero .hero-inner > * {
+      animation: fadeUp 0.6s ease both;
+    }
+    #hero .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+    #hero .hero-inner > *:nth-child(2) { animation-delay: 0.12s; }
+    #hero .hero-inner > *:nth-child(3) { animation-delay: 0.2s; }
+    #hero .hero-inner > *:nth-child(4) { animation-delay: 0.28s; }
+    #hero .hero-inner > *:nth-child(5) { animation-delay: 0.36s; }
+    #hero .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+    }
+    #hero h1 {
+      font-family: 'Lora', serif;
+      font-size: 36px;
+      font-weight: 500;
+      color: #2B313D;
+      margin-top: 10px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    #hero .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin-top: 28px;
+    }
+    #hero .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0 40px;
+      margin-top: 36px;
+      padding-top: 24px;
+    }
+    .meta-col .meta-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .meta-col .meta-value {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3D3D3D;
+      line-height: 1.5;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    :root {
+      --section-v: 32px;
+      --section-h: 40px;
+      --label-gap: 16px;
+      --block-gap: 56px;
+      --elem-gap: 24px;
+    }
+    section {
+      padding: var(--section-v) 0;
+    }
+    /* All section labels get the same gap below them */
+    .section-label {
+      display: block;
+      margin-bottom: var(--label-gap);
+    }
+    /* Utility classes pinned to variables */
+    .mt-64 { margin-top: var(--block-gap); }
+    .mt-40 { margin-top: var(--block-gap); }
+    .mt-24 { margin-top: var(--elem-gap); }
+    .decision-block { margin-top: var(--block-gap); }
+    .decision-block:first-of-type { margin-top: 0; }
+    .image-block { margin-top: var(--block-gap); }
+
+    /* ── PROBLEM STATEMENT BAND ── */
+    #problem-band .container, #hmw-band .container {
+      background: var(--white);
+      padding: 0 var(--section-h);
+    }
+    /* Remove dividers around problem/HMW bands */
+    #problem-band + section, #hmw-band + section {
+      border-top: none;
+    }
+    #problem-band, #hmw-band {
+      border-top: none;
+    }
+    #problem-band .problem-h2 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: #2B313D;
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+    #problem-band .problem-body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    #problem-band .problem-body strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* ── OVERVIEW ── */
+    #overview .two-col {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    #overview h2, .section-h2 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      color: #2B313D;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    #overview p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 12px;
+    }
+
+    /* ── RESEARCH ── */
+
+    .pullquote {
+      padding-left: 0;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2B313D;
+    }
+    .pullquotes-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .image-block .section-label {
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .competitor-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: flex-start;
+      margin: 32px 0;
+    }
+    .competitor-tag {
+      background: var(--card);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-radius: 20px;
+      padding: 8px 20px;
+    }
+
+    /* ── BODY TEXT ── */
+    .body-lead {
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+    .body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .body-bold { font-weight: 600; color: var(--text-secondary); }
+
+    /* ── ACCENT BAND (inner) ── */
+    .accent-band {
+      background: var(--white);
+      padding: 64px 40px;
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+    .accent-band .section-label { margin-bottom: 20px; display: block; }
+    .accent-band img,
+    .accent-band .img-placeholder {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    /* ── DESIGN SECTION ── */
+
+    .decision-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    /* final designs grid */
+    .final-hero-band {
+      background: var(--white);
+      padding: 64px 0;
+      border-radius: 16px;
+      margin-top: 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .final-hero-band img,
+    .final-hero-band .img-placeholder {
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+    .screen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .screen-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .screen-card img,
+    .screen-card .img-placeholder {
+      width: 100%;
+      border-radius: 0;
+    }
+
+    /* ── TESTING ── */
+    #testing {
+      background: var(--white);
+    }
+    .testing-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 48px;
+    }
+    .testing-col-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .recommendations {
+      margin-top: 64px;
+    }
+
+    ol.rec-list {
+      list-style: none;
+      counter-reset: rec;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    ol.rec-list li {
+      counter-increment: rec;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    ol.rec-list li::before {
+      content: counter(rec);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 20px;
+      padding-top: 1px;
+    }
+
+    /* ── OUTCOME ── */
+    #outcome {
+      padding-bottom: 0;
+    }
+    #what-i-learned {
+      padding-top: 0;
+      padding-bottom: var(--section-v);
+    }
+    .what-i-learned {
+      background: var(--white);
+    }
+    .what-i-learned .pullout-text {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2B313D;
+      margin: 0;
+    }
+    .what-i-learned .kicker {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 40px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      margin-left: -180px;
+      margin-right: -180px;
+      margin-top: 240px;
+      padding: 36px 40px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 36px;
+    }
+    .footer-cols { display: flex; gap: 64px; }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-col ul a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: #4F3D30; }
+    .footer-name {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 72px;
+      font-weight: 400;
+      color: rgba(79, 61, 48, 0.3);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 20px 0;
+    }
+    .footer-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--text-label);
+    }
+
+    /* ── DIVIDERS ── */
+    .divider { height: 1px; background: var(--border); margin: 64px 0; }
+
+    /* ── H2 spacing within sections ── */
+    .section-h2 { margin-top: 0; margin-bottom: 24px; }
+    .mt-64 { margin-top: var(--block-gap); }
+    .mt-40 { margin-top: var(--block-gap); }
+    .mt-24 { margin-top: var(--elem-gap); }
+    .mt-16 { margin-top: var(--elem-gap); }
+
+    @media (max-width: 768px) {
+      /* ── GLOBAL ── */
+      .section-label { font-size: 11px !important; letter-spacing: 0.06em !important; white-space: normal; }
+      html, body { overflow-x: hidden; }
+
+
+      /* Layout */
+      :root { --section-v: 40px; --section-h: 20px; --block-gap: 36px; --elem-gap: 20px; }
+      #overview .two-col { grid-template-columns: 1fr; }
+      .testing-cols { grid-template-columns: 1fr; }
+      .screen-grid { grid-template-columns: 1fr; }
+
+      /* Nav */
+      nav .nav-links { display: none; }
+      nav { padding: 0 20px; height: 68px; }
+
+      /* Hero */
+      #hero { padding-top: 72px; }
+      #hero h1 { font-size: 28px; line-height: 1.2; }
+      #hero .hero-image { height: auto; }
+      #hero .hero-meta {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px 16px !important;
+      }
+
+      /* Typography */
+      #overview h2, .section-h2 { font-size: 22px; }
+      #problem-band .problem-h2 { font-size: 22px; }
+      .pullquote { font-size: 17px; }
+      .what-i-learned .pullout-text { font-size: 17px; }
+      .pullout-text { font-size: 17px !important; }
+
+      /* Problem band */
+      #problem-band .problem-grid { grid-template-columns: 1fr !important; }
+
+      /* Images */
+      .container img { width: 100%; height: auto; }
+      img { max-width: 100%; height: auto; }
+      video { max-width: 100%; }
+
+      /* All inline grids: stack to single column */
+      div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+
+      /* What I learned */
+      .what-i-learned { padding: 32px 0 !important; }
+
+      /* Footer */
+      footer {
+        padding: 36px 20px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 60px;
+      }
+      .footer-inner { flex-direction: column !important; gap: 20px !important; }
+      .footer-name { font-size: 26px; }
+      .footer-cols { gap: 28px; }
+
+      /* Tap targets */
+      nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
+
+      /* Prevent long words/URLs from overflowing */
+      p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #hero .hero-inner > * { animation: none; }
+    }
+
+    /* ── SIDE NAV ── */
+    .side-nav {
+      position: fixed;
+      top: 68px;
+      left: 0;
+      width: 180px;
+      height: calc(100vh - 68px);
+      padding: 40px 0 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      overflow-x: visible;
+      z-index: 50;
+    }
+    .side-nav a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-label);
+      text-decoration: none;
+      line-height: 1.4;
+      padding: 4px 0;
+      transition: color 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 10px;
+      margin-left: -12px;
+    }
+    .side-nav a:hover { color: #4F3D30; }
+    .side-nav-back {
+      color: var(--text-label) !important;
+      margin-bottom: 24px;
+    }
+    .side-nav-back:hover { color: #4F3D30 !important; }
+    .side-nav a.active {
+      color: #2B313D;
+      font-weight: 500;
+      border-left-color: #4F3D30;
+    }
+    .side-nav .nav-sub.active {
+      border-left-color: #4F3D30;
+      padding-left: 26px;
+    }
+    .side-nav .nav-group-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #2B313D;
+      padding: 8px 0 2px 12px;
+      margin-left: -12px;
+      border-left: 2px solid transparent;
+      cursor: default;
+      pointer-events: none;
+    }
+    .side-nav .nav-sub {
+      padding-left: 28px;
+    }
+    /* Shift main content right to make room */
+    body {
+      padding-left: 180px;
+      padding-right: 180px;
+    }
+    @media (max-width: 960px) {
+      .side-nav { display: none; }
+      body { padding-left: 0; padding-right: 0; }
+    }
+
+    /* ── HAMBURGER / MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-toggle span {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      height: 2.5px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: transform 0.4s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 17px; }
+    .nav-toggle span:nth-child(2) { top: 25px; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+    /* Lift the nav (with the morphing toggle) above the open overlay */
+    body.nav-open nav { z-index: 300; }
+
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 200;
+      padding: 24px 20px 40px;
+      flex-direction: column;
+    }
+    .mobile-nav-overlay.open { display: flex; }
+    .mobile-nav-header { display: none; }
+    .mobile-nav-logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+    }
+    .mobile-nav-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--accent);
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .mobile-nav-links {
+      /* Reset the generic nav rule that bleeds into this <nav> element */
+      position: static;
+      background: none;
+      height: auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-top: 92px;
+    }
+    .mobile-nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 26px;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--text-label);
+      text-decoration: none;
+      padding: 12px 0;
+      transition: color 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-nav-links a:hover { color: #4F3D30; }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+    }
+    #dot-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      width: 16px;
+      height: 16px;
+      background: #4F3D30;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.15s ease;
+      top: 0; left: 0;
+    }
+    #dot-cursor.active { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">Khanak Joshi</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="resume.pdf">Resume</a></li>
+      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-logo">Khanak Joshi</span>
+      <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html#work" onclick="toggleMobileNav()">Work</a>
+      <a href="index.html#about" onclick="toggleMobileNav()">About</a>
+      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+    </nav>
+  </div>
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav">
+    <a href="index.html" class="side-nav-back">← Back</a>
+    <a href="#overview">Overview</a>
+    <span class="nav-group-label">Project 01</span>
+    <a href="#brief" class="nav-sub">The Brief</a>
+    <a href="#moodboard" class="nav-sub">Moodboard</a>
+    <a href="#competitive-analysis" class="nav-sub">Comp. Analysis</a>
+    <a href="#ux-audit" class="nav-sub">UX Audit</a>
+    <a href="#hero-design" class="nav-sub">Hero Design</a>
+    <a href="#hero-outcome" class="nav-sub">Outcome</a>
+    <span class="nav-group-label">Project 02</span>
+    <a href="#fh-brief" class="nav-sub">The Brief</a>
+    <a href="#fh-process" class="nav-sub">Process</a>
+    <a href="#sitemap-decisions" class="nav-sub">Sitemap</a>
+    <a href="#fh-outcome" class="nav-sub">Outcome</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="section-label">PRODUCT DESIGN INTERNSHIP · OXY · 2026</span>
+      <h1>Oxy Design Agency</h1>
+      <img class="hero-image" src="images/oxy-hero.png" alt="Oxy Design Agency" />
+      <h2 class="section-h2" style="margin-top:20px;">Designing across strategy, research, and visual design for a creative agency and its clients</h2>
+
+      <!-- Four-column meta -->
+      <div class="hero-meta">
+        <div class="meta-col">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">Product Design Intern</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Duration</span>
+          <span class="meta-value">Feb–Present</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Tool</span>
+          <span class="meta-value">Figma</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="container">
+      <span class="section-label">Overview</span>
+      <p class="body" style="margin-top:12px;">Over 4 months at Oxy, a Phoenix-based design agency, I've worked as a product design intern across client engagements spanning UX research, competitive analysis, information architecture, and visual design.</p>
+      <p class="body" style="margin-top:16px;">The two projects below share a thread: both were companies whose websites undersold what they actually were. A luxury aviation studio reading like a SaaS product. A platform that closes loans in 5 days positioned as a chatbot. Different industries, same job: closing the gap between the work and the story the site told about it.</p>
+    </div>
+  </section>
+
+  <!-- PROJECT 01 -->
+  <section id="project-01">
+    <div class="container">
+      <span class="section-label">PROJECT 01</span>
+      <h2 class="section-h2" style="margin-top:12px;">Oxy Aero - from research to visual direction for a luxury aviation design studio</h2>
+    </div>
+  </section>
+
+  <!-- THE BRIEF -->
+  <section id="brief">
+    <div class="container">
+      <span class="section-label">The Brief</span>
+      <h2 class="section-h2" style="margin-top:12px;">Oxy Aero had the work. The site didn't know it.</h2>
+      <p class="body">Oxy Aero is Oxy's own venture, a private aviation design studio built around designing the entire client experience, from the moment someone gets a text to when they step off the plane. The website didn't reflect any of that. In a kickoff with Anthony, Oxy's founder, the direction was clear: the site needed to feel like Amangiri, not polished or commercially clean but so confident it doesn't need to explain itself. The current site read like a SaaS company. My job was to figure out why, understand where the bar actually was, and help close the gap.</p>
+    </div>
+  </section>
+
+  <!-- MOODBOARD -->
+  <section id="moodboard">
+    <div class="container">
+      <span class="section-label">Moodboard</span>
+      <h2 class="section-h2" style="margin-top:12px;">The references came before the rules did.</h2>
+      <p class="body" style="margin-top:12px;">I built a moodboard organized around three ideas Anthony kept returning to: bespoke aviation interiors, inaccessible minimalism, and obsessive craft. The framing that stuck: <span class="body-bold">"Luxury that doesn't explain itself. You have to already know to be there."</span> That became the lens for everything that followed.</p>
+      <ol class="rec-list" style="margin-top:32px;">
+        <li>
+          <img src="images/Moodboard A.png" alt="Moodboard A" style="width:100%;height:auto;display:block;margin-top:8px;" />
+        </li>
+        <li>
+          <img src="images/Moodboard B.png" alt="Moodboard B" style="width:100%;height:auto;display:block;margin-top:8px;" />
+        </li>
+        <li>
+          <img src="images/Moodboard C.png" alt="Moodboard C" style="width:100%;height:auto;display:block;margin-top:8px;" />
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- COMPETITIVE ANALYSIS -->
+  <section id="competitive-analysis">
+    <div class="container">
+      <span class="section-label">Competitive and Comparative Analysis</span>
+      <h2 class="section-h2" style="margin-top:12px;">The work existed. The world didn't.</h2>
+      <p class="body" style="margin-top:12px;">I analyzed Winch Design, Singer Vehicle Design, and Ago Interiors across seven dimensions. All three are bespoke studios designing high-consideration objects for wealthy clients at the level Oxy Aero is aiming for.</p>
+      <p class="body" style="margin-top:16px;">Winch framed project work around the brief and outcome, not the client's identity, and that became the model for presenting Abogada Air. Singer showed what a brand built entirely around philosophy looks like; their menu labels alone make it feel like a world. That shaped the navigation rethink: "Contact Us" to "Inquire," "Gallery" to a named project, service lists to something with a point of view.</p>
+      <p class="body" style="margin-top:16px;">Oxy Aero had none of what these three had. <span class="body-bold">The site communicated capability but not character.</span></p>
+      <img src="images/Competitor Overview Breakdown.png" alt="Competitor overview breakdown" style="width:100%;height:auto;display:block;margin-top:24px;" />
+    </div>
+  </section>
+
+  <!-- UX AUDIT -->
+  <section id="ux-audit">
+    <div class="container">
+      <span class="section-label">UX Audit</span>
+      <h2 class="section-h2" style="margin-top:12px;">28 observations. One conclusion.</h2>
+      <p class="body" style="margin-top:12px;">I audited the entire site and logged 28 observations across every section, color coded by priority, with competitor screenshots embedded inline as visual evidence. The hero section alone had six. The findings fell into three buckets.</p>
+      <ol class="rec-list" style="margin-top:16px;">
+        <li><div><span class="body-bold">Functional errors:</span> typos, duplicate numbering, body copy breaking mid-word on desktop and mobile.</div></li>
+        <li><div><span class="body-bold">Brand misalignments:</span> the hero image showed a commercial aircraft wing directly contradicting the private aviation positioning, and the headline introduced three accent colors simultaneously, making it read like a SaaS product launch.</div></li>
+        <li><div><span class="body-bold">Missed opportunities:</span> Oxy Aero's one real project appeared in the gallery with no brief, no rationale, and no outcome. Visitors saw the work with nothing to explain what it meant.</div></li>
+      </ol>
+      <p class="body" style="margin-top:16px;">The conclusion: nothing needed to be added. <span class="body-bold">The content needed to build trust already existed on the site. It just wasn't doing anything.</span> This wasn't a rebuild. It was a translation problem.</p>
+      <img src="images/UX Audit - Oxy Aero.png" alt="UX Audit - Oxy Aero" style="width:100%;height:auto;display:block;margin-top:24px;" />
+    </div>
+  </section>
+
+  <!-- AI IMAGE LIBRARY -->
+  <section id="ai-image-library">
+    <div class="container">
+      <span class="section-label">AI Image Library</span>
+      <h2 class="section-h2" style="margin-top:12px;">Art directing AI against its defaults</h2>
+      <p class="body" style="margin-top:12px;">Oxy Aero had only one real client, which meant there wasn't enough photography to support a site that needed to feel like an established luxury studio. The problem wasn't just quantity. Using the wrong images would undermine everything the redesign was trying to signal. I wrote a prompt document from scratch to define the visual language for a 14-image AI library.</p>
+      <p class="body" style="margin-top:16px;"><span class="body-bold">The anti-rules mattered as much as the rules.</span> The difficulty is that AI imagery defaults to exactly what luxury can't be: overlit, posed, symmetrical, eager to impress. The prompt document was less about generating images than about systematically suppressing those instincts. A brand signaling Amangiri-level exclusivity cannot use imagery that's trying to sell something. The images had to assume you already belonged there.</p>
+      <img src="images/Image Library.png" alt="AI image library" style="width:100%;height:auto;display:block;margin-top:24px;" />
+    </div>
+  </section>
+
+  <!-- HERO DESIGN -->
+  <section id="hero-design">
+    <div class="container">
+      <span class="section-label">Hero Design</span>
+      <h2 class="section-h2" style="margin-top:12px;">1B didn't win by default. It made a case.</h2>
+      <p class="body" style="margin-top:12px;">I designed three hero directions. All three shared the same updated navigation, Inquire replacing Contact Us, Our Work, Philosophy, and Services, and the same core copy. Directions 1A and 1C were both dismissed, one too warm and inviting, one too restrained to hold presence.</p>
+      <p class="body" style="margin-top:16px;"><span class="body-bold">Direction 1B made a case for itself at every level.</span> The navigation swap from "Contact Us" to "Inquire" is gated, implies a process, and is the pattern luxury brands use when they want to signal that not everyone gets in. The image is a full-bleed single-window private jet shot from the AI library, removing any distance between the brand and the visitor. The previous site's hero showed a commercial aircraft with multiple windows, undoing everything the copy was trying to say. The typography, line elements, and color came directly from the Oxy design system, so Aero would read as part of the family. What I introduced was the register. The system on its own reads like what it is, a design agency. Oxy Aero needed the same bones to carry restraint, silence, exclusivity. That shift came through the imagery, the gated "Inquire," and a subline that tells you immediately who this is for.</p>
+      <ol class="rec-list" style="margin-top:32px;">
+        <li>
+          <div><img src="images/Style Tile A.png" alt="Style Tile A" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+        </li>
+        <li>
+          <div><img src="images/Style Tile B.png" alt="Style Tile B" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+        </li>
+        <li>
+          <div><img src="images/Style Tile C.png" alt="Style Tile C" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- HERO OUTCOME -->
+  <section id="hero-outcome">
+    <div class="container">
+      <span class="section-label">Outcome</span>
+      <h2 class="section-h2" style="margin-top:12px;">Selected against two alternatives.</h2>
+      <p class="body" style="margin-top:12px;"><span class="body-bold">Andrew, head of growth, and Spencer Ramirez, Oxy's creative director, reviewed all three directions and both landed on 1B.</span> Spencer's reasoning: it was the closest to the Oxy brand. That was the test all three directions had to pass twice: staying inside Oxy's existing design system while capturing a luxury standard that was never written down, only named in kickoff as "Amangiri."</p>
+    </div>
+  </section>
+
+  <!-- WHAT I LEARNED P01 -->
+  <section id="what-i-learned-p01">
+    <div class="container">
+      <div class="what-i-learned">
+        <span class="section-label">What I Learned</span>
+        <p style="margin-top:16px;font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;color:var(--text-secondary);">When Anthony said Amangiri, he wasn't describing an aesthetic. He was describing a standard. Figuring out what that standard actually meant in practice and then building toward it was the most useful thing this project taught me. Luxury at that level doesn't explain itself, and neither should the design. That's not something you can get from a brief alone.</p>
+        <p class="pullout-text" style="margin-top:24px;border-left:2px solid #2C1A0E;padding-left:16px;">You have to look at enough of the right references until the pattern becomes impossible to miss.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT 02 -->
+  <section id="project-02">
+    <div class="container">
+      <span class="section-label">PROJECT 02</span>
+      <h2 class="section-h2" style="margin-top:12px;">Friday Harbor - Information architecture for a fintech SaaS redesign</h2>
+      <img src="images/fh-logo copy.jpg" alt="Friday Harbor logo" style="height:80px;object-fit:contain;object-position:left;display:block;margin-top:24px;margin-left:0;" />
+    </div>
+  </section>
+
+  <!-- FH BRIEF -->
+  <section id="fh-brief">
+    <div class="container">
+      <span class="section-label">The Brief</span>
+      <h2 class="section-h2" style="margin-top:12px;">The product closed loans in 5 days. The site didn't say that.</h2>
+      <p class="body" style="margin-top:12px;">Friday Harbor is an AI-native mortgage technology company that helps lenders originate cleaner, faster loans, taking a loan from application to clear-to-close in <span class="body-bold">5 days versus the industry standard of 40.</span> The website wasn't communicating any of that. The existing site was hard-coded, slow to update, and positioned the product as an "AI mortgage originator assistant" which read as a chatbot, not an enterprise system. With a sales team coming on and a redesign underway, they needed an information architecture that could hold the weight of where the company was going.</p>
+    </div>
+  </section>
+
+  <!-- FH PROCESS -->
+  <section id="fh-process">
+    <div class="container">
+      <span class="section-label">Process</span>
+      <h2 class="section-h2" style="margin-top:12px;">The decisions came from the sessions, not the deliverable.</h2>
+      <p class="body" style="margin-top:12px;">I attended two discovery sessions with the Friday Harbor team, then delivered a competitive analysis across three competitors and a proposed sitemap. Every decision in the sitemap tied directly back to something that came out of those sessions.</p>
+    </div>
+  </section>
+
+  <!-- SITEMAP DECISIONS -->
+  <section id="sitemap-decisions">
+    <div class="container">
+      <span class="section-label">Key Sitemap Decisions</span>
+      <h2 class="section-h2" style="margin-top:12px;">Every label was an argument.</h2>
+      <p class="body" style="margin-top:12px;">Platform became Product. Blend uses Platform because they're a large multi-suite company. Friday Harbor is focused and AI-native. Product feels more honest, and <span class="body-bold">honesty matters with buyers who have been overpromised by mortgage tech for decades.</span></p>
+      <img src="images/Sitemap, Friday Harbor Top Nav.png" alt="Friday Harbor top navigation sitemap" class="fh-sitemap-img" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <p class="body" style="margin-top:16px;">Resources became News + Insights with three distinct swim lanes: Thought Leadership, News and Press, and Case Studies. Discovery calls made clear that most customers come through referrals and buyers need to self-serve before they're ready to book a demo. A generic bucket wasn't doing that job.</p>
+      <img src="images/Sitemap, Friday Harbor News + Insights.png" alt="Friday Harbor News and Insights sitemap" class="fh-sitemap-img" style="width:22%;height:auto;display:block;margin-top:24px;" />
+      <p class="body" style="margin-top:16px;">I added two pages that didn't exist. An Integrations page, because <span class="body-bold">the first question every buyer asks is whether Friday Harbor works with Encompass.</span> The page also needed an Open API section as Friday Harbor didn't want to be lumped in with automation tools, and a visible API story signals that the product is built to integrate, not just connect. And a Where to Find Us page, because Friday Harbor had nine conferences scheduled in three months and saying "we're active" in body text isn't the same as showing buyers exactly where to find the team. Company became Who We Are, which was slightly warmer and matched the brand positioning the team had landed on in discovery.</p>
+      <div style="display:flex;gap:16px;margin-top:24px;align-items:flex-start;">
+        <img src="images/Sitemap, Friday Harbor Integrations.png" alt="Friday Harbor Integrations sitemap" class="fh-sitemap-img" style="width:22%;height:auto;" />
+        <img src="images/Sitemap, Friday Harbor Where to Find Us.png" alt="Friday Harbor Where to Find Us sitemap" class="fh-sitemap-img" style="width:22%;height:auto;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FH OUTCOME -->
+  <section id="fh-outcome">
+    <div class="container">
+      <span class="section-label">Outcome</span>
+      <h2 class="section-h2" style="margin-top:12px;">Approved without revisions.</h2>
+      <p class="body" style="margin-top:12px;">The sitemap was approved as delivered and is the foundation for the redesign, launching soon.</p>
+    </div>
+  </section>
+
+  <!-- WHAT I LEARNED P02 -->
+  <section id="what-i-learned-p02">
+    <div class="container">
+      <div class="what-i-learned">
+        <span class="section-label">What I Learned</span>
+        <p class="body" style="margin-top:12px;">The real discipline in this project wasn't the deliverable, it was the listening. I walked out of two discovery sessions with the arguments already made. My job was recognizing them and arranging them into structure.</p>
+        <p class="pullout-text" style="margin-top:16px;border-left:2px solid #2C1A0E;padding-left:16px;">A sitemap is easier to approve when every decision has a reason the client already gave you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="resume.pdf">Resume</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
+            <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-name">Khanak Joshi</div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for side nav links
+    document.querySelectorAll('.side-nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('#')) return; // let non-anchor links (Back) work normally
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+          const offset = 64;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    const sections = [
+      { id: 'hero',               link: 'a[href="#hero"]' },
+      { id: 'overview',           link: 'a[href="#overview"]' },
+      { id: 'brief',              link: 'a[href="#brief"]' },
+      { id: 'moodboard',          link: 'a[href="#moodboard"]' },
+      { id: 'competitive-analysis', link: 'a[href="#competitive-analysis"]' },
+      { id: 'ux-audit',           link: 'a[href="#ux-audit"]' },
+      { id: 'hero-design',        link: 'a[href="#hero-design"]' },
+      { id: 'hero-outcome',       link: 'a[href="#hero-outcome"]' },
+      { id: 'fh-brief',           link: 'a[href="#fh-brief"]' },
+      { id: 'fh-process',         link: 'a[href="#fh-process"]' },
+      { id: 'sitemap-decisions',  link: 'a[href="#sitemap-decisions"]' },
+      { id: 'fh-outcome',         link: 'a[href="#fh-outcome"]' },
+    ];
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const section = sections.find(s => s.id === entry.target.id);
+        if (!section) return;
+        const link = document.querySelector('.side-nav ' + section.link);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    function toggleMobileNav() {
+      const overlay = document.getElementById("mobileNav");
+      const open = !overlay.classList.contains("open");
+      overlay.classList.toggle("open", open);
+      document.querySelector(".nav-toggle").classList.toggle("open", open);
+      document.body.classList.toggle("nav-open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+  </script>
+
+  <div id="dot-cursor"></div>
+  <script>
+    const dotCursor = document.getElementById('dot-cursor');
+    document.addEventListener('mousemove', e => {
+      dotCursor.style.left = e.clientX + 'px';
+      dotCursor.style.top = e.clientY + 'px';
+      dotCursor.classList.add('active');
+    });
+    document.addEventListener('mouseleave', () => dotCursor.classList.remove('active'));
+  </script>
+</body>
+</html>

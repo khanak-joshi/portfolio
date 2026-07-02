@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find My Size — Khanak Joshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #fafcfd;
+      --bg-warm: #E8E6DD;
+      --card: #EDE3D8;
+      --border: #D4C4B8;
+      --accent: #4F3D30;
+      --accent-link: #2C1A0E;
+      --text-primary: #1A1A1A;
+      --text-secondary: #3D3D3D;
+      --text-label: #888888;
+      --max-w: 780px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    /* ── NAV ── */
+    nav:not(.side-nav) {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(251,251,251,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+      text-decoration: none;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    nav .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:not(.nav-contact)::after {
+      content: '';
+      position: absolute;
+      bottom: 11px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #4F3D30;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
+    nav .nav-links a:hover { color: #4F3D30; }
+    nav .nav-links a.active {
+      color: #4F3D30;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+    nav .nav-links a.nav-contact {
+      color: #fff;
+      background: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background-color 0.35s ease;
+    }
+    nav .nav-links a.nav-contact:hover {
+      background: #32261E;
+    }
+    /* 44px minimum touch targets */
+    nav .nav-links a, .footer-col ul a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+
+
+    /* ── UTILITIES ── */
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+      box-sizing: border-box;
+    }
+    .container img {
+      max-width: 100%;
+    }
+    .img-placeholder {
+      width: 100%;
+      background: var(--card);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-label);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: var(--white);
+      padding-top: 100px;
+      padding-bottom: var(--section-v);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #hero .hero-inner > * {
+      animation: fadeUp 0.6s ease both;
+    }
+    #hero .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+    #hero .hero-inner > *:nth-child(2) { animation-delay: 0.12s; }
+    #hero .hero-inner > *:nth-child(3) { animation-delay: 0.2s; }
+    #hero .hero-inner > *:nth-child(4) { animation-delay: 0.28s; }
+    #hero .hero-inner > *:nth-child(5) { animation-delay: 0.36s; }
+    #hero .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+    }
+    #hero h1 {
+      font-family: 'Lora', serif;
+      font-size: 36px;
+      font-weight: 500;
+      color: #2B313D;
+      margin-top: 10px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    #hero .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin-top: 28px;
+    }
+    #hero .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0;
+      margin-top: 36px;
+      padding-top: 24px;
+    }
+    .meta-col .meta-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .meta-col .meta-value {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3D3D3D;
+      line-height: 1.5;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    :root {
+      --section-v: 32px;
+      --section-h: 40px;
+      --label-gap: 16px;
+      --block-gap: 56px;
+      --elem-gap: 24px;
+    }
+    section {
+      padding: var(--section-v) 0;
+    }
+    /* All section labels get the same gap below them */
+    .section-label {
+      display: block;
+      margin-bottom: var(--label-gap);
+    }
+    /* Utility classes pinned to variables */
+    .mt-64 { margin-top: var(--block-gap); }
+    .mt-40 { margin-top: var(--block-gap); }
+    .mt-24 { margin-top: var(--elem-gap); }
+    .decision-block { margin-top: var(--block-gap); }
+    .decision-block:first-of-type { margin-top: 0; }
+    .image-block { margin-top: var(--block-gap); }
+
+    /* ── PROBLEM STATEMENT BAND ── */
+    #problem-band .container, #hmw-band .container {
+      background: var(--white);
+      padding: 0 var(--section-h);
+    }
+    /* Remove dividers around problem/HMW bands */
+    #problem-band + section, #hmw-band + section {
+      border-top: none;
+    }
+    #problem-band, #hmw-band {
+      border-top: none;
+    }
+    #problem-band .problem-h2 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: #2B313D;
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+    #problem-band .problem-body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    #problem-band .problem-body strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* ── OVERVIEW ── */
+    #overview .two-col {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    #overview h2, .section-h2 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      color: #2B313D;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    #overview p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 12px;
+    }
+
+    /* ── RESEARCH ── */
+
+    .pullquote {
+      padding-left: 0;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2B313D;
+    }
+    .pullquotes-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .image-block .section-label {
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .comp-logos {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 56px;
+    }
+    @media (max-width: 768px) {
+      .comp-logos {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        margin-top: 32px;
+      }
+      .comp-logos img {
+        height: 36px !important;
+        width: auto !important;
+        object-fit: contain;
+        display: block;
+      }
+    }
+    .competitor-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: flex-start;
+      margin: 32px 0;
+    }
+    .competitor-tag {
+      background: var(--card);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-radius: 20px;
+      padding: 8px 20px;
+    }
+
+    /* ── BODY TEXT ── */
+    .body-lead {
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+    .body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .body-bold { font-weight: 600; color: var(--text-secondary); }
+
+    /* ── ACCENT BAND (inner) ── */
+    .accent-band {
+      background: var(--white);
+      padding: 64px 40px;
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+    .accent-band .section-label { margin-bottom: 20px; display: block; }
+    .accent-band img,
+    .accent-band .img-placeholder {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    /* ── DESIGN SECTION ── */
+
+    .decision-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    /* final designs grid */
+    .final-hero-band {
+      background: var(--white);
+      padding: 64px 0;
+      border-radius: 16px;
+      margin-top: 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .final-hero-band img,
+    .final-hero-band .img-placeholder {
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+    .screen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .screen-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .screen-card img,
+    .screen-card .img-placeholder {
+      width: 100%;
+      border-radius: 0;
+    }
+
+    /* ── TESTING ── */
+    #testing {
+      background: var(--white);
+    }
+    .testing-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 48px;
+    }
+    .testing-col-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .recommendations {
+      margin-top: 64px;
+    }
+
+    ol.rec-list {
+      list-style: none;
+      counter-reset: rec;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    ol.rec-list li {
+      counter-increment: rec;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    ol.rec-list li::before {
+      content: counter(rec);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 20px;
+      padding-top: 1px;
+    }
+
+    /* ── OUTCOME ── */
+    #outcome {
+      padding-bottom: 0;
+    }
+    #what-i-learned {
+      padding-top: 0;
+      padding-bottom: var(--section-v);
+    }
+    .what-i-learned {
+      background: var(--white);
+      margin-top: 56px;
+    }
+    .what-i-learned .pullout-text {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2B313D;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .what-i-learned .kicker {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 40px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      margin-left: -180px;
+      margin-right: -180px;
+      margin-top: 120px;
+      padding: 36px 40px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 36px;
+    }
+    .footer-cols { display: flex; gap: 64px; }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-col ul a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: #4F3D30; }
+    .footer-name {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 72px;
+      font-weight: 400;
+      color: rgba(79, 61, 48, 0.3);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 20px 0;
+    }
+    .footer-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--text-label);
+    }
+
+    /* ── DIVIDERS ── */
+    .divider { height: 1px; background: var(--border); margin: 64px 0; }
+
+    /* ── H2 spacing within sections ── */
+    .section-h2 { margin-top: 0; margin-bottom: 24px; }
+    .mt-64 { margin-top: var(--block-gap); }
+    .mt-40 { margin-top: var(--block-gap); }
+    .mt-24 { margin-top: var(--elem-gap); }
+    .mt-16 { margin-top: var(--elem-gap); }
+
+    @media (max-width: 768px) {
+      /* ── GLOBAL ── */
+      .section-label { font-size: 11px !important; letter-spacing: 0.06em !important; white-space: normal; }
+      html, body { overflow-x: hidden; }
+
+
+      /* Layout */
+      :root { --section-v: 40px; --section-h: 20px; --block-gap: 36px; --elem-gap: 20px; }
+      #overview .two-col { grid-template-columns: 1fr; }
+      .testing-cols { grid-template-columns: 1fr; }
+      .screen-grid { grid-template-columns: 1fr; }
+
+      /* Nav */
+      nav .nav-links { display: none; }
+      nav { padding: 0 20px; height: 68px; }
+
+      /* Hero */
+      #hero { padding-top: 72px; }
+      #hero h1 { font-size: 28px; line-height: 1.2; }
+      #hero .hero-image { height: auto; }
+      #hero .hero-meta {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px 16px !important;
+      }
+
+      /* Typography */
+      #overview h2, .section-h2 { font-size: 22px; }
+      #problem-band .problem-h2 { font-size: 22px; }
+      .pullquote { font-size: 17px; }
+      .what-i-learned .pullout-text { font-size: 17px; }
+      .pullout-text { font-size: 17px !important; }
+
+      /* Problem band */
+      #problem-band .problem-grid { grid-template-columns: 1fr !important; }
+
+      /* Images */
+      .container img { width: 100%; height: auto; }
+      img { max-width: 100%; height: auto; }
+      video { max-width: 100%; }
+
+      /* All inline grids: stack to single column */
+      div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+
+      /* What I learned */
+      .what-i-learned { padding: 32px 0 !important; }
+      .what-i-learned .pullout-text { margin: 0 !important; max-width: 100% !important; }
+
+      /* Footer */
+      footer {
+        padding: 36px 20px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 60px;
+      }
+      .footer-inner { flex-direction: column !important; gap: 20px !important; }
+      .footer-name { font-size: 26px; }
+      .footer-cols { gap: 28px; }
+
+      /* Tap targets */
+      nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
+
+      /* Prevent long words/URLs from overflowing */
+      p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #hero .hero-inner > * { animation: none; }
+    }
+
+    /* ── SIDE NAV ── */
+    .side-nav {
+      position: fixed;
+      top: 68px;
+      left: 0;
+      width: 180px;
+      height: calc(100vh - 68px);
+      padding: 40px 0 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    .side-nav a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-label);
+      text-decoration: none;
+      line-height: 1.4;
+      padding: 4px 0;
+      transition: color 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 10px;
+      margin-left: -12px;
+    }
+    .side-nav a:hover { color: #4F3D30; }
+    .side-nav-back {
+      color: var(--text-label) !important;
+      margin-bottom: 24px;
+    }
+    .side-nav-back:hover { color: #4F3D30 !important; }
+    .side-nav a.active {
+      color: #2B313D;
+      font-weight: 500;
+      border-left-color: #4F3D30;
+    }
+    /* Shift main content right to make room */
+    body {
+      padding-left: 180px;
+      padding-right: 180px;
+    }
+    @media (max-width: 960px) {
+      .side-nav { display: none; }
+      body { padding-left: 0; padding-right: 0; }
+    }
+
+    /* ── HAMBURGER / MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-toggle span {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      height: 2.5px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: transform 0.4s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 17px; }
+    .nav-toggle span:nth-child(2) { top: 25px; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+    /* Lift the nav (with the morphing toggle) above the open overlay */
+    body.nav-open nav { z-index: 300; }
+
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 200;
+      padding: 24px 20px 40px;
+      flex-direction: column;
+    }
+    .mobile-nav-overlay.open { display: flex; }
+    .mobile-nav-header { display: none; }
+    .mobile-nav-logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+    }
+    .mobile-nav-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--accent);
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .mobile-nav-links {
+      /* Reset the generic nav rule that bleeds into this <nav> element */
+      position: static;
+      background: none;
+      height: auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-top: 92px;
+    }
+    .mobile-nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 26px;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--text-label);
+      text-decoration: none;
+      padding: 12px 0;
+      transition: color 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-nav-links a:hover { color: #4F3D30; }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+    }
+    #dot-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      width: 16px;
+      height: 16px;
+      background: #4F3D30;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.15s ease;
+      top: 0; left: 0;
+    }
+    #dot-cursor.active { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">Khanak Joshi</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="resume.pdf">Resume</a></li>
+      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-logo">Khanak Joshi</span>
+      <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html#work" onclick="toggleMobileNav()">Work</a>
+      <a href="index.html#about" onclick="toggleMobileNav()">About</a>
+      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+    </nav>
+  </div>
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav">
+    <a href="index.html" class="side-nav-back">← Back</a>
+    <a href="#hero">Overview</a>
+    <a href="#problem-band">The Problem</a>
+    <a href="#research">Research</a>
+    <a href="#hmw-band">How Might We</a>
+    <a href="#design">Design</a>
+    <a href="#testing">Testing</a>
+    <a href="#outcome">Outcome</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="section-label">End-to-end UX · GIT 340 · 2026</span>
+      <h1>Find My Size</h1>
+      <img class="hero-image" src="images/hero.png" alt="Find My Size — hero mockup" />
+      <h2 class="section-h2" style="margin-top:20px;">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer</h2>
+
+      <!-- Four-column meta -->
+      <div class="hero-meta">
+        <div class="meta-col">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">Student Project<br>GIT 340</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Duration</span>
+          <span class="meta-value">Jan–Apr 2026</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Tool</span>
+          <span class="meta-value">Figma, Figma Make</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Scope</span>
+          <span class="meta-value">End-to-End UX</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM STATEMENT BAND -->
+  <section id="problem-band">
+    <div class="container">
+      <span class="section-label">The Problem</span>
+      <h2 class="problem-h2">Sizing tools existed. Trust didn't.</h2>
+      <p class="body">Online shoppers aren't short on sizing tools, they're short on reasons to believe them. A recommendation means nothing if it doesn't explain itself. And the stakes aren't just user frustration: sizing-driven returns are one of online retail's most expensive problems, and every return starts as a moment of doubt at checkout. <span class="body-bold">Online-first clothing shoppers need clear and trustworthy sizing guidance before purchasing so they can reduce uncertainty and avoid unnecessary returns.</span></p>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <span class="section-label">Research</span>
+      <h2 class="section-h2">The anxiety lives before the package, not after.</h2>
+      <p class="body" style="margin-top:16px;">Both users I interviewed felt the most stress <span class="body-bold">before</span> purchasing, not after the package arrived. That single finding shaped the entire project. Size charts felt too generic. Fit tools felt unreliable. Buying from a new brand meant the first few purchases were basically trial runs.</p>
+
+      <!-- User Interview Quotes -->
+      <div style="margin-top:56px;">
+        <span class="section-label">User Interview Quotes</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;margin-left:-14px;">
+          <img src="images/empathy-map-1.png" alt="Empathy map 1" style="width:100%;border-radius:12px;display:block;" />
+          <img src="images/empathy-map-2.png" alt="Empathy map 2" style="width:100%;border-radius:12px;display:block;" />
+        </div>
+      </div>
+
+      <!-- Persona -->
+      <div class="image-block">
+        <span class="section-label">User Persona</span>
+        <p class="body" style="margin-top:12px;">I synthesized both interviews into a composite shopper: a woman in her 20s–30s who shops online monthly but never feels certain something will fit until she tries it on. She loves the convenience and dreads the guesswork. That tension, not a demographic profile, is what the design had to resolve.</p>
+        <img src="images/Joshi_340_Persona_2.png" alt="User Persona" style="width:75%;display:block;margin-top:20px;" />
+      </div>
+
+      <!-- Journey Map -->
+      <div class="image-block">
+        <span class="section-label">Journey Map</span>
+        <p class="body" style="margin-top:12px;">Mapping Sophie's end-to-end journey made the problem precise. Emotion stays relatively neutral through browsing, then <span class="body-bold">drops sharply at Compare & Decide</span>, the exact moment she's weighing whether the sizing risk is worth it. Notably, once she commits to a purchase, mood recovers immediately: the wait feels exciting, not anxious. The problem isn't the order, <span class="body-bold">it's the decision before it.</span> That dip became the design target.</p>
+        <img src="images/Joshi_340_JourneyMap.png" alt="Journey Map" style="width:100%;display:block;margin-top:16px;" />
+      </div>
+
+      <!-- Competitor analysis -->
+      <div class="mt-64">
+        <span class="section-label">Competitor analysis and heuristic evaluation</span>
+        <h2 class="section-h2" style="margin-top:8px;">The same gap, across every tool.</h2>
+        <p class="body" style="margin-top:16px;">I analyzed three existing sizing tools, PacSun's True Fit integration, Aritzia's size chart, and Fytted, then conducted a heuristic evaluation of Aritzia's full shopping flow.</p>
+
+        <div class="comp-logos">
+          <img src="images/true-fit-logo.png" alt="True Fit" style="height:48px;object-fit:contain;" />
+          <img src="images/aritizia-logo.png" alt="Aritzia" style="height:48px;object-fit:contain;" />
+          <img src="images/fytted-logo.png" alt="Fytted" style="height:48px;object-fit:contain;" />
+        </div>
+
+        <p class="body body-bold" style="margin-top:56px;">Each had real strengths. But the gap was consistent across all three:</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>None explained how a recommendation was generated</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>None tied fit-related social proof directly to the sizing decision moment</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>None addressed return anxiety within the sizing experience itself</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>Fytted required a full app download - completely separate from the checkout flow</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HMW BAND -->
+  <section id="hmw-band">
+    <div class="container">
+      <span class="section-label">How might we</span>
+      <p style="font-family:'Lora',serif;font-style:italic;font-size:20px;line-height:1.6;color:#2B313D;margin-top:8px;font-weight:400;">Help online shoppers trust a size recommendation enough to buy with confidence without asking them to leave the product page to get one?</p>
+    </div>
+  </section>
+
+  <!-- DESIGN -->
+  <section id="design">
+    <div class="container">
+      <span class="section-label">Design</span>
+
+      <!-- Concept + task flow -->
+      <h2 class="section-h2">Embedded, not extracted.</h2>
+      <p class="body" style="margin-top:16px;"><span class="body-bold">The dip at Compare & Decide was the brief.</span> Every design decision that followed was an answer to the same question: what does a shopper need at that exact moment to feel confident enough to commit?</p>
+      <span class="section-label" style="display:block;margin-top:56px;">Task Flow</span>
+      <img src="images/Joshi_340_Task_flow.png" alt="Task Flow" style="width:calc(100% + 25px);max-width:none;display:block;margin-top:12px;margin-left:-25px;" />
+
+      <!-- Sketches to hi-fi -->
+      <div class="mt-64">
+        <span class="section-label">From sketches to hi-fi</span>
+        <p class="body" style="margin-top:12px;">Paper sketches let me work out the core interaction logic: where the module lived, what the form needed to ask, and how the recommendation screen should be structured. What they couldn't tell me was whether the visual hierarchy was working. That's what the first hi-fi round had to solve.</p>
+        <img src="images/Joshi_340_Wireframe copy.png" alt="Paper Sketches" style="width:100%;max-width:100%;display:block;margin-top:16px;" />
+      </div>
+
+      <!-- Key design decisions -->
+      <div class="mt-64">
+        <span class="section-label">Key design decisions</span>
+        <p class="body" style="margin-top:12px;">I designed Find My Size as a module that lives directly above the size selector on the product page. The core constraint was deliberate: <span class="body-bold">no app download, no account creation, no body scan.</span> Every existing tool added friction before a shopper could access anything. Find My Size required none of that as users could try it without committing to it first.</p>
+        <p class="body" style="margin-top:16px;">I considered building a standalone app similar to Fytted, but a key weakness kept surfacing: separating the tool from the product and checkout flow breaks the moment that matters most. Keeping it embedded wasn't just simpler, it was the right answer to the HMW.</p>
+        <img src="images/product-page.png" alt="Product page" style="width:100%;height:auto;display:block;margin-top:24px;" />
+
+        <div style="margin-top:56px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+            <div class="text-above-img">
+              <img src="images/i1.png" alt="Iteration 1" style="width:100%;height:auto;display:block;" />
+              <p class="body body-bold" style="margin-top:16px;">Progressive disclosure on the form</p>
+              <p class="body" style="margin-top:8px;">Height, weight, and fit preference are asked upfront, which is the minimum for a useful recommendation. Body measurements live in a collapsible section and usual size is an added field, keeping the experience light while giving detail-oriented users a path to more accuracy.</p>
+            </div>
+            <div class="text-above-img">
+              <img src="images/i2.png" alt="Iteration 2" style="width:100%;height:auto;display:block;" />
+              <p class="body body-bold" style="margin-top:16px;">Progress bar over step counter</p>
+              <p class="body" style="margin-top:8px;">An earlier iteration used a step counter. I replaced it with a progress bar: it communicates progress made rather than work remaining, which is the gentler frame for a form you want people to finish.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:56px;">
+          <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
+            <img src="images/opt-measurements.png" alt="Visual hierarchy" style="width:100%;height:auto;display:block;" />
+            <div style="align-self:center;">
+              <p class="body body-bold">Visual hierarchy refinement</p>
+              <p class="body" style="margin-top:8px;">Toggle buttons for IN/CM, LB/KG, and fit preference were pulled to a lighter purple in the second iteration. Everything competed equally before so dialing them back made "Get Size Recommendation" the clear visual anchor.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:56px;">
+          <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
+            <img src="images/help-modal.png" alt="Inline measurement guides" style="width:100%;height:auto;display:block;" />
+            <div style="align-self:center;">
+              <p class="body body-bold">Inline measurement guides</p>
+              <p class="body" style="margin-top:8px;">A heuristic evaluation of Aritzia revealed that users benefited from visual measurement guides inline. I adopted the same idea so users who didn't know their bust or waist measurement had a reference right there, without leaving the flow.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision-block mt-40">
+          <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
+            <img src="images/rec-screen.png" alt="Recommendation screen" style="width:100%;height:auto;display:block;" />
+            <div style="align-self:center;">
+              <p class="body body-bold">The recommendation screen shows its work</p>
+              <p class="body" style="margin-top:8px;">The result screen shows the suggested size, how it was determined, what percentage of similar shoppers chose it, whether the item runs true to size, and a free returns note with a link to the return policy. Most tools give you an answer. This one explains the reasoning behind it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTING -->
+  <section id="testing">
+    <div class="container">
+      <span class="section-label">Testing</span>
+      <h2 class="section-h2" style="margin-top:8px;">What worked, what didn't, and what it means.</h2>
+      <p class="body" style="margin-top:16px;margin-bottom:56px;">I tested the Figma Make prototype in person with two participants who shopped online monthly on mobile and had returned items due to sizing before, different from the research interviewees.</p>
+
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#8EB497;font-weight:600;flex-shrink:0;">✓</span>Both users found Find My Size independently within 10 seconds</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#8EB497;font-weight:600;flex-shrink:0;">✓</span>Both rated ease of use 5/5 and post-recommendation confidence 4/5 and 5/5</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#8EB497;font-weight:600;flex-shrink:0;">✓</span>The model height callout and return reassurance were noticed unprompted — the right details in the right places</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>One user tapped X instead of "Select Size S," not knowing it auto-applies the recommended size</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>The help icon next to bust was too small — one user asked aloud how to measure instead of tapping it</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>Both users were unsure whether Find My Size and the "Size and Fit" link did the same thing</li>
+      </ul>
+
+      <div style="margin-top:32px;">
+        <span class="section-label">Did the recommendation screen actually build trust?</span>
+        <p class="body" style="margin-top:12px;">This was the question the test was really asking. The scores say yes: both users entered the study only somewhat confident about sizing at new stores, and after receiving a recommendation, rated their confidence 4/5 and 5/5.</p>
+        <p class="body" style="margin-top:16px;">But they built that trust differently. User 2 spent 42 seconds on the recommendation screen and said her confidence came primarily from the measurements she had entered, not the social proof. The recommendation felt trustworthy because it was visibly built on her own inputs. User 1 dismissed the same screen in 5 seconds, likely too fast to absorb the social proof at all.</p>
+        <p class="body" style="margin-top:16px;">Transparency worked, just not the way I designed it to. <span class="body-bold">The trust-building element wasn't the social stat. It was input visibility.</span> The two users also revealed two trust modes: the verifier, who invests time for accuracy, and the skimmer, who gives the screen about five seconds. The Select Size microcopy fix is really a trust-delivery problem for the skimmer.</p>
+        <p class="body" style="margin-top:16px;"><span class="body-bold">One score complicates the win:</span> User 2, the most confident user, rated herself only neutral (3/5) on using a feature like this again. Thoroughness bought confidence but at a cost she wasn't sure she'd pay every time, which validates the project's core constraint: the form has to stay light.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
+        <img src="images/testing-1.png" alt="Testing 1" style="width:100%;height:auto;display:block;" />
+        <img src="images/testing-2.png" alt="Testing 2" style="width:100%;height:auto;display:block;" />
+      </div>
+
+      <div class="recommendations" style="margin-top:56px;">
+        <p class="decision-title" style="margin-bottom:32px;">Recommendations for Next Iteration</p>
+        <ol class="rec-list">
+          <li>Add microcopy to the Select Size CTA clarifying it auto-applies the recommended size.</li>
+          <li>Replace the help icon with a visible text link so users can immediately find measurement guidance.</li>
+          <li>Add brand-specific input to the Usual Size field to improve recommendation accuracy across retailers.</li>
+          <li>Differentiate Find My Size from the "Size and Fit" link to resolve the naming confusion both users hit.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOME -->
+  <section id="outcome">
+    <div class="container">
+      <span class="section-label">Outcome</span>
+      <h2 class="section-h2" style="margin-top:8px;">The concept worked. The details showed us where to go next.</h2>
+      <p class="body" style="margin-top:16px;"><span class="body-bold">The friction points are the finding.</span> Both users completed the full flow without guidance. But the friction points that surfaced are the most valuable part of the test. Each one points to a specific, distinct problem: an affordance gap, a visual hierarchy failure, and an IA issue that lives upstream of the feature itself.</p>
+      <p class="body" style="margin-top:24px;"><span class="body-bold">A note on scale.</span> This project was built on two interviews and two usability sessions. That's enough to see how trust forms, not enough to prove it generalizes. A larger study would test whether input visibility really matters more than social proof, whether people would use the tool repeatedly, and whether it actually reduces returns. <span class="body-bold">The next step isn't more design. It's more research.</span></p>
+
+    </div>
+  </section>
+
+  <section id="what-i-learned">
+    <div class="container">
+      <div class="what-i-learned">
+        <span class="section-label">What I Learned</span>
+        <p style="margin-top:16px;font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;color:var(--text-secondary);">I designed a help icon assuming users would notice it. One user asked aloud how to measure her bust instead. That single moment taught me more about visual hierarchy than two rounds of iteration did.</p>
+        <p style="margin-top:24px;margin-left:0;font-family:'Lora',serif;font-style:italic;font-size:20px;line-height:1.7;color:#2B313D;border-left:2px solid #2C1A0E;padding-left:16px;">The details you're most confident about are the ones worth testing first.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="resume.pdf">Resume</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
+            <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-name">Khanak Joshi</div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for side nav links
+    document.querySelectorAll(".side-nav a").forEach(link => {
+      link.addEventListener("click", e => {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 64;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    const sections = [
+      { id: 'hero',         link: 'a[href="#hero"]' },
+      { id: 'problem-band', link: 'a[href="#problem-band"]' },
+      { id: 'research',     link: 'a[href="#research"]' },
+      { id: 'hmw-band',     link: 'a[href="#hmw-band"]' },
+      { id: 'design',       link: 'a[href="#design"]' },
+      { id: 'testing',      link: 'a[href="#testing"]' },
+      { id: 'outcome',      link: 'a[href="#outcome"]' },
+    ];
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const section = sections.find(s => s.id === entry.target.id);
+        if (!section) return;
+        const link = document.querySelector('.side-nav ' + section.link);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    function toggleMobileNav() {
+      const overlay = document.getElementById("mobileNav");
+      const open = !overlay.classList.contains("open");
+      overlay.classList.toggle("open", open);
+      document.querySelector(".nav-toggle").classList.toggle("open", open);
+      document.body.classList.toggle("nav-open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+  </script>
+
+  <div id="dot-cursor"></div>
+  <script>
+    const dotCursor = document.getElementById('dot-cursor');
+    document.addEventListener('mousemove', e => {
+      dotCursor.style.left = e.clientX + 'px';
+      dotCursor.style.top = e.clientY + 'px';
+      dotCursor.classList.add('active');
+    });
+    document.addEventListener('mouseleave', () => dotCursor.classList.remove('active'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nielsen ONE — Khanak Joshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #fafcfd;
+      --bg-warm: #E8E6DD;
+      --card: #EDE3D8;
+      --border: #D4C4B8;
+      --accent: #4F3D30;
+      --accent-link: #2C1A0E;
+      --text-primary: #1A1A1A;
+      --text-secondary: #3D3D3D;
+      --text-label: #888888;
+      --max-w: 780px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    /* ── NAV ── */
+    nav:not(.side-nav) {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(251,251,251,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+      text-decoration: none;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    nav .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:not(.nav-contact)::after {
+      content: '';
+      position: absolute;
+      bottom: 11px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #4F3D30;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
+    nav .nav-links a:hover { color: #4F3D30; }
+    nav .nav-links a.active {
+      color: #4F3D30;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+    nav .nav-links a.nav-contact {
+      color: #fff;
+      background: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background-color 0.35s ease;
+    }
+    nav .nav-links a.nav-contact:hover {
+      background: #32261E;
+    }
+    /* 44px minimum touch targets */
+    nav .nav-links a, .footer-col ul a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+
+
+    /* ── UTILITIES ── */
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+      box-sizing: border-box;
+    }
+    .container img {
+      max-width: 100%;
+    }
+    .img-placeholder {
+      width: 100%;
+      background: var(--card);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-label);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: var(--white);
+      padding-top: 100px;
+      padding-bottom: var(--section-v);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #hero .hero-inner > * {
+      animation: fadeUp 0.6s ease both;
+    }
+    #hero .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+    #hero .hero-inner > *:nth-child(2) { animation-delay: 0.12s; }
+    #hero .hero-inner > *:nth-child(3) { animation-delay: 0.2s; }
+    #hero .hero-inner > *:nth-child(4) { animation-delay: 0.28s; }
+    #hero .hero-inner > *:nth-child(5) { animation-delay: 0.36s; }
+    #hero .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+    }
+    #hero h1 {
+      font-family: 'Lora', serif;
+      font-size: 36px;
+      font-weight: 500;
+      color: #2B313D;
+      margin-top: 10px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    #hero .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin-top: 28px;
+    }
+    #hero .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0;
+      margin-top: 36px;
+      padding-top: 24px;
+    }
+    .meta-col .meta-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .meta-col .meta-value {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3D3D3D;
+      line-height: 1.5;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    :root {
+      --section-v: 32px;
+      --section-h: 40px;
+      --label-gap: 16px;
+      --block-gap: 56px;
+      --elem-gap: 24px;
+    }
+    section {
+      padding: var(--section-v) 0;
+    }
+    /* All section labels get the same gap below them */
+    .section-label {
+      display: block;
+      margin-bottom: var(--label-gap);
+    }
+    /* Utility classes pinned to variables */
+    .mt-64 { margin-top: var(--block-gap); }
+    .mt-40 { margin-top: var(--block-gap); }
+    .mt-24 { margin-top: var(--elem-gap); }
+    .decision-block { margin-top: var(--block-gap); }
+    .decision-block:first-of-type { margin-top: 0; }
+    .image-block { margin-top: var(--block-gap); }
+
+    /* ── PROBLEM STATEMENT BAND ── */
+    #problem-band .container, #hmw-band .container {
+      background: var(--white);
+      padding: 0 var(--section-h);
+    }
+    /* Remove dividers around problem/HMW bands */
+    #problem-band + section, #hmw-band + section {
+      border-top: none;
+    }
+    #problem-band, #hmw-band {
+      border-top: none;
+    }
+    #problem-band .problem-h2 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: #2B313D;
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+    #problem-band .problem-body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    #problem-band .problem-body strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* ── OVERVIEW ── */
+    #overview .two-col {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    #overview h2, .section-h2 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      color: #2B313D;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    #overview p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 12px;
+    }
+
+    /* ── RESEARCH ── */
+
+    .pullquote {
+      padding-left: 0;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2B313D;
+    }
+    .pullquotes-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .image-block .section-label {
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .competitor-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: flex-start;
+      margin: 32px 0;
+    }
+    .competitor-tag {
+      background: var(--card);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-radius: 20px;
+      padding: 8px 20px;
+    }
+
+    /* ── BODY TEXT ── */
+    .body-lead {
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+    .body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .body-bold { font-weight: 600; color: var(--text-secondary); }
+
+    /* ── ACCENT BAND (inner) ── */
+    .accent-band {
+      background: var(--white);
+      padding: 64px 40px;
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+    .accent-band .section-label { margin-bottom: 20px; display: block; }
+    .accent-band img,
+    .accent-band .img-placeholder {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    /* ── DESIGN SECTION ── */
+
+    .decision-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    /* final designs grid */
+    .final-hero-band {
+      background: var(--white);
+      padding: 64px 0;
+      border-radius: 16px;
+      margin-top: 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .final-hero-band img,
+    .final-hero-band .img-placeholder {
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+    .screen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .screen-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .screen-card img,
+    .screen-card .img-placeholder {
+      width: 100%;
+      border-radius: 0;
+    }
+
+    /* ── TESTING ── */
+    #testing {
+      background: var(--white);
+    }
+    .testing-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 48px;
+    }
+    .testing-col-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .recommendations {
+      margin-top: 64px;
+    }
+
+    ol.rec-list {
+      list-style: none;
+      counter-reset: rec;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    ol.rec-list li {
+      counter-increment: rec;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    ol.rec-list li::before {
+      content: counter(rec);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 20px;
+      padding-top: 1px;
+    }
+
+    /* ── OUTCOME ── */
+    #outcome {
+      padding-bottom: 0;
+    }
+    #what-i-learned {
+      padding-top: 0;
+      padding-bottom: var(--section-v);
+    }
+    .what-i-learned {
+      background: var(--white);
+      margin-top: 56px;
+    }
+    .what-i-learned .pullout-text {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2B313D;
+      max-width: 100%;
+      margin: 0;
+    }
+    .what-i-learned .kicker {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 40px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      margin-left: -180px;
+      margin-right: -180px;
+      margin-top: 120px;
+      padding: 36px 40px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 36px;
+    }
+    .footer-cols { display: flex; gap: 64px; }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-col ul a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: #4F3D30; }
+    .footer-name {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 72px;
+      font-weight: 400;
+      color: rgba(79, 61, 48, 0.3);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 20px 0;
+    }
+    .footer-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--text-label);
+    }
+    @media (max-width: 768px) {
+      .footer-inner { flex-direction: column; gap: 40px; }
+      .footer-name { font-size: 26px; }
+      .footer-cols { gap: 36px; }
+    }
+
+    /* ── DIVIDERS ── */
+    .divider { height: 1px; background: var(--border); margin: 64px 0; }
+
+    /* ── H2 spacing within sections ── */
+    .section-h2 { margin-top: 0; margin-bottom: 24px; }
+    .mt-64 { margin-top: var(--block-gap); }
+    .mt-40 { margin-top: var(--block-gap); }
+    .mt-24 { margin-top: var(--elem-gap); }
+    .mt-16 { margin-top: var(--elem-gap); }
+
+    @media (max-width: 768px) {
+      /* ── GLOBAL ── */
+      .section-label { font-size: 11px !important; letter-spacing: 0.06em !important; white-space: normal; }
+      html, body { overflow-x: hidden; }
+
+
+      /* Layout */
+      :root { --section-v: 40px; --section-h: 20px; --block-gap: 36px; --elem-gap: 20px; }
+      #overview .two-col { grid-template-columns: 1fr; }
+      .testing-cols { grid-template-columns: 1fr; }
+      .screen-grid { grid-template-columns: 1fr; }
+
+      /* Nav */
+      nav .nav-links { display: none; }
+      nav { padding: 0 20px; height: 68px; }
+
+      /* Hero */
+      #hero { padding-top: 72px; }
+      #hero h1 { font-size: 28px; line-height: 1.2; }
+      #hero .hero-image { height: 220px; }
+      #hero .hero-meta {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px 16px !important;
+      }
+
+      /* Typography */
+      #overview h2, .section-h2 { font-size: 22px; }
+      #problem-band .problem-h2 { font-size: 22px; }
+      .pullquote { font-size: 17px; }
+      .what-i-learned .pullout-text { font-size: 17px; }
+      .pullout-text { font-size: 17px !important; }
+
+      /* Problem band */
+      #problem-band .problem-grid { grid-template-columns: 1fr !important; }
+
+      /* Images */
+      .container img { width: 100%; height: auto; }
+      img { max-width: 100%; height: auto; }
+      video { max-width: 100%; }
+
+      /* All inline grids: stack to single column */
+      div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+
+      /* What I learned */
+      .what-i-learned { padding: 32px 0 !important; }
+
+      /* Footer */
+      footer {
+        padding: 36px 20px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 60px;
+      }
+      .footer-inner { flex-direction: column !important; gap: 20px !important; }
+      .footer-name { font-size: 26px; }
+      .footer-cols { gap: 28px; }
+
+      /* Tap targets */
+      nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
+
+      /* Prevent long words/URLs from overflowing */
+      p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #hero .hero-inner > * { animation: none; }
+    }
+
+    /* ── SIDE NAV ── */
+    .side-nav {
+      position: fixed;
+      top: 68px;
+      left: 0;
+      width: 180px;
+      height: calc(100vh - 68px);
+      padding: 40px 0 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      z-index: 50;
+    }
+    .side-nav a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-label);
+      text-decoration: none;
+      line-height: 1.4;
+      padding: 4px 0 4px 12px;
+      margin-left: -12px;
+      transition: color 0.2s;
+      border-left: 2px solid transparent;
+    }
+    .side-nav a:hover { color: #4F3D30; }
+    .side-nav-back {
+      color: var(--text-label) !important;
+      margin-bottom: 24px;
+    }
+    .side-nav-back:hover { color: #4F3D30 !important; }
+    .side-nav a.active {
+      color: #2B313D;
+      font-weight: 500;
+      border-left-color: #4F3D30;
+    }
+    .side-nav .nav-group-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #2B313D;
+      text-decoration: none;
+      padding: 8px 0 2px 10px;
+      margin-left: -12px;
+      border-left: 2px solid transparent;
+      letter-spacing: 0.02em;
+      cursor: default;
+      pointer-events: none;
+    }
+    .side-nav .nav-sub {
+      padding-left: 28px;
+    }
+    /* Shift main content right to make room */
+    body {
+      padding-left: 180px;
+      padding-right: 180px;
+    }
+    @media (max-width: 960px) {
+      .side-nav { display: none; }
+      body { padding-left: 0; padding-right: 0; }
+    }
+
+    /* ── HAMBURGER / MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-toggle span {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      height: 2.5px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: transform 0.4s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 17px; }
+    .nav-toggle span:nth-child(2) { top: 25px; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+    /* Lift the nav (with the morphing toggle) above the open overlay */
+    body.nav-open nav { z-index: 300; }
+
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 200;
+      padding: 24px 20px 40px;
+      flex-direction: column;
+    }
+    .mobile-nav-overlay.open { display: flex; }
+    .mobile-nav-header { display: none; }
+    .mobile-nav-logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+    }
+    .mobile-nav-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--accent);
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .mobile-nav-links {
+      /* Reset the generic nav rule that bleeds into this <nav> element */
+      position: static;
+      background: none;
+      height: auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-top: 92px;
+    }
+    .mobile-nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 26px;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--text-label);
+      text-decoration: none;
+      padding: 12px 0;
+      transition: color 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-nav-links a:hover { color: #4F3D30; }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+    }
+    #dot-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      width: 16px;
+      height: 16px;
+      background: #4F3D30;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.15s ease;
+      top: 0; left: 0;
+    }
+    #dot-cursor.active { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">Khanak Joshi</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="resume.pdf">Resume</a></li>
+      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-logo">Khanak Joshi</span>
+      <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html#work" onclick="toggleMobileNav()">Work</a>
+      <a href="index.html#about" onclick="toggleMobileNav()">About</a>
+      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+    </nav>
+  </div>
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav">
+    <a href="index.html" class="side-nav-back">← Back</a>
+    <a href="#overview">Overview</a>
+    <span class="nav-group-label">Project 01</span>
+    <a href="#problem-band" class="nav-sub">The Problem</a>
+    <a href="#p01-approach" class="nav-sub">Approach</a>
+    <a href="#p01-outcome" class="nav-sub">Outcome</a>
+    <span class="nav-group-label">Project 02</span>
+    <a href="#p02-problem" class="nav-sub">The Problem</a>
+    <a href="#p02-approach" class="nav-sub">Approach</a>
+    <a href="#p02-outcome" class="nav-sub">Outcome</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="section-label">UX DESIGN INTERNSHIP · NIELSEN · 2025</span>
+      <h1>Nielsen ONE</h1>
+      <img class="hero-image" src="images/nielsenmockup.png" alt="Nielsen ONE mockup" />
+      <h2 class="section-h2" style="margin-top:20px;">Designing for a cross-platform measurement tool used by the world's largest media brands</h2>
+
+      <!-- Four-column meta -->
+      <div class="hero-meta">
+        <div class="meta-col">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">UX Design Intern</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Duration</span>
+          <span class="meta-value">Jun–Sep 2025</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Tool</span>
+          <span class="meta-value">Figma, Figma Make</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="container">
+      <span class="section-label">Overview</span>
+      <p class="body" style="margin-top:12px;">Over a 3-month internship at Nielsen, I worked as the sole UI/UX design intern on Nielsen ONE, a B2B analytics platform used by media buyers and sellers to plan, measure, and optimize advertising campaigns. I took briefs from my UX supervisor and worked with the development team from iteration through handoff. The two projects below share a thread: both ask a user to commit to something, an upgrade in one, a report in the other, and both put the evidence for that decision exactly where the decision happens.</p>
+    </div>
+  </section>
+
+  <!-- PROJECT 01 -->
+  <section id="project-01">
+    <div class="container">
+      <span class="section-label">PROJECT 01</span>
+      <h2 class="section-h2" style="margin-top:12px;">Upsell UI - making a hidden feature impossible to miss</h2>
+    </div>
+  </section>
+
+  <!-- PROBLEM STATEMENT BAND -->
+  <section id="problem-band">
+    <div class="container">
+      <span class="section-label">The Problem</span>
+      <h2 class="problem-h2">The feature existed. The interface gave users no reason to look.</h2>
+      <p class="body">Nielsen ONE had a Planning feature that most users weren't engaging with. The problem wasn't that they didn't need it. <span class="body-bold">It was that nothing on the campaign dashboard told them it existed.</span> My brief was to design an upsell experience that made the feature visible and compelling without pulling users away from what they were already doing.</p>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <div id="p01-approach"></div>
+      <span class="section-label">Approach</span>
+      <h2 class="section-h2">Three entry points, one clear path.</h2>
+
+      <!-- Lock Icon on the Planning Tab -->
+      <div style="margin-top:56px;">
+        <span class="section-label">Lock Icon on the Planning Tab</span>
+        <p class="body" style="margin-top:12px;">The first entry point was the Planning tab in the main navigation. My supervisor suggested using a lock icon to signal the feature was gated. I kept it small and inline with the tab label so it wouldn't disrupt the navigation's visual rhythm, informational rather than alarming. On hover, I added a bold outline state to make it feel clickable. Without it, users might have assumed the tab was simply disabled and <span class="body-bold">moved on.</span></p>
+        <img src="images/n1cf-campaigns-upsell-hover.png" alt="Lock icon on Planning tab hover state" style="width:100%;display:block;margin-top:20px;" />
+      </div>
+
+      <!-- Upsell Modal -->
+      <div style="margin-top:56px;">
+        <span class="section-label">Upsell Modal</span>
+        <p class="body" style="margin-top:12px;">Clicking the lock opens a modal rather than a redirect. Taking users to a new page mid-task would have broken their flow and made it harder to return. The modal keeps them in context: they can read about the feature and close it without losing their place. The Cancel button was intentional too. A user who knows they can leave is more willing to stay and read, and it makes the upsell feel like <span class="body-bold">an invitation rather than a trap.</span> The modal itself uses a short header, three scannable outcome statements, and a supporting image. <span class="body-bold">Enterprise users scan rather than read paragraphs.</span></p>
+        <img src="images/upsell-mockup.png" alt="Upsell modal mockup" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+      </div>
+
+      <!-- Side Panel Card -->
+      <div style="margin-top:56px;">
+        <span class="section-label">Side Panel Card</span>
+        <p class="body" style="margin-top:12px;">A user who has clicked into Campaign Details is in a different mindset than someone browsing the nav. They're looking at a specific campaign, a natural moment to show them what Planning could do with that data. I designed a card with two CTAs. Preview Data was an existing feature that let users sample Planning with their own data, surfacing it here gave <span class="body-bold">a low-commitment way to try before upgrading.</span> Learn More served users who needed more context before deciding.</p>
+        <p class="body" style="margin-top:16px;">After the first review, stakeholders felt the card needed more credibility. I added a social proof badge ('Join 2,500+ brands already using Planning') at the bottom of the card. For enterprise buyers, knowing that peers are already using something reduces the perceived risk of upgrading. <span class="body-bold">It was a small addition, but it shifted the card from a pitch to proof.</span></p>
+        <img src="images/upsell-side-panel.png" alt="Upsell side panel card" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+      </div>
+
+      <!-- Light and Dark Mode Variants and Edge Cases -->
+      <div style="margin-top:56px;">
+        <span class="section-label">Light and Dark Mode Variants and Edge Cases</span>
+        <p class="body" style="margin-top:12px;">The first color pass on the card clashed in both light and dark mode, making it feel visually jarring. I reworked the palette to sit more calmly within Nielsen's design system. I also built out short and long content variants using Figma component properties, something I added proactively <span class="body-bold">rather than because it was asked of me.</span> Real content is unpredictable, and a design that only works at one character count creates problems for developers. Having every state documented meant the team could build without guessing.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+          <img src="images/Content Size=Short, Mode=Light.png" alt="Short content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img src="images/Content Size=Short, Mode=Dark.png" alt="Short content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img src="images/Content Size=Long, Mode=Light.png" alt="Long content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img src="images/Content Size=Long, Mode=Dark.png" alt="Long content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+        </div>
+      </div>
+
+      <!-- Outcome -->
+      <div id="p01-outcome" style="margin-top:56px;">
+        <span class="section-label">Outcome</span>
+        <h2 class="section-h2" style="margin-top:12px;">From a missed opportunity to a system with intent.</h2>
+        <p class="body" style="margin-top:12px;">The designs were approved after two rounds of iteration and handed off to development. The Planning feature went from a tab nobody clicked to three entry points, each timed to a different moment: the lock for users scanning the nav, the modal for users curious enough to click, the card for users already deep in a campaign. <span class="body-bold">The feature didn't change. When and how it asked for attention did.</span></p>
+      </div>
+
+      <!-- What I Learned -->
+      <div class="what-i-learned" style="margin-top:56px;">
+        <span class="section-label">What I Learned</span>
+        <p class="pullout-text" style="margin-top:16px;margin-left:0;border-left:2px solid #2C1A0E;padding-left:16px;">This project taught me that in B2B, trust is part of the design. An exit path in a modal, a social proof badge, a palette that doesn't fight the interface: none of these sell the feature. They make the moment of being asked feel safe. That is the difference between an upsell users consider and one they dismiss.</p>
+      </div>
+
+      <!-- PROJECT 02 -->
+      <div style="margin-top:56px;">
+        <span class="section-label">PROJECT 02</span>
+        <h2 class="section-h2" style="margin-top:12px;">Campaign Builder - turning raw backend data into a decision-making tool</h2>
+      </div>
+
+      <!-- Problem -->
+      <div id="p02-problem" style="margin-top:56px;">
+        <span class="section-label">Problem</span>
+        <h2 class="section-h2" style="margin-top:12px;">Reports built on assumptions, not data.</h2>
+        <p class="body" style="margin-top:12px;">When users combined campaigns in Nielsen ONE, they had no way of knowing how much data actually existed within their chosen date range. <span class="body-bold">They were building reports blind,</span> and if the campaigns didn't overlap the way they expected, the report would come back with gaps. There was no indicator anywhere in the flow to flag this before it happened.</p>
+      </div>
+
+      <!-- Approach -->
+      <div id="p02-approach" style="margin-top:56px;">
+        <span class="section-label">Approach</span>
+        <h2 class="section-h2" style="margin-top:12px;">One column. Two checkpoints.</h2>
+      </div>
+
+      <!-- Data Overlap Column -->
+      <div style="margin-top:56px;">
+        <span class="section-label">Data Overlap Column</span>
+        <p class="body" style="margin-top:12px;">I proposed adding a Data Overlap column to the Selected Campaigns table, showing available data as a ratio. '19/61 days' meaning 19 days of data existed within a 61-day selected range. I scoped it to the Selected Campaigns section only, not the full list of 512 campaigns above it. Showing it across the full table would have cluttered the UI and added unnecessary backend load. I anticipated this as a constraint <span class="body-bold">before starting</span> and confirmed it with the dev team. The column also carries through to the review step, giving users one final check before committing to generating a report.</p>
+        <img src="images/n1a-ccb-step-details-selected-campaigns-data-overlap.png" alt="Step details - selected campaigns data overlap" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
+      </div>
+
+      <!-- Info Icon and Tooltip -->
+      <div style="margin-top:56px;">
+        <span class="section-label">Info Icon and Tooltip</span>
+        <p class="body" style="margin-top:12px;">The ratio format was a start, but it didn't tell users which months had data and which didn't. I added an info icon next to the column header, a standard Nielsen design system component used to signal more detail is available, so users would recognize it immediately. On hover, a tooltip reads 'View detailed overlap.' I made it a click to open rather than hover to expand because the full table is dense. Users need time to scan it, and a hover state would have <span class="body-bold">disappeared the moment they moved their cursor.</span></p>
+        <img src="images/Group 5.png" alt="Info icon and tooltip" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
+      </div>
+
+      <!-- Redesigned Data Overlap Table -->
+      <div style="margin-top:56px;">
+        <span class="section-label">Redesigned Data Overlap Table</span>
+        <p class="body" style="margin-top:12px;">Clicking opens a modal with a redesigned overlap table. The reference point I was working from was a raw backend spreadsheet with columns for CC ID, start dates, and data availability strings like '19 [May (9), Jun (10)]', built <span class="body-bold">for engineers rather than media buyers.</span></p>
+        <img src="images/n1a-cc-monthly-details-enhancement 1.png" alt="Monthly details enhancement" style="width:100%;display:block;margin-top:20px;border-radius:12px;" />
+        <p class="body" style="margin-top:16px;">My version restructures the same data into a calendar-style layout organized by month, with each campaign as a row. Days within the selected range are highlighted in one color, days outside in another, with a legend at the bottom. The same information becomes immediately visual. You can see at a glance which campaigns have strong coverage for your window and which fall short, <span class="body-bold">without decoding anything.</span></p>
+        <img src="images/modal.png" alt="Data overlap modal" style="width:100%;height:auto;display:block;margin-top:20px;" />
+      </div>
+
+      <!-- Outcome P02 -->
+      <div id="p02-outcome" style="margin-top:56px;">
+        <span class="section-label">Outcome</span>
+        <h2 class="section-h2" style="margin-top:12px;">From blind commitment to informed decisions</h2>
+        <p class="body" style="margin-top:12px;">After two iterations, the designs were approved and handed to dev. Before this project, users had no way to know whether their selected campaigns actually had data for the date range they chose. They were committing to reports without enough information to make that call confidently. After handoff, the same workflow surfaced data availability at two levels: a quick ratio in the table for users who needed a scan, and a full calendar breakdown one click away for users who needed to go deeper. <span class="body-bold">The redesign didn't add new data. It made existing data legible at the right moment.</span></p>
+        <img src="images/ccb-table.png" alt="CCB table" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+      </div>
+
+      <!-- What I Learned P02 -->
+      <div class="what-i-learned" style="margin-top:56px;">
+        <span class="section-label">What I Learned</span>
+        <p class="pullout-text" style="margin-top:16px;margin-left:0;border-left:2px solid #2C1A0E;padding-left:16px;">Working with complex backend data taught me that clarity is its own form of design. The data was already there. My job was to restructure it into something users could actually act on. That is a problem I want to keep solving.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="resume.pdf">Resume</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
+            <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-name">Khanak Joshi</div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for side nav links
+    document.querySelectorAll(".side-nav a").forEach(link => {
+      link.addEventListener("click", e => {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 64;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    const sections = [
+      { id: 'overview',     link: 'a[href="#overview"]' },
+      { id: 'problem-band', link: 'a[href="#problem-band"]' },
+      { id: 'p01-approach', link: 'a[href="#p01-approach"]' },
+      { id: 'p01-outcome',  link: 'a[href="#p01-outcome"]' },
+      { id: 'p02-problem',  link: 'a[href="#p02-problem"]' },
+      { id: 'p02-approach', link: 'a[href="#p02-approach"]' },
+      { id: 'p02-outcome',  link: 'a[href="#p02-outcome"]' },
+    ];
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const section = sections.find(s => s.id === entry.target.id);
+        if (!section) return;
+        const link = document.querySelector('.side-nav ' + section.link);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    function toggleMobileNav() {
+      const overlay = document.getElementById("mobileNav");
+      const open = !overlay.classList.contains("open");
+      overlay.classList.toggle("open", open);
+      document.querySelector(".nav-toggle").classList.toggle("open", open);
+      document.body.classList.toggle("nav-open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+  </script>
+
+  <div id="dot-cursor"></div>
+  <script>
+    const dotCursor = document.getElementById('dot-cursor');
+    document.addEventListener('mousemove', e => {
+      dotCursor.style.left = e.clientX + 'px';
+      dotCursor.style.top = e.clientY + 'px';
+      dotCursor.classList.add('active');
+    });
+    document.addEventListener('mouseleave', () => dotCursor.classList.remove('active'));
+  </script>
+</body>
+</html>

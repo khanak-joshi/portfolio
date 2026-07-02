@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khanak Joshi — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #fafcfd;
+      --bg-warm: #E8E6DD;
+      --card: #EDE3D8;
+      --border: #D4C4B8;
+      --accent: #4F3D30;
+      --accent-link: #2C1A0E;
+      --text-primary: #1A1A1A;
+      --text-secondary: #3D3D3D;
+      --text-label: #888888;
+      /* Shared layout system (matches case study pages) */
+      --max-w: 780px;       /* narrow reading column */
+      --max-wide: 1320px;   /* hero + project grid */
+      --section-h: 40px;
+      --section-v: 32px;
+      --label-gap: 16px;
+      --block-gap: 56px;
+      --elem-gap: 24px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+      /* Same gutters as case study pages so the content edge never shifts.
+         No sidebar here — the left gutter is simply open space. */
+      padding-left: 180px;
+      padding-right: 180px;
+    }
+    /* Links get a UA pointer cursor that overrides body's cursor:none —
+       suppress it so only the custom dot shows on hover. */
+    a { cursor: none; }
+
+    /* ── SHARED CONTAINERS ── */
+    /* Narrow reading column — identical math to the case study pages,
+       so body text aligns to the same left edge across the site. */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+      box-sizing: border-box;
+    }
+    .container img { max-width: 100%; }
+    /* Fuller-width column for heroes, images, and grids. */
+    .wide-inner {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+      box-sizing: border-box;
+    }
+    /* Wide sections break out of the body gutters, then re-center. */
+    #hero, #work, footer {
+      margin-left: -180px;
+      margin-right: -180px;
+    }
+    @media (max-width: 960px) {
+      body { padding-left: 0; padding-right: 0; }
+      #hero, #work, footer { margin-left: 0; margin-right: 0; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250,252,253,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+      text-decoration: none;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    nav .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:not(.nav-contact)::after {
+      content: '';
+      position: absolute;
+      bottom: 11px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #4F3D30;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
+    nav .nav-links a:hover { color: #4F3D30; }
+    nav .nav-links a.active {
+      color: #4F3D30;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+    nav .nav-links a.nav-contact {
+      color: #fff;
+      background: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background-color 0.35s ease;
+    }
+    nav .nav-links a.nav-contact:hover {
+      background: #32261E;
+    }
+    /* 44px minimum touch targets */
+    nav .nav-links a, .footer-col ul a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+
+
+    /* ── HAMBURGER ── */
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-toggle span {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      height: 2.5px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: transform 0.4s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 17px; }
+    .nav-toggle span:nth-child(2) { top: 25px; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+    /* Lift the nav (with the morphing toggle) above the open overlay */
+    body.nav-open nav { z-index: 300; }
+
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 200;
+      padding: 24px 20px 40px;
+      flex-direction: column;
+    }
+    .mobile-nav-overlay.open { display: flex; }
+    .mobile-nav-header { display: none; }
+    .mobile-nav-logo {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: #2B313D;
+    }
+    .mobile-nav-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--accent);
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-nav-links {
+      /* Reset the generic nav rule that bleeds into this <nav> element */
+      position: static;
+      background: none;
+      height: auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-top: 92px;
+    }
+    .mobile-nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 26px;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--text-label);
+      text-decoration: none;
+      padding: 12px 0;
+      transition: color 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-nav-links a:hover { color: #4F3D30; }
+
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 140px;
+      padding-bottom: 80px;
+    }
+    #hero .kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      margin-bottom: 20px;
+      display: block;
+    }
+    #hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 400;
+      color: #2B313D;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      max-width: 700px;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #hero .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      max-width: 760px;
+      margin-top: 24px;
+    }
+    #hero .kicker { animation: fadeUp 0.6s ease both 0.05s; }
+    #hero h1 { animation: fadeUp 0.6s ease both 0.12s; }
+    #hero .hero-sub { animation: fadeUp 0.6s ease both 0.2s; }
+
+    /* ── WORK GRID ── */
+    #work {
+      padding-bottom: 120px;
+    }
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .case-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: #EEEFF1;
+      overflow: hidden;
+      cursor: none;
+    }
+    .case-card .card-image-wrap {
+      position: relative;
+      padding: 14px 14px 0;
+      overflow: hidden;
+    }
+    .case-card .card-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      border-radius: 2px;
+      background: var(--bg-warm);
+      transition: opacity 0.35s ease;
+    }
+    .case-card .card-image-video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 2px;
+      background: var(--bg-warm);
+      transition: opacity 0.35s ease;
+    }
+    .case-card:hover .card-image,
+    .case-card:hover .card-image-video {
+      opacity: 0.15;
+    }
+    .card-hover-desc {
+      position: absolute;
+      bottom: 16px;
+      left: 28px;
+      right: 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.45;
+      color: #3D3D3D;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      pointer-events: none;
+    }
+    .case-card:hover .card-hover-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #custom-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #4F3D30;
+      color: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border-radius: 999px;
+      top: 0; left: 0;
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, padding 0.25s ease, opacity 0.15s ease, color 0.15s ease;
+    }
+    #custom-cursor.active {
+      opacity: 1;
+    }
+    #custom-cursor.on-card {
+      width: auto;
+      height: auto;
+      padding: 10px 20px;
+      color: #fff;
+    }
+    .card-body {
+      padding: 16px 20px 20px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .card-title {
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: #2B313D;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .card-year {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #4F3D30;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      padding: 36px 40px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 36px;
+    }
+    .footer-cols { display: flex; gap: 64px; }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-col ul a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: #4F3D30; }
+    .footer-name {
+      font-family: 'Lora', serif;
+      font-style: italic;
+
+      font-size: 72px;
+      font-weight: 400;
+      color: rgba(79, 61, 48, 0.3);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 20px 0;
+    }
+    .footer-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--text-label);
+    }
+
+    /* ── RESPONSIVE ── */
+    /* Stack the work cards a little earlier, before they get cramped at two-up. */
+    @media (max-width: 900px) {
+      .work-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      html, body { overflow-x: hidden; }
+
+      nav { padding: 0 20px; }
+      nav .nav-links { display: none; }
+      .nav-toggle { display: block; }
+
+      #hero { padding: 100px 0 56px; }
+      #hero h1 { font-size: 36px; }
+      #hero .hero-sub { font-size: 22px; margin-top: 18px; }
+
+      #work { padding: 0 0 80px; }
+      .wide-inner, .container { padding-left: 20px; padding-right: 20px; }
+      .work-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      footer { padding: 40px 20px 0; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+      .footer-name { font-size: 56px; }
+      .footer-cols { gap: 32px; }
+      .footer-bottom { padding: 16px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #hero .kicker, #hero h1 { animation: none; }
+      .case-card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">Khanak Joshi</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="#work" class="active">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resume.pdf">Resume</a></li>
+      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-logo">Khanak Joshi</span>
+      <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="#work" onclick="toggleMobileNav()">Work</a>
+      <a href="about.html" onclick="toggleMobileNav()">About</a>
+      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="wide-inner">
+      <h1>Artist first,<br>designer always.</h1>
+      <p class="hero-sub">Product designer shaped by art, grounded in research</p>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wide-inner">
+    <div class="work-grid">
+
+      <!-- Find My Size -->
+      <a class="case-card" href="find-my-size.html">
+        <div class="card-image-wrap">
+          <img class="card-image" src="images/hero.png" alt="Find My Size mockup" loading="lazy" />
+          <div class="card-hover-desc">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Find My Size</div>
+          <span class="card-year">End-to-End UX · 2026</span>
+        </div>
+      </a>
+
+      <!-- Oxy -->
+      <a class="case-card" href="oxy.html">
+        <div class="card-image-wrap">
+          <img class="card-image" src="images/oxy-hero.png" alt="Oxy Design Agency" loading="lazy" />
+          <div class="card-hover-desc">Designing across strategy, research, and visual design for a creative agency and its clients</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Oxy Design Agency</div>
+          <span class="card-year">Product Design · 2026</span>
+        </div>
+      </a>
+
+      <!-- Smile Donor -->
+      <a class="case-card" href="smile-donor.html">
+        <div class="card-image-wrap">
+          <img class="card-image" src="images/smiledonor-logo.png" alt="Smile Donor" loading="lazy" style="background: none;" />
+          <div class="card-hover-desc">Redesigning a nonprofit website to close the gap between mission and trust</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Smile Donor</div>
+          <span class="card-year">End-to-End UX · 2026</span>
+        </div>
+      </a>
+
+      <!-- Nielsen -->
+      <a class="case-card" href="nielsen.html">
+        <div class="card-image-wrap">
+          <img class="card-image" src="images/nielsenmockup.png" alt="Nielsen ONE mockup" loading="lazy" style="background: none;" />
+          <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media brands</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Nielsen ONE</div>
+          <span class="card-year">UX Design · 2025</span>
+        </div>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <ul>
+            <li><a href="#work">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.pdf">Resume</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
+            <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-name">Khanak Joshi</div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="custom-cursor">
+    View Case Study
+  </div>
+
+  <script>
+    const cursor = document.getElementById('custom-cursor');
+    const cards = document.querySelectorAll('.case-card');
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      cursor.classList.add('active');
+    });
+
+    document.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => cursor.classList.add('on-card'));
+      card.addEventListener('mouseleave', () => cursor.classList.remove('on-card'));
+    });
+
+    function toggleMobileNav() {
+      const overlay = document.getElementById('mobileNav');
+      const open = !overlay.classList.contains('open');
+      overlay.classList.toggle('open', open);
+      document.querySelector('.nav-toggle').classList.toggle('open', open);
+      document.body.classList.toggle('nav-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+  </script>
+
+</body>
+</html>
