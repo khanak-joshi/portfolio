@@ -663,6 +663,8 @@
     @media (max-width: 960px) {
       .side-nav { display: none; }
       body { padding-left: 0; padding-right: 0; }
+      /* Footer breaks out by -180px; drop that once the body gutters are gone. */
+      footer { margin-left: 0; margin-right: 0; }
     }
 
     /* ── HAMBURGER / MOBILE NAV ── */
