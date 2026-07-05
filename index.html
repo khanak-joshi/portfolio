@@ -343,41 +343,22 @@
       transform: translateY(0);
     }
 
-    /* "In progress" status badge — sits in the top-left of the card image
-       and stays legible while the image fades on hover. */
+    /* "In progress" status badge — top-left of the card image. */
     .card-status {
       position: absolute;
       top: 26px;
       left: 26px;
       z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 12px 6px 11px;
-      background: rgba(43, 33, 25, 0.88);
-      color: #FBF6EF;
-      font-family: 'DM Mono', monospace;
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      padding: 7px 14px;
+      background: #EEEFF1;
+      color: #2B313D;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       border-radius: 999px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
       pointer-events: none;
-    }
-    .card-status::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #E7B27C;
-      animation: statusPulse 2.4s ease-out infinite;
-    }
-    @keyframes statusPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(231, 178, 124, 0.55); }
-      70%  { box-shadow: 0 0 0 7px rgba(231, 178, 124, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(231, 178, 124, 0); }
     }
 
     /* ── CUSTOM CURSOR ── */
@@ -515,7 +496,6 @@
     @media (prefers-reduced-motion: reduce) {
       #hero .kicker, #hero h1 { animation: none; }
       .case-card { transition: none; }
-      .card-status::before { animation: none; }
     }
   </style>
 </head>
