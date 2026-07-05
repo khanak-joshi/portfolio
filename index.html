@@ -343,6 +343,43 @@
       transform: translateY(0);
     }
 
+    /* "In progress" status badge — sits in the top-left of the card image
+       and stays legible while the image fades on hover. */
+    .card-status {
+      position: absolute;
+      top: 26px;
+      left: 26px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px 6px 11px;
+      background: rgba(43, 33, 25, 0.88);
+      color: #FBF6EF;
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      pointer-events: none;
+    }
+    .card-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #E7B27C;
+      animation: statusPulse 2.4s ease-out infinite;
+    }
+    @keyframes statusPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(231, 178, 124, 0.55); }
+      70%  { box-shadow: 0 0 0 7px rgba(231, 178, 124, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(231, 178, 124, 0); }
+    }
+
     /* ── CUSTOM CURSOR ── */
     #custom-cursor {
       position: fixed;
@@ -478,6 +515,7 @@
     @media (prefers-reduced-motion: reduce) {
       #hero .kicker, #hero h1 { animation: none; }
       .case-card { transition: none; }
+      .card-status::before { animation: none; }
     }
   </style>
 </head>
@@ -521,6 +559,18 @@
     <div class="wide-inner">
     <div class="work-grid">
 
+      <!-- Nielsen -->
+      <a class="case-card" href="nielsen.html">
+        <div class="card-image-wrap">
+          <img class="card-image" src="images/nielsenmockup.png" alt="Nielsen ONE mockup" loading="lazy" style="background: none;" />
+          <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media brands</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Nielsen ONE</div>
+          <span class="card-year">UX Design · 2025</span>
+        </div>
+      </a>
+
       <!-- Find My Size -->
       <a class="case-card" href="find-my-size.html">
         <div class="card-image-wrap">
@@ -548,24 +598,13 @@
       <!-- Smile Donor -->
       <a class="case-card" href="smile-donor.html">
         <div class="card-image-wrap">
+          <span class="card-status">In progress</span>
           <img class="card-image" src="images/smiledonor-logo.png" alt="Smile Donor" loading="lazy" style="background: none;" />
           <div class="card-hover-desc">Redesigning a nonprofit website to close the gap between mission and trust</div>
         </div>
         <div class="card-body">
           <div class="card-title">Smile Donor</div>
           <span class="card-year">End-to-End UX · 2026</span>
-        </div>
-      </a>
-
-      <!-- Nielsen -->
-      <a class="case-card" href="nielsen.html">
-        <div class="card-image-wrap">
-          <img class="card-image" src="images/nielsenmockup.png" alt="Nielsen ONE mockup" loading="lazy" style="background: none;" />
-          <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media brands</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Nielsen ONE</div>
-          <span class="card-year">UX Design · 2025</span>
         </div>
       </a>
 
