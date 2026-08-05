@@ -1,0 +1,618 @@
+/* ==========================================================================
+   Khanak Joshi — shared foundation
+   Loaded before each page's inline <style>, so page-specific rules still win.
+
+   Typography source of truth: Figma "Portfolio" → Typography (node 357-2264).
+   Fonts are served by the Adobe Fonts web project (kit kyx4cmh).
+   ========================================================================== */
+
+::selection { background: rgba(149, 0, 255, 0.18); color: var(--text-heading); }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ── COLOR ──
+     Figma "Portfolio" → Colors (node 357-355). Six colors; the two marked
+     "derived" fill gaps the spec doesn't cover. */
+
+  /* Primary */
+  --bg: #F9FAFB;             /* Off-White — page background */
+  --text-heading: #1A1D21;   /* Near Black — headings */
+
+  /* Secondary */
+  --text-body: #3A3F45;      /* Dark Grey — body text */
+  --text-label: #6B7280;     /* Medium Grey — section labels, meta */
+  --accent: #9500FF;         /* Purple — buttons, and link/nav hover only */
+
+  /* Tertiary */
+  --surface: #EEEFF1;        /* Light Grey — cards & image backgrounds */
+
+  --accent-tint: #F4E5FF;    /* Purple tint — fill of the "View Case Study" pill */
+  --nav-glass: rgba(249, 250, 251, 0.10); /* Off-White at 10% over the blur */
+
+  /* Derived — not in the Figma palette */
+  --accent-hover: #7A00D1;   /* pressed/hover state for the purple button */
+  --border: #E3E5E8;         /* hairlines & dividers, between light/medium grey */
+
+  /* Functional — case study findings. Outside the brand palette; these are
+     carried over from the previous scheme so pass/fail stays legible. */
+  --pos: #8EB497;
+  --neg: #D07D7D;
+
+  /* ── LAYOUT ──
+     One aligned content edge across the homepage and case studies:
+     body text stays in the narrow column, heroes and grids go wide. */
+  --max-w: 780px;
+  --max-wide: 1320px;
+  --section-h: 40px;
+  --section-v: 32px;
+  --label-gap: 16px;
+  --block-gap: 56px;
+  --elem-gap: 24px;
+
+  /* ── FAMILIES ──
+     Only the faces below exist in the kit. Anything else synthesises. */
+  --font-serif: "new-spirit", Georgia, "Times New Roman", serif;
+  --font-sans: "aktiv-grotesk", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+
+  /* ── WEIGHTS ──
+     new-spirit:    300, 400 + italics
+     aktiv-grotesk: 400, 500, 700 */
+  --w-light: 300;
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-bold: 700;
+
+  /* ── TYPE SCALE ──
+     Desktop values are the Figma spec verbatim; the clamp floors are derived
+     for mobile, which the spec doesn't cover. */
+
+  /* H1 — New Spirit Light · 64/75 · -2% */
+  --h1-size: clamp(38px, 6.2vw, 64px);
+  --h1-lh: 1.172;
+  --h1-ls: -0.02em;
+
+  /* H2 — New Spirit Light · 36/45 · 0 */
+  --h2-size: clamp(28px, 3.4vw, 36px);
+  --h2-lh: 1.25;
+  --h2-ls: 0;
+
+  /* H3 — New Spirit Regular · 24/30 · 0 */
+  --h3-size: clamp(20px, 2.2vw, 24px);
+  --h3-lh: 1.25;
+  --h3-ls: 0;
+
+  /* Body Large — Aktiv Regular · 20/28 · 0 */
+  --body-lg-size: 20px;
+  --body-lg-lh: 1.4;
+
+  /* Body Regular — Aktiv Regular · 16/22 · 0 */
+  --body-size: 16px;
+  --body-lh: 1.375;
+
+  /* Pull Quote — New Spirit Regular Italic · 20/25 · -2% */
+  --quote-size: 20px;
+  --quote-lh: 1.25;
+  --quote-ls: -0.02em;
+
+  /* Section Label — Aktiv Medium Uppercase · 16/19 · 0 */
+  --label-size: 16px;
+  --label-lh: 1.1875;
+
+  /* Label Small — extension to the Figma scale, on the 4pt grid.
+     Badges, card meta, captions and footer copy, which the spec's 16px
+     floor would otherwise inflate. Uppercase at 12px needs tracking. */
+  --label-sm-size: 12px;
+  --label-sm-lh: 1.333;
+  --label-sm-ls: 0.08em;
+
+  /* Nav / Button Label — Aktiv Medium Title Case · 16/19 · 0 */
+  --nav-size: 16px;
+  --nav-lh: 1.1875;
+
+  /* Nav chrome (Figma "Portfolio" → Navbar, node 385-716) */
+  --nav-h: 72px;             /* bar height */
+  --nav-gap: 32px;           /* between nav items */
+  --nav-pad-h: 12px;         /* inside each nav item */
+  --nav-arrow-gap: 8px;      /* label → ↗ */
+  --wordmark-size: 28px;     /* New Spirit, upright */
+
+  /* Footer chrome (Figma "Portfolio" → Footer / 4 /, node 388-897) */
+  --footer-pad-y: 48px;
+  --footer-row-gap: 48px;    /* links row → credit line */
+
+  /* Side inset that lands the nav on the homepage's content edge. Reproduces
+     .wide-inner's math (max-width centred, then --section-h), so the wordmark
+     lines up with the hero and the work grid at every width.
+     Only safe on elements whose containing block is the viewport — the nav is
+     position:fixed, so 100% here is the viewport. The footer uses a
+     .wide-inner wrapper instead. */
+  --content-inset: max(
+    var(--section-h),
+    calc((100% - var(--max-wide)) / 2 + var(--section-h))
+  );
+}
+
+/* ── BASE ── */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  font-weight: var(--w-regular);
+  color: var(--text-heading);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+/* Links get a UA pointer cursor that overrides body's cursor:none —
+   suppress it so only the custom dot shows on hover. */
+a { cursor: none; }
+
+/* ==========================================================================
+   TYPE CLASSES
+   One class per Figma token. Prefer these over ad-hoc font declarations.
+   ========================================================================== */
+
+.t-h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--w-light);
+  font-size: var(--h1-size);
+  line-height: var(--h1-lh);
+  letter-spacing: var(--h1-ls);
+  color: var(--text-heading);
+}
+.t-h1 em, .t-h1 .italic { font-style: italic; font-weight: var(--w-light); }
+
+.t-h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--w-light);
+  font-size: var(--h2-size);
+  line-height: var(--h2-lh);
+  letter-spacing: var(--h2-ls);
+  color: var(--text-heading);
+}
+
+.t-h3 {
+  font-family: var(--font-serif);
+  font-weight: var(--w-regular);
+  font-size: var(--h3-size);
+  line-height: var(--h3-lh);
+  letter-spacing: var(--h3-ls);
+  color: var(--text-heading);
+}
+
+.t-body-lg {
+  font-family: var(--font-sans);
+  font-weight: var(--w-regular);
+  font-size: var(--body-lg-size);
+  line-height: var(--body-lg-lh);
+  color: var(--text-body);
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: var(--w-regular);
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  color: var(--text-body);
+}
+.t-body strong, .t-body-lg strong, .t-body b, .t-body-lg b { font-weight: var(--w-bold); }
+
+.t-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--w-regular);
+  font-size: var(--quote-size);
+  line-height: var(--quote-lh);
+  letter-spacing: var(--quote-ls);
+  color: var(--text-heading);
+}
+
+.t-label {
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--label-size);
+  line-height: var(--label-lh);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+.t-label-sm {
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--label-sm-size);
+  line-height: var(--label-sm-lh);
+  letter-spacing: var(--label-sm-ls);
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+.t-nav {
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--nav-size);
+  line-height: var(--nav-lh);
+  letter-spacing: 0;
+}
+
+/* ==========================================================================
+   SHARED CONTAINERS
+   ========================================================================== */
+
+/* Narrow reading column — identical math on every page, so body text
+   aligns to the same left edge across the site. */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--section-h);
+  box-sizing: border-box;
+}
+.container img { max-width: 100%; }
+
+/* Fuller-width column for heroes, images, and grids. */
+.wide-inner {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  padding: 0 var(--section-h);
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   NAV
+   ========================================================================== */
+
+nav:not(.side-nav) {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 var(--content-inset);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Glass, mapped from the Figma material (Frost 30, Light -45° @ 80%,
+     Refraction 80 / Depth 20 / Dispersion 50 / Splay 0).
+     Frost → blur; Dispersion → a saturation lift so the content beneath keeps
+     its colour through the tint; Light → the inset top highlight below.
+     Refraction, Depth and Splay have no CSS equivalent — see note in README. */
+  background: var(--nav-glass);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+          backdrop-filter: blur(12px) saturate(1.5);
+  /* Light at -45° reads as a bright top edge, with the pane's thickness
+     catching a faint shadow along the bottom. */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(26, 29, 33, 0.06);
+}
+/* Without backdrop-filter a 10% off-white tint is effectively invisible and
+   content would scroll straight through the bar, so fall back to opaque. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  nav:not(.side-nav) { background: var(--bg); }
+}
+/* Wordmark — New Spirit upright (not italic, as it used to be). */
+nav .logo {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-size: var(--wordmark-size);
+  font-weight: var(--w-regular);
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--text-heading);
+  text-decoration: none;
+  white-space: nowrap;
+}
+nav .nav-links {
+  display: flex;
+  gap: var(--nav-gap);
+  list-style: none;
+  align-items: center;
+  /* Cancel the last item's inner padding so its label sits flush with the
+     content edge rather than 12px inside it. */
+  margin-right: calc(var(--nav-pad-h) * -1);
+}
+/* Every item is the same nav link — Contact Me included, no pill. */
+nav .nav-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nav-arrow-gap);
+  height: 40px;
+  min-height: 44px;          /* touch target */
+  padding: 0 var(--nav-pad-h);
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--nav-size);
+  line-height: var(--nav-lh);
+  letter-spacing: 0;
+  color: var(--text-heading);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+nav .nav-links a:hover { color: var(--accent); }
+/* Active = current page: purple, underlined, and the arrow is dropped
+   (external items are never the current page, so this never conflicts). */
+nav .nav-links a.active {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+nav .nav-links a.active .ext-arrow { display: none; }
+
+/* ↗ marks a destination that leaves the site (PDF, mailto).
+   Served as a mask so the arrow inherits currentColor through every state,
+   instead of duplicating 1.7KB of path data in each link. */
+.ext-arrow {
+  width: 21px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2022%2021'><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M14.945%206.83671C14.9037%206.78471%2014.8523%206.74157%2014.7939%206.70986C14.7355%206.67814%2014.6713%206.65849%2014.6052%206.65208C14.5391%206.64568%2014.4723%206.65265%2014.4089%206.67257C14.3456%206.6925%2014.2868%206.72498%2014.2363%206.76807L10.3868%209.16712L7.57461%2011.2729C6.07546%2012.5502%204.5328%2014.0533%203.68726%2014.7058C3.62454%2014.7475%203.57068%2014.8013%203.52875%2014.8639C3.48683%2014.9265%203.45767%2014.9967%203.44295%2015.0706C3.42823%2015.1445%203.42823%2015.2206%203.44296%2015.2944C3.45769%2015.3683%203.48685%2015.4386%203.52878%2015.5012C3.61568%2015.6246%203.74673%2015.71%203.89479%2015.7395C4.04286%2015.769%204.19659%2015.7404%204.32417%2015.6597C5.8473%2014.7706%207.31962%2013.7973%208.73425%2012.7441C9.86162%2011.8999%2010.8373%2011.034%2011.4444%2010.5794L14.8362%207.51761C14.9332%207.43622%2014.9977%207.32256%2015.0177%207.19748C15.0377%207.0724%2015.0119%206.94431%2014.945%206.83671Z'%20fill='%23000'/><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M17.8594%204.63492C17.1904%204.32747%2016.4634%204.1665%2015.7271%204.16278C13.6347%203.95068%2010.0193%204.02838%209.2052%203.99989C9.08445%204.00772%208.97039%204.05816%208.88336%204.14224C8.79633%204.22632%208.74198%204.33856%208.73%204.45898C8.71801%204.57939%208.74917%204.70014%208.81791%204.79973C8.88666%204.89931%208.98853%204.97125%209.10537%205.00272C10.0029%205.14271%2014.2369%205.76195%2016.131%206.12247C15.7271%208.16511%2014.5409%2012.959%2014.268%2013.7047C14.2278%2013.8384%2014.238%2013.9822%2014.2964%2014.109C14.3548%2014.2357%2014.4575%2014.3368%2014.5852%2014.3932C14.7129%2014.4496%2014.8568%2014.4573%2014.9899%2014.4151C15.1229%2014.3728%2015.2359%2014.2834%2015.3077%2014.1636C15.6332%2013.5139%2017.0879%209.69838%2017.7861%207.37738C17.9554%206.81983%2018.0851%206.25103%2018.1743%205.67521C18.2166%205.48939%2018.2097%205.29579%2018.1545%205.1134C18.0993%204.93102%2017.9976%204.76613%2017.8594%204.63492Z'%20fill='%23000'/></svg>") no-repeat center / contain;
+          mask: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2022%2021'><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M14.945%206.83671C14.9037%206.78471%2014.8523%206.74157%2014.7939%206.70986C14.7355%206.67814%2014.6713%206.65849%2014.6052%206.65208C14.5391%206.64568%2014.4723%206.65265%2014.4089%206.67257C14.3456%206.6925%2014.2868%206.72498%2014.2363%206.76807L10.3868%209.16712L7.57461%2011.2729C6.07546%2012.5502%204.5328%2014.0533%203.68726%2014.7058C3.62454%2014.7475%203.57068%2014.8013%203.52875%2014.8639C3.48683%2014.9265%203.45767%2014.9967%203.44295%2015.0706C3.42823%2015.1445%203.42823%2015.2206%203.44296%2015.2944C3.45769%2015.3683%203.48685%2015.4386%203.52878%2015.5012C3.61568%2015.6246%203.74673%2015.71%203.89479%2015.7395C4.04286%2015.769%204.19659%2015.7404%204.32417%2015.6597C5.8473%2014.7706%207.31962%2013.7973%208.73425%2012.7441C9.86162%2011.8999%2010.8373%2011.034%2011.4444%2010.5794L14.8362%207.51761C14.9332%207.43622%2014.9977%207.32256%2015.0177%207.19748C15.0377%207.0724%2015.0119%206.94431%2014.945%206.83671Z'%20fill='%23000'/><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M17.8594%204.63492C17.1904%204.32747%2016.4634%204.1665%2015.7271%204.16278C13.6347%203.95068%2010.0193%204.02838%209.2052%203.99989C9.08445%204.00772%208.97039%204.05816%208.88336%204.14224C8.79633%204.22632%208.74198%204.33856%208.73%204.45898C8.71801%204.57939%208.74917%204.70014%208.81791%204.79973C8.88666%204.89931%208.98853%204.97125%209.10537%205.00272C10.0029%205.14271%2014.2369%205.76195%2016.131%206.12247C15.7271%208.16511%2014.5409%2012.959%2014.268%2013.7047C14.2278%2013.8384%2014.238%2013.9822%2014.2964%2014.109C14.3548%2014.2357%2014.4575%2014.3368%2014.5852%2014.3932C14.7129%2014.4496%2014.8568%2014.4573%2014.9899%2014.4151C15.1229%2014.3728%2015.2359%2014.2834%2015.3077%2014.1636C15.6332%2013.5139%2017.0879%209.69838%2017.7861%207.37738C17.9554%206.81983%2018.0851%206.25103%2018.1743%205.67521C18.2166%205.48939%2018.2097%205.29579%2018.1545%205.1134C18.0993%204.93102%2017.9976%204.76613%2017.8594%204.63492Z'%20fill='%23000'/></svg>") no-repeat center / contain;
+}
+/* Back link — its own drawing in the Figma file (node 505-636), not a rotation
+   of the ↗ arrow. Same 12px ink height as the nav arrows so they read alike. */
+.ext-arrow.back-arrow {
+  width: 18px;
+  height: 12px;
+  -webkit-mask-image: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2018%2012'><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M3.66811%206.12505C3.67005%206.19146%203.68534%206.25681%203.71307%206.31719C3.74079%206.37758%203.78038%206.43176%203.82947%206.47653C3.87857%206.5213%203.93618%206.55573%203.99886%206.57777C4.06154%206.59981%204.12801%206.60901%204.19433%206.60483L8.71359%206.99176L12.2268%206.99176C14.1924%206.86794%2016.3282%206.58936%2017.3961%206.57388C17.4714%206.57806%2017.5467%206.56735%2017.6178%206.54237C17.6888%206.51739%2017.7543%206.47862%2017.8104%206.4283C17.8664%206.37798%2017.912%206.31709%2017.9445%206.24912C17.977%206.18114%2017.9958%206.10743%2017.9997%206.03219C18.0042%205.88128%2017.9504%205.73444%2017.8496%205.62208C17.7487%205.50972%2017.6086%205.44044%2017.458%205.42859C15.706%205.22729%2013.944%205.12395%2012.1804%205.11905C10.772%205.11905%209.47196%205.22739%208.71359%205.22739L4.16337%205.64526C4.0369%205.65224%203.91718%205.7046%203.8262%205.79273C3.73523%205.88087%203.67909%205.99886%203.66811%206.12505Z'%20fill='%23000'/><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0.015575%206.14052C0.366842%206.78764%200.852301%207.35225%201.43945%207.79655C2.98714%209.22043%205.92776%2011.3253%206.56231%2011.836C6.66366%2011.9021%206.78519%2011.9301%206.90525%2011.915C7.02531%2011.8999%207.13609%2011.8426%207.21786%2011.7534C7.29963%2011.6642%207.34707%2011.5488%207.35173%2011.4279C7.35639%2011.307%207.31796%2011.1884%207.2433%2011.0931C6.60874%2010.4431%203.59074%207.40963%202.29068%205.98575C3.83837%204.59283%207.66118%201.46649%208.32668%201.03314C8.43894%200.95016%208.51701%200.829036%208.54624%200.692538C8.57546%200.556039%208.55382%200.413566%208.48539%200.291901C8.41695%200.170236%208.30643%200.0777594%208.1746%200.0318533C8.04278%20-0.0140528%207.89872%20-0.0102266%207.76951%200.0426145C7.11948%200.36763%203.66813%202.54988%201.71804%203.98923C1.24833%204.33405%200.803555%204.71159%200.387021%205.11904C0.241852%205.24249%200.131281%205.40156%200.0661598%205.58064C0.00103909%205.75973%20-0.0163941%205.95267%200.015575%206.14052Z'%20fill='%23000'/></svg>");
+          mask-image: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2018%2012'><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M3.66811%206.12505C3.67005%206.19146%203.68534%206.25681%203.71307%206.31719C3.74079%206.37758%203.78038%206.43176%203.82947%206.47653C3.87857%206.5213%203.93618%206.55573%203.99886%206.57777C4.06154%206.59981%204.12801%206.60901%204.19433%206.60483L8.71359%206.99176L12.2268%206.99176C14.1924%206.86794%2016.3282%206.58936%2017.3961%206.57388C17.4714%206.57806%2017.5467%206.56735%2017.6178%206.54237C17.6888%206.51739%2017.7543%206.47862%2017.8104%206.4283C17.8664%206.37798%2017.912%206.31709%2017.9445%206.24912C17.977%206.18114%2017.9958%206.10743%2017.9997%206.03219C18.0042%205.88128%2017.9504%205.73444%2017.8496%205.62208C17.7487%205.50972%2017.6086%205.44044%2017.458%205.42859C15.706%205.22729%2013.944%205.12395%2012.1804%205.11905C10.772%205.11905%209.47196%205.22739%208.71359%205.22739L4.16337%205.64526C4.0369%205.65224%203.91718%205.7046%203.8262%205.79273C3.73523%205.88087%203.67909%205.99886%203.66811%206.12505Z'%20fill='%23000'/><path%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0.015575%206.14052C0.366842%206.78764%200.852301%207.35225%201.43945%207.79655C2.98714%209.22043%205.92776%2011.3253%206.56231%2011.836C6.66366%2011.9021%206.78519%2011.9301%206.90525%2011.915C7.02531%2011.8999%207.13609%2011.8426%207.21786%2011.7534C7.29963%2011.6642%207.34707%2011.5488%207.35173%2011.4279C7.35639%2011.307%207.31796%2011.1884%207.2433%2011.0931C6.60874%2010.4431%203.59074%207.40963%202.29068%205.98575C3.83837%204.59283%207.66118%201.46649%208.32668%201.03314C8.43894%200.95016%208.51701%200.829036%208.54624%200.692538C8.57546%200.556039%208.55382%200.413566%208.48539%200.291901C8.41695%200.170236%208.30643%200.0777594%208.1746%200.0318533C8.04278%20-0.0140528%207.89872%20-0.0102266%207.76951%200.0426145C7.11948%200.36763%203.66813%202.54988%201.71804%203.98923C1.24833%204.33405%200.803555%204.71159%200.387021%205.11904C0.241852%205.24249%200.131281%205.40156%200.0661598%205.58064C0.00103909%205.75973%20-0.0163941%205.95267%200.015575%206.14052Z'%20fill='%23000'/></svg>");
+}
+
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* ── HAMBURGER ── */
+.nav-toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav-toggle span {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  height: 2.5px;
+  background: var(--text-heading);
+  border-radius: 2px;
+  transition: transform 0.4s ease;
+}
+.nav-toggle span:nth-child(1) { top: 17px; }
+.nav-toggle span:nth-child(2) { top: 25px; }
+.nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+/* Lift the nav (with the morphing toggle) above the open overlay */
+body.nav-open nav { z-index: 300; }
+
+/* ── MOBILE NAV OVERLAY ── */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  padding: 24px 20px 40px;
+  flex-direction: column;
+}
+.mobile-nav-overlay.open { display: flex; }
+.mobile-nav-header { display: none; }
+.mobile-nav-logo {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--quote-size);
+  font-weight: var(--w-regular);
+  line-height: var(--quote-lh);
+  letter-spacing: var(--quote-ls);
+  color: var(--text-heading);
+}
+.mobile-nav-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--text-heading);
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.mobile-nav-links {
+  /* Reset the generic nav rule that bleeds into this <nav> element */
+  position: static;
+  background: none;
+  height: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 92px;
+}
+.mobile-nav-links a {
+  font-family: var(--font-serif);
+  font-weight: var(--w-light);
+  font-size: var(--h3-size);
+  line-height: var(--h3-lh);
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--text-label);
+  text-decoration: none;
+  padding: 12px 0;
+  transition: color 0.2s;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.mobile-nav-links a:hover { color: var(--accent); }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+/* Figma "Portfolio" → Footer / 4 / (node 388-897).
+   Wordmark left, links right on one row; credit line below. No rules or
+   dividers, and no oversized wordmark. */
+/* The side inset comes from the .wide-inner wrapper inside, not from padding
+   here: footer sits inside the body's content box, so a percentage-based
+   inset would measure against the wrong width on pages with body gutters. */
+footer {
+  background: var(--bg);
+  padding: var(--footer-pad-y) 0;
+}
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nav-gap);
+  flex-wrap: wrap;
+}
+/* Same wordmark as the nav. */
+.footer-logo {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-size: var(--wordmark-size);
+  font-weight: var(--w-regular);
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--text-heading);
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* Links match the nav exactly, plus LinkedIn. */
+.footer-nav {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nav-gap);
+  align-items: center;
+  /* Same flush-edge correction as the nav. */
+  margin-right: calc(var(--nav-pad-h) * -1);
+}
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nav-arrow-gap);
+  height: 40px;
+  min-height: 44px;          /* touch target */
+  padding: 0 var(--nav-pad-h);
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--nav-size);
+  line-height: var(--nav-lh);
+  letter-spacing: 0;
+  color: var(--text-heading);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--accent); }
+/* Sentence case, not the uppercase treatment this used to have. */
+.footer-copy {
+  display: block;
+  margin-top: var(--footer-row-gap);
+  font-family: var(--font-sans);
+  font-weight: var(--w-regular);
+  font-size: var(--label-sm-size);
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-label);
+}
+
+/* ==========================================================================
+   CURSOR
+   ========================================================================== */
+
+#dot-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease;
+  top: 0; left: 0;
+}
+#dot-cursor.active { opacity: 1; }
+
+/* Default state is the purple dot; over a case study card it morphs into the
+   outlined "View Case Study ↗" pill from the Button spec. */
+#custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  top: 0; left: 0;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: transparent;
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--nav-size);
+  line-height: var(--nav-lh);
+  letter-spacing: 0;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, padding 0.25s ease,
+              gap 0.25s ease, background-color 0.25s ease,
+              opacity 0.15s ease, color 0.15s ease;
+}
+#custom-cursor .ext-arrow { opacity: 0; transition: opacity 0.15s ease; }
+#custom-cursor.active { opacity: 1; }
+#custom-cursor.on-card {
+  width: auto;
+  height: 40px;
+  padding: 0 var(--nav-pad-h);
+  gap: var(--nav-arrow-gap);
+  background: var(--accent-tint);
+  color: var(--accent);
+}
+#custom-cursor.on-card .ext-arrow { opacity: 1; }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden; }
+
+  nav:not(.side-nav) { padding: 0 20px; }
+  nav .nav-links { display: none; }
+  .nav-toggle { display: block; }
+
+  .wide-inner, .container { padding-left: 20px; padding-right: 20px; }
+
+  footer { padding: 40px 0; }
+  /* Stack the wordmark above the links once they can't share a row.
+     Flush-left now instead of flush-right, so the inset flips sides. */
+  .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .footer-nav {
+    gap: 4px 20px;
+    margin-left: calc(var(--nav-pad-h) * -1);
+    margin-right: 0;
+  }
+  .footer-copy { margin-top: 28px; }
+
+  /* Prevent long words/URLs from overflowing */
+  p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
+}

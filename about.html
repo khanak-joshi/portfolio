@@ -4,48 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Khanak Joshi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #fafcfd;
-      --bg-warm: #E8E6DD;
-      --card: #EDE3D8;
-      --border: #D4C4B8;
-      --accent: #4F3D30;
-      --accent-link: #2C1A0E;
-      --text-primary: #1A1A1A;
-      --text-secondary: #3D3D3D;
-      --text-label: #888888;
-      /* Shared layout system (matches homepage + case study pages) */
-      --max-w: 780px;       /* narrow reading column */
-      --max-wide: 1320px;   /* hero + wide content */
-      --section-h: 40px;
-    }
+    /* Reset, tokens, nav, footer and containers now live in styles.css. */
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      color: var(--text-primary);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-      cursor: none;
       /* Same gutters as the rest of the site so the content edge never shifts. */
       padding-left: 180px;
       padding-right: 180px;
     }
-    a { cursor: none; }
 
-    /* ── SHARED CONTAINERS ── */
-    .wide-inner {
-      max-width: var(--max-wide);
-      margin: 0 auto;
-      padding: 0 var(--section-h);
-      box-sizing: border-box;
-    }
     /* Wide sections break out of the body gutters, then re-center. */
     #about-hero, #art-builds, footer {
       margin-left: -180px;
@@ -56,172 +27,10 @@
       #about-hero, #art-builds, footer { margin-left: 0; margin-right: 0; }
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 0 40px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    nav .logo {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 20px;
-      font-weight: 400;
-      color: #2B313D;
-      text-decoration: none;
-      letter-spacing: 0;
-      white-space: nowrap;
-    }
-    nav .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    nav .nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-label);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.2s;
-    }
-    nav .nav-links a:not(.nav-contact)::after {
-      content: '';
-      position: absolute;
-      bottom: 11px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #4F3D30;
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.25s ease;
-    }
-    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
-    nav .nav-links a:hover { color: #4F3D30; }
-    nav .nav-links a.active {
-      color: #4F3D30;
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
-    }
-    nav .nav-links a.nav-contact {
-      color: #fff;
-      background: var(--accent);
-      height: 44px;
-      min-height: 44px;
-      padding: 0 14px;
-      box-sizing: border-box;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background-color 0.35s ease;
-    }
-    nav .nav-links a.nav-contact:hover {
-      background: #32261E;
-    }
-    /* 44px minimum touch targets */
-    nav .nav-links a, .footer-nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-    }
-
-    /* ── HAMBURGER ── */
-    .nav-toggle {
-      display: none;
-      position: relative;
-      width: 44px;
-      height: 44px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-    .nav-toggle span {
-      position: absolute;
-      left: 5px;
-      right: 5px;
-      height: 2.5px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: transform 0.4s ease;
-    }
-    .nav-toggle span:nth-child(1) { top: 17px; }
-    .nav-toggle span:nth-child(2) { top: 25px; }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
-    body.nav-open nav { z-index: 300; }
-
-    .mobile-nav-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--white);
-      z-index: 200;
-      padding: 24px 20px 40px;
-      flex-direction: column;
-    }
-    .mobile-nav-overlay.open { display: flex; }
-    .mobile-nav-header { display: none; }
-    .mobile-nav-logo {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 20px;
-      font-weight: 400;
-      color: #2B313D;
-    }
-    .mobile-nav-close {
-      background: none;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      color: var(--accent);
-      min-width: 44px;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .mobile-nav-links {
-      position: static;
-      background: none;
-      height: auto;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 8px;
-      margin-top: 92px;
-    }
-    .mobile-nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 26px;
-      letter-spacing: normal;
-      text-transform: none;
-      color: var(--text-label);
-      text-decoration: none;
-      padding: 12px 0;
-      transition: color 0.2s;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-    }
-    .mobile-nav-links a:hover { color: #4F3D30; }
-    .mobile-nav-links a.active { color: #4F3D30; }
-
     /* ── ABOUT HERO ── */
     #about-hero {
       padding-top: 160px;
-      padding-bottom: 110px;
+      padding-bottom: 112px;
     }
     .about-grid {
       display: grid;
@@ -234,34 +43,38 @@
       max-width: none;
       margin: 0 auto;
     }
+    /* Label Small */
     .about-kicker {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-sm-size);
+      line-height: var(--label-sm-lh);
+      letter-spacing: var(--label-sm-ls);
       text-transform: uppercase;
       color: var(--text-label);
       display: block;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
+    /* H1 */
     .about-text h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(32px, 4.2vw, 46px);
-      font-weight: 400;
-      color: #2B313D;
-      line-height: 1.16;
-      letter-spacing: -0.02em;
+      font-family: var(--font-serif);
+      font-weight: var(--w-light);
+      font-size: var(--h1-size);
+      line-height: var(--h1-lh);
+      letter-spacing: var(--h1-ls);
+      color: var(--text-heading);
     }
     .about-body {
       margin-top: 32px;
       max-width: 32em;
     }
+    /* Body Large */
     .about-body p {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-weight: var(--w-regular);
+      font-size: var(--body-lg-size);
+      line-height: var(--body-lg-lh);
+      color: var(--text-body);
     }
     .about-body p + p { margin-top: 20px; }
 
@@ -274,7 +87,7 @@
       content: '';
       position: absolute;
       inset: 16px -16px -16px 16px;
-      background: var(--card);
+      background: var(--surface);
       border-radius: 2px;
       z-index: 0;
     }
@@ -285,7 +98,7 @@
       height: auto;
       border-radius: 2px;
       display: block;
-      background: var(--bg-warm);
+      background: var(--surface);
     }
     .about-photo-placeholder {
       position: relative;
@@ -293,17 +106,18 @@
       width: 100%;
       aspect-ratio: 4 / 5;
       border-radius: 2px;
-      background: var(--bg-warm);
+      background: var(--surface);
       border: 1px dashed var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .about-photo-placeholder span {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-sm-size);
+      line-height: var(--label-sm-lh);
+      letter-spacing: var(--label-sm-ls);
       text-transform: uppercase;
       color: var(--text-label);
     }
@@ -321,29 +135,34 @@
       padding: 0 var(--section-h);
     }
     .statement > * { max-width: 720px; }
+    /* H2 */
     .statement h2 {
-      font-family: 'Lora', serif;
-      font-size: 28px;
-      font-weight: 500;
-      color: #2B313D;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
+      font-family: var(--font-serif);
+      font-weight: var(--w-light);
+      font-size: var(--h2-size);
+      line-height: var(--h2-lh);
+      letter-spacing: var(--h2-ls);
+      color: var(--text-heading);
     }
+    /* Body Regular */
     .statement-body {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-weight: var(--w-regular);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text-body);
       margin-top: 20px;
     }
-    /* Pull quote — same device as the "What I Learned" pullout on the case studies */
+    /* Pull Quote — same device as the "What I Learned" pullout on the case studies */
     .statement-quote {
-      font-family: 'Lora', serif;
+      font-family: var(--font-serif);
       font-style: italic;
-      font-size: 20px;
-      line-height: 1.6;
-      color: #2B313D;
-      border-left: 2px solid var(--accent-link);
+      font-weight: var(--w-regular);
+      font-size: var(--quote-size);
+      line-height: var(--quote-lh);
+      letter-spacing: var(--quote-ls);
+      color: var(--text-heading);
+      border-left: 2px solid var(--accent);
       padding-left: 16px;
       margin-top: 36px;
     }
@@ -368,7 +187,7 @@
       height: auto;
       display: block;
       border-radius: 2px;
-      background: var(--bg-warm);
+      background: var(--surface);
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
     .art-gallery figure:hover img { transform: scale(1.025); }
@@ -427,54 +246,6 @@
     .about-body { animation: fadeUp 0.6s ease both 0.2s; }
     .about-photo { animation: fadeUp 0.7s ease both 0.28s; }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--white);
-      padding: 36px 40px 0;
-    }
-    /* Nav links in a single horizontal row above the wordmark. */
-    .footer-nav {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 36px;
-      align-items: center;
-      padding-top: 36px;
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
-    .footer-nav a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-label);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-nav a:hover { color: #4F3D30; }
-    /* Full-width wordmark anchored at the bottom. */
-    .footer-name {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: clamp(40px, 11vw, 150px);
-      font-weight: 400;
-      color: rgba(79, 61, 48, 0.3);
-      line-height: 0.9;
-      letter-spacing: -0.03em;
-      white-space: nowrap;
-      margin-top: 24px;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(0,0,0,0.08);
-      padding: 20px 0;
-    }
-    .footer-copy {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      color: var(--text-label);
-    }
-
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .about-grid {
@@ -485,15 +256,9 @@
       /* Photo above text reads better when stacked */
       .about-photo { order: -1; max-width: 420px; }
     }
+    /* Nav, footer and container gutters are handled in styles.css. */
     @media (max-width: 768px) {
-      html, body { overflow-x: hidden; }
-
-      nav { padding: 0 20px; }
-      nav .nav-links { display: none; }
-      .nav-toggle { display: block; }
-
       #about-hero { padding: 116px 0 72px; }
-      .wide-inner { padding-left: 20px; padding-right: 20px; }
       .statement { padding-left: 20px; padding-right: 20px; }
       #art-builds { padding-top: 48px; padding-bottom: 96px; }
       .art-gallery { padding-left: 20px; padding-right: 20px; margin-top: 48px; }
@@ -501,13 +266,6 @@
       .art-pair { flex-direction: column; gap: 24px; margin-top: 24px; }
       .art-gallery .art-companion, .art-pair .a-square { margin-top: 0; }
       .art-gallery .art-wide { width: 100%; margin: 24px 0 0 0; }
-      .about-text h1 { font-size: 32px; }
-      .about-body p { font-size: 18px; }
-
-      footer { padding: 40px 20px 0; }
-      .footer-nav { gap: 20px 24px; padding-top: 28px; }
-      .footer-name { font-size: 15vw; margin-top: 20px; }
-      .footer-bottom { padding: 16px 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -519,7 +277,7 @@
       position: fixed;
       pointer-events: none;
       z-index: 9999;
-      background: #4F3D30;
+      background: var(--accent);
       top: 0; left: 0;
       width: 16px;
       height: 16px;
@@ -543,10 +301,9 @@
     <a class="logo" href="index.html">Khanak Joshi</a>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
-      <li><a href="index.html#work">Work</a></li>
       <li><a href="about.html" class="active">About</a></li>
-      <li><a href="resume.pdf">Resume</a></li>
-      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
 
@@ -556,10 +313,9 @@
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
     <nav class="mobile-nav-links">
-      <a href="index.html#work" onclick="toggleMobileNav()">Work</a>
       <a href="about.html" class="active" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
-      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
 
@@ -620,15 +376,16 @@
 
   <!-- FOOTER -->
   <footer>
-    <ul class="footer-nav">
-      <li><a href="index.html#work">Work</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="resume.pdf">Resume</a></li>
-      <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
-      <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
-    </ul>
-    <div class="footer-name">Khanak Joshi</div>
-    <div class="footer-bottom">
+    <div class="wide-inner">
+      <div class="footer-top">
+        <a class="footer-logo" href="index.html">Khanak Joshi</a>
+        <ul class="footer-nav">
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
+        </ul>
+      </div>
       <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
     </div>
   </footer>

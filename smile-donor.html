@@ -4,150 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smile Donor — Khanak Joshi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
-    :root {
-      --white: #fafcfd;
-      --bg-warm: #E8E6DD;
-      --card: #EDE3D8;
-      --border: #D4C4B8;
-      --accent: #4F3D30;
-      --accent-link: #2C1A0E;
-      --text-primary: #1A1A1A;
-      --text-secondary: #3D3D3D;
-      --text-label: #888888;
-      --max-w: 780px;
-    }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      color: var(--text-primary);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-      cursor: none;
-    }
-    /* Suppress the UA pointer on links so only the custom dot shows. */
-    a { cursor: none; }
-
-    /* ── NAV ── */
-    nav:not(.side-nav) {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 0 40px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    nav .logo {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 20px;
-      font-weight: 400;
-      color: #2B313D;
-      text-decoration: none;
-      letter-spacing: 0;
-      white-space: nowrap;
-    }
-    nav .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    nav .nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-label);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.2s;
-    }
-    nav .nav-links a:not(.nav-contact)::after {
-      content: '';
-      position: absolute;
-      bottom: 11px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #4F3D30;
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.25s ease;
-    }
-    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
-    nav .nav-links a:hover { color: #4F3D30; }
-    nav .nav-links a.active {
-      color: #4F3D30;
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
-    }
-    nav .nav-links a.nav-contact {
-      color: #fff;
-      background: var(--accent);
-      height: 44px;
-      min-height: 44px;
-      padding: 0 14px;
-      box-sizing: border-box;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background-color 0.35s ease;
-    }
-    nav .nav-links a.nav-contact:hover {
-      background: #32261E;
-    }
-    /* 44px minimum touch targets */
-    nav .nav-links a, .footer-nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-    }
 
 
 
     /* ── UTILITIES ── */
+    /* Section Label */
     .section-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-size);
+      line-height: var(--label-lh);
+      letter-spacing: 0;
       text-transform: uppercase;
-      color: var(--accent);
-    }
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--section-h);
-      box-sizing: border-box;
-    }
-    .container img {
-      max-width: 100%;
+      color: var(--text-label);
     }
     .img-placeholder {
       width: 100%;
-      background: var(--card);
+      background: var(--surface);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-label);
-      font-size: 13px;
-      letter-spacing: 0.06em;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-sm-size);
+      letter-spacing: var(--label-sm-ls);
       text-transform: uppercase;
     }
 
     /* ── HERO ── */
     #hero {
-      background: var(--white);
+      background: var(--bg);
       padding-top: 100px;
       padding-bottom: var(--section-v);
     }
@@ -168,14 +64,15 @@
       margin: 0 auto;
       padding: 0 var(--section-h);
     }
+    /* H2 — case study title */
     #hero h1 {
-      font-family: 'Lora', serif;
-      font-size: 36px;
-      font-weight: 500;
-      color: #2B313D;
-      margin-top: 10px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      font-family: var(--font-serif);
+      font-weight: var(--w-light);
+      font-size: var(--h2-size);
+      line-height: var(--h2-lh);
+      letter-spacing: var(--h2-ls);
+      color: var(--text-heading);
+      margin-top: 8px;
     }
     #hero .hero-image {
       display: block;
@@ -190,22 +87,25 @@
       margin-top: 36px;
       padding-top: 24px;
     }
+    /* Label Small */
     .meta-col .meta-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-sm-size);
+      line-height: var(--label-sm-lh);
+      letter-spacing: var(--label-sm-ls);
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--text-label);
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
+    /* Body Regular */
     .meta-col .meta-value {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: #3D3D3D;
-      line-height: 1.5;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text-body);
     }
 
     /* ── SECTIONS SHARED ── */
@@ -234,7 +134,7 @@
 
     /* ── PROBLEM STATEMENT BAND ── */
     #problem-band .container, #hmw-band .container {
-      background: var(--white);
+      background: var(--bg);
       padding: 0 var(--section-h);
     }
     /* Remove dividers around problem/HMW bands */
@@ -244,25 +144,27 @@
     #problem-band, #hmw-band {
       border-top: none;
     }
+    /* H3 */
     #problem-band .problem-h2 {
-      font-family: 'Lora', serif;
-      font-size: 28px;
-      font-weight: 500;
+      font-family: var(--font-serif);
+      font-weight: var(--w-regular);
+      font-size: var(--h3-size);
+      line-height: var(--h3-lh);
+      letter-spacing: var(--h3-ls);
       font-style: normal;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
-      color: #2B313D;
-      margin-top: 10px;
+      color: var(--text-heading);
+      margin-top: 8px;
       margin-bottom: 16px;
     }
+    /* Body Regular */
     #problem-band .problem-body {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text-body);
     }
     #problem-band .problem-body strong {
-      color: var(--text-secondary);
-      font-weight: 600;
+      color: var(--text-body);
+      font-weight: var(--w-bold);
     }
 
     /* ── OVERVIEW ── */
@@ -272,31 +174,36 @@
       gap: 40px;
       align-items: start;
     }
+    /* H3 */
     #overview h2, .section-h2 {
-      font-family: 'Lora', serif;
-      font-size: 28px;
-      font-weight: 500;
+      font-family: var(--font-serif);
+      font-weight: var(--w-regular);
+      font-size: var(--h3-size);
+      line-height: var(--h3-lh);
+      letter-spacing: var(--h3-ls);
       font-style: normal;
-      color: #2B313D;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
+      color: var(--text-heading);
     }
+    /* Body Regular */
     #overview p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text-body);
       margin-top: 12px;
     }
 
     /* ── RESEARCH ── */
 
+    /* Pull Quote */
     .pullquote {
       padding-left: 0;
-      font-family: 'Lora', serif;
+      font-family: var(--font-serif);
       font-style: italic;
-      font-size: 20px;
-      line-height: 1.6;
-      color: #2B313D;
+      font-weight: var(--w-regular);
+      font-size: var(--quote-size);
+      line-height: var(--quote-lh);
+      letter-spacing: var(--quote-ls);
+      color: var(--text-heading);
     }
     .pullquotes-stack {
       display: flex;
@@ -318,31 +225,35 @@
       margin: 32px 0;
     }
     .competitor-tag {
-      background: var(--card);
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 500;
+      background: var(--surface);
+      color: var(--text-body);
+      font-family: var(--font-sans);
+      font-size: var(--label-sm-size);
+      line-height: var(--label-sm-lh);
+      font-weight: var(--w-medium);
       letter-spacing: 0.04em;
       border-radius: 20px;
       padding: 8px 20px;
     }
 
     /* ── BODY TEXT ── */
+    /* Body Large */
     .body-lead {
-      font-size: 20px;
-      line-height: 1.7;
-      color: var(--text-primary);
+      font-size: var(--body-lg-size);
+      line-height: var(--body-lg-lh);
+      color: var(--text-heading);
     }
+    /* Body Regular */
     .body {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text-body);
     }
-    .body-bold { font-weight: 600; color: var(--text-secondary); }
+    .body-bold { font-weight: var(--w-bold); color: var(--text-body); }
 
     /* ── ACCENT BAND (inner) ── */
     .accent-band {
-      background: var(--white);
+      background: var(--bg);
       padding: 64px 40px;
       border-radius: 16px;
       margin-top: 40px;
@@ -357,15 +268,16 @@
     /* ── DESIGN SECTION ── */
 
     .decision-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      font-weight: var(--w-medium);
+      color: var(--text-heading);
       margin-bottom: 12px;
     }
 
     /* final designs grid */
     .final-hero-band {
-      background: var(--white);
+      background: var(--bg);
       padding: 64px 0;
       border-radius: 16px;
       margin-top: 24px;
@@ -385,7 +297,7 @@
       margin-top: 24px;
     }
     .screen-card {
-      background: var(--white);
+      background: var(--bg);
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 2px 16px rgba(0,0,0,0.06);
@@ -398,7 +310,7 @@
 
     /* ── TESTING ── */
     #testing {
-      background: var(--white);
+      background: var(--bg);
     }
     .testing-cols {
       display: grid;
@@ -407,9 +319,10 @@
       margin-top: 48px;
     }
     .testing-col-header {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      font-weight: var(--w-medium);
+      color: var(--text-heading);
       margin-bottom: 16px;
     }
     .recommendations {
@@ -428,15 +341,15 @@
       display: flex;
       gap: 16px;
       align-items: flex-start;
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text-body);
     }
     ol.rec-list li::before {
       content: counter(rec);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--accent);
+      font-size: var(--body-size);
+      font-weight: var(--w-medium);
+      color: var(--text-label);
       min-width: 20px;
       padding-top: 1px;
     }
@@ -450,78 +363,37 @@
       padding-bottom: var(--section-v);
     }
     .what-i-learned {
-      background: var(--white);
+      background: var(--bg);
       margin-top: 56px;
     }
+    /* Pull Quote */
     .what-i-learned .pullout-text {
-      font-family: 'Lora', serif;
+      font-family: var(--font-serif);
       font-style: italic;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 1.6;
-      color: #2B313D;
+      font-weight: var(--w-regular);
+      font-size: var(--quote-size);
+      line-height: var(--quote-lh);
+      letter-spacing: var(--quote-ls);
+      color: var(--text-heading);
       max-width: 600px;
       margin: 0 auto;
     }
     .what-i-learned .kicker {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      font-weight: var(--w-medium);
+      color: var(--text-heading);
       margin-top: 40px;
     }
 
-    /* ── FOOTER ── */
+    /* Footer lives in styles.css; only the breakout margins are page-specific. */
     footer {
-      background: var(--white);
       /* Sit above the fixed side-nav (z-index 50) so it covers it. */
       position: relative;
       z-index: 60;
       margin-left: -180px;
       margin-right: -180px;
-      margin-top: 120px;
-      padding: 36px 40px 0;
-    }
-    /* Nav links in a single horizontal row above the wordmark. */
-    .footer-nav {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 36px;
-      align-items: center;
-      padding-top: 36px;
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
-    .footer-nav a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-label);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-nav a:hover { color: #4F3D30; }
-    /* Full-width wordmark anchored at the bottom. */
-    .footer-name {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: clamp(40px, 11vw, 150px);
-      font-weight: 400;
-      color: rgba(79, 61, 48, 0.3);
-      line-height: 0.9;
-      letter-spacing: -0.03em;
-      white-space: nowrap;
-      margin-top: 24px;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(0,0,0,0.08);
-      padding: 20px 0;
-    }
-    .footer-copy {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      color: var(--text-label);
+      margin-top: 240px;
     }
 
     /* ── DIVIDERS ── */
@@ -536,7 +408,7 @@
 
     @media (max-width: 768px) {
       /* ── GLOBAL ── */
-      .section-label { font-size: 11px !important; letter-spacing: 0.06em !important; white-space: normal; }
+      .section-label { font-size: var(--label-sm-size); letter-spacing: var(--label-sm-ls); white-space: normal; }
       html, body { overflow-x: hidden; }
 
 
@@ -548,11 +420,10 @@
 
       /* Nav */
       nav .nav-links { display: none; }
-      nav { padding: 0 20px; height: 68px; }
+      nav { padding: 0 20px; }
 
       /* Hero */
       #hero { padding-top: 72px; }
-      #hero h1 { font-size: 28px; line-height: 1.2; }
       #hero .hero-image { height: auto; }
       #hero .hero-meta {
         display: grid !important;
@@ -560,12 +431,7 @@
         gap: 20px 16px !important;
       }
 
-      /* Typography */
-      #overview h2, .section-h2 { font-size: 22px; }
-      #problem-band .problem-h2 { font-size: 22px; }
-      .pullquote { font-size: 17px; }
-      .what-i-learned .pullout-text { font-size: 17px; }
-      .pullout-text { font-size: 17px !important; }
+      /* Typography is fluid via clamp() in styles.css — no overrides needed. */
 
       /* Problem band */
       #problem-band .problem-grid { grid-template-columns: 1fr !important; }
@@ -609,40 +475,43 @@
     /* ── SIDE NAV ── */
     .side-nav {
       position: fixed;
-      top: 68px;
+      top: var(--nav-h);
       left: 0;
       width: 180px;
-      height: calc(100vh - 68px);
+      height: calc(100vh - var(--nav-h));
       padding: 40px 0 40px 32px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
       overflow-y: auto;
       z-index: 50;
     }
     .side-nav a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 400;
+      font-family: var(--font-sans);
+      font-size: var(--nav-size);
+      font-weight: var(--w-regular);
       color: var(--text-label);
       text-decoration: none;
       line-height: 1.4;
       padding: 4px 0;
       transition: color 0.2s;
       border-left: 2px solid transparent;
-      padding-left: 10px;
+      padding-left: 12px;
       margin-left: -12px;
     }
-    .side-nav a:hover { color: #4F3D30; }
+    .side-nav a:hover { color: var(--accent); }
     .side-nav-back {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-arrow-gap);
       color: var(--text-label) !important;
       margin-bottom: 24px;
     }
-    .side-nav-back:hover { color: #4F3D30 !important; }
+    .side-nav-back:hover { color: var(--accent) !important; }
     .side-nav a.active {
-      color: #2B313D;
+      color: var(--text-heading);
       font-weight: 500;
-      border-left-color: #4F3D30;
+      border-left-color: var(--accent);
     }
     /* Shift main content right to make room */
     body {
@@ -656,109 +525,12 @@
       footer { margin-left: 0; margin-right: 0; }
     }
 
-    /* ── HAMBURGER / MOBILE NAV ── */
-    .nav-toggle {
-      display: none;
-      position: relative;
-      width: 44px;
-      height: 44px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-    .nav-toggle span {
-      position: absolute;
-      left: 5px;
-      right: 5px;
-      height: 2.5px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: transform 0.4s ease;
-    }
-    .nav-toggle span:nth-child(1) { top: 17px; }
-    .nav-toggle span:nth-child(2) { top: 25px; }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
-    /* Lift the nav (with the morphing toggle) above the open overlay */
-    body.nav-open nav { z-index: 300; }
 
-    .mobile-nav-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--white);
-      z-index: 200;
-      padding: 24px 20px 40px;
-      flex-direction: column;
-    }
-    .mobile-nav-overlay.open { display: flex; }
-    .mobile-nav-header { display: none; }
-    .mobile-nav-logo {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 20px;
-      font-weight: 400;
-      color: #2B313D;
-    }
-    .mobile-nav-close {
-      background: none;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      color: var(--accent);
-      min-width: 44px;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
-    .mobile-nav-links {
-      /* Reset the generic nav rule that bleeds into this <nav> element */
-      position: static;
-      background: none;
-      height: auto;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 8px;
-      margin-top: 92px;
-    }
-    .mobile-nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 26px;
-      letter-spacing: normal;
-      text-transform: none;
-      color: var(--text-label);
-      text-decoration: none;
-      padding: 12px 0;
-      transition: color 0.2s;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-    }
-    .mobile-nav-links a:hover { color: #4F3D30; }
 
     @media (max-width: 768px) {
       .nav-toggle { display: block; }
     }
-    #dot-cursor {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      width: 16px;
-      height: 16px;
-      background: #4F3D30;
-      border-radius: 50%;
-      opacity: 0;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.15s ease;
-      top: 0; left: 0;
-    }
-    #dot-cursor.active { opacity: 1; }
+
   </style>
 </head>
 <body>
@@ -768,10 +540,9 @@
     <a class="logo" href="index.html">Khanak Joshi</a>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
-      <li><a href="index.html#work">Work</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="resume.pdf">Resume</a></li>
-      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
 
@@ -781,16 +552,15 @@
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
     <nav class="mobile-nav-links">
-      <a href="index.html#work" onclick="toggleMobileNav()">Work</a>
-      <a href="index.html#about" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
-      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+      <a href="about.html" onclick="toggleMobileNav()">About</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
 
   <!-- SIDE NAV -->
   <nav class="side-nav">
-    <a href="index.html" class="side-nav-back">← Back</a>
+    <a href="index.html" class="side-nav-back"><span class="ext-arrow back-arrow" aria-hidden="true"></span> Back</a>
     <a href="#hero">Overview</a>
     <a href="#problem-band">The Problem</a>
     <a href="#research">Research</a>
@@ -891,9 +661,9 @@
 
         <p class="body body-bold" style="margin-top:56px;">Smile Donor had none of these. Its donation form was a single open text field redirecting to an external PayPal page. The form had:</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:12px;">
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>No fund-use information</li>
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>No trust signals</li>
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#D07D7D;font-weight:600;flex-shrink:0;">✕</span>No receipt confirmation language</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No fund-use information</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No trust signals</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No receipt confirmation language</li>
         </ul>
         <img src="images/smile-donor/smile2.jpg" alt="Smile Donor current site" style="max-width:360px;width:100%;height:auto;display:block;margin-top:24px;" />
         <p class="body" style="margin-top:24px;">The heuristic evaluation sharpened that finding. Smile Donor's strongest trust-building content, its 501(c)(3) status, 0% overhead model, vetting process, and project stories, already existed on the site. It was hidden in long body text and just wasn't where donors needed it. A first-time visitor going straight to the donation form would <span class="body-bold">encounter none of it.</span></p>
@@ -923,15 +693,16 @@
 
   <!-- FOOTER -->
   <footer>
-    <ul class="footer-nav">
-      <li><a href="index.html#work">Work</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="resume.pdf">Resume</a></li>
-      <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
-      <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
-    </ul>
-    <div class="footer-name">Khanak Joshi</div>
-    <div class="footer-bottom">
+    <div class="wide-inner">
+      <div class="footer-top">
+        <a class="footer-logo" href="index.html">Khanak Joshi</a>
+        <ul class="footer-nav">
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
+        </ul>
+      </div>
       <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
     </div>
   </footer>

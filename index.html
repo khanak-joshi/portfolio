@@ -4,65 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Khanak Joshi — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    ::selection { background: rgba(179, 143, 118, 0.4); color: #4F3D30; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #fafcfd;
-      --bg-warm: #E8E6DD;
-      --card: #EDE3D8;
-      --border: #D4C4B8;
-      --accent: #4F3D30;
-      --accent-link: #2C1A0E;
-      --text-primary: #1A1A1A;
-      --text-secondary: #3D3D3D;
-      --text-label: #888888;
-      /* Shared layout system (matches case study pages) */
-      --max-w: 780px;       /* narrow reading column */
-      --max-wide: 1320px;   /* hero + project grid */
-      --section-h: 40px;
-      --section-v: 32px;
-      --label-gap: 16px;
-      --block-gap: 56px;
-      --elem-gap: 24px;
-    }
+    /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      color: var(--text-primary);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-      cursor: none;
       /* Same gutters as case study pages so the content edge never shifts.
          No sidebar here — the left gutter is simply open space. */
       padding-left: 180px;
       padding-right: 180px;
     }
-    /* Links get a UA pointer cursor that overrides body's cursor:none —
-       suppress it so only the custom dot shows on hover. */
-    a { cursor: none; }
 
-    /* ── SHARED CONTAINERS ── */
-    /* Narrow reading column — identical math to the case study pages,
-       so body text aligns to the same left edge across the site. */
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--section-h);
-      box-sizing: border-box;
-    }
-    .container img { max-width: 100%; }
-    /* Fuller-width column for heroes, images, and grids. */
-    .wide-inner {
-      max-width: var(--max-wide);
-      margin: 0 auto;
-      padding: 0 var(--section-h);
-      box-sizing: border-box;
-    }
     /* Wide sections break out of the body gutters, then re-center. */
     #hero, #work, footer {
       margin-left: -180px;
@@ -73,212 +28,41 @@
       #hero, #work, footer { margin-left: 0; margin-right: 0; }
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 0 40px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    nav .logo {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 20px;
-      font-weight: 400;
-      color: #2B313D;
-      text-decoration: none;
-      letter-spacing: 0;
-      white-space: nowrap;
-    }
-    nav .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    nav .nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-label);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.2s;
-    }
-    nav .nav-links a:not(.nav-contact)::after {
-      content: '';
-      position: absolute;
-      bottom: 11px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #4F3D30;
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.25s ease;
-    }
-    nav .nav-links a:not(.nav-contact):not(.active):hover::after { transform: scaleX(1); }
-    nav .nav-links a:hover { color: #4F3D30; }
-    nav .nav-links a.active {
-      color: #4F3D30;
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
-    }
-    nav .nav-links a.nav-contact {
-      color: #fff;
-      background: var(--accent);
-      height: 44px;
-      min-height: 44px;
-      padding: 0 14px;
-      box-sizing: border-box;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background-color 0.35s ease;
-    }
-    nav .nav-links a.nav-contact:hover {
-      background: #32261E;
-    }
-    /* 44px minimum touch targets */
-    nav .nav-links a, .footer-nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-    }
-
-
-
-    /* ── HAMBURGER ── */
-    .nav-toggle {
-      display: none;
-      position: relative;
-      width: 44px;
-      height: 44px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-    .nav-toggle span {
-      position: absolute;
-      left: 5px;
-      right: 5px;
-      height: 2.5px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: transform 0.4s ease;
-    }
-    .nav-toggle span:nth-child(1) { top: 17px; }
-    .nav-toggle span:nth-child(2) { top: 25px; }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
-    /* Lift the nav (with the morphing toggle) above the open overlay */
-    body.nav-open nav { z-index: 300; }
-
-    .mobile-nav-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--white);
-      z-index: 200;
-      padding: 24px 20px 40px;
-      flex-direction: column;
-    }
-    .mobile-nav-overlay.open { display: flex; }
-    .mobile-nav-header { display: none; }
-    .mobile-nav-logo {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 20px;
-      font-weight: 400;
-      color: #2B313D;
-    }
-    .mobile-nav-close {
-      background: none;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      color: var(--accent);
-      min-width: 44px;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .mobile-nav-links {
-      /* Reset the generic nav rule that bleeds into this <nav> element */
-      position: static;
-      background: none;
-      height: auto;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 8px;
-      margin-top: 92px;
-    }
-    .mobile-nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 26px;
-      letter-spacing: normal;
-      text-transform: none;
-      color: var(--text-label);
-      text-decoration: none;
-      padding: 12px 0;
-      transition: color 0.2s;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-    }
-    .mobile-nav-links a:hover { color: #4F3D30; }
-
-
     /* ── HERO ── */
     #hero {
       padding-top: 168px;
       padding-bottom: 112px;
     }
+    /* Label Small — replaces the old DM Mono kicker. */
     #hero .kicker {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.1em;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-sm-size);
+      line-height: var(--label-sm-lh);
+      letter-spacing: var(--label-sm-ls);
       text-transform: uppercase;
       color: var(--text-label);
       margin-bottom: 20px;
       display: block;
     }
+    /* H1 — line 2 (an artist who designs products) reuses the italic
+       treatment from .t-h1 em, defined in styles.css. */
     #hero h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 400;
-      color: #2B313D;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      max-width: 700px;
+      font-family: var(--font-serif);
+      font-weight: var(--w-light);
+      font-size: var(--h1-size);
+      line-height: var(--h1-lh);
+      letter-spacing: var(--h1-ls);
+      color: var(--text-heading);
+      max-width: 900px;
     }
+    #hero h1 em { font-style: italic; font-weight: var(--w-light); }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    #hero .hero-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 26px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      max-width: 760px;
-      margin-top: 24px;
-    }
     #hero .kicker { animation: fadeUp 0.6s ease both 0.05s; }
     #hero h1 { animation: fadeUp 0.6s ease both 0.12s; }
-    #hero .hero-sub { animation: fadeUp 0.6s ease both 0.2s; }
 
     /* ── WORK GRID ── */
     #work {
@@ -293,13 +77,13 @@
       display: block;
       text-decoration: none;
       color: inherit;
-      background: #EEEFF1;
+      background: var(--surface);
       overflow: hidden;
       cursor: none;
     }
     .case-card .card-image-wrap {
       position: relative;
-      padding: 14px 14px 0;
+      padding: 16px 16px 0;
       overflow: hidden;
     }
     .case-card .card-image {
@@ -309,7 +93,7 @@
       object-position: top;
       display: block;
       border-radius: 2px;
-      background: var(--bg-warm);
+      background: var(--surface);
       transition: opacity 0.35s ease;
     }
     .case-card .card-image-video {
@@ -319,7 +103,7 @@
       object-position: center;
       display: block;
       border-radius: 2px;
-      background: var(--bg-warm);
+      background: var(--surface);
       transition: opacity 0.35s ease;
     }
     .case-card:hover .card-image,
@@ -331,11 +115,11 @@
       bottom: 16px;
       left: 28px;
       right: 28px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      line-height: 1.45;
-      color: #3D3D3D;
+      font-family: var(--font-sans);
+      font-weight: var(--w-bold);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text-body);
       opacity: 0;
       transform: translateY(6px);
       transition: opacity 0.28s ease, transform 0.28s ease;
@@ -349,53 +133,20 @@
     /* "In progress" status badge — top-left of the card image. */
     .card-status {
       position: absolute;
-      top: 26px;
-      left: 26px;
+      top: 24px;
+      left: 24px;
       z-index: 3;
-      padding: 7px 14px;
-      background: #EEEFF1;
-      color: #2B313D;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      padding: 8px 16px;
+      background: var(--surface);
+      color: var(--text-heading);
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-sm-size);
+      line-height: var(--label-sm-lh);
+      letter-spacing: var(--label-sm-ls);
       text-transform: uppercase;
       border-radius: 6px;
       pointer-events: none;
-    }
-
-    /* ── CUSTOM CURSOR ── */
-    #custom-cursor {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #4F3D30;
-      color: transparent;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      white-space: nowrap;
-      border-radius: 999px;
-      top: 0; left: 0;
-      width: 16px;
-      height: 16px;
-      padding: 0;
-      opacity: 0;
-      transform: translate(-50%, -50%);
-      transition: width 0.25s ease, height 0.25s ease, padding 0.25s ease, opacity 0.15s ease, color 0.15s ease;
-    }
-    #custom-cursor.active {
-      opacity: 1;
-    }
-    #custom-cursor.on-card {
-      width: auto;
-      height: auto;
-      padding: 10px 20px;
-      color: #fff;
     }
     .card-body {
       padding: 16px 20px 20px;
@@ -404,70 +155,25 @@
       justify-content: space-between;
       gap: 12px;
     }
+    /* H3 */
     .card-title {
-      font-family: 'Lora', serif;
-      font-size: 26px;
-      font-weight: 500;
-      color: #2B313D;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
+      font-family: var(--font-serif);
+      font-weight: var(--w-regular);
+      font-size: var(--h3-size);
+      line-height: var(--h3-lh);
+      letter-spacing: var(--h3-ls);
+      color: var(--text-heading);
     }
+    /* Label Small */
     .card-year {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.06em;
+      font-family: var(--font-sans);
+      font-weight: var(--w-medium);
+      font-size: var(--label-sm-size);
+      line-height: var(--label-sm-lh);
+      letter-spacing: var(--label-sm-ls);
       text-transform: uppercase;
-      color: #4F3D30;
+      color: var(--text-label);
       flex-shrink: 0;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--white);
-      padding: 36px 40px 0;
-    }
-    /* Nav links in a single horizontal row above the wordmark. */
-    .footer-nav {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 36px;
-      align-items: center;
-      padding-top: 36px;
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
-    .footer-nav a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-label);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-nav a:hover { color: #4F3D30; }
-    /* Full-width wordmark anchored at the bottom. */
-    .footer-name {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: clamp(40px, 11vw, 150px);
-      font-weight: 400;
-      color: rgba(79, 61, 48, 0.3);
-      line-height: 0.9;
-      letter-spacing: -0.03em;
-      white-space: nowrap;
-      margin-top: 24px;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(0,0,0,0.08);
-      padding: 20px 0;
-    }
-    .footer-copy {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      color: var(--text-label);
     }
 
     /* ── RESPONSIVE ── */
@@ -475,25 +181,12 @@
     @media (max-width: 900px) {
       .work-grid { grid-template-columns: 1fr; }
     }
+    /* Nav, footer and container gutters are handled in styles.css. */
     @media (max-width: 768px) {
-      html, body { overflow-x: hidden; }
-
-      nav { padding: 0 20px; }
-      nav .nav-links { display: none; }
-      .nav-toggle { display: block; }
-
       #hero { padding: 116px 0 76px; }
-      #hero h1 { font-size: 36px; }
-      #hero .hero-sub { font-size: 22px; margin-top: 18px; }
 
       #work { padding: 0 0 80px; }
-      .wide-inner, .container { padding-left: 20px; padding-right: 20px; }
       .work-grid { grid-template-columns: 1fr; gap: 20px; }
-
-      footer { padding: 40px 20px 0; }
-      .footer-nav { gap: 20px 24px; padding-top: 28px; }
-      .footer-name { font-size: 15vw; margin-top: 20px; }
-      .footer-bottom { padding: 16px 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -509,10 +202,9 @@
     <a class="logo" href="index.html">Khanak Joshi</a>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
-      <li><a href="#work" class="active">Work</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="resume.pdf">Resume</a></li>
-      <li><a href="mailto:khanak.art99@gmail.com" class="nav-contact">Contact</a></li>
+      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
 
@@ -522,18 +214,16 @@
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
     <nav class="mobile-nav-links">
-      <a href="#work" onclick="toggleMobileNav()">Work</a>
       <a href="about.html" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" onclick="toggleMobileNav()">Resume</a>
-      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
 
   <!-- HERO -->
   <section id="hero">
     <div class="wide-inner">
-      <h1>Artist first,<br>designer always.</h1>
-      <p class="hero-sub">Product designer shaped by art, grounded in research</p>
+      <h1>I'm Khanak Joshi,<br><em>an artist who designs products.</em></h1>
     </div>
   </section>
 
@@ -597,15 +287,16 @@
 
   <!-- FOOTER -->
   <footer>
-    <ul class="footer-nav">
-      <li><a href="#work">Work</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="resume.pdf">Resume</a></li>
-      <li><a href="mailto:khanak.art99@gmail.com">Contact</a></li>
-      <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank">LinkedIn</a></li>
-    </ul>
-    <div class="footer-name">Khanak Joshi</div>
-    <div class="footer-bottom">
+    <div class="wide-inner">
+      <div class="footer-top">
+        <a class="footer-logo" href="index.html">Khanak Joshi</a>
+        <ul class="footer-nav">
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
+        </ul>
+      </div>
       <span class="footer-copy">© 2026 Khanak Joshi. All rights reserved.</span>
     </div>
   </footer>
