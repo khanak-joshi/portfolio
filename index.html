@@ -11,6 +11,10 @@
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
+    /* Homepage-only: wider content column than the shared --max-wide,
+       since there's no sidebar competing for space on this page. */
+    :root { --max-wide: 1440px; }
+
     body {
       /* Same gutters as case study pages so the content edge never shifts.
          No sidebar here — the left gutter is simply open space. */
@@ -68,57 +72,64 @@
     #work {
       padding-bottom: 120px;
     }
+    /* Wide column carries the two landscape films, narrow column the two
+       upright ones. Two independent stacks rather than a 2x2 grid — a real
+       grid would force shared row heights and open gaps under the short cards.
+
+       The 1.9615 is what makes both columns bottom out level, and it holds at
+       every width because the row gap and card bodies are identical in each.
+       Stacked height per unit of column width:
+         left  = 960/1920 + 1186/1920 = 1.11771
+         right = 1016/842  + 830/842  = 2.19240
+       so left must be 2.19240 / 1.11771 = 1.9615x the width of right.
+       Re-derive this if a film is ever swapped for one of a different ratio. */
     .work-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.9615fr 1fr;
+      gap: 32px;
+    }
+    .work-col {
+      display: flex;
+      flex-direction: column;
       gap: 32px;
     }
     .case-card {
       display: block;
       text-decoration: none;
       color: inherit;
-      background: var(--surface);
-      overflow: hidden;
       cursor: none;
     }
     .case-card .card-image-wrap {
       position: relative;
-      padding: 16px 16px 0;
       overflow: hidden;
     }
-    .case-card .card-image {
+    /* Each card is held at its film's native ratio, so nothing is cropped. */
+    .case-card .card-media {
       width: 100%;
-      aspect-ratio: 16 / 9;
       object-fit: cover;
-      object-position: top;
       display: block;
       border-radius: 2px;
       background: var(--surface);
       transition: opacity 0.35s ease;
     }
-    .case-card .card-image-video {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      border-radius: 2px;
-      background: var(--surface);
-      transition: opacity 0.35s ease;
-    }
-    .case-card:hover .card-image,
-    .case-card:hover .card-image-video {
+    .card-nielsen .card-media { aspect-ratio: 1920 / 960;  }  /* 2:1    */
+    .card-oxy     .card-media { aspect-ratio: 1920 / 1186; }  /* 1.62:1 */
+    .card-fms     .card-media { aspect-ratio: 842 / 1016;  }  /* 5:6    */
+    .card-smile   .card-media { aspect-ratio: 842 / 830;   }  /* 1:1    */
+
+    .case-card:hover .card-media {
       opacity: 0.15;
     }
     .card-hover-desc {
       position: absolute;
-      bottom: 16px;
-      left: 28px;
-      right: 28px;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
       font-family: var(--font-sans);
-      font-weight: var(--w-bold);
-      font-size: var(--body-size);
-      line-height: var(--body-lh);
+      /* Body Large, regular */
+      font-weight: var(--w-regular);
+      font-size: var(--body-lg-size);
+      line-height: var(--body-lg-lh);
       color: var(--text-body);
       opacity: 0;
       transform: translateY(6px);
@@ -130,38 +141,42 @@
       transform: translateY(0);
     }
 
-    /* "In progress" status badge — top-left of the card image. */
+    /* "In progress" status badge — top-right of the card image, clear of the
+       artwork. Figma "Portfolio" → node 588-5333: Light Grey pill, 8px radius,
+       8/12 padding, Aktiv Medium 16/19 in Near Black, title case rather than
+       the uppercase small label it used to be. The 16/19 pair is the same one
+       the nav runs on, so it reuses those tokens. */
     .card-status {
       position: absolute;
       top: 24px;
-      left: 24px;
+      right: 24px;
       z-index: 3;
-      padding: 8px 16px;
+      padding: 8px 12px;
       background: var(--surface);
       color: var(--text-heading);
       font-family: var(--font-sans);
       font-weight: var(--w-medium);
-      font-size: var(--label-sm-size);
-      line-height: var(--label-sm-lh);
-      letter-spacing: var(--label-sm-ls);
-      text-transform: uppercase;
-      border-radius: 6px;
+      font-size: var(--nav-size);
+      line-height: var(--nav-lh);
+      letter-spacing: 0;
+      text-transform: capitalize;
+      border-radius: 8px;
       pointer-events: none;
     }
     .card-body {
-      padding: 16px 20px 20px;
+      padding: 16px 0 0;
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 12px;
     }
-    /* H3 */
+    /* H4 */
     .card-title {
       font-family: var(--font-serif);
       font-weight: var(--w-regular);
-      font-size: var(--h3-size);
-      line-height: var(--h3-lh);
-      letter-spacing: var(--h3-ls);
+      font-size: var(--h4-size);
+      line-height: var(--h4-lh);
+      letter-spacing: var(--h4-ls);
       color: var(--text-heading);
     }
     /* Label Small */
@@ -177,16 +192,25 @@
     }
 
     /* ── RESPONSIVE ── */
-    /* Stack the work cards a little earlier, before they get cramped at two-up. */
+    /* Stack the work cards a little earlier, before they get cramped at two-up.
+       Collapsing to one column flows them nielsen → oxy → find my size → smile.
+
+       Once stacked, every card spans the full width, and the two upright films
+       would run absurdly tall — so both switch to their rectangular cuts here.
+       The ratios below match those files; the JS at the foot of the page swaps
+       the sources to suit. Keep the two in step if either film is re-exported. */
     @media (max-width: 900px) {
       .work-grid { grid-template-columns: 1fr; }
+      .card-fms   .card-media { aspect-ratio: 1110 / 798; }  /* 1.39:1 */
+      .card-smile .card-media { aspect-ratio: 1110 / 830; }  /* 1.34:1 */
     }
     /* Nav, footer and container gutters are handled in styles.css. */
     @media (max-width: 768px) {
       #hero { padding: 116px 0 76px; }
 
       #work { padding: 0 0 80px; }
-      .work-grid { grid-template-columns: 1fr; gap: 20px; }
+      .work-grid, .work-col { gap: 20px; }
+      .work-grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -232,54 +256,74 @@
     <div class="wide-inner">
     <div class="work-grid">
 
-      <!-- Nielsen -->
-      <a class="case-card" href="nielsen.html">
-        <div class="card-image-wrap">
-          <img class="card-image" src="images/nielsen/nielsenmockup.png" alt="Nielsen ONE mockup" loading="lazy" style="background: none;" />
-          <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media brands</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Nielsen ONE</div>
-          <span class="card-year">UX Design · 2025</span>
-        </div>
-      </a>
+      <!-- Wide column — the two landscape films -->
+      <div class="work-col">
 
-      <!-- Oxy -->
-      <a class="case-card" href="oxy.html">
-        <div class="card-image-wrap">
-          <img class="card-image" src="images/oxy/oxy-hero.png" alt="Oxy Design Agency" loading="lazy" />
-          <div class="card-hover-desc">Designing across strategy, research, and visual design for a creative agency and its clients</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Oxy Design Agency</div>
-          <span class="card-year">Product Design · 2026</span>
-        </div>
-      </a>
+        <!-- Nielsen -->
+        <a class="case-card card-nielsen" href="nielsen.html">
+          <div class="card-image-wrap">
+            <video class="card-media" src="images/nielsen/nielsen-hero-web.mp4"
+                   autoplay muted loop playsinline preload="metadata"
+                   aria-label="Nielsen ONE measurement tool"></video>
+            <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media brands</div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Nielsen ONE</div>
+            <span class="card-year">UX Design · 2025</span>
+          </div>
+        </a>
 
-      <!-- Find My Size -->
-      <a class="case-card" href="find-my-size.html">
-        <div class="card-image-wrap">
-          <img class="card-image" src="images/find-my-size/hero.png" alt="Find My Size mockup" loading="lazy" />
-          <div class="card-hover-desc">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Find My Size</div>
-          <span class="card-year">End-to-End UX · 2026</span>
-        </div>
-      </a>
+        <!-- Oxy -->
+        <a class="case-card card-oxy" href="oxy.html">
+          <div class="card-image-wrap">
+            <video class="card-media" src="images/oxy/oxy-hero-web.mp4"
+                   autoplay muted loop playsinline preload="metadata"
+                   aria-label="Oxy Design Agency site"></video>
+            <div class="card-hover-desc">Designing across strategy, research, and visual design for a creative agency and its clients</div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Oxy Design Agency</div>
+            <span class="card-year">Product Design · 2026</span>
+          </div>
+        </a>
 
-      <!-- Smile Donor -->
-      <a class="case-card" href="smile-donor.html">
-        <div class="card-image-wrap">
-          <span class="card-status">In progress</span>
-          <img class="card-image" src="images/smile-donor/smiledonor-logo.png" alt="Smile Donor" loading="lazy" style="background: none;" />
-          <div class="card-hover-desc">Redesigning a nonprofit website to close the gap between mission and trust</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Smile Donor</div>
-          <span class="card-year">End-to-End UX · 2026</span>
-        </div>
-      </a>
+      </div>
+
+      <!-- Narrow column — the two upright films -->
+      <div class="work-col">
+
+        <!-- Find My Size -->
+        <a class="case-card card-fms" href="find-my-size.html">
+          <div class="card-image-wrap">
+            <video class="card-media" src="images/find-my-size/find-my-size-hero-web.mp4"
+                   data-src-stacked="images/find-my-size/find-my-size-hero-stacked-web.mp4"
+                   autoplay muted loop playsinline preload="metadata"
+                   aria-label="Find My Size sizing flow"></video>
+            <div class="card-hover-desc">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer</div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Find My Size</div>
+            <span class="card-year">End-to-End UX · 2026</span>
+          </div>
+        </a>
+
+        <!-- Smile Donor -->
+        <a class="case-card card-smile" href="smile-donor.html">
+          <div class="card-image-wrap">
+            <span class="card-status">In progress</span>
+            <video class="card-media" src="images/smile-donor/smile-donor-hero-web.mp4"
+                   data-src-stacked="images/smile-donor/smile-donor-hero-stacked-web.mp4"
+                   autoplay muted loop playsinline preload="metadata"
+                   aria-label="Smile Donor donation flow"></video>
+            <div class="card-hover-desc">Redesigning a nonprofit website to close the gap between mission and trust</div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Smile Donor</div>
+            <span class="card-year">End-to-End UX · 2026</span>
+          </div>
+        </a>
+
+      </div>
 
     </div>
     </div>
@@ -322,6 +366,32 @@
       card.addEventListener('mouseenter', () => cursor.classList.add('on-card'));
       card.addEventListener('mouseleave', () => cursor.classList.remove('on-card'));
     });
+
+    /* Below 900px the work grid collapses to one column and the upright films
+       run too tall, so those two switch to their rectangular cuts. Paired with
+       the aspect-ratio overrides in the 900px media query.
+
+       matchMedia rather than <source media> because browsers pick a <source>
+       once and never revisit it — a tablet rotated across the breakpoint would
+       keep the wrong cut. Swapping src also means only one file is ever
+       fetched, instead of both loading and one sitting hidden. */
+    const stackedFilms = document.querySelectorAll('.card-media[data-src-stacked]');
+    const isStacked = window.matchMedia('(max-width: 900px)');
+
+    stackedFilms.forEach(v => { v.dataset.srcWide = v.getAttribute('src'); });
+
+    function pickFilmCuts() {
+      stackedFilms.forEach(v => {
+        const want = isStacked.matches ? v.dataset.srcStacked : v.dataset.srcWide;
+        if (v.getAttribute('src') === want) return;
+        v.setAttribute('src', want);
+        v.load();
+        v.play().catch(() => {});   // autoplay can be refused; the poster frame still shows
+      });
+    }
+
+    pickFilmCuts();
+    isStacked.addEventListener('change', pickFilmCuts);
 
     function toggleMobileNav() {
       const overlay = document.getElementById('mobileNav');

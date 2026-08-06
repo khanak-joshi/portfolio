@@ -64,21 +64,27 @@
       margin: 0 auto;
       padding: 0 var(--section-h);
     }
-    /* H2 — case study title */
+    /* H3 — case study title */
     #hero h1 {
       font-family: var(--font-serif);
       font-weight: var(--w-light);
-      font-size: var(--h2-size);
-      line-height: var(--h2-lh);
-      letter-spacing: var(--h2-ls);
+      font-size: var(--h3-size);
+      line-height: var(--h3-lh);
+      letter-spacing: var(--h3-ls);
       color: var(--text-heading);
       margin-top: 8px;
     }
+    /* The hero film. Held at the file's native ratio so the block reserves its
+       height before the video's metadata lands — nothing shifts on load. Keep
+       the ratio in step with the file if the film is ever re-exported. */
     #hero .hero-image {
       display: block;
       width: 100%;
       height: auto;
-      object-fit: contain;
+      aspect-ratio: 1920 / 1186;
+      object-fit: cover;
+      background: var(--surface);
+      border-radius: 2px;
       margin-top: 28px;
     }
     #hero .hero-meta {
@@ -88,13 +94,13 @@
       margin-top: 36px;
       padding-top: 24px;
     }
-    /* Label Small */
+    /* Section Label */
     .meta-col .meta-label {
       font-family: var(--font-sans);
       font-weight: var(--w-medium);
-      font-size: var(--label-sm-size);
-      line-height: var(--label-sm-lh);
-      letter-spacing: var(--label-sm-ls);
+      font-size: var(--label-size);
+      line-height: var(--label-lh);
+      letter-spacing: 0;
       text-transform: uppercase;
       color: var(--text-label);
       display: block;
@@ -103,7 +109,7 @@
     /* Body Regular */
     .meta-col .meta-value {
       font-family: var(--font-sans);
-      font-weight: var(--w-medium);
+      font-weight: var(--w-regular);
       font-size: var(--body-size);
       line-height: var(--body-lh);
       color: var(--text-body);
@@ -145,13 +151,13 @@
     #problem-band, #hmw-band {
       border-top: none;
     }
-    /* H3 */
+    /* H4 */
     #problem-band .problem-h2 {
       font-family: var(--font-serif);
       font-weight: var(--w-regular);
-      font-size: var(--h3-size);
-      line-height: var(--h3-lh);
-      letter-spacing: var(--h3-ls);
+      font-size: var(--h4-size);
+      line-height: var(--h4-lh);
+      letter-spacing: var(--h4-ls);
       font-style: normal;
       color: var(--text-heading);
       margin-top: 8px;
@@ -175,13 +181,13 @@
       gap: 40px;
       align-items: start;
     }
-    /* H3 */
+    /* H4 */
     #overview h2, .section-h2 {
       font-family: var(--font-serif);
       font-weight: var(--w-regular);
-      font-size: var(--h3-size);
-      line-height: var(--h3-lh);
-      letter-spacing: var(--h3-ls);
+      font-size: var(--h4-size);
+      line-height: var(--h4-lh);
+      letter-spacing: var(--h4-ls);
       font-style: normal;
       color: var(--text-heading);
     }
@@ -423,7 +429,11 @@
 
       /* Hero */
       #hero { padding-top: 72px; }
-      #hero .hero-image { height: auto; }
+      /* .hero-inner carries its own 40px gutter, so it misses the shared 20px
+         mobile override in styles.css and the hero sits inset from the body
+         text below it — reading as centred. Match the site gutter here so the
+         film starts on the same left edge and runs the full section width. */
+      #hero .hero-inner { padding-left: 20px; padding-right: 20px; }
       #hero .hero-meta {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
@@ -599,7 +609,9 @@
     <div class="hero-inner">
       <span class="section-label">PRODUCT DESIGN INTERNSHIP · OXY · 2026</span>
       <h1>Oxy Design Agency</h1>
-      <img class="hero-image" src="images/oxy/oxy-hero.png" alt="Oxy Design Agency" />
+      <video class="hero-image" src="images/oxy/oxy-hero-web.mp4"
+             autoplay muted loop playsinline preload="metadata"
+             aria-label="Oxy Design Agency site"></video>
       <h2 class="section-h2" style="margin-top:20px;">Designing across strategy, research, and visual design for a creative agency and its clients</h2>
 
       <!-- Four-column meta -->

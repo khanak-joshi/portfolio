@@ -71,15 +71,22 @@
   --h1-lh: 1.172;
   --h1-ls: -0.02em;
 
-  /* H2 — New Spirit Light · 36/45 · 0 */
-  --h2-size: clamp(28px, 3.4vw, 36px);
+  /* H2 — New Spirit Light · 48/60 · -2%
+     Added to the scale after H1, which pushed the two steps below it down a
+     number each: what these tokens call H3 and H4 were H2 and H3 before. */
+  --h2-size: clamp(32px, 4.6vw, 48px);
   --h2-lh: 1.25;
-  --h2-ls: 0;
+  --h2-ls: -0.02em;
 
-  /* H3 — New Spirit Regular · 24/30 · 0 */
-  --h3-size: clamp(20px, 2.2vw, 24px);
+  /* H3 — New Spirit Light · 36/45 · 0 */
+  --h3-size: clamp(28px, 3.4vw, 36px);
   --h3-lh: 1.25;
   --h3-ls: 0;
+
+  /* H4 — New Spirit Regular · 24/30 · 0 */
+  --h4-size: clamp(20px, 2.2vw, 24px);
+  --h4-lh: 1.25;
+  --h4-ls: 0;
 
   /* Body Large — Aktiv Regular · 20/28 · 0 */
   --body-lg-size: 20px;
@@ -165,18 +172,18 @@ a { cursor: none; }
 .t-h2 {
   font-family: var(--font-serif);
   font-weight: var(--w-light);
-  font-size: var(--h2-size);
-  line-height: var(--h2-lh);
-  letter-spacing: var(--h2-ls);
+  font-size: var(--h3-size);
+  line-height: var(--h3-lh);
+  letter-spacing: var(--h3-ls);
   color: var(--text-heading);
 }
 
 .t-h3 {
   font-family: var(--font-serif);
   font-weight: var(--w-regular);
-  font-size: var(--h3-size);
-  line-height: var(--h3-lh);
-  letter-spacing: var(--h3-ls);
+  font-size: var(--h4-size);
+  line-height: var(--h4-lh);
+  letter-spacing: var(--h4-ls);
   color: var(--text-heading);
 }
 
@@ -333,8 +340,13 @@ nav .nav-links a:hover { color: var(--accent); }
 nav .nav-links a.active {
   color: var(--accent);
   text-decoration: underline;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 4px;
+  /* Figma "Portfolio" → node 379-1015 gives the rule as 16% of 1em; 0.16em is
+     the same value in a unit every browser takes. The 3px offset is measured,
+     not copied: CSS counts the offset from the font's own underline position
+     rather than the baseline, so the number isn't comparable to Figma's. This
+     one lands the rule 4px under the glyph bottom, matching the spec render. */
+  text-decoration-thickness: 0.16em;
+  text-underline-offset: 3px;
 }
 nav .nav-links a.active .ext-arrow { display: none; }
 
@@ -441,8 +453,8 @@ body.nav-open nav { z-index: 300; }
 .mobile-nav-links a {
   font-family: var(--font-serif);
   font-weight: var(--w-light);
-  font-size: var(--h3-size);
-  line-height: var(--h3-lh);
+  font-size: var(--h4-size);
+  line-height: var(--h4-lh);
   letter-spacing: normal;
   text-transform: none;
   color: var(--text-label);
