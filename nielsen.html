@@ -45,7 +45,7 @@
     /* ── HERO ── */
     #hero {
       background: var(--bg);
-      padding-top: 100px;
+      padding-top: 104px;
       padding-bottom: var(--section-v);
     }
     @keyframes fadeUp {
@@ -73,7 +73,7 @@
       line-height: var(--h3-lh);
       letter-spacing: var(--h3-ls);
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
     }
     /* The hero film. Held at the file's native ratio so the block reserves its
        height before the video's metadata lands — nothing shifts on load. Keep
@@ -86,13 +86,13 @@
       object-fit: cover;
       background: var(--surface);
       border-radius: 2px;
-      margin-top: 28px;
+      margin-top: var(--media-gap);
     }
     #hero .hero-meta {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 0;
-      margin-top: 36px;
+      margin-top: 40px;
       padding-top: 24px;
     }
     /* Section Label */
@@ -117,13 +117,7 @@
     }
 
     /* ── SECTIONS SHARED ── */
-    :root {
-      --section-v: 32px;
-      --section-h: 40px;
-      --label-gap: 16px;
-      --block-gap: 56px;
-      --elem-gap: 24px;
-    }
+    /* Spacing tokens and .mt-* utilities live in styles.css. */
     section {
       padding: var(--section-v) 0;
     }
@@ -132,10 +126,6 @@
       display: block;
       margin-bottom: var(--label-gap);
     }
-    /* Utility classes pinned to variables */
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
     .decision-block { margin-top: var(--block-gap); }
     .decision-block:first-of-type { margin-top: 0; }
     .image-block { margin-top: var(--block-gap); }
@@ -161,7 +151,7 @@
       letter-spacing: var(--h4-ls);
       font-style: normal;
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
       margin-bottom: 16px;
     }
     /* Body Regular */
@@ -197,7 +187,7 @@
       font-size: var(--body-size);
       line-height: var(--body-lh);
       color: var(--text-body);
-      margin-top: 12px;
+      margin-top: var(--label-gap);
     }
 
     /* ── RESEARCH ── */
@@ -266,7 +256,7 @@
       border-radius: 16px;
       margin-top: 40px;
     }
-    .accent-band .section-label { margin-bottom: 20px; display: block; }
+    .accent-band .section-label { margin-bottom: var(--label-gap); display: block; }
     .accent-band img,
     .accent-band .img-placeholder {
       width: 100%;
@@ -280,7 +270,7 @@
       line-height: var(--body-lh);
       font-weight: var(--w-medium);
       color: var(--text-heading);
-      margin-bottom: 12px;
+      margin-bottom: var(--label-gap);
     }
 
     /* final designs grid */
@@ -372,7 +362,7 @@
     }
     .what-i-learned {
       background: var(--bg);
-      margin-top: 56px;
+      margin-top: var(--block-gap);
     }
     /* Pull Quote */
     .what-i-learned .pullout-text {
@@ -384,7 +374,6 @@
       letter-spacing: var(--quote-ls);
       color: var(--text-heading);
       max-width: 100%;
-      margin: 0;
     }
     .what-i-learned .kicker {
       font-size: var(--body-size);
@@ -403,9 +392,6 @@
       margin-right: -180px;
       margin-top: 240px;
     }
-    @media (max-width: 768px) {
-      .footer-name { font-size: 15vw; margin-top: 20px; }
-    }
 
     /* ── LIGHT/DARK VARIANT MATRIX ──
        Four near-square cards (1020×1072). A real class rather than an inline
@@ -416,18 +402,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      margin-top: 20px;
+      margin-top: var(--media-gap);
     }
 
     /* ── DIVIDERS ── */
     .divider { height: 1px; background: var(--border); margin: 64px 0; }
 
     /* ── H2 spacing within sections ── */
-    .section-h2 { margin-top: 0; margin-bottom: 24px; }
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
-    .mt-16 { margin-top: var(--elem-gap); }
+    .section-h2 { margin-bottom: 24px; }
 
     @media (max-width: 768px) {
       /* ── GLOBAL ── */
@@ -435,27 +417,21 @@
       html, body { overflow-x: hidden; }
 
 
-      /* Layout */
-      :root { --section-v: 40px; --section-h: 20px; --block-gap: 36px; --elem-gap: 20px; }
+      /* Layout — mobile spacing tokens come from styles.css */
       #overview .two-col { grid-template-columns: 1fr; }
       .testing-cols { grid-template-columns: 1fr; }
       .screen-grid { grid-template-columns: 1fr; }
 
       /* Nav */
       nav .nav-links { display: none; }
-      nav { padding: 0 20px; }
 
-      /* Hero */
+      /* Hero — .hero-inner's gutter is var(--section-h), which styles.css
+         already drops to the mobile value, so no padding override needed. */
       #hero { padding-top: 72px; }
-      /* .hero-inner carries its own 40px gutter, so it misses the shared 20px
-         mobile override in styles.css and the hero sits inset from the body
-         text below it — reading as centred. Match the site gutter here so the
-         film starts on the same left edge and runs the full section width. */
-      #hero .hero-inner { padding-left: 20px; padding-right: 20px; }
       #hero .hero-meta {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 20px 16px !important;
+        gap: 24px 16px !important;
       }
 
       /* Typography is fluid via clamp() in styles.css — no overrides needed. */
@@ -477,20 +453,19 @@
 
       /* Variant matrix holds its 2×2 here, capped below the desktop cell size
          (342px) so the pair reads as a specimen sheet, not four hero images. */
-      .variant-grid { max-width: 560px; gap: 12px; }
+      .variant-grid { max-width: 560px; }
 
       /* What I learned */
       .what-i-learned { padding: 32px 0 !important; }
 
       /* Footer */
       footer {
-        padding: 36px 20px !important;
+        padding: 40px var(--section-h) !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        margin-top: 60px;
+        margin-top: 64px;
       }
-      .footer-nav { gap: 20px 24px; padding-top: 28px; }
-      .footer-name { font-size: 15vw; margin-top: 20px; }
+      .footer-nav { gap: 8px 24px; padding-top: 32px; }
 
       /* Tap targets */
       nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
@@ -632,7 +607,7 @@
       <video class="hero-image" src="images/nielsen/nielsen-hero-web.mp4"
              autoplay muted loop playsinline preload="metadata"
              aria-label="Nielsen ONE measurement tool"></video>
-      <h2 class="section-h2" style="margin-top:20px;">Designing for a cross-platform measurement tool used by the world's largest media brands</h2>
+      <h2 class="section-h2 mt-elem">Designing for a cross-platform measurement tool used by the world's largest media brands</h2>
 
       <!-- Four-column meta -->
       <div class="hero-meta">
@@ -656,7 +631,7 @@
   <section id="overview">
     <div class="container">
       <span class="section-label">Overview</span>
-      <p class="body" style="margin-top:12px;">Over a 3-month internship at Nielsen, I worked as the sole UI/UX design intern on Nielsen ONE, a B2B analytics platform used by media buyers and sellers to plan, measure, and optimize advertising campaigns. I took briefs from my UX supervisor and worked with the development team from iteration through handoff. The two projects below share a thread: both ask a user to commit to something, an upgrade in one, a report in the other, and both put the evidence for that decision exactly where the decision happens.</p>
+      <p class="body mt-label">Over a 3-month internship at Nielsen, I worked as the sole UI/UX design intern on Nielsen ONE, a B2B analytics platform used by media buyers and sellers to plan, measure, and optimize advertising campaigns. I took briefs from my UX supervisor and worked with the development team from iteration through handoff. The two projects below share a thread: both ask a user to commit to something, an upgrade in one, a report in the other, and both put the evidence for that decision exactly where the decision happens.</p>
     </div>
   </section>
 
@@ -664,7 +639,7 @@
   <section id="project-01">
     <div class="container">
       <span class="section-label">PROJECT 01</span>
-      <h2 class="section-h2" style="margin-top:12px;">Upsell UI - making a hidden feature impossible to miss</h2>
+      <h2 class="section-h2 mt-label">Upsell UI - making a hidden feature impossible to miss</h2>
     </div>
   </section>
 
@@ -685,31 +660,31 @@
       <h2 class="section-h2">Three entry points, one clear path.</h2>
 
       <!-- Lock Icon on the Planning Tab -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">Lock Icon on the Planning Tab</span>
-        <p class="body" style="margin-top:12px;">The first entry point was the Planning tab in the main navigation. My supervisor suggested using a lock icon to signal the feature was gated. I kept it small and inline with the tab label so it wouldn't disrupt the navigation's visual rhythm, informational rather than alarming. On hover, I added a bold outline state to make it feel clickable. Without it, users might have assumed the tab was simply disabled and <span class="body-bold">moved on.</span></p>
-        <img width="1820" height="831" src="images/nielsen/n1cf-campaigns-upsell-hover.webp" alt="Lock icon on Planning tab hover state" style="width:100%;display:block;margin-top:20px;" />
+        <p class="body mt-label">The first entry point was the Planning tab in the main navigation. My supervisor suggested using a lock icon to signal the feature was gated. I kept it small and inline with the tab label so it wouldn't disrupt the navigation's visual rhythm, informational rather than alarming. On hover, I added a bold outline state to make it feel clickable. Without it, users might have assumed the tab was simply disabled and <span class="body-bold">moved on.</span></p>
+        <img width="1820" height="831" src="images/nielsen/n1cf-campaigns-upsell-hover.webp" alt="Lock icon on Planning tab hover state" class="mt-media" style="width:100%;display:block;" />
       </div>
 
       <!-- Upsell Modal -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">Upsell Modal</span>
-        <p class="body" style="margin-top:12px;">Clicking the lock opens a modal rather than a redirect. Taking users to a new page mid-task would have broken their flow and made it harder to return. The modal keeps them in context: they can read about the feature and close it without losing their place. The Cancel button was intentional too. <span class="body-bold">A user who knows they can leave is more willing to stay and read.</span> The modal itself uses a short header, three scannable outcome statements, and a supporting image. <span class="body-bold">Enterprise users scan rather than read paragraphs.</span></p>
-        <img width="1965" height="1340" loading="lazy" decoding="async" src="images/nielsen/upsell-mockup.webp" alt="Upsell modal mockup" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+        <p class="body mt-label">Clicking the lock opens a modal rather than a redirect. Taking users to a new page mid-task would have broken their flow and made it harder to return. The modal keeps them in context: they can read about the feature and close it without losing their place. The Cancel button was intentional too. <span class="body-bold">A user who knows they can leave is more willing to stay and read.</span> The modal itself uses a short header, three scannable outcome statements, and a supporting image. <span class="body-bold">Enterprise users scan rather than read paragraphs.</span></p>
+        <div class="media-crop mt-media"><img width="1965" height="1340" loading="lazy" decoding="async" src="images/nielsen/upsell-mockup.webp" alt="Upsell modal mockup" style="transform:scale(1.08);transform-origin:center;" /></div>
       </div>
 
       <!-- Side Panel Card -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">Side Panel Card</span>
-        <p class="body" style="margin-top:12px;">A user who has clicked into Campaign Details is in a different mindset than someone browsing the nav. They're looking at a specific campaign, a natural moment to show them what Planning could do with that data. I designed a card with two CTAs. Preview Data was an existing feature that let users sample Planning with their own data, surfacing it here gave <span class="body-bold">a low-commitment way to try before upgrading.</span> Learn More served users who needed more context before deciding.</p>
-        <p class="body" style="margin-top:16px;">After the first review, stakeholders felt the card needed more credibility. I added a social proof badge ('Join 2,500+ brands already using Planning') at the bottom of the card. For enterprise buyers, knowing that peers are already using something reduces the perceived risk of upgrading. <span class="body-bold">It was a small addition, but it shifted the card from a pitch to proof.</span></p>
-        <img width="1965" height="1341" loading="lazy" decoding="async" src="images/nielsen/upsell-side-panel.webp" alt="Upsell side panel card" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+        <p class="body mt-label">A user who has clicked into Campaign Details is in a different mindset than someone browsing the nav. They're looking at a specific campaign, a natural moment to show them what Planning could do with that data. I designed a card with two CTAs. Preview Data was an existing feature that let users sample Planning with their own data, surfacing it here gave <span class="body-bold">a low-commitment way to try before upgrading.</span> Learn More served users who needed more context before deciding.</p>
+        <p class="body mt-label">After the first review, stakeholders felt the card needed more credibility. I added a social proof badge ('Join 2,500+ brands already using Planning') at the bottom of the card. For enterprise buyers, knowing that peers are already using something reduces the perceived risk of upgrading. <span class="body-bold">It was a small addition, but it shifted the card from a pitch to proof.</span></p>
+        <div class="media-crop mt-media"><img width="1965" height="1341" loading="lazy" decoding="async" src="images/nielsen/upsell-side-panel.webp" alt="Upsell side panel card" style="transform:scale(1.08);transform-origin:center;" /></div>
       </div>
 
       <!-- Light and Dark Mode Variants and Edge Cases -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">Light and Dark Mode Variants and Edge Cases</span>
-        <p class="body" style="margin-top:12px;">The first color pass on the card clashed in both light and dark mode, making it feel visually jarring. I reworked the palette to sit more calmly within Nielsen's design system. I also built out short and long content variants using Figma component properties, something I added proactively <span class="body-bold">rather than because it was asked of me.</span> Real content is unpredictable, and a design that only works at one character count creates problems for developers. Having every state documented meant the team could build without guessing.</p>
+        <p class="body mt-label">The first color pass on the card clashed in both light and dark mode, making it feel visually jarring. I reworked the palette to sit more calmly within Nielsen's design system. I also built out short and long content variants using Figma component properties, something I added proactively <span class="body-bold">rather than because it was asked of me.</span> Real content is unpredictable, and a design that only works at one character count creates problems for developers. Having every state documented meant the team could build without guessing.</p>
         <div class="variant-grid">
           <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Light.webp" alt="Short content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
           <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Dark.webp" alt="Short content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
@@ -719,72 +694,72 @@
       </div>
 
       <!-- Outcome -->
-      <div id="p01-outcome" style="margin-top:56px;">
+      <div id="p01-outcome" class="mt-block">
         <span class="section-label">Outcome</span>
-        <h2 class="section-h2" style="margin-top:12px;">From a missed opportunity to a system with intent.</h2>
-        <p class="body" style="margin-top:12px;">The designs were approved after two rounds of iteration and handed off to development. The Planning feature went from a tab nobody clicked to three entry points, each timed to a different moment: the lock for users scanning the nav, the modal for users curious enough to click, the card for users already deep in a campaign. <span class="body-bold">The feature didn't change. When and how it asked for attention did.</span></p>
+        <h2 class="section-h2 mt-label">From a missed opportunity to a system with intent.</h2>
+        <p class="body mt-label">The designs were approved after two rounds of iteration and handed off to development. The Planning feature went from a tab nobody clicked to three entry points, each timed to a different moment: the lock for users scanning the nav, the modal for users curious enough to click, the card for users already deep in a campaign. <span class="body-bold">The feature didn't change. When and how it asked for attention did.</span></p>
       </div>
 
       <!-- What I Learned -->
-      <div class="what-i-learned" style="margin-top:56px;">
+      <div class="what-i-learned">
         <span class="section-label">What I Learned</span>
-        <p class="pullout-text" style="margin-top:16px;margin-left:0;border-left:2px solid var(--accent);padding-left:16px;">This project taught me that in B2B, trust is part of the design. An exit path in a modal, a social proof badge, a palette that doesn't fight the interface: none of these sell the feature. They make the moment of being asked feel safe. That is the difference between an upsell users consider and one they dismiss.</p>
+        <p class="pullout-text mt-label" style="margin-left:0;border-left:2px solid var(--accent);padding-left:16px;">This project taught me that in B2B, trust is part of the design. An exit path in a modal, a social proof badge, a palette that doesn't fight the interface: none of these sell the feature. They make the moment of being asked feel safe. That is the difference between an upsell users consider and one they dismiss.</p>
       </div>
 
       <!-- PROJECT 02 -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">PROJECT 02</span>
-        <h2 class="section-h2" style="margin-top:12px;">Campaign Builder - turning raw backend data into a decision-making tool</h2>
+        <h2 class="section-h2 mt-label">Campaign Builder - turning raw backend data into a decision-making tool</h2>
       </div>
 
       <!-- Problem -->
-      <div id="p02-problem" style="margin-top:56px;">
+      <div id="p02-problem" class="mt-block">
         <span class="section-label">Problem</span>
-        <h2 class="section-h2" style="margin-top:12px;">Reports built on assumptions, not data.</h2>
-        <p class="body" style="margin-top:12px;">When users combined campaigns in Nielsen ONE, they had no way of knowing how much data actually existed within their chosen date range. <span class="body-bold">They were building reports blind,</span> and if the campaigns didn't overlap the way they expected, the report would come back with gaps. There was no indicator anywhere in the flow to flag this before it happened.</p>
+        <h2 class="section-h2 mt-label">Reports built on assumptions, not data.</h2>
+        <p class="body mt-label">When users combined campaigns in Nielsen ONE, they had no way of knowing how much data actually existed within their chosen date range. <span class="body-bold">They were building reports blind,</span> and if the campaigns didn't overlap the way they expected, the report would come back with gaps. There was no indicator anywhere in the flow to flag this before it happened.</p>
       </div>
 
       <!-- Approach -->
-      <div id="p02-approach" style="margin-top:56px;">
+      <div id="p02-approach" class="mt-block">
         <span class="section-label">Approach</span>
-        <h2 class="section-h2" style="margin-top:12px;">One column. Two checkpoints.</h2>
+        <h2 class="section-h2 mt-label">One column. Two checkpoints.</h2>
       </div>
 
       <!-- Data Overlap Column -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">Data Overlap Column</span>
-        <p class="body" style="margin-top:12px;">I proposed adding a Data Overlap column to the Selected Campaigns table, showing available data as a ratio. '19/61 days' meaning 19 days of data existed within a 61-day selected range. I scoped it to the Selected Campaigns section only, not the full list of 512 campaigns above it. Showing it across the full table would have cluttered the UI and added unnecessary backend load. I anticipated this as a constraint <span class="body-bold">before starting</span> and confirmed it with the dev team. The column also carries through to the review step, giving users one final check before committing to generating a report.</p>
-        <img width="626" height="855" loading="lazy" decoding="async" src="images/nielsen/n1a-ccb-step-details-selected-campaigns-data-overlap.webp" alt="Step details - selected campaigns data overlap" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
+        <p class="body mt-label">I proposed adding a Data Overlap column to the Selected Campaigns table, showing available data as a ratio. '19/61 days' meaning 19 days of data existed within a 61-day selected range. I scoped it to the Selected Campaigns section only, not the full list of 512 campaigns above it. Showing it across the full table would have cluttered the UI and added unnecessary backend load. I anticipated this as a constraint <span class="body-bold">before starting</span> and confirmed it with the dev team. The column also carries through to the review step, giving users one final check before committing to generating a report.</p>
+        <img width="626" height="855" loading="lazy" decoding="async" src="images/nielsen/n1a-ccb-step-details-selected-campaigns-data-overlap.webp" alt="Step details - selected campaigns data overlap" class="mt-media" style="width:45%;display:block;border-radius:12px;" />
       </div>
 
       <!-- Info Icon and Tooltip -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">Info Icon and Tooltip</span>
-        <p class="body" style="margin-top:12px;">The ratio format was a start, but it didn't tell users which months had data and which didn't. I added an info icon next to the column header, a standard Nielsen component users already recognize. On hover, a tooltip reads 'View detailed overlap.' I made it a click to open rather than hover to expand because the full table is dense. Users need time to scan it, and a hover state would have <span class="body-bold">disappeared the moment they moved their cursor.</span></p>
-        <img width="629" height="845" loading="lazy" decoding="async" src="images/nielsen/Group 5.webp" alt="Info icon and tooltip" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
+        <p class="body mt-label">The ratio format was a start, but it didn't tell users which months had data and which didn't. I added an info icon next to the column header, a standard Nielsen component users already recognize. On hover, a tooltip reads 'View detailed overlap.' I made it a click to open rather than hover to expand because the full table is dense. Users need time to scan it, and a hover state would have <span class="body-bold">disappeared the moment they moved their cursor.</span></p>
+        <img width="629" height="845" loading="lazy" decoding="async" src="images/nielsen/Group 5.webp" alt="Info icon and tooltip" class="mt-media" style="width:45%;display:block;border-radius:12px;" />
       </div>
 
       <!-- Redesigned Data Overlap Table -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">Redesigned Data Overlap Table</span>
-        <p class="body" style="margin-top:12px;">Clicking opens a modal with a redesigned overlap table. The reference point I was working from was a raw backend spreadsheet with columns for CC ID, start dates, and data availability strings like '19 [May (9), Jun (10)]', built <span class="body-bold">for engineers rather than media buyers.</span></p>
-        <img width="1820" height="346" loading="lazy" decoding="async" src="images/nielsen/n1a-cc-monthly-details-enhancement 1.webp" alt="Monthly details enhancement" style="width:100%;display:block;margin-top:20px;border-radius:12px;" />
-        <p class="body" style="margin-top:16px;">My version restructures the same data into a calendar-style layout organized by month, with each campaign as a row. Days within the selected range are highlighted in one color, days outside in another, with a legend at the bottom. The same information becomes immediately visual. You can see at a glance which campaigns have strong coverage for your window and which fall short, <span class="body-bold">without decoding anything.</span></p>
-        <img width="1820" height="797" loading="lazy" decoding="async" src="images/nielsen/modal.webp" alt="Data overlap modal" style="width:100%;height:auto;display:block;margin-top:20px;" />
+        <p class="body mt-label">Clicking opens a modal with a redesigned overlap table. The reference point I was working from was a raw backend spreadsheet with columns for CC ID, start dates, and data availability strings like '19 [May (9), Jun (10)]', built <span class="body-bold">for engineers rather than media buyers.</span></p>
+        <img width="1820" height="346" loading="lazy" decoding="async" src="images/nielsen/n1a-cc-monthly-details-enhancement 1.webp" alt="Monthly details enhancement" class="mt-media" style="width:100%;display:block;border-radius:12px;" />
+        <p class="body mt-label">My version restructures the same data into a calendar-style layout organized by month, with each campaign as a row. Days within the selected range are highlighted in one color, days outside in another, with a legend at the bottom. The same information becomes immediately visual. You can see at a glance which campaigns have strong coverage for your window and which fall short, <span class="body-bold">without decoding anything.</span></p>
+        <img width="1820" height="797" loading="lazy" decoding="async" src="images/nielsen/modal.webp" alt="Data overlap modal" class="mt-media" style="width:100%;height:auto;display:block;" />
       </div>
 
       <!-- Outcome P02 -->
-      <div id="p02-outcome" style="margin-top:56px;">
+      <div id="p02-outcome" class="mt-block">
         <span class="section-label">Outcome</span>
-        <h2 class="section-h2" style="margin-top:12px;">From blind commitment to informed decisions</h2>
-        <p class="body" style="margin-top:12px;">After two iterations, the designs were approved and handed to dev. Before this project, users had no way to know whether their selected campaigns actually had data for the date range they chose. They were committing to reports without enough information to make that call confidently. After handoff, the same workflow surfaced data availability at two levels: a quick ratio in the table for users who needed a scan, and a full calendar breakdown one click away for users who needed to go deeper. <span class="body-bold">The redesign didn't add new data. It made existing data legible at the right moment.</span></p>
-        <img width="1965" height="1335" loading="lazy" decoding="async" src="images/nielsen/ccb-table.webp" alt="CCB table" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+        <h2 class="section-h2 mt-label">From blind commitment to informed decisions</h2>
+        <p class="body mt-label">After two iterations, the designs were approved and handed to dev. Before this project, users had no way to know whether their selected campaigns actually had data for the date range they chose. They were committing to reports without enough information to make that call confidently. After handoff, the same workflow surfaced data availability at two levels: a quick ratio in the table for users who needed a scan, and a full calendar breakdown one click away for users who needed to go deeper. <span class="body-bold">The redesign didn't add new data. It made existing data legible at the right moment.</span></p>
+        <div class="media-crop mt-media"><img width="1965" height="1335" loading="lazy" decoding="async" src="images/nielsen/ccb-table.webp" alt="CCB table" style="transform:scale(1.08);transform-origin:center;" /></div>
       </div>
 
       <!-- What I Learned P02 -->
-      <div class="what-i-learned" style="margin-top:56px;">
+      <div class="what-i-learned">
         <span class="section-label">What I Learned</span>
-        <p class="pullout-text" style="margin-top:16px;margin-left:0;border-left:2px solid var(--accent);padding-left:16px;">Working with complex backend data taught me that clarity is its own form of design. The data was already there. My job was to restructure it into something users could actually act on. That is a problem I want to keep solving.</p>
+        <p class="pullout-text mt-label" style="margin-left:0;border-left:2px solid var(--accent);padding-left:16px;">Working with complex backend data taught me that clarity is its own form of design. The data was already there. My job was to restructure it into something users could actually act on. That is a problem I want to keep solving.</p>
     </div>
   </section>
 

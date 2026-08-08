@@ -107,7 +107,7 @@
       line-height: var(--body-lg-lh);
       color: var(--text-body);
     }
-    .about-body p + p { margin-top: 20px; }
+    .about-body p + p { margin-top: 24px; }
 
     /* Portrait, sized by its column and left at its own proportions — so it is
        never cropped, and it's free to run taller than the copy beside it. It
@@ -172,7 +172,7 @@
       font-size: var(--body-size);
       line-height: var(--body-lh);
       color: var(--text-body);
-      margin-top: 20px;
+      margin-top: 24px;
     }
     /* Pull Quote — same device as the "What I Learned" pullout on the case studies */
     .statement-quote {
@@ -185,7 +185,7 @@
       color: var(--text-heading);
       border-left: 2px solid var(--accent);
       padding-left: 16px;
-      margin-top: 36px;
+      margin-top: 40px;
     }
 
     /* ── ART GALLERY (editorial, sits on the page — not in cards) ── */
@@ -288,10 +288,10 @@
     @media (max-width: 768px) {
       /* Homepage mobile hero is 116px; --h1-size is down at its 38px floor
          here, so the optical gap above its glyphs shrinks with it. */
-      #about-hero { --hero-nudge: 8px; padding: calc(116px + var(--hero-nudge)) 0 76px; }
-      .statement { padding-left: 20px; padding-right: 20px; }
+      #about-hero { --hero-nudge: 8px; padding: calc(120px + var(--hero-nudge)) 0 80px; }
+      .statement { padding-left: var(--section-h); padding-right: var(--section-h); }
       #art-builds { padding-top: 0; padding-bottom: 80px; }
-      .art-gallery { padding-left: 20px; padding-right: 20px; margin-top: 48px; }
+      .art-gallery { padding-left: var(--section-h); padding-right: var(--section-h); margin-top: 48px; }
       .art-movement { flex-direction: column; gap: 24px; }
       .art-pair { flex-direction: column; gap: 24px; margin-top: 24px; }
       .art-gallery .art-companion, .art-pair .a-square { margin-top: 0; }

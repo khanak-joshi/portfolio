@@ -45,7 +45,7 @@
     /* ── HERO ── */
     #hero {
       background: var(--bg);
-      padding-top: 100px;
+      padding-top: 104px;
       padding-bottom: var(--section-v);
     }
     @keyframes fadeUp {
@@ -73,7 +73,7 @@
       line-height: var(--h3-lh);
       letter-spacing: var(--h3-ls);
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
     }
     /* The hero film. Held at the file's native ratio so the block reserves its
        height before the video's metadata lands — nothing shifts on load. Keep
@@ -86,13 +86,13 @@
       object-fit: cover;
       background: var(--surface);
       border-radius: 2px;
-      margin-top: 28px;
+      margin-top: var(--media-gap);
     }
     #hero .hero-meta {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 0 40px;
-      margin-top: 36px;
+      margin-top: 40px;
       padding-top: 24px;
     }
     /* Section Label */
@@ -117,13 +117,7 @@
     }
 
     /* ── SECTIONS SHARED ── */
-    :root {
-      --section-v: 32px;
-      --section-h: 40px;
-      --label-gap: 16px;
-      --block-gap: 56px;
-      --elem-gap: 24px;
-    }
+    /* Spacing tokens and .mt-* utilities live in styles.css. */
     section {
       padding: var(--section-v) 0;
     }
@@ -132,10 +126,6 @@
       display: block;
       margin-bottom: var(--label-gap);
     }
-    /* Utility classes pinned to variables */
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
     .decision-block { margin-top: var(--block-gap); }
     .decision-block:first-of-type { margin-top: 0; }
     .image-block { margin-top: var(--block-gap); }
@@ -161,7 +151,7 @@
       letter-spacing: var(--h4-ls);
       font-style: normal;
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
       margin-bottom: 16px;
     }
     /* Body Regular */
@@ -197,7 +187,7 @@
       font-size: var(--body-size);
       line-height: var(--body-lh);
       color: var(--text-body);
-      margin-top: 12px;
+      margin-top: var(--label-gap);
     }
 
     /* ── RESEARCH ── */
@@ -266,7 +256,7 @@
       border-radius: 16px;
       margin-top: 40px;
     }
-    .accent-band .section-label { margin-bottom: 20px; display: block; }
+    .accent-band .section-label { margin-bottom: var(--label-gap); display: block; }
     .accent-band img,
     .accent-band .img-placeholder {
       width: 100%;
@@ -280,7 +270,7 @@
       line-height: var(--body-lh);
       font-weight: var(--w-medium);
       color: var(--text-heading);
-      margin-bottom: 12px;
+      margin-bottom: var(--label-gap);
     }
 
     /* final designs grid */
@@ -382,7 +372,6 @@
       line-height: var(--quote-lh);
       letter-spacing: var(--quote-ls);
       color: var(--text-heading);
-      margin: 0;
     }
     .what-i-learned .kicker {
       font-size: var(--body-size);
@@ -406,11 +395,7 @@
     .divider { height: 1px; background: var(--border); margin: 64px 0; }
 
     /* ── H2 spacing within sections ── */
-    .section-h2 { margin-top: 0; margin-bottom: 24px; }
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
-    .mt-16 { margin-top: var(--elem-gap); }
+    .section-h2 { margin-bottom: 24px; }
 
     @media (max-width: 768px) {
       /* ── GLOBAL ── */
@@ -419,26 +404,20 @@
 
 
       /* Layout */
-      :root { --section-v: 40px; --section-h: 20px; --block-gap: 36px; --elem-gap: 20px; }
+      /* Mobile spacing tokens come from styles.css */
       #overview .two-col { grid-template-columns: 1fr; }
       .testing-cols { grid-template-columns: 1fr; }
       .screen-grid { grid-template-columns: 1fr; }
 
       /* Nav */
       nav .nav-links { display: none; }
-      nav { padding: 0 20px; }
 
       /* Hero */
       #hero { padding-top: 72px; }
-      /* .hero-inner carries its own 40px gutter, so it misses the shared 20px
-         mobile override in styles.css and the hero sits inset from the body
-         text below it — reading as centred. Match the site gutter here so the
-         film starts on the same left edge and runs the full section width. */
-      #hero .hero-inner { padding-left: 20px; padding-right: 20px; }
       #hero .hero-meta {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 20px 16px !important;
+        gap: 24px 16px !important;
       }
 
       /* Typography is fluid via clamp() in styles.css — no overrides needed. */
@@ -463,13 +442,12 @@
 
       /* Footer */
       footer {
-        padding: 36px 20px !important;
+        padding: 40px var(--section-h) !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        margin-top: 60px;
+        margin-top: 64px;
       }
-      .footer-nav { gap: 20px 24px; padding-top: 28px; }
-      .footer-name { font-size: 15vw; margin-top: 20px; }
+      .footer-nav { gap: 8px 24px; padding-top: 32px; }
 
       /* Tap targets */
       nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
@@ -613,7 +591,7 @@
       <video class="hero-image" src="images/oxy/oxy-hero-web.mp4"
              autoplay muted loop playsinline preload="metadata"
              aria-label="Oxy Design Agency site"></video>
-      <h2 class="section-h2" style="margin-top:20px;">Designing across strategy, research, and visual design for a creative agency and its clients</h2>
+      <h2 class="section-h2 mt-elem">Designing across strategy, research, and visual design for a creative agency and its clients</h2>
 
       <!-- Four-column meta -->
       <div class="hero-meta">
@@ -637,8 +615,8 @@
   <section id="overview">
     <div class="container">
       <span class="section-label">Overview</span>
-      <p class="body" style="margin-top:12px;">Over 4 months at Oxy, a Phoenix-based design agency, I've worked as a product design intern across client engagements spanning UX research, competitive analysis, information architecture, and visual design.</p>
-      <p class="body" style="margin-top:16px;">The two projects below share a thread: an investor, writer, and community builder with five careers and no website at all, and a luxury aviation studio reading like a SaaS product. Different problems, same job: closing the gap between the work and the story told about it.</p>
+      <p class="body mt-label">Over 4 months at Oxy, a Phoenix-based design agency, I've worked as a product design intern across client engagements spanning UX research, competitive analysis, information architecture, and visual design.</p>
+      <p class="body mt-label">The two projects below share a thread: an investor, writer, and community builder with five careers and no website at all, and a luxury aviation studio reading like a SaaS product. Different problems, same job: closing the gap between the work and the story told about it.</p>
     </div>
   </section>
 
@@ -646,7 +624,7 @@
   <section id="project-01">
     <div class="container">
       <span class="section-label">PROJECT 01</span>
-      <h2 class="section-h2" style="margin-top:12px;">Sadasia McCutchen - brand identity and website for a multi-hyphenate operator</h2>
+      <h2 class="section-h2 mt-label">Sadasia McCutchen - brand identity and website for a multi-hyphenate operator</h2>
     </div>
   </section>
 
@@ -654,7 +632,7 @@
   <section id="sm-brief">
     <div class="container">
       <span class="section-label">The Brief</span>
-      <h2 class="section-h2" style="margin-top:12px;">Five careers. One practice. No website.</h2>
+      <h2 class="section-h2 mt-label">Five careers. One practice. No website.</h2>
       <p class="body">Sadasia McCutchen is an investor at SignalFire who previously worked at Google. She writes, builds communities, and works in fragrance and fashion. The through-line she named was <span class="body-bold">relationship infrastructure</span>: not five careers, one practice of putting aligned people in the same room and keeping them there. The site had to show the range as a single practice, not a list of accomplishments.</p>
     </div>
   </section>
@@ -663,11 +641,11 @@
   <section id="sm-moodboard">
     <div class="container">
       <span class="section-label">Moodboard</span>
-      <h2 class="section-h2" style="margin-top:12px;">Round one missed. The miss is what taught me.</h2>
-      <p class="body" style="margin-top:12px;">I wasn't on the discovery call, so the first three moodboards came from sticky notes and fragments. None of them felt like her, and she said so. Warm Authority came closest, but she wanted more color, more plant life, and more play. <span class="body-bold">Hearing her talk through the gap gave me what the notes never could.</span></p>
-      <img width="1820" height="1024" src="images/oxy/Moodboard SM.webp" alt="Moodboard SM" style="width:100%;height:auto;display:block;margin-top:24px;" />
-      <p class="body" style="margin-top:24px;">Round two pushed exactly there. Bright Authority turned the color up: jewel tones, saturated portraiture, botanicals rendered like stained glass. She called it the perfect combination of playful, expert, and relatable, which was the exact tension the brief had been circling.</p>
-      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/Moodboard SM 2.webp" alt="Moodboard SM 2" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <h2 class="section-h2 mt-label">Round one missed. The miss is what taught me.</h2>
+      <p class="body mt-label">I wasn't on the discovery call, so the first three moodboards came from sticky notes and fragments. None of them felt like her, and she said so. Warm Authority came closest, but she wanted more color, more plant life, and more play. <span class="body-bold">Hearing her talk through the gap gave me what the notes never could.</span></p>
+      <img width="1820" height="1024" src="images/oxy/Moodboard SM.webp" alt="Moodboard SM" class="mt-media" style="width:100%;height:auto;display:block;" />
+      <p class="body mt-media">Round two pushed exactly there. Bright Authority turned the color up: jewel tones, saturated portraiture, botanicals rendered like stained glass. She called it the perfect combination of playful, expert, and relatable, which was the exact tension the brief had been circling.</p>
+      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/Moodboard SM 2.webp" alt="Moodboard SM 2" class="mt-media" style="width:100%;height:auto;display:block;" />
     </div>
   </section>
 
@@ -675,11 +653,11 @@
   <section id="sm-identity">
     <div class="container">
       <span class="section-label">Identity System</span>
-      <h2 class="section-h2" style="margin-top:12px;">The name was already the logo.</h2>
-      <p class="body" style="margin-top:12px;">Sadasia's name was made up, given with intention, and built to go far. I tested five treatments in high-contrast editorial serifs and <span class="body-bold">let the letterforms carry the identity.</span></p>
-      <img width="1820" height="1334" loading="lazy" decoding="async" src="images/oxy/logotype.webp" alt="Sadasia McCutchen logotype treatments" style="width:100%;height:auto;display:block;margin-top:24px;" />
-      <p class="body" style="margin-top:24px;">Romie carries the whole site as she wanted one voice throughout, so range comes from weight and italics rather than a second typeface. The palette of linen, wine, chartreuse, terracotta, and sky holds jewel tones without going heavy. Two marks grouped together round it out: a key, because opening doors for people is what she actually does, and a flower, from her love of fragrance and plants.</p>
-      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/identity-system.webp" alt="Sadasia McCutchen identity system" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <h2 class="section-h2 mt-label">The name was already the logo.</h2>
+      <p class="body mt-label">Sadasia's name was made up, given with intention, and built to go far. I tested five treatments in high-contrast editorial serifs and <span class="body-bold">let the letterforms carry the identity.</span></p>
+      <img width="1820" height="1334" loading="lazy" decoding="async" src="images/oxy/logotype.webp" alt="Sadasia McCutchen logotype treatments" class="mt-media" style="width:100%;height:auto;display:block;" />
+      <p class="body mt-media">Romie carries the whole site as she wanted one voice throughout, so range comes from weight and italics rather than a second typeface. The palette of linen, wine, chartreuse, terracotta, and sky holds jewel tones without going heavy. Two marks grouped together round it out: a key, because opening doors for people is what she actually does, and a flower, from her love of fragrance and plants.</p>
+      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/identity-system.webp" alt="Sadasia McCutchen identity system" class="mt-media" style="width:100%;height:auto;display:block;" />
     </div>
   </section>
 
@@ -687,11 +665,11 @@
   <section id="sm-wireframes">
     <div class="container">
       <span class="section-label">Wireframes</span>
-      <h2 class="section-h2" style="margin-top:12px;">Eight pages, three rounds. One did the hard thinking.</h2>
-      <p class="body" style="margin-top:12px;">I wireframed all eight pages across three rounds, each adding real imagery so stakeholders could picture the site. On an image-dependent site, if a client can't picture the page, the wireframe hasn't done its job.</p>
-      <img width="1820" height="889" loading="lazy" decoding="async" src="images/oxy/wireframes.webp" alt="Sadasia McCutchen wireframes" style="width:100%;height:auto;display:block;margin-top:24px;" />
-      <p class="body" style="margin-top:24px;">The Library was the structural problem: It was the only commerce surface, with products not yet final, so the structure had to flex. The Foyer and Parlor carried positioning weight; <span class="body-bold">the Library had to carry uncertainty.</span></p>
-      <img width="1820" height="2055" loading="lazy" decoding="async" src="images/oxy/library-wireframe.webp" alt="Sadasia McCutchen Library page wireframe" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <h2 class="section-h2 mt-label">Eight pages, three rounds. One did the hard thinking.</h2>
+      <p class="body mt-label">I wireframed all eight pages across three rounds, each adding real imagery so stakeholders could picture the site. On an image-dependent site, if a client can't picture the page, the wireframe hasn't done its job.</p>
+      <img width="1820" height="889" loading="lazy" decoding="async" src="images/oxy/wireframes.webp" alt="Sadasia McCutchen wireframes" class="mt-media" style="width:100%;height:auto;display:block;" />
+      <p class="body mt-media">The Library was the structural problem: It was the only commerce surface, with products not yet final, so the structure had to flex. The Foyer and Parlor carried positioning weight; <span class="body-bold">the Library had to carry uncertainty.</span></p>
+      <img width="1820" height="2055" loading="lazy" decoding="async" src="images/oxy/library-wireframe.webp" alt="Sadasia McCutchen Library page wireframe" class="mt-media" style="width:100%;height:auto;display:block;" />
     </div>
   </section>
 
@@ -699,9 +677,9 @@
   <section id="sm-navigation">
     <div class="container">
       <span class="section-label">Choose a Room</span>
-      <h2 class="section-h2" style="margin-top:12px;">Navigation had to prove the concept.</h2>
-      <p class="body" style="margin-top:12px;">The rooms have to work as navigation before they work as anything else, so I designed three versions. A short dropdown gave visitors no reason to believe the rooms were real; a modal floor plan asked people to read a layout before they could go anywhere. The long dropdown shows each room with an image and description so <span class="body-bold">you see the room before you enter it.</span> Sadasia chose it, and it's the version I'd have argued for. I art directed AI interior imagery for all four rooms in the brand's jewel tones so they read as part of the site.</p>
-      <img width="1820" height="3717" loading="lazy" decoding="async" src="images/oxy/nav.webp" alt="Sadasia McCutchen navigation options" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <h2 class="section-h2 mt-label">Navigation had to prove the concept.</h2>
+      <p class="body mt-label">The rooms have to work as navigation before they work as anything else, so I designed three versions. A short dropdown gave visitors no reason to believe the rooms were real; a modal floor plan asked people to read a layout before they could go anywhere. The long dropdown shows each room with an image and description so <span class="body-bold">you see the room before you enter it.</span> Sadasia chose it, and it's the version I'd have argued for. I art directed AI interior imagery for all four rooms in the brand's jewel tones so they read as part of the site.</p>
+      <img width="1820" height="3717" loading="lazy" decoding="async" src="images/oxy/nav.webp" alt="Sadasia McCutchen navigation options" class="mt-media" style="width:100%;height:auto;display:block;" />
     </div>
   </section>
 
@@ -709,10 +687,10 @@
   <section id="sm-style-tiles">
     <div class="container">
       <span class="section-label">Style Tiles</span>
-      <h2 class="section-h2" style="margin-top:12px;">Round one had a flaw I didn't see. My supervisor did.</h2>
-      <p class="body" style="margin-top:12px;">I presented three hero directions in light and dark, but used the same portrait across all three. My supervisor caught that <span class="body-bold">identical imagery made them read as variations, not choices.</span> Round two gave each its own treatment.</p>
-      <p class="body" style="margin-top:16px;">1A hid her portrait below the fold on a site where she's the reason anyone visits; 1B put her name above her when the point is what she does with it. 1C frames the portrait inside an arch to resemble a doorway, so the room concept shows up in the structure of the page. Sadasia chose 1C.</p>
-      <ol class="rec-list" style="margin-top:32px;">
+      <h2 class="section-h2 mt-label">Round one had a flaw I didn't see. My supervisor did.</h2>
+      <p class="body mt-label">I presented three hero directions in light and dark, but used the same portrait across all three. My supervisor caught that <span class="body-bold">identical imagery made them read as variations, not choices.</span> Round two gave each its own treatment.</p>
+      <p class="body mt-label">1A hid her portrait below the fold on a site where she's the reason anyone visits; 1B put her name above her when the point is what she does with it. 1C frames the portrait inside an arch to resemble a doorway, so the room concept shows up in the structure of the page. Sadasia chose 1C.</p>
+      <ol class="rec-list mt-media">
         <li>
           <div><img width="1730" height="962" loading="lazy" decoding="async" src="images/oxy/Style Tile A SM.webp" alt="Style Tile A" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
@@ -730,11 +708,11 @@
   <section id="sm-hifi">
     <div class="container">
       <span class="section-label">Hi-Fi</span>
-      <h2 class="section-h2" style="margin-top:12px;">The arch became a rule.</h2>
-      <p class="body" style="margin-top:12px;">In the hero, the arch framed one portrait. Across the homepage it crops the dinner photograph, the closing call-to-action portrait, and all four rooms in the dropdown, so the concept holds without being explained.</p>
-      <img width="1820" height="7066" loading="lazy" decoding="async" src="images/oxy/hi-fi-1.webp" alt="Sadasia McCutchen hi-fi homepage" style="width:100%;height:auto;display:block;margin-top:24px;" />
-      <p class="body" style="margin-top:24px;"><span class="body-bold">Then the arch stopped being a crop and became a surface:</span> Fabric texture sits behind her in the hero and the closing call to action, and lines the Choose a Room dropdown: upholstery, drapery, backdrops, and a nod to the fashion side of her work. Texture needed a limit, so I set one: brand surfaces and editorial imagery only. Her portraits and the products stay untreated, because a filter on a face reads as a filter on the credibility behind it.</p>
-      <img width="1820" height="3120" loading="lazy" decoding="async" src="images/oxy/hi-fi-2.webp" alt="Sadasia McCutchen hi-fi texture and treatment" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <h2 class="section-h2 mt-label">The arch became a rule.</h2>
+      <p class="body mt-label">In the hero, the arch framed one portrait. Across the homepage it crops the dinner photograph, the closing call-to-action portrait, and all four rooms in the dropdown, so the concept holds without being explained.</p>
+      <img width="1820" height="7066" loading="lazy" decoding="async" src="images/oxy/hi-fi-1.webp" alt="Sadasia McCutchen hi-fi homepage" class="mt-media" style="width:100%;height:auto;display:block;" />
+      <p class="body mt-media"><span class="body-bold">Then the arch stopped being a crop and became a surface:</span> Fabric texture sits behind her in the hero and the closing call to action, and lines the Choose a Room dropdown: upholstery, drapery, backdrops, and a nod to the fashion side of her work. Texture needed a limit, so I set one: brand surfaces and editorial imagery only. Her portraits and the products stay untreated, because a filter on a face reads as a filter on the credibility behind it.</p>
+      <img width="1820" height="3120" loading="lazy" decoding="async" src="images/oxy/hi-fi-2.webp" alt="Sadasia McCutchen hi-fi texture and treatment" class="mt-media" style="width:100%;height:auto;display:block;" />
     </div>
   </section>
 
@@ -743,8 +721,8 @@
     <div class="container">
       <div class="what-i-learned">
         <span class="section-label">What I Learned</span>
-        <p style="margin-top:16px;font-family:var(--font-sans);font-size:var(--body-size);line-height:var(--body-lh);color:var(--text-body);">Notes from a discovery call give you what the client said. They can't give you what she lit up about.</p>
-        <p class="pullout-text" style="margin-top:24px;border-left:2px solid var(--accent);padding-left:16px;">The first moodboard round missed because I designed from a transcript; the second landed because I designed from a conversation.</p>
+        <p class="mt-label" style="font-family:var(--font-sans);font-size:var(--body-size);line-height:var(--body-lh);color:var(--text-body);">Notes from a discovery call give you what the client said. They can't give you what she lit up about.</p>
+        <p class="pullout-text mt-elem" style="border-left:2px solid var(--accent);padding-left:16px;">The first moodboard round missed because I designed from a transcript; the second landed because I designed from a conversation.</p>
       </div>
     </div>
   </section>
@@ -753,7 +731,7 @@
   <section id="project-02">
     <div class="container">
       <span class="section-label">PROJECT 02</span>
-      <h2 class="section-h2" style="margin-top:12px;">Oxy Aero - from research to visual direction for a luxury aviation design studio</h2>
+      <h2 class="section-h2 mt-label">Oxy Aero - from research to visual direction for a luxury aviation design studio</h2>
     </div>
   </section>
 
@@ -761,7 +739,7 @@
   <section id="brief">
     <div class="container">
       <span class="section-label">The Brief</span>
-      <h2 class="section-h2" style="margin-top:12px;">Oxy Aero had the work. The site didn't know it.</h2>
+      <h2 class="section-h2 mt-label">Oxy Aero had the work. The site didn't know it.</h2>
       <p class="body">Oxy Aero is Oxy's own venture, a private aviation studio designing the entire client experience, from the first text to stepping off the plane. <span class="body-bold">The website read like a SaaS company.</span> In kickoff, Anthony named the bar as Amangiri: so confident it doesn't need to explain itself. My job was to close that gap.</p>
     </div>
   </section>
@@ -770,8 +748,8 @@
   <section id="research">
     <div class="container">
       <span class="section-label">Research</span>
-      <h2 class="section-h2" style="margin-top:12px;">The work existed. The world didn't.</h2>
-      <p class="body" style="margin-top:12px;">I analyzed three bespoke studios (Winch Design, Singer Vehicle Design, Ago Interiors) and audited the full site, logging 28 prioritized observations: functional errors, brand misalignments like a commercial aircraft wing in the hero, and missed opportunities like the one real project sitting in a gallery with no brief or outcome. The conclusion: the content needed to build trust already existed. <span class="body-bold">This wasn't a rebuild. It was a translation problem.</span></p>
+      <h2 class="section-h2 mt-label">The work existed. The world didn't.</h2>
+      <p class="body mt-label">I analyzed three bespoke studios (Winch Design, Singer Vehicle Design, Ago Interiors) and audited the full site, logging 28 prioritized observations: functional errors, brand misalignments like a commercial aircraft wing in the hero, and missed opportunities like the one real project sitting in a gallery with no brief or outcome. The conclusion: the content needed to build trust already existed. <span class="body-bold">This wasn't a rebuild. It was a translation problem.</span></p>
     </div>
   </section>
 
@@ -779,7 +757,7 @@
   <section id="competitive-analysis">
     <div class="container">
       <span class="section-label">Competitive and Comparative Analysis</span>
-      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/Competitor Overview Breakdown.webp" alt="Competitor overview breakdown" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/Competitor Overview Breakdown.webp" alt="Competitor overview breakdown" class="mt-media" style="width:100%;height:auto;display:block;" />
     </div>
   </section>
 
@@ -787,7 +765,7 @@
   <section id="ux-audit">
     <div class="container">
       <span class="section-label">UX Audit</span>
-      <img width="1820" height="895" loading="lazy" decoding="async" src="images/oxy/UX Audit - Oxy Aero.webp" alt="UX Audit - Oxy Aero" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="895" loading="lazy" decoding="async" src="images/oxy/UX Audit - Oxy Aero.webp" alt="UX Audit - Oxy Aero" class="mt-media" style="width:100%;height:auto;display:block;" />
     </div>
   </section>
 
@@ -795,9 +773,9 @@
   <section id="hero-design">
     <div class="container">
       <span class="section-label">Hero Design & Outcome</span>
-      <h2 class="section-h2" style="margin-top:12px;">Three directions, one shared system.</h2>
-      <p class="body" style="margin-top:12px;">I designed three hero directions across two rounds, all built on the same updated navigation and copy, so the choice came down to imagery and typographic register: a grounded jet at golden hour with centered editorial type, an aerial over open water with oversized italic display type, and a jet in the clouds with quiet left-aligned type and hairline grid marks.</p>
-      <ol class="rec-list" style="margin-top:32px;">
+      <h2 class="section-h2 mt-label">Three directions, one shared system.</h2>
+      <p class="body mt-label">I designed three hero directions across two rounds, all built on the same updated navigation and copy, so the choice came down to imagery and typographic register: a grounded jet at golden hour with centered editorial type, an aerial over open water with oversized italic display type, and a jet in the clouds with quiet left-aligned type and hairline grid marks.</p>
+      <ol class="rec-list mt-media">
         <li>
           <div><img width="1730" height="894" loading="lazy" decoding="async" src="images/oxy/Style Tile A.webp" alt="Style Tile A" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
@@ -808,9 +786,9 @@
           <div><img width="1730" height="894" loading="lazy" decoding="async" src="images/oxy/Style Tile C.webp" alt="Style Tile C" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
       </ol>
-      <p class="body" style="margin-top:24px;">All three pulled from a 14-image AI library I art directed against AI's defaults (overlit, eager to impress) because with one real client, the imagery had to assume you already belonged there.</p>
-      <img width="1820" height="476" loading="lazy" decoding="async" src="images/oxy/Image Library.webp" alt="AI image library" style="width:100%;height:auto;display:block;margin-top:24px;" />
-      <p class="body" style="margin-top:24px;">Andrew and Spencer, Oxy's creative director, both landed on 1B, which Spencer called <span class="body-bold">the closest to the Oxy parent brand</span>: the same design system, but in a new register of restraint. That was the brief all along. Aero had to read as family, not as a departure.</p>
+      <p class="body mt-media">All three pulled from a 14-image AI library I art directed against AI's defaults (overlit, eager to impress) because with one real client, the imagery had to assume you already belonged there.</p>
+      <img width="1820" height="476" loading="lazy" decoding="async" src="images/oxy/Image Library.webp" alt="AI image library" class="mt-media" style="width:100%;height:auto;display:block;" />
+      <p class="body mt-media">Andrew and Spencer, Oxy's creative director, both landed on 1B, which Spencer called <span class="body-bold">the closest to the Oxy parent brand</span>: the same design system, but in a new register of restraint. That was the brief all along. Aero had to read as family, not as a departure.</p>
     </div>
   </section>
 
@@ -819,8 +797,8 @@
     <div class="container">
       <div class="what-i-learned">
         <span class="section-label">What I Learned</span>
-        <p style="margin-top:16px;font-family:var(--font-sans);font-size:var(--body-size);line-height:var(--body-lh);color:var(--text-body);">Amangiri wasn't an aesthetic. It was a standard. Luxury at that level doesn't explain itself.</p>
-        <p class="pullout-text" style="margin-top:24px;border-left:2px solid var(--accent);padding-left:16px;">You only learn that by looking at enough of the right references until the pattern becomes impossible to miss.</p>
+        <p class="mt-label" style="font-family:var(--font-sans);font-size:var(--body-size);line-height:var(--body-lh);color:var(--text-body);">Amangiri wasn't an aesthetic. It was a standard. Luxury at that level doesn't explain itself.</p>
+        <p class="pullout-text mt-elem" style="border-left:2px solid var(--accent);padding-left:16px;">You only learn that by looking at enough of the right references until the pattern becomes impossible to miss.</p>
       </div>
     </div>
   </section>

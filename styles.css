@@ -43,11 +43,18 @@
      body text stays in the narrow column, heroes and grids go wide. */
   --max-w: 780px;
   --max-wide: 1320px;
-  --section-h: 40px;
-  --section-v: 32px;
-  --label-gap: 16px;
-  --block-gap: 56px;
-  --elem-gap: 24px;
+
+  /* ── SPACING ──
+     Strict 8pt grid: every layout margin, padding and gap below is a multiple
+     of 8. The only sanctioned exceptions are optical corrections (the about
+     hero nudge), touch targets (44px) and fixed chrome (--nav-h, side-nav).
+     One token per relationship — pages must not redefine these. */
+  --section-h: 40px;         /* page gutter (side padding) */
+  --section-v: 32px;         /* section vertical padding → 64px between sections */
+  --label-gap: 16px;         /* section label → what follows (heading or body) */
+  --elem-gap: 24px;          /* element → element within a block */
+  --media-gap: 32px;         /* paragraph → its illustrating image/video */
+  --block-gap: 56px;         /* sub-block → sub-block within a section */
 
   /* ── FAMILIES ──
      Only the faces below exist in the kit. Anything else synthesises. */
@@ -274,6 +281,27 @@ img { width: auto; height: auto; }
   padding: 0 var(--section-h);
   box-sizing: border-box;
 }
+
+/* ==========================================================================
+   SPACING UTILITIES
+   One class per spacing token — use these instead of inline margin-top so
+   every page pulls the same rhythm from the tokens above.
+   ========================================================================== */
+
+.mt-label { margin-top: var(--label-gap); }
+.mt-elem  { margin-top: var(--elem-gap); }
+.mt-media { margin-top: var(--media-gap); }
+.mt-block { margin-top: var(--block-gap); }
+
+/* Frame for images that carry a transform:scale() crop. Scale doesn't affect
+   layout, so an unframed scaled image bleeds past its box and visually eats
+   the margin above it. The frame owns the gap and the radius; overflow:hidden
+   clips the bleed so the visual gap equals the layout gap. */
+.media-crop {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.media-crop > img { display: block; width: 100%; height: auto; }
 
 /* ==========================================================================
    NAV
@@ -762,22 +790,35 @@ footer {
 @media (max-width: 768px) {
   html, body { overflow-x: hidden; }
 
-  nav:not(.side-nav) { padding: 0 20px; }
+  /* Mobile spacing tokens — the single source for every page's mobile rhythm.
+     Pages must not redefine these in their own media queries. */
+  :root {
+    --section-h: 24px;
+    --section-v: 40px;
+    --block-gap: 40px;
+    --elem-gap: 16px;
+    --media-gap: 24px;
+  }
+
+  nav:not(.side-nav) { padding: 0 var(--section-h); }
   nav .nav-links { display: none; }
   .nav-toggle { display: block; }
 
-  .wide-inner, .container { padding-left: 20px; padding-right: 20px; }
+  .wide-inner, .container {
+    padding-left: var(--section-h);
+    padding-right: var(--section-h);
+  }
 
   footer { padding: 40px 0; }
   /* Stack the wordmark above the links once they can't share a row.
      Flush-left now instead of flush-right, so the inset flips sides. */
-  .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .footer-top { flex-direction: column; align-items: flex-start; gap: 24px; }
   .footer-nav {
-    gap: 4px 20px;
+    gap: 8px 24px;
     margin-left: calc(var(--nav-pad-h) * -1);
     margin-right: 0;
   }
-  .footer-copy { margin-top: 28px; }
+  .footer-copy { margin-top: 32px; }
 
   /* Prevent long words/URLs from overflowing */
   p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }

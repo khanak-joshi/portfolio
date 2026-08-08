@@ -45,7 +45,7 @@
     /* ── HERO ── */
     #hero {
       background: var(--bg);
-      padding-top: 100px;
+      padding-top: 104px;
       padding-bottom: var(--section-v);
     }
     @keyframes fadeUp {
@@ -73,7 +73,7 @@
       line-height: var(--h3-lh);
       letter-spacing: var(--h3-ls);
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
     }
     /* The hero film. This page runs the landscape cut of the film at every
        width — the hero always spans the full column here, and the upright cut
@@ -88,12 +88,12 @@
       object-fit: cover;
       background: var(--surface);
       border-radius: 2px;
-      margin-top: 28px;
+      margin-top: var(--media-gap);
     }
     #hero .hero-meta {
       display: flex;
       justify-content: space-between;
-      margin-top: 36px;
+      margin-top: 40px;
       padding-top: 24px;
     }
     /* Section Label */
@@ -118,13 +118,7 @@
     }
 
     /* ── SECTIONS SHARED ── */
-    :root {
-      --section-v: 32px;
-      --section-h: 40px;
-      --label-gap: 16px;
-      --block-gap: 56px;
-      --elem-gap: 24px;
-    }
+    /* Spacing tokens and .mt-* utilities live in styles.css. */
     section {
       padding: var(--section-v) 0;
     }
@@ -133,10 +127,6 @@
       display: block;
       margin-bottom: var(--label-gap);
     }
-    /* Utility classes pinned to variables */
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
     .decision-block { margin-top: var(--block-gap); }
     .decision-block:first-of-type { margin-top: 0; }
     .image-block { margin-top: var(--block-gap); }
@@ -162,7 +152,7 @@
       letter-spacing: var(--h4-ls);
       font-style: normal;
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
       margin-bottom: 16px;
     }
     /* Body Regular */
@@ -198,7 +188,7 @@
       font-size: var(--body-size);
       line-height: var(--body-lh);
       color: var(--text-body);
-      margin-top: 12px;
+      margin-top: var(--label-gap);
     }
 
     /* ── RESEARCH ── */
@@ -267,7 +257,7 @@
       border-radius: 16px;
       margin-top: 40px;
     }
-    .accent-band .section-label { margin-bottom: 20px; display: block; }
+    .accent-band .section-label { margin-bottom: var(--label-gap); display: block; }
     .accent-band img,
     .accent-band .img-placeholder {
       width: 100%;
@@ -281,7 +271,7 @@
       line-height: var(--body-lh);
       font-weight: var(--w-medium);
       color: var(--text-heading);
-      margin-bottom: 12px;
+      margin-bottom: var(--label-gap);
     }
 
     /* final designs grid */
@@ -373,7 +363,7 @@
     }
     .what-i-learned {
       background: var(--bg);
-      margin-top: 56px;
+      margin-top: var(--block-gap);
     }
     /* Pull Quote */
     .what-i-learned .pullout-text {
@@ -414,18 +404,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      margin-top: 12px;
+      margin-top: var(--media-gap);
     }
 
     /* ── DIVIDERS ── */
     .divider { height: 1px; background: var(--border); margin: 64px 0; }
 
     /* ── H2 spacing within sections ── */
-    .section-h2 { margin-top: 0; margin-bottom: 24px; }
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
-    .mt-16 { margin-top: var(--elem-gap); }
+    .section-h2 { margin-bottom: 24px; }
 
     @media (max-width: 768px) {
       /* ── GLOBAL ── */
@@ -434,26 +420,20 @@
 
 
       /* Layout */
-      :root { --section-v: 40px; --section-h: 20px; --block-gap: 36px; --elem-gap: 20px; }
+      /* Mobile spacing tokens come from styles.css */
       #overview .two-col { grid-template-columns: 1fr; }
       .testing-cols { grid-template-columns: 1fr; }
       .screen-grid { grid-template-columns: 1fr; }
 
       /* Nav */
       nav .nav-links { display: none; }
-      nav { padding: 0 20px; }
 
       /* Hero */
       #hero { padding-top: 72px; }
-      /* .hero-inner carries its own 40px gutter, so it misses the shared 20px
-         mobile override in styles.css and the hero sits inset from the body
-         text below it — reading as centred. Match the site gutter here so the
-         film starts on the same left edge and runs the full section width. */
-      #hero .hero-inner { padding-left: 20px; padding-right: 20px; }
       #hero .hero-meta {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 20px 16px !important;
+        gap: 24px 16px !important;
       }
 
       /* Typography is fluid via clamp() in styles.css — no overrides needed. */
@@ -475,20 +455,19 @@
 
       /* Quote cards hold their 2×2 here, capped below the desktop cell size
          (342px) so they shrink with the column instead of filling it. */
-      .quote-grid { max-width: 560px; gap: 12px; }
+      .quote-grid { max-width: 560px; gap: 16px; }
 
       /* What I learned */
-      .what-i-learned { padding: 32px 20px !important; }
+      .what-i-learned { padding: 32px 0 !important; }
 
       /* Footer */
       footer {
-        padding: 36px 20px !important;
+        padding: 40px var(--section-h) !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        margin-top: 60px;
+        margin-top: 64px;
       }
-      .footer-nav { gap: 20px 24px; padding-top: 28px; }
-      .footer-name { font-size: 15vw; margin-top: 20px; }
+      .footer-nav { gap: 8px 24px; padding-top: 32px; }
 
       /* Tap targets */
       nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
@@ -616,7 +595,7 @@
       <video class="hero-image" src="images/smile-donor/smile-donor-hero-stacked-web.mp4"
              autoplay muted loop playsinline preload="metadata"
              aria-label="Smile Donor donation flow"></video>
-      <h2 class="section-h2" style="margin-top:20px;">Redesigning a nonprofit website to close the gap between mission and trust</h2>
+      <h2 class="section-h2 mt-elem">Redesigning a nonprofit website to close the gap between mission and trust</h2>
 
       <!-- Four-column meta -->
       <div class="hero-meta">
@@ -654,17 +633,17 @@
     <div class="container">
       <span class="section-label">Research</span>
       <h2 class="section-h2">No data, no tracking, no baseline. Just donors.</h2>
-      <p class="body" style="margin-top:16px;">Before interviewing anyone, I tried to pull existing analytics from Smile Donor. They don't track any. <span class="body-bold">That absence was itself a finding</span> as every design decision on the current site had been made without data, and the redesign would need to be grounded entirely in qualitative research and competitive benchmarking.</p>
+      <p class="body mt-label">Before interviewing anyone, I tried to pull existing analytics from Smile Donor. They don't track any. <span class="body-bold">That absence was itself a finding</span> as every design decision on the current site had been made without data, and the redesign would need to be grounded entirely in qualitative research and competitive benchmarking.</p>
 
       <!-- User Interviews -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">User Interviews</span>
-        <p class="body" style="margin-top:12px;">I conducted four Zoom interviews with people who had donated to nonprofits online or seriously considered it. They didn't average into one donor. They revealed a spectrum: a time-conscious donor who needed the process under 60 seconds, a purpose-driven donor whose trust came from personal experience with a cause, a socially-motivated donor who gave because of relationships, and a verifier who visited organizations in person before ever giving online. A donation flow has to pass all four inspections at once, fast enough for the first, transparent enough for the last.</p>
-        <p class="body" style="margin-top:16px;">One finding cut across all four: <span class="body-bold">no user relied on a website to build trust. They arrived already skeptical, and the website was their last checkpoint, not their first reason to give.</span></p>
+        <p class="body mt-label">I conducted four Zoom interviews with people who had donated to nonprofits online or seriously considered it. They didn't average into one donor. They revealed a spectrum: a time-conscious donor who needed the process under 60 seconds, a purpose-driven donor whose trust came from personal experience with a cause, a socially-motivated donor who gave because of relationships, and a verifier who visited organizations in person before ever giving online. A donation flow has to pass all four inspections at once, fast enough for the first, transparent enough for the last.</p>
+        <p class="body mt-label">One finding cut across all four: <span class="body-bold">no user relied on a website to build trust. They arrived already skeptical, and the website was their last checkpoint, not their first reason to give.</span></p>
       </div>
 
       <!-- User Interview Quotes -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">User Interview Quotes</span>
         <div class="quote-grid">
           <img width="780" height="780" src="images/smile-donor/quote-user3.webp" alt="User 3 quote" style="width:100%;border-radius:12px;display:block;" />
@@ -672,53 +651,53 @@
           <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user4.webp" alt="User 4 quote" style="width:100%;border-radius:12px;display:block;" />
           <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user2.webp" alt="User 2 quote" style="width:100%;border-radius:12px;display:block;" />
         </div>
-        <p class="body" style="margin-top:24px;">Three of four users said too many steps led to abandonment. Three of four cited limited payment options as a barrier. Two of four pointed to lack of transparency about fund use, and two of four said the absence of a tax receipt or post-donation confirmation added to that frustration. <span class="body-bold">Trust was the number one factor</span> in deciding whether to donate, but <span class="body-bold">friction in the process was just as likely to kill a donation as distrust of the organization itself.</span></p>
+        <p class="body mt-media">Three of four users said too many steps led to abandonment. Three of four cited limited payment options as a barrier. Two of four pointed to lack of transparency about fund use, and two of four said the absence of a tax receipt or post-donation confirmation added to that frustration. <span class="body-bold">Trust was the number one factor</span> in deciding whether to donate, but <span class="body-bold">friction in the process was just as likely to kill a donation as distrust of the organization itself.</span></p>
       </div>
 
       <!-- Persona -->
       <div class="image-block">
         <span class="section-label">User Persona</span>
-        <p class="body" style="margin-top:12px;">I synthesized the four into a composite persona, Sara Reyes, for the thesis documentation. But the spectrum is the finding: four trust strategies, one flow that has to serve them all.</p>
-        <img width="1365" height="1500" loading="lazy" decoding="async" src="images/smile-donor/Joshi_340_HonorsPersona.webp" alt="User Persona" class="persona-img" style="width:75%;display:block;margin-top:20px;" />
+        <p class="body mt-label">I synthesized the four into a composite persona, Sara Reyes, for the thesis documentation. But the spectrum is the finding: four trust strategies, one flow that has to serve them all.</p>
+        <img width="1365" height="1500" loading="lazy" decoding="async" src="images/smile-donor/Joshi_340_HonorsPersona.webp" alt="User Persona" class="persona-img mt-media" style="width:75%;display:block;" />
       </div>
 
       <!-- Competitor analysis -->
-      <div class="mt-64">
+      <div class="mt-block">
         <span class="section-label">Competitor analysis and heuristic evaluation</span>
-        <h2 class="section-h2" style="margin-top:8px;">Hidden in plain text.</h2>
-        <p class="body" style="margin-top:16px;">I analyzed three established nonprofit sites, St. Jude, Feeding America, and Women for Women International, then evaluated the current Smile Donor site against Nielsen's usability heuristics. The competitor gap was stark: every competitor had preset donation amounts, multiple payment methods, third-party credibility badges, and named beneficiary stories.</p>
+        <h2 class="section-h2 mt-label">Hidden in plain text.</h2>
+        <p class="body mt-label">I analyzed three established nonprofit sites, St. Jude, Feeding America, and Women for Women International, then evaluated the current Smile Donor site against Nielsen's usability heuristics. The competitor gap was stark: every competitor had preset donation amounts, multiple payment methods, third-party credibility badges, and named beneficiary stories.</p>
 
-        <div style="margin-top:56px;">
+        <div class="mt-block">
           <span class="section-label">St. Jude</span>
-          <img width="896" height="140" loading="lazy" decoding="async" src="images/smile-donor/smile5.webp" alt="St. Jude" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
+          <img width="896" height="140" loading="lazy" decoding="async" src="images/smile-donor/smile5.webp" alt="St. Jude" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         </div>
 
-        <div style="margin-top:56px;">
+        <div class="mt-block">
           <span class="section-label">Feeding America</span>
-          <img width="900" height="279" loading="lazy" decoding="async" src="images/smile-donor/smile4.webp" alt="Feeding America" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
+          <img width="900" height="279" loading="lazy" decoding="async" src="images/smile-donor/smile4.webp" alt="Feeding America" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         </div>
 
-        <div style="margin-top:56px;">
+        <div class="mt-block">
           <span class="section-label">Women for Women International</span>
-          <img width="900" height="182" loading="lazy" decoding="async" src="images/smile-donor/smile3.webp" alt="Women for Women International" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
+          <img width="900" height="182" loading="lazy" decoding="async" src="images/smile-donor/smile3.webp" alt="Women for Women International" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         </div>
 
-        <p class="body body-bold" style="margin-top:56px;">Smile Donor had none of these. Its donation form was a single open text field redirecting to an external PayPal page. The form had:</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+        <p class="body body-bold mt-block">Smile Donor had none of these. Its donation form was a single open text field redirecting to an external PayPal page. The form had:</p>
+        <ul class="mt-label" style="list-style:none;display:flex;flex-direction:column;gap:16px;">
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No fund-use information</li>
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No trust signals</li>
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No receipt confirmation language</li>
         </ul>
-        <img width="900" height="401" loading="lazy" decoding="async" src="images/smile-donor/smile2.webp" alt="Smile Donor current site" style="max-width:360px;width:100%;height:auto;display:block;margin-top:24px;" />
-        <p class="body" style="margin-top:24px;">The heuristic evaluation sharpened that finding. Smile Donor's strongest trust-building content, its 501(c)(3) status, 0% overhead model, vetting process, and project stories, already existed on the site. It was hidden in long body text and just wasn't where donors needed it. A first-time visitor going straight to the donation form would <span class="body-bold">encounter none of it.</span></p>
-        <img width="900" height="950" loading="lazy" decoding="async" src="images/smile-donor/smile1.webp" alt="Smile Donor heuristic evaluation" style="max-width:360px;width:100%;height:auto;display:block;margin-top:24px;" />
-        <p class="body" style="margin-top:24px;">One opportunity emerged that no competitor had addressed: none allowed donors to direct their gift to a specific cause despite showing detailed cause content. Smile Donor already had that content. <span class="body-bold">Directed giving could be a meaningful differentiator.</span></p>
+        <img width="900" height="401" loading="lazy" decoding="async" src="images/smile-donor/smile2.webp" alt="Smile Donor current site" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
+        <p class="body mt-media">The heuristic evaluation sharpened that finding. Smile Donor's strongest trust-building content, its 501(c)(3) status, 0% overhead model, vetting process, and project stories, already existed on the site. It was hidden in long body text and just wasn't where donors needed it. A first-time visitor going straight to the donation form would <span class="body-bold">encounter none of it.</span></p>
+        <img width="900" height="950" loading="lazy" decoding="async" src="images/smile-donor/smile1.webp" alt="Smile Donor heuristic evaluation" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
+        <p class="body mt-media">One opportunity emerged that no competitor had addressed: none allowed donors to direct their gift to a specific cause despite showing detailed cause content. Smile Donor already had that content. <span class="body-bold">Directed giving could be a meaningful differentiator.</span></p>
       </div>
 
       <div class="image-block">
         <span class="section-label">Proposed Sitemap</span>
-        <p class="body" style="margin-top:12px;">To bridge research and redesign, I mapped a proposed information architecture and a set of prioritized fixes. The donation flow needed the most work: preset amounts, multiple payment methods, fund-use transparency, and post-donation confirmation were all missing. Smile Donor's existing credibility content needed to move to <span class="body-bold">where donors are actually deciding</span>, not buried elsewhere on the site. Directed giving was scoped as a medium-priority differentiator once the foundation was in place.</p>
-        <img width="1820" height="1196" loading="lazy" decoding="async" src="images/smile-donor/Smile Donor, Sitemap.webp" alt="Proposed Sitemap" style="width:100%;height:auto;display:block;margin-top:20px;" />
+        <p class="body mt-label">To bridge research and redesign, I mapped a proposed information architecture and a set of prioritized fixes. The donation flow needed the most work: preset amounts, multiple payment methods, fund-use transparency, and post-donation confirmation were all missing. Smile Donor's existing credibility content needed to move to <span class="body-bold">where donors are actually deciding</span>, not buried elsewhere on the site. Directed giving was scoped as a medium-priority differentiator once the foundation was in place.</p>
+        <img width="1820" height="1196" loading="lazy" decoding="async" src="images/smile-donor/Smile Donor, Sitemap.webp" alt="Proposed Sitemap" class="mt-media" style="width:100%;height:auto;display:block;" />
       </div>
     </div>
   </section>
@@ -728,10 +707,10 @@
   <section id="whats-next">
     <div class="container">
       <span class="section-label">What's Next</span>
-      <h2 class="section-h2" style="margin-top:8px;">Right content, wrong place.</h2>
-      <p class="body" style="margin-top:16px;">The design phase starts with the donation flow, because that's where the research says donations die. The first pass rebuilds the form around the four things every competitor had and Smile Donor didn't. <span class="body-bold">Credibility content moves to the decision moment:</span> 0% overhead and the vetting process belong next to the donate button, not buried in body text. Directed giving follows once the foundation holds.</p>
-      <p class="body" style="margin-top:16px;">Because Smile Donor tracks nothing, the redesign will also propose what to start measuring: donation completion rate, drop-off points in the form, and traffic to credibility content. <span class="body-bold">The current site was designed in the dark. The next one shouldn't be.</span></p>
-      <p class="body" style="margin-top:16px;">I'll test the redesigned flow with donors against the current site, with the thesis defense in spring 2027.</p>
+      <h2 class="section-h2 mt-label">Right content, wrong place.</h2>
+      <p class="body mt-label">The design phase starts with the donation flow, because that's where the research says donations die. The first pass rebuilds the form around the four things every competitor had and Smile Donor didn't. <span class="body-bold">Credibility content moves to the decision moment:</span> 0% overhead and the vetting process belong next to the donate button, not buried in body text. Directed giving follows once the foundation holds.</p>
+      <p class="body mt-label">Because Smile Donor tracks nothing, the redesign will also propose what to start measuring: donation completion rate, drop-off points in the form, and traffic to credibility content. <span class="body-bold">The current site was designed in the dark. The next one shouldn't be.</span></p>
+      <p class="body mt-label">I'll test the redesigned flow with donors against the current site, with the thesis defense in spring 2027.</p>
     </div>
   </section>
 

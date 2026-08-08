@@ -45,7 +45,7 @@
     /* ── HERO ── */
     #hero {
       background: var(--bg);
-      padding-top: 100px;
+      padding-top: 104px;
       padding-bottom: var(--section-v);
     }
     @keyframes fadeUp {
@@ -73,7 +73,7 @@
       line-height: var(--h3-lh);
       letter-spacing: var(--h3-ls);
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
     }
     /* The hero film. This page runs the landscape cut of the film at every
        width — the hero always spans the full column here, and the upright cut
@@ -88,13 +88,13 @@
       object-fit: cover;
       background: var(--surface);
       border-radius: 2px;
-      margin-top: 28px;
+      margin-top: var(--media-gap);
     }
     #hero .hero-meta {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 0;
-      margin-top: 36px;
+      margin-top: 40px;
       padding-top: 24px;
     }
     /* Section Label */
@@ -119,13 +119,7 @@
     }
 
     /* ── SECTIONS SHARED ── */
-    :root {
-      --section-v: 32px;
-      --section-h: 40px;
-      --label-gap: 16px;
-      --block-gap: 56px;
-      --elem-gap: 24px;
-    }
+    /* Spacing tokens and .mt-* utilities live in styles.css. */
     section {
       padding: var(--section-v) 0;
     }
@@ -134,10 +128,6 @@
       display: block;
       margin-bottom: var(--label-gap);
     }
-    /* Utility classes pinned to variables */
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
     .decision-block { margin-top: var(--block-gap); }
     .decision-block:first-of-type { margin-top: 0; }
     .image-block { margin-top: var(--block-gap); }
@@ -152,7 +142,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      margin-top: 12px;
+      margin-top: var(--media-gap);
       margin-left: -16px;
     }
 
@@ -177,7 +167,7 @@
       letter-spacing: var(--h4-ls);
       font-style: normal;
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: var(--label-gap);
       margin-bottom: 16px;
     }
     /* Body Regular */
@@ -213,7 +203,7 @@
       font-size: var(--body-size);
       line-height: var(--body-lh);
       color: var(--text-body);
-      margin-top: 12px;
+      margin-top: var(--label-gap);
     }
 
     /* ── RESEARCH ── */
@@ -303,7 +293,7 @@
       border-radius: 16px;
       margin-top: 40px;
     }
-    .accent-band .section-label { margin-bottom: 20px; display: block; }
+    .accent-band .section-label { margin-bottom: var(--label-gap); display: block; }
     .accent-band img,
     .accent-band .img-placeholder {
       width: 100%;
@@ -317,7 +307,7 @@
       line-height: var(--body-lh);
       font-weight: var(--w-medium);
       color: var(--text-heading);
-      margin-bottom: 12px;
+      margin-bottom: var(--label-gap);
     }
 
     /* final designs grid */
@@ -409,7 +399,7 @@
     }
     .what-i-learned {
       background: var(--bg);
-      margin-top: 56px;
+      margin-top: var(--block-gap);
     }
     /* Pull Quote */
     .what-i-learned .pullout-text {
@@ -445,11 +435,7 @@
     .divider { height: 1px; background: var(--border); margin: 64px 0; }
 
     /* ── H2 spacing within sections ── */
-    .section-h2 { margin-top: 0; margin-bottom: 24px; }
-    .mt-64 { margin-top: var(--block-gap); }
-    .mt-40 { margin-top: var(--block-gap); }
-    .mt-24 { margin-top: var(--elem-gap); }
-    .mt-16 { margin-top: var(--elem-gap); }
+    .section-h2 { margin-bottom: 24px; }
 
     @media (max-width: 768px) {
       /* ── GLOBAL ── */
@@ -458,26 +444,20 @@
 
 
       /* Layout */
-      :root { --section-v: 40px; --section-h: 20px; --block-gap: 36px; --elem-gap: 20px; }
+      /* Mobile spacing tokens come from styles.css */
       #overview .two-col { grid-template-columns: 1fr; }
       .testing-cols { grid-template-columns: 1fr; }
       .screen-grid { grid-template-columns: 1fr; }
 
       /* Nav */
       nav .nav-links { display: none; }
-      nav { padding: 0 20px; }
 
       /* Hero */
       #hero { padding-top: 72px; }
-      /* .hero-inner carries its own 40px gutter, so it misses the shared 20px
-         mobile override in styles.css and the hero sits inset from the body
-         text below it — reading as centred. Match the site gutter here so the
-         film starts on the same left edge and runs the full section width. */
-      #hero .hero-inner { padding-left: 20px; padding-right: 20px; }
       #hero .hero-meta {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 20px 16px !important;
+        gap: 24px 16px !important;
       }
 
       /* Typography is fluid via clamp() in styles.css — no overrides needed. */
@@ -501,7 +481,7 @@
          (342px) so they shrink with the column instead of filling it. The pull
          tracks the board's own whitespace (~4% of the artwork), so it comes
          down with the render width or the notes hang past the text edge. */
-      .empathy-grid { max-width: 560px; gap: 12px; margin-left: -12px; }
+      .empathy-grid { max-width: 560px; gap: 16px; margin-left: -16px; }
 
       /* Phone mockups: at full column width each one towers over the paragraph
          explaining it. The stacked layout is untouched — only the size comes
@@ -524,13 +504,12 @@
 
       /* Footer */
       footer {
-        padding: 36px 20px !important;
+        padding: 40px var(--section-h) !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        margin-top: 60px;
+        margin-top: 64px;
       }
-      .footer-nav { gap: 20px 24px; padding-top: 28px; }
-      .footer-name { font-size: 15vw; margin-top: 20px; }
+      .footer-nav { gap: 8px 24px; padding-top: 32px; }
 
       /* Tap targets */
       nav .nav-links a, .side-nav a, footer a { min-height: 44px; display: flex; align-items: center; }
@@ -666,7 +645,7 @@
       <video class="hero-image" src="images/find-my-size/find-my-size-hero-stacked-web.mp4"
              autoplay muted loop playsinline preload="metadata"
              aria-label="Find My Size sizing flow"></video>
-      <h2 class="section-h2" style="margin-top:20px;">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer</h2>
+      <h2 class="section-h2 mt-elem">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer</h2>
 
       <!-- Four-column meta -->
       <div class="hero-meta">
@@ -704,10 +683,10 @@
     <div class="container">
       <span class="section-label">Research</span>
       <h2 class="section-h2">The anxiety lives before the package, not after.</h2>
-      <p class="body" style="margin-top:16px;">Both users I interviewed felt the most stress <span class="body-bold">before</span> purchasing, not after the package arrived. That single finding shaped the entire project.</p>
+      <p class="body mt-label">Both users I interviewed felt the most stress <span class="body-bold">before</span> purchasing, not after the package arrived. That single finding shaped the entire project.</p>
 
       <!-- User Interview Quotes -->
-      <div style="margin-top:56px;">
+      <div class="mt-block">
         <span class="section-label">User Interview Quotes</span>
         <div class="empathy-grid">
           <img width="875" height="875" src="images/find-my-size/empathy-map-1.webp" alt="Empathy map 1" style="width:100%;border-radius:12px;display:block;" />
@@ -718,22 +697,22 @@
       <!-- Persona -->
       <div class="image-block">
         <span class="section-label">User Persona</span>
-        <p class="body" style="margin-top:12px;">I synthesized both interviews into a composite shopper. She loves the convenience and dreads the guesswork. That tension, not a demographic profile, is what the design had to resolve.</p>
-        <img width="1365" height="1424" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Persona_2.webp" alt="User Persona" class="persona-img" style="width:75%;display:block;margin-top:20px;" />
+        <p class="body mt-label">I synthesized both interviews into a composite shopper. She loves the convenience and dreads the guesswork. That tension, not a demographic profile, is what the design had to resolve.</p>
+        <img width="1365" height="1424" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Persona_2.webp" alt="User Persona" class="persona-img mt-media" style="width:75%;display:block;" />
       </div>
 
       <!-- Journey Map -->
       <div class="image-block">
         <span class="section-label">Journey Map</span>
-        <p class="body" style="margin-top:12px;">Emotion stays neutral through browsing, then drops sharply at Compare & Decide, the exact moment she's weighing whether the sizing risk is worth it. Once she commits, mood recovers immediately. The problem isn't the order; <span class="body-bold">it's the decision before it.</span> That dip became the design target.</p>
-        <img width="1820" height="816" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_JourneyMap.webp" alt="Journey Map" style="width:100%;display:block;margin-top:16px;" />
+        <p class="body mt-label">Emotion stays neutral through browsing, then drops sharply at Compare & Decide, the exact moment she's weighing whether the sizing risk is worth it. Once she commits, mood recovers immediately. The problem isn't the order; <span class="body-bold">it's the decision before it.</span> That dip became the design target.</p>
+        <img width="1820" height="816" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_JourneyMap.webp" alt="Journey Map" class="mt-media" style="width:100%;display:block;" />
       </div>
 
       <!-- Competitor analysis -->
-      <div class="mt-64">
+      <div class="mt-block">
         <span class="section-label">Competitor analysis and heuristic evaluation</span>
-        <h2 class="section-h2" style="margin-top:8px;">The same gap, across every tool.</h2>
-        <p class="body" style="margin-top:16px;">I analyzed three existing sizing tools, PacSun's True Fit integration, Aritzia's size chart, and Fytted, then conducted a heuristic evaluation of Aritzia's full shopping flow.</p>
+        <h2 class="section-h2 mt-label">The same gap, across every tool.</h2>
+        <p class="body mt-label">I analyzed three existing sizing tools, PacSun's True Fit integration, Aritzia's size chart, and Fytted, then conducted a heuristic evaluation of Aritzia's full shopping flow.</p>
 
         <div class="comp-logos">
           <img width="363" height="120" loading="lazy" decoding="async" src="images/find-my-size/true-fit-logo.webp" alt="True Fit" style="height:48px;object-fit:contain;" />
@@ -741,8 +720,8 @@
           <img width="120" height="120" loading="lazy" decoding="async" src="images/find-my-size/fytted-logo.webp" alt="Fytted" style="height:48px;object-fit:contain;" />
         </div>
 
-        <p class="body body-bold" style="margin-top:56px;">Each had real strengths. But the gap was consistent across all three:</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+        <p class="body body-bold mt-block">Each had real strengths. But the gap was consistent across all three:</p>
+        <ul class="mt-label" style="list-style:none;display:flex;flex-direction:column;gap:16px;">
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>None explained how a recommendation was generated</li>
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>None tied fit-related social proof directly to the sizing decision moment</li>
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>None addressed return anxiety within the sizing experience itself</li>
@@ -756,7 +735,7 @@
   <section id="hmw-band">
     <div class="container">
       <span class="section-label">How might we</span>
-      <p style="font-family:var(--font-serif);font-style:italic;font-size:var(--quote-size);line-height:var(--quote-lh);letter-spacing:var(--quote-ls);color:var(--text-heading);margin-top:8px;font-weight:400;">Help online shoppers trust a size recommendation enough to buy with confidence without asking them to leave the product page to get one?</p>
+      <p style="font-family:var(--font-serif);font-style:italic;font-size:var(--quote-size);line-height:var(--quote-lh);letter-spacing:var(--quote-ls);color:var(--text-heading);font-weight:400;" class="mt-label">Help online shoppers trust a size recommendation enough to buy with confidence without asking them to leave the product page to get one?</p>
     </div>
   </section>
 
@@ -767,38 +746,38 @@
 
       <!-- Concept + task flow -->
       <h2 class="section-h2">Embedded, not extracted.</h2>
-      <p class="body" style="margin-top:16px;"><span class="body-bold">The dip at Compare & Decide was the brief.</span> Every design decision that followed was an answer to the same question: what does a shopper need at that exact moment to feel confident enough to commit?</p>
-      <span class="section-label" style="display:block;margin-top:56px;">Task Flow</span>
-      <img width="1880" height="1301" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Task_flow.webp" alt="Task Flow" style="width:calc(100% + 24px);max-width:none;display:block;margin-top:12px;margin-left:-24px;" />
+      <p class="body mt-label"><span class="body-bold">The dip at Compare & Decide was the brief.</span> Every design decision that followed was an answer to the same question: what does a shopper need at that exact moment to feel confident enough to commit?</p>
+      <span class="section-label mt-block">Task Flow</span>
+      <img width="1880" height="1301" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Task_flow.webp" alt="Task Flow" class="mt-media" style="width:calc(100% + 24px);max-width:none;display:block;margin-left:-24px;" />
 
       <!-- Sketches to hi-fi -->
-      <div class="mt-64">
+      <div class="mt-block">
         <span class="section-label">From sketches to hi-fi</span>
-        <img width="1820" height="942" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Wireframe copy.webp" alt="Paper Sketches" style="width:100%;max-width:100%;display:block;margin-top:16px;" />
+        <img width="1820" height="942" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Wireframe copy.webp" alt="Paper Sketches" class="mt-media" style="width:100%;max-width:100%;display:block;" />
       </div>
 
       <!-- Key design decisions -->
-      <div class="mt-64 decisions">
+      <div class="mt-block decisions">
         <span class="section-label">Key design decisions</span>
-        <p class="body" style="margin-top:12px;">Find My Size lives directly above the size selector on the product page: <span class="body-bold">no app download, no account, no body scan.</span> I considered a standalone app like Fytted, but separating the tool from checkout breaks the exact moment the journey map identified. Keeping it embedded wasn't just simpler, it was the right answer to the HMW.</p>
-        <img width="1383" height="1386" loading="lazy" decoding="async" src="images/find-my-size/product-page.webp" alt="Product page" style="width:100%;height:auto;display:block;margin-top:24px;" />
+        <p class="body mt-label">Find My Size lives directly above the size selector on the product page: <span class="body-bold">no app download, no account, no body scan.</span> I considered a standalone app like Fytted, but separating the tool from checkout breaks the exact moment the journey map identified. Keeping it embedded wasn't just simpler, it was the right answer to the HMW.</p>
+        <img width="1383" height="1386" loading="lazy" decoding="async" src="images/find-my-size/product-page.webp" alt="Product page" class="mt-media" style="width:100%;height:auto;display:block;" />
 
-        <div style="margin-top:56px;">
+        <div class="mt-block">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
             <div class="text-above-img">
               <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i1.webp" alt="Iteration 1" style="width:100%;height:auto;display:block;" />
-              <p class="body body-bold" style="margin-top:16px;">Progressive disclosure on the form</p>
+              <p class="body body-bold mt-label">Progressive disclosure on the form</p>
               <p class="body" style="margin-top:8px;">Height, weight, and fit preference are asked upfront, which is the minimum for a useful recommendation. Body measurements live in a collapsible section and usual size is an added field, keeping the experience light while giving detail-oriented users a path to more accuracy.</p>
             </div>
             <div class="text-above-img">
               <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i2.webp" alt="Iteration 2" style="width:100%;height:auto;display:block;" />
-              <p class="body body-bold" style="margin-top:16px;">Progress bar over step counter</p>
+              <p class="body body-bold mt-label">Progress bar over step counter</p>
               <p class="body" style="margin-top:8px;">An earlier iteration used a step counter. I replaced it with a progress bar: it communicates progress made rather than work remaining, which is the gentler frame for a form you want people to finish.</p>
             </div>
           </div>
         </div>
 
-        <div style="margin-top:56px;">
+        <div class="mt-block">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
             <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/opt-measurements.webp" alt="Visual hierarchy" style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
@@ -808,7 +787,7 @@
           </div>
         </div>
 
-        <div style="margin-top:56px;">
+        <div class="mt-block">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
             <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/help-modal.webp" alt="Inline measurement guides" style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
@@ -818,7 +797,7 @@
           </div>
         </div>
 
-        <div class="decision-block mt-40">
+        <div class="decision-block">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
             <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/rec-screen.webp" alt="Recommendation screen" style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
@@ -835,10 +814,10 @@
   <section id="testing">
     <div class="container">
       <span class="section-label">Testing</span>
-      <h2 class="section-h2" style="margin-top:8px;">What worked, what didn't, and what it means.</h2>
-      <p class="body" style="margin-top:16px;margin-bottom:56px;">I tested the Figma Make prototype in person with two participants who shopped online monthly on mobile and had returned items due to sizing before, different from the research interviewees.</p>
+      <h2 class="section-h2 mt-label">What worked, what didn't, and what it means.</h2>
+      <p class="body mt-label" style="margin-bottom:56px;">I tested the Figma Make prototype in person with two participants who shopped online monthly on mobile and had returned items due to sizing before, different from the research interviewees.</p>
 
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
         <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--pos);font-weight:600;flex-shrink:0;">✓</span>Both users found Find My Size independently within 10 seconds</li>
         <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--pos);font-weight:600;flex-shrink:0;">✓</span>Both rated ease of use 5/5 and post-recommendation confidence 4/5 and 5/5</li>
         <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--pos);font-weight:600;flex-shrink:0;">✓</span>The model height callout and return reassurance were noticed unprompted — the right details in the right places</li>
@@ -849,16 +828,16 @@
 
       <div style="margin-top:32px;">
         <span class="section-label">Did the recommendation screen actually build trust?</span>
-        <p class="body" style="margin-top:12px;">The scores say yes: both users entered only somewhat confident about sizing at new stores and left at 4/5 and 5/5. But they got there differently. User 2 spent 42 seconds on the recommendation screen and credited the measurements she'd entered, not the social proof. User 1 dismissed the same screen in 5 seconds, too fast to absorb the social proof at all. Transparency worked, just not the way I designed it: <span class="body-bold">the trust-builder was input visibility, and the two users split into a verifier and a skimmer.</span></p>
-        <p class="body" style="margin-top:16px;"><span class="body-bold">One score complicates the win.</span> User 2, the most confident user, rated herself only 3/5 on using a feature like this again. Thoroughness bought confidence at a cost she wasn't sure she'd pay twice. The form has to stay light.</p>
+        <p class="body mt-label">The scores say yes: both users entered only somewhat confident about sizing at new stores and left at 4/5 and 5/5. But they got there differently. User 2 spent 42 seconds on the recommendation screen and credited the measurements she'd entered, not the social proof. User 1 dismissed the same screen in 5 seconds, too fast to absorb the social proof at all. Transparency worked, just not the way I designed it: <span class="body-bold">the trust-builder was input visibility, and the two users split into a verifier and a skimmer.</span></p>
+        <p class="body mt-label"><span class="body-bold">One score complicates the win.</span> User 2, the most confident user, rated herself only 3/5 on using a feature like this again. Thoroughness bought confidence at a cost she wasn't sure she'd pay twice. The form has to stay light.</p>
       </div>
 
-      <div class="testing-shots" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
+      <div class="testing-shots mt-media" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/testing-1.webp" alt="Testing 1" style="width:100%;height:auto;display:block;" />
         <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/testing-2.webp" alt="Testing 2" style="width:100%;height:auto;display:block;" />
       </div>
 
-      <div class="recommendations" style="margin-top:56px;">
+      <div class="recommendations">
         <p class="decision-title" style="margin-bottom:32px;">Recommendations for Next Iteration</p>
         <ol class="rec-list">
           <li>Add microcopy to the Select Size CTA clarifying it auto-applies the recommended size.</li>
@@ -874,9 +853,9 @@
   <section id="outcome">
     <div class="container">
       <span class="section-label">Outcome</span>
-      <h2 class="section-h2" style="margin-top:8px;">The concept worked. The details showed us where to go next.</h2>
-      <p class="body" style="margin-top:16px;"><span class="body-bold">The friction points are the finding.</span> Both users completed the full flow without guidance. But the friction points that surfaced are the most valuable part of the test. Each one points to a specific, distinct problem: an affordance gap, a visual hierarchy failure, and an IA issue that lives upstream of the feature itself.</p>
-      <p class="body" style="margin-top:24px;"><span class="body-bold">A note on scale.</span> This project was built on two interviews and two usability sessions. That's enough to see how trust forms, not enough to prove it generalizes. A larger study would test whether input visibility beats social proof and whether the tool actually reduces returns. <span class="body-bold">The next step isn't more design. It's more research.</span></p>
+      <h2 class="section-h2 mt-label">The concept worked. The details showed us where to go next.</h2>
+      <p class="body mt-label"><span class="body-bold">The friction points are the finding.</span> Both users completed the full flow without guidance. But the friction points that surfaced are the most valuable part of the test. Each one points to a specific, distinct problem: an affordance gap, a visual hierarchy failure, and an IA issue that lives upstream of the feature itself.</p>
+      <p class="body mt-media"><span class="body-bold">A note on scale.</span> This project was built on two interviews and two usability sessions. That's enough to see how trust forms, not enough to prove it generalizes. A larger study would test whether input visibility beats social proof and whether the tool actually reduces returns. <span class="body-bold">The next step isn't more design. It's more research.</span></p>
 
     </div>
   </section>
@@ -885,8 +864,8 @@
     <div class="container">
       <div class="what-i-learned">
         <span class="section-label">What I Learned</span>
-        <p style="margin-top:16px;font-family:var(--font-sans);font-size:var(--body-size);line-height:var(--body-lh);color:var(--text-body);">I designed a help icon assuming users would notice it. One user asked aloud how to measure her bust instead. That single moment taught me more about visual hierarchy than two rounds of iteration did.</p>
-        <p style="margin-top:24px;margin-left:0;font-family:var(--font-serif);font-style:italic;font-size:var(--quote-size);line-height:var(--quote-lh);letter-spacing:var(--quote-ls);color:var(--text-heading);border-left:2px solid var(--accent);padding-left:16px;">The details you're most confident about are the ones worth testing first.</p>
+        <p class="mt-label" style="font-family:var(--font-sans);font-size:var(--body-size);line-height:var(--body-lh);color:var(--text-body);">I designed a help icon assuming users would notice it. One user asked aloud how to measure her bust instead. That single moment taught me more about visual hierarchy than two rounds of iteration did.</p>
+        <p class="mt-elem" style="margin-left:0;font-family:var(--font-serif);font-style:italic;font-size:var(--quote-size);line-height:var(--quote-lh);letter-spacing:var(--quote-ls);color:var(--text-heading);border-left:2px solid var(--accent);padding-left:16px;">The details you're most confident about are the ones worth testing first.</p>
       </div>
     </div>
   </section>
