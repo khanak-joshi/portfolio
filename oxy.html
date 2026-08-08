@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="side-nav.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
@@ -491,7 +492,7 @@
       padding: 40px 0 40px 32px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
       overflow-y: auto;
       overflow-x: visible;
       z-index: 50;
@@ -500,10 +501,10 @@
       font-family: var(--font-sans);
       font-size: var(--nav-size);
       font-weight: var(--w-regular);
-      color: var(--text-label);
+      color: var(--text-body);
       text-decoration: none;
       line-height: 1.4;
-      padding: 4px 0;
+      padding: 3px 0;
       transition: color 0.2s;
       border-left: 2px solid transparent;
       padding-left: 12px;
@@ -514,12 +515,12 @@
       display: flex;
       align-items: center;
       gap: var(--nav-arrow-gap);
-      color: var(--text-label) !important;
-      margin-bottom: 24px;
+      color: var(--text-body) !important;
+      margin-bottom: 16px;
     }
     .side-nav-back:hover { color: var(--accent) !important; }
     .side-nav a.active {
-      color: var(--text-heading);
+      color: var(--text-body);
       font-weight: 500;
       border-left-color: var(--accent);
     }
@@ -531,8 +532,8 @@
       font-family: var(--font-sans);
       font-size: var(--nav-size);
       font-weight: var(--w-medium);
-      color: var(--text-heading);
-      padding: 8px 0 2px 12px;
+      color: var(--text-body);
+      padding: 12px 0 2px 12px;
       margin-left: -12px;
       border-left: 2px solid transparent;
       cursor: default;
@@ -569,7 +570,7 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
       <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
@@ -581,7 +582,7 @@
     </div>
     <nav class="mobile-nav-links">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
@@ -664,9 +665,9 @@
       <span class="section-label">Moodboard</span>
       <h2 class="section-h2" style="margin-top:12px;">Round one missed. The miss is what taught me.</h2>
       <p class="body" style="margin-top:12px;">I wasn't on the discovery call, so the first three moodboards came from sticky notes and fragments. None of them felt like her, and she said so. Warm Authority came closest, but she wanted more color, more plant life, and more play. <span class="body-bold">Hearing her talk through the gap gave me what the notes never could.</span></p>
-      <img src="images/oxy/Moodboard SM.png" alt="Moodboard SM" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="1024" src="images/oxy/Moodboard SM.webp" alt="Moodboard SM" style="width:100%;height:auto;display:block;margin-top:24px;" />
       <p class="body" style="margin-top:24px;">Round two pushed exactly there. Bright Authority turned the color up: jewel tones, saturated portraiture, botanicals rendered like stained glass. She called it the perfect combination of playful, expert, and relatable, which was the exact tension the brief had been circling.</p>
-      <img src="images/oxy/Moodboard SM 2.png" alt="Moodboard SM 2" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/Moodboard SM 2.webp" alt="Moodboard SM 2" style="width:100%;height:auto;display:block;margin-top:24px;" />
     </div>
   </section>
 
@@ -676,9 +677,9 @@
       <span class="section-label">Identity System</span>
       <h2 class="section-h2" style="margin-top:12px;">The name was already the logo.</h2>
       <p class="body" style="margin-top:12px;">Sadasia's name was made up, given with intention, and built to go far. I tested five treatments in high-contrast editorial serifs and <span class="body-bold">let the letterforms carry the identity.</span></p>
-      <img src="images/oxy/logotype.png" alt="Sadasia McCutchen logotype treatments" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="1334" loading="lazy" decoding="async" src="images/oxy/logotype.webp" alt="Sadasia McCutchen logotype treatments" style="width:100%;height:auto;display:block;margin-top:24px;" />
       <p class="body" style="margin-top:24px;">Romie carries the whole site as she wanted one voice throughout, so range comes from weight and italics rather than a second typeface. The palette of linen, wine, chartreuse, terracotta, and sky holds jewel tones without going heavy. Two marks grouped together round it out: a key, because opening doors for people is what she actually does, and a flower, from her love of fragrance and plants.</p>
-      <img src="images/oxy/identity-system.png" alt="Sadasia McCutchen identity system" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/identity-system.webp" alt="Sadasia McCutchen identity system" style="width:100%;height:auto;display:block;margin-top:24px;" />
     </div>
   </section>
 
@@ -688,9 +689,9 @@
       <span class="section-label">Wireframes</span>
       <h2 class="section-h2" style="margin-top:12px;">Eight pages, three rounds. One did the hard thinking.</h2>
       <p class="body" style="margin-top:12px;">I wireframed all eight pages across three rounds, each adding real imagery so stakeholders could picture the site. On an image-dependent site, if a client can't picture the page, the wireframe hasn't done its job.</p>
-      <img src="images/oxy/wireframes.jpg" alt="Sadasia McCutchen wireframes" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="889" loading="lazy" decoding="async" src="images/oxy/wireframes.webp" alt="Sadasia McCutchen wireframes" style="width:100%;height:auto;display:block;margin-top:24px;" />
       <p class="body" style="margin-top:24px;">The Library was the structural problem: It was the only commerce surface, with products not yet final, so the structure had to flex. The Foyer and Parlor carried positioning weight; <span class="body-bold">the Library had to carry uncertainty.</span></p>
-      <img src="images/oxy/library-wireframe.jpg" alt="Sadasia McCutchen Library page wireframe" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="2055" loading="lazy" decoding="async" src="images/oxy/library-wireframe.webp" alt="Sadasia McCutchen Library page wireframe" style="width:100%;height:auto;display:block;margin-top:24px;" />
     </div>
   </section>
 
@@ -700,7 +701,7 @@
       <span class="section-label">Choose a Room</span>
       <h2 class="section-h2" style="margin-top:12px;">Navigation had to prove the concept.</h2>
       <p class="body" style="margin-top:12px;">The rooms have to work as navigation before they work as anything else, so I designed three versions. A short dropdown gave visitors no reason to believe the rooms were real; a modal floor plan asked people to read a layout before they could go anywhere. The long dropdown shows each room with an image and description so <span class="body-bold">you see the room before you enter it.</span> Sadasia chose it, and it's the version I'd have argued for. I art directed AI interior imagery for all four rooms in the brand's jewel tones so they read as part of the site.</p>
-      <img src="images/oxy/nav.jpg" alt="Sadasia McCutchen navigation options" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="3717" loading="lazy" decoding="async" src="images/oxy/nav.webp" alt="Sadasia McCutchen navigation options" style="width:100%;height:auto;display:block;margin-top:24px;" />
     </div>
   </section>
 
@@ -713,13 +714,13 @@
       <p class="body" style="margin-top:16px;">1A hid her portrait below the fold on a site where she's the reason anyone visits; 1B put her name above her when the point is what she does with it. 1C frames the portrait inside an arch to resemble a doorway, so the room concept shows up in the structure of the page. Sadasia chose 1C.</p>
       <ol class="rec-list" style="margin-top:32px;">
         <li>
-          <div><img src="images/oxy/Style Tile A SM.png" alt="Style Tile A" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+          <div><img width="1730" height="962" loading="lazy" decoding="async" src="images/oxy/Style Tile A SM.webp" alt="Style Tile A" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
         <li>
-          <div><img src="images/oxy/Style Tile B SM.png" alt="Style Tile B" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+          <div><img width="1730" height="923" loading="lazy" decoding="async" src="images/oxy/Style Tile B SM.webp" alt="Style Tile B" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
         <li>
-          <div><img src="images/oxy/Style Tile C SM.png" alt="Style Tile C" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+          <div><img width="1730" height="1010" loading="lazy" decoding="async" src="images/oxy/Style Tile C SM.webp" alt="Style Tile C" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
       </ol>
     </div>
@@ -731,9 +732,9 @@
       <span class="section-label">Hi-Fi</span>
       <h2 class="section-h2" style="margin-top:12px;">The arch became a rule.</h2>
       <p class="body" style="margin-top:12px;">In the hero, the arch framed one portrait. Across the homepage it crops the dinner photograph, the closing call-to-action portrait, and all four rooms in the dropdown, so the concept holds without being explained.</p>
-      <img src="images/oxy/hi-fi-1.png" alt="Sadasia McCutchen hi-fi homepage" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="7066" loading="lazy" decoding="async" src="images/oxy/hi-fi-1.webp" alt="Sadasia McCutchen hi-fi homepage" style="width:100%;height:auto;display:block;margin-top:24px;" />
       <p class="body" style="margin-top:24px;"><span class="body-bold">Then the arch stopped being a crop and became a surface:</span> Fabric texture sits behind her in the hero and the closing call to action, and lines the Choose a Room dropdown: upholstery, drapery, backdrops, and a nod to the fashion side of her work. Texture needed a limit, so I set one: brand surfaces and editorial imagery only. Her portraits and the products stay untreated, because a filter on a face reads as a filter on the credibility behind it.</p>
-      <img src="images/oxy/hi-fi-2.png" alt="Sadasia McCutchen hi-fi texture and treatment" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="3120" loading="lazy" decoding="async" src="images/oxy/hi-fi-2.webp" alt="Sadasia McCutchen hi-fi texture and treatment" style="width:100%;height:auto;display:block;margin-top:24px;" />
     </div>
   </section>
 
@@ -778,7 +779,7 @@
   <section id="competitive-analysis">
     <div class="container">
       <span class="section-label">Competitive and Comparative Analysis</span>
-      <img src="images/oxy/Competitor Overview Breakdown.png" alt="Competitor overview breakdown" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="1024" loading="lazy" decoding="async" src="images/oxy/Competitor Overview Breakdown.webp" alt="Competitor overview breakdown" style="width:100%;height:auto;display:block;margin-top:24px;" />
     </div>
   </section>
 
@@ -786,7 +787,7 @@
   <section id="ux-audit">
     <div class="container">
       <span class="section-label">UX Audit</span>
-      <img src="images/oxy/UX Audit - Oxy Aero.png" alt="UX Audit - Oxy Aero" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="895" loading="lazy" decoding="async" src="images/oxy/UX Audit - Oxy Aero.webp" alt="UX Audit - Oxy Aero" style="width:100%;height:auto;display:block;margin-top:24px;" />
     </div>
   </section>
 
@@ -798,17 +799,17 @@
       <p class="body" style="margin-top:12px;">I designed three hero directions across two rounds, all built on the same updated navigation and copy, so the choice came down to imagery and typographic register: a grounded jet at golden hour with centered editorial type, an aerial over open water with oversized italic display type, and a jet in the clouds with quiet left-aligned type and hairline grid marks.</p>
       <ol class="rec-list" style="margin-top:32px;">
         <li>
-          <div><img src="images/oxy/Style Tile A.png" alt="Style Tile A" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+          <div><img width="1730" height="894" loading="lazy" decoding="async" src="images/oxy/Style Tile A.webp" alt="Style Tile A" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
         <li>
-          <div><img src="images/oxy/Style Tile B.png" alt="Style Tile B" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+          <div><img width="1730" height="894" loading="lazy" decoding="async" src="images/oxy/Style Tile B.webp" alt="Style Tile B" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
         <li>
-          <div><img src="images/oxy/Style Tile C.png" alt="Style Tile C" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
+          <div><img width="1730" height="894" loading="lazy" decoding="async" src="images/oxy/Style Tile C.webp" alt="Style Tile C" style="width:100%;height:auto;display:block;margin-top:8px;" /></div>
         </li>
       </ol>
       <p class="body" style="margin-top:24px;">All three pulled from a 14-image AI library I art directed against AI's defaults (overlit, eager to impress) because with one real client, the imagery had to assume you already belonged there.</p>
-      <img src="images/oxy/Image Library.png" alt="AI image library" style="width:100%;height:auto;display:block;margin-top:24px;" />
+      <img width="1820" height="476" loading="lazy" decoding="async" src="images/oxy/Image Library.webp" alt="AI image library" style="width:100%;height:auto;display:block;margin-top:24px;" />
       <p class="body" style="margin-top:24px;">Andrew and Spencer, Oxy's creative director, both landed on 1B, which Spencer called <span class="body-bold">the closest to the Oxy parent brand</span>: the same design system, but in a new register of restraint. That was the brief all along. Aero had to read as family, not as a departure.</p>
     </div>
   </section>
@@ -824,6 +825,36 @@
     </div>
   </section>
 
+  <!-- MORE WORK -->
+  <section id="more-work">
+    <div class="container">
+      <span class="section-label">More Work</span>
+      <div class="more-work-grid">
+        <a class="more-work-card" href="find-my-size.html">
+          <video class="mw-media" src="images/find-my-size/find-my-size-hero-stacked-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Find My Size sizing flow"></video>
+          <div class="mw-body">
+            <span class="mw-title">Find My Size</span>
+            <span class="mw-year">End-to-End UX &middot; 2026</span>
+          </div>
+        </a>
+        <a class="more-work-card" href="smile-donor.html">
+          <video class="mw-media" src="images/smile-donor/smile-donor-hero-stacked-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Smile Donor donation flow"></video>
+          <div class="mw-body">
+            <span class="mw-title">Smile Donor</span>
+            <span class="mw-year">End-to-End UX &middot; 2026</span>
+          </div>
+        </a>
+      </div>
+      <div class="more-work-cta">
+        <a class="btn-view-all" href="index.html#work">View All Work</a>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="wide-inner">
@@ -831,7 +862,7 @@
         <a class="footer-logo" href="index.html">Khanak Joshi</a>
         <ul class="footer-nav">
           <li><a href="about.html">About</a></li>
-          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
         </ul>
@@ -841,56 +872,6 @@
   </footer>
 
   <script>
-    // Smooth scroll for side nav links
-    document.querySelectorAll('.side-nav a').forEach(link => {
-      link.addEventListener('click', e => {
-        const href = link.getAttribute('href');
-        if (!href || !href.startsWith('#')) return; // let non-anchor links (Back) work normally
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
-          link.classList.add('active');
-          const offset = 64;
-          const top = target.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Highlight active section on scroll
-    const sections = [
-      { id: 'hero',               link: 'a[href="#hero"]' },
-      { id: 'overview',           link: 'a[href="#overview"]' },
-      { id: 'sm-brief',           link: 'a[href="#sm-brief"]' },
-      { id: 'sm-moodboard',       link: 'a[href="#sm-moodboard"]' },
-      { id: 'sm-identity',        link: 'a[href="#sm-identity"]' },
-      { id: 'sm-wireframes',      link: 'a[href="#sm-wireframes"]' },
-      { id: 'sm-navigation',      link: 'a[href="#sm-navigation"]' },
-      { id: 'sm-style-tiles',     link: 'a[href="#sm-style-tiles"]' },
-      { id: 'sm-hifi',            link: 'a[href="#sm-hifi"]' },
-      { id: 'brief',              link: 'a[href="#brief"]' },
-      { id: 'research',           link: 'a[href="#research"]' },
-      { id: 'hero-design',        link: 'a[href="#hero-design"]' },
-    ];
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const section = sections.find(s => s.id === entry.target.id);
-        if (!section) return;
-        const link = document.querySelector('.side-nav ' + section.link);
-        if (!link) return;
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
-    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
 
     function toggleMobileNav() {
       const overlay = document.getElementById("mobileNav");

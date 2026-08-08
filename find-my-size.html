@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="side-nav.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
@@ -140,6 +141,20 @@
     .decision-block { margin-top: var(--block-gap); }
     .decision-block:first-of-type { margin-top: 0; }
     .image-block { margin-top: var(--block-gap); }
+
+    /* ── EMPATHY MAPS ──
+       Two square sticky-note boards (1040×1040). A real class rather than an
+       inline grid, so it opts out of the blanket "stack every inline grid"
+       rule below: side by side they read as a pair, stacked full-width each
+       one is taller than the section it sits in. The -16px pull absorbs the
+       whitespace baked into the artwork. */
+    .empathy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 12px;
+      margin-left: -16px;
+    }
 
     /* ── PROBLEM STATEMENT BAND ── */
     #problem-band .container, #hmw-band .container {
@@ -482,6 +497,27 @@
         gap: 16px !important;
       }
 
+      /* Empathy maps hold their pair here, capped below the desktop cell size
+         (342px) so they shrink with the column instead of filling it. The pull
+         tracks the board's own whitespace (~4% of the artwork), so it comes
+         down with the render width or the notes hang past the text edge. */
+      .empathy-grid { max-width: 560px; gap: 12px; margin-left: -12px; }
+
+      /* Phone mockups: at full column width each one towers over the paragraph
+         explaining it. The stacked layout is untouched — only the size comes
+         down. One width for every frame, so the grey backgrounds start and end
+         on the same two edges down the whole section. (The frames ship in two
+         ratios — 1383×1386 and 1107×1278 — so the device inside the wider ones
+         lands ~10% smaller; matching frames wins over matching devices here.)
+         The testing pair is the same artwork, so it holds the same width. */
+      .decisions img,
+      .testing-shots img { max-width: 440px; }
+
+      /* The blanket stacker above turns .img-text-block into a column flex,
+         where its inline align-items:center takes over and pushes the mockup
+         to the middle of the column. Pull it back to the reading edge. */
+      .decisions .img-text-block { align-items: flex-start !important; }
+
       /* What I learned */
       .what-i-learned { padding: 32px 0 !important; }
       .what-i-learned .pullout-text { margin: 0 !important; max-width: 100% !important; }
@@ -503,6 +539,23 @@
       p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
     }
 
+    /* Phone: two boards finally give up too little to read, so stack — but
+       hold them at 300px rather than filling the column. Mockups come down
+       one more step alongside them. */
+    @media (max-width: 600px) {
+      .empathy-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        margin-left: -12px;
+        gap: 16px;
+      }
+      .decisions img,
+      .testing-shots img { max-width: 320px; }
+      /* The persona goes the other way: a dense document, so it takes the
+         whole column here instead of the 75% it holds at every larger size. */
+      .persona-img { width: 100% !important; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       #hero .hero-inner > * { animation: none; }
     }
@@ -517,7 +570,7 @@
       padding: 40px 0 40px 32px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
       overflow-y: auto;
       z-index: 50;
     }
@@ -525,10 +578,10 @@
       font-family: var(--font-sans);
       font-size: var(--nav-size);
       font-weight: var(--w-regular);
-      color: var(--text-label);
+      color: var(--text-body);
       text-decoration: none;
       line-height: 1.4;
-      padding: 4px 0;
+      padding: 3px 0;
       transition: color 0.2s;
       border-left: 2px solid transparent;
       padding-left: 12px;
@@ -539,12 +592,12 @@
       display: flex;
       align-items: center;
       gap: var(--nav-arrow-gap);
-      color: var(--text-label) !important;
-      margin-bottom: 24px;
+      color: var(--text-body) !important;
+      margin-bottom: 16px;
     }
     .side-nav-back:hover { color: var(--accent) !important; }
     .side-nav a.active {
-      color: var(--text-heading);
+      color: var(--text-body);
       font-weight: 500;
       border-left-color: var(--accent);
     }
@@ -576,7 +629,7 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
       <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
@@ -588,7 +641,7 @@
     </div>
     <nav class="mobile-nav-links">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
@@ -656,9 +709,9 @@
       <!-- User Interview Quotes -->
       <div style="margin-top:56px;">
         <span class="section-label">User Interview Quotes</span>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;margin-left:-16px;">
-          <img src="images/find-my-size/empathy-map-1.png" alt="Empathy map 1" style="width:100%;border-radius:12px;display:block;" />
-          <img src="images/find-my-size/empathy-map-2.png" alt="Empathy map 2" style="width:100%;border-radius:12px;display:block;" />
+        <div class="empathy-grid">
+          <img width="875" height="875" src="images/find-my-size/empathy-map-1.webp" alt="Empathy map 1" style="width:100%;border-radius:12px;display:block;" />
+          <img width="875" height="875" loading="lazy" decoding="async" src="images/find-my-size/empathy-map-2.webp" alt="Empathy map 2" style="width:100%;border-radius:12px;display:block;" />
         </div>
       </div>
 
@@ -666,14 +719,14 @@
       <div class="image-block">
         <span class="section-label">User Persona</span>
         <p class="body" style="margin-top:12px;">I synthesized both interviews into a composite shopper. She loves the convenience and dreads the guesswork. That tension, not a demographic profile, is what the design had to resolve.</p>
-        <img src="images/find-my-size/Joshi_340_Persona_2.png" alt="User Persona" style="width:75%;display:block;margin-top:20px;" />
+        <img width="1365" height="1424" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Persona_2.webp" alt="User Persona" class="persona-img" style="width:75%;display:block;margin-top:20px;" />
       </div>
 
       <!-- Journey Map -->
       <div class="image-block">
         <span class="section-label">Journey Map</span>
         <p class="body" style="margin-top:12px;">Emotion stays neutral through browsing, then drops sharply at Compare & Decide, the exact moment she's weighing whether the sizing risk is worth it. Once she commits, mood recovers immediately. The problem isn't the order; <span class="body-bold">it's the decision before it.</span> That dip became the design target.</p>
-        <img src="images/find-my-size/Joshi_340_JourneyMap.png" alt="Journey Map" style="width:100%;display:block;margin-top:16px;" />
+        <img width="1820" height="816" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_JourneyMap.webp" alt="Journey Map" style="width:100%;display:block;margin-top:16px;" />
       </div>
 
       <!-- Competitor analysis -->
@@ -683,9 +736,9 @@
         <p class="body" style="margin-top:16px;">I analyzed three existing sizing tools, PacSun's True Fit integration, Aritzia's size chart, and Fytted, then conducted a heuristic evaluation of Aritzia's full shopping flow.</p>
 
         <div class="comp-logos">
-          <img src="images/find-my-size/true-fit-logo.png" alt="True Fit" style="height:48px;object-fit:contain;" />
-          <img src="images/find-my-size/aritizia-logo.png" alt="Aritzia" style="height:48px;object-fit:contain;" />
-          <img src="images/find-my-size/fytted-logo.png" alt="Fytted" style="height:48px;object-fit:contain;" />
+          <img width="363" height="120" loading="lazy" decoding="async" src="images/find-my-size/true-fit-logo.webp" alt="True Fit" style="height:48px;object-fit:contain;" />
+          <img width="180" height="120" loading="lazy" decoding="async" src="images/find-my-size/aritizia-logo.webp" alt="Aritzia" style="height:48px;object-fit:contain;" />
+          <img width="120" height="120" loading="lazy" decoding="async" src="images/find-my-size/fytted-logo.webp" alt="Fytted" style="height:48px;object-fit:contain;" />
         </div>
 
         <p class="body body-bold" style="margin-top:56px;">Each had real strengths. But the gap was consistent across all three:</p>
@@ -716,29 +769,29 @@
       <h2 class="section-h2">Embedded, not extracted.</h2>
       <p class="body" style="margin-top:16px;"><span class="body-bold">The dip at Compare & Decide was the brief.</span> Every design decision that followed was an answer to the same question: what does a shopper need at that exact moment to feel confident enough to commit?</p>
       <span class="section-label" style="display:block;margin-top:56px;">Task Flow</span>
-      <img src="images/find-my-size/Joshi_340_Task_flow.png" alt="Task Flow" style="width:calc(100% + 24px);max-width:none;display:block;margin-top:12px;margin-left:-24px;" />
+      <img width="1880" height="1301" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Task_flow.webp" alt="Task Flow" style="width:calc(100% + 24px);max-width:none;display:block;margin-top:12px;margin-left:-24px;" />
 
       <!-- Sketches to hi-fi -->
       <div class="mt-64">
         <span class="section-label">From sketches to hi-fi</span>
-        <img src="images/find-my-size/Joshi_340_Wireframe copy.png" alt="Paper Sketches" style="width:100%;max-width:100%;display:block;margin-top:16px;" />
+        <img width="1820" height="942" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Wireframe copy.webp" alt="Paper Sketches" style="width:100%;max-width:100%;display:block;margin-top:16px;" />
       </div>
 
       <!-- Key design decisions -->
-      <div class="mt-64">
+      <div class="mt-64 decisions">
         <span class="section-label">Key design decisions</span>
         <p class="body" style="margin-top:12px;">Find My Size lives directly above the size selector on the product page: <span class="body-bold">no app download, no account, no body scan.</span> I considered a standalone app like Fytted, but separating the tool from checkout breaks the exact moment the journey map identified. Keeping it embedded wasn't just simpler, it was the right answer to the HMW.</p>
-        <img src="images/find-my-size/product-page.png" alt="Product page" style="width:100%;height:auto;display:block;margin-top:24px;" />
+        <img width="1383" height="1386" loading="lazy" decoding="async" src="images/find-my-size/product-page.webp" alt="Product page" style="width:100%;height:auto;display:block;margin-top:24px;" />
 
         <div style="margin-top:56px;">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
             <div class="text-above-img">
-              <img src="images/find-my-size/i1.png" alt="Iteration 1" style="width:100%;height:auto;display:block;" />
+              <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i1.webp" alt="Iteration 1" style="width:100%;height:auto;display:block;" />
               <p class="body body-bold" style="margin-top:16px;">Progressive disclosure on the form</p>
               <p class="body" style="margin-top:8px;">Height, weight, and fit preference are asked upfront, which is the minimum for a useful recommendation. Body measurements live in a collapsible section and usual size is an added field, keeping the experience light while giving detail-oriented users a path to more accuracy.</p>
             </div>
             <div class="text-above-img">
-              <img src="images/find-my-size/i2.png" alt="Iteration 2" style="width:100%;height:auto;display:block;" />
+              <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i2.webp" alt="Iteration 2" style="width:100%;height:auto;display:block;" />
               <p class="body body-bold" style="margin-top:16px;">Progress bar over step counter</p>
               <p class="body" style="margin-top:8px;">An earlier iteration used a step counter. I replaced it with a progress bar: it communicates progress made rather than work remaining, which is the gentler frame for a form you want people to finish.</p>
             </div>
@@ -747,7 +800,7 @@
 
         <div style="margin-top:56px;">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
-            <img src="images/find-my-size/opt-measurements.png" alt="Visual hierarchy" style="width:100%;height:auto;display:block;" />
+            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/opt-measurements.webp" alt="Visual hierarchy" style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
               <p class="body body-bold">Visual hierarchy refinement</p>
               <p class="body" style="margin-top:8px;">Toggle buttons for IN/CM, LB/KG, and fit preference were pulled to a lighter purple in the second iteration. Everything competed equally before so dialing them back made "Get Size Recommendation" the clear visual anchor.</p>
@@ -757,7 +810,7 @@
 
         <div style="margin-top:56px;">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
-            <img src="images/find-my-size/help-modal.png" alt="Inline measurement guides" style="width:100%;height:auto;display:block;" />
+            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/help-modal.webp" alt="Inline measurement guides" style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
               <p class="body body-bold">Inline measurement guides</p>
               <p class="body" style="margin-top:8px;">A heuristic evaluation of Aritzia revealed that users benefited from visual measurement guides inline. I adopted the same idea so users who didn't know their bust or waist measurement had a reference right there, without leaving the flow.</p>
@@ -767,7 +820,7 @@
 
         <div class="decision-block mt-40">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
-            <img src="images/find-my-size/rec-screen.png" alt="Recommendation screen" style="width:100%;height:auto;display:block;" />
+            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/rec-screen.webp" alt="Recommendation screen" style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
               <p class="body body-bold">The recommendation screen shows its work</p>
               <p class="body" style="margin-top:8px;">The result screen shows the suggested size, how it was determined, what percentage of similar shoppers chose it, whether the item runs true to size, and a free returns note with a link to the return policy. Most tools give you an answer. This one explains the reasoning behind it.</p>
@@ -800,9 +853,9 @@
         <p class="body" style="margin-top:16px;"><span class="body-bold">One score complicates the win.</span> User 2, the most confident user, rated herself only 3/5 on using a feature like this again. Thoroughness bought confidence at a cost she wasn't sure she'd pay twice. The form has to stay light.</p>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
-        <img src="images/find-my-size/testing-1.png" alt="Testing 1" style="width:100%;height:auto;display:block;" />
-        <img src="images/find-my-size/testing-2.png" alt="Testing 2" style="width:100%;height:auto;display:block;" />
+      <div class="testing-shots" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;">
+        <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/testing-1.webp" alt="Testing 1" style="width:100%;height:auto;display:block;" />
+        <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/testing-2.webp" alt="Testing 2" style="width:100%;height:auto;display:block;" />
       </div>
 
       <div class="recommendations" style="margin-top:56px;">
@@ -839,6 +892,36 @@
   </section>
 
 
+  <!-- MORE WORK -->
+  <section id="more-work">
+    <div class="container">
+      <span class="section-label">More Work</span>
+      <div class="more-work-grid">
+        <a class="more-work-card" href="smile-donor.html">
+          <video class="mw-media" src="images/smile-donor/smile-donor-hero-stacked-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Smile Donor donation flow"></video>
+          <div class="mw-body">
+            <span class="mw-title">Smile Donor</span>
+            <span class="mw-year">End-to-End UX &middot; 2026</span>
+          </div>
+        </a>
+        <a class="more-work-card" href="nielsen.html">
+          <video class="mw-media" src="images/nielsen/nielsen-hero-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Nielsen ONE measurement tool"></video>
+          <div class="mw-body">
+            <span class="mw-title">Nielsen ONE</span>
+            <span class="mw-year">UX Design &middot; 2025</span>
+          </div>
+        </a>
+      </div>
+      <div class="more-work-cta">
+        <a class="btn-view-all" href="index.html#work">View All Work</a>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="wide-inner">
@@ -846,7 +929,7 @@
         <a class="footer-logo" href="index.html">Khanak Joshi</a>
         <ul class="footer-nav">
           <li><a href="about.html">About</a></li>
-          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
         </ul>
@@ -856,49 +939,6 @@
   </footer>
 
   <script>
-    // Smooth scroll for side nav links
-    document.querySelectorAll(".side-nav a").forEach(link => {
-      link.addEventListener("click", e => {
-        const href = link.getAttribute("href");
-        if (!href || !href.startsWith("#")) return;
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          const offset = 64;
-          const top = target.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Highlight active section on scroll
-    const sections = [
-      { id: 'hero',         link: 'a[href="#hero"]' },
-      { id: 'problem-band', link: 'a[href="#problem-band"]' },
-      { id: 'research',     link: 'a[href="#research"]' },
-      { id: 'hmw-band',     link: 'a[href="#hmw-band"]' },
-      { id: 'design',       link: 'a[href="#design"]' },
-      { id: 'testing',      link: 'a[href="#testing"]' },
-      { id: 'outcome',      link: 'a[href="#outcome"]' },
-    ];
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const section = sections.find(s => s.id === entry.target.id);
-        if (!section) return;
-        const link = document.querySelector('.side-nav ' + section.link);
-        if (!link) return;
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
-    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
 
     function toggleMobileNav() {
       const overlay = document.getElementById("mobileNav");

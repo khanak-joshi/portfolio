@@ -115,6 +115,9 @@
   /* Nav / Button Label — Aktiv Medium Title Case · 16/19 · 0 */
   --nav-size: 16px;
   --nav-lh: 1.1875;
+  /* Same label one step up the 4pt scale, for the full-screen mobile menu
+     where 16px reads as fine print. */
+  --nav-lg-size: 20px;
 
   /* Nav chrome (Figma "Portfolio" → Navbar, node 385-716) */
   --nav-h: 72px;             /* bar height */
@@ -153,6 +156,14 @@ body {
 /* Links get a UA pointer cursor that overrides body's cursor:none —
    suppress it so only the custom dot shows on hover. */
 a { cursor: none; }
+
+/* Every <img> carries width/height attributes so the browser can reserve the
+   right box before the file lands. Those attributes are presentational hints,
+   though: on any axis a stylesheet leaves alone they become the *used* size,
+   which stretches an image whose CSS sets only one dimension. This demotes
+   them to what they're for — the intrinsic ratio — while any real rule still
+   wins. Do not remove without also removing the attributes. */
+img { width: auto; height: auto; }
 
 /* ==========================================================================
    TYPE CLASSES
@@ -402,6 +413,15 @@ nav .nav-links a.active .ext-arrow { display: none; }
 .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 /* Lift the nav (with the morphing toggle) above the open overlay */
 body.nav-open nav { z-index: 300; }
+/* Over the overlay the bar has nothing to refract, and its two inset edges
+   (top highlight, bottom hairline) read as stray rules across a plain white
+   sheet. Flatten it so the open menu is one uninterrupted surface. */
+body.nav-open nav:not(.side-nav) {
+  background: var(--bg);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+}
 
 /* ── MOBILE NAV OVERLAY ── */
 .mobile-nav-overlay {
@@ -410,7 +430,10 @@ body.nav-open nav { z-index: 300; }
   inset: 0;
   background: var(--bg);
   z-index: 200;
-  padding: 24px 20px 40px;
+  /* Right inset lands the links under the close ×. The × is the hamburger
+     morphed in place: a 44px button 20px off the edge, whose 34px bars rotate
+     to a mark ~26px wide — so its right tip sits 29px in from the viewport. */
+  padding: 24px 29px 40px;
   flex-direction: column;
 }
 .mobile-nav-overlay.open { display: flex; }
@@ -437,35 +460,166 @@ body.nav-open nav { z-index: 300; }
   justify-content: center;
   padding: 0;
 }
-.mobile-nav-links {
-  /* Reset the generic nav rule that bleeds into this <nav> element */
+/* Scoped to the overlay on purpose: `nav:not(.side-nav)` carries a class in its
+   :not(), so it outranks a lone `.mobile-nav-links` and was handing this <nav>
+   the fixed bar's position, height, glass and inset hairlines — a phantom bar
+   ruled across the open menu. Two classes here put the reset back on top. */
+.mobile-nav-overlay .mobile-nav-links {
   position: static;
   background: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
   height: auto;
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* Right-aligned so every label ends on the × above it. */
+  align-items: flex-end;
   justify-content: flex-start;
+  text-align: right;
   gap: 8px;
-  margin-top: 92px;
+  /* 24px of overlay padding + this = --nav-h, so the list opens right where
+     the bar carrying the × ends rather than floating below it. */
+  margin-top: 48px;
 }
-.mobile-nav-links a {
-  font-family: var(--font-serif);
-  font-weight: var(--w-light);
-  font-size: var(--h4-size);
-  line-height: var(--h4-lh);
-  letter-spacing: normal;
+/* Same Aktiv Medium as the desktop bar, one step up the scale. */
+.mobile-nav-overlay .mobile-nav-links a {
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--nav-lg-size);
+  line-height: var(--nav-lh);
+  letter-spacing: 0;
   text-transform: none;
   color: var(--text-label);
   text-decoration: none;
+  gap: var(--nav-arrow-gap);
   padding: 12px 0;
   transition: color 0.2s;
   min-height: 44px;
   display: flex;
   align-items: center;
 }
-.mobile-nav-links a:hover { color: var(--accent); }
+.mobile-nav-overlay .mobile-nav-links a:hover { color: var(--accent); }
+
+/* ==========================================================================
+   MORE WORK
+   Closing section on every case study: two other cases side by side, then a
+   "View All" pill through to the homepage grid. Lives here rather than in each
+   page's <style> block because all four case studies carry it verbatim.
+   ========================================================================== */
+
+/* Case studies run a tight 32px section rhythm (`section { padding: var(--section-v) 0 }`),
+   so this needs its own spacing to read as a break from the narrative rather
+   than one more section of it. The preceding section already contributes its
+   own 32px, so 88px here totals the 120px the homepage leaves before its
+   footer — the two pages hand off to the footer on the same gap. */
+#more-work {
+  background: var(--bg);
+  padding-top: 88px;
+  padding-bottom: 120px;
+}
+/* Sits in .container (--max-w), not .wide-inner: every other block on a case
+   study runs at 780px, so the row keeps the page's single content edge rather
+   than breaking out the way the homepage grid does. */
+.more-work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 32px;
+}
+/* The four films are all different ratios (2:1 → 1.34:1). Left native they'd
+   give the two cards different heights and knock the titles out of line, so
+   the row is held at one ratio and the films are cropped into it. 16/10 is the
+   middle of the four, which keeps the crop shallow on every card. */
+.more-work-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: none;
+}
+.more-work-card .mw-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 2px;
+  background: var(--surface);
+  transition: opacity 0.35s ease;
+}
+.more-work-card:hover .mw-media { opacity: 0.55; }
+.more-work-card .mw-body {
+  padding: 16px 0 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+/* Same H4 / Label Small pairing as the homepage cards. */
+.more-work-card .mw-title {
+  font-family: var(--font-serif);
+  font-weight: var(--w-regular);
+  font-size: var(--h4-size);
+  line-height: var(--h4-lh);
+  letter-spacing: var(--h4-ls);
+  color: var(--text-heading);
+}
+.more-work-card .mw-year {
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--label-sm-size);
+  line-height: var(--label-sm-lh);
+  letter-spacing: var(--label-sm-ls);
+  text-transform: uppercase;
+  color: var(--text-label);
+  flex-shrink: 0;
+}
+
+/* Figma "Portfolio" → node 505-633 (default) / 505-643 (hover).
+   Outlined pill, sized to its label rather than stretched across the column.
+   Purple stays an outline and a hover fill here, never a solid resting fill —
+   the palette reserves --accent for hover and buttons. */
+.btn-view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 30px;
+  background: transparent;
+  color: var(--text-heading);
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--nav-size);
+  line-height: var(--nav-lh);
+  letter-spacing: 0;
+  text-transform: capitalize;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+/* 505-643: 10% purple wash, label flips to purple, border holds. */
+.btn-view-all:hover,
+.btn-view-all:focus-visible {
+  background: rgba(149, 0, 255, 0.1);
+  color: var(--accent);
+}
+.more-work-cta {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  #more-work { padding-top: 56px; padding-bottom: 80px; }
+  .more-work-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .more-work-card .mw-media,
+  .btn-view-all { transition: none; }
+}
 
 /* ==========================================================================
    FOOTER

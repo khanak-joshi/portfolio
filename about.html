@@ -11,6 +11,11 @@
   <style>
     /* Reset, tokens, nav, footer and containers now live in styles.css. */
 
+    /* Matches the homepage: wider content column than the shared --max-wide,
+       since neither page has a sidebar competing for space. Keep this in step
+       with index.html so the two pages share one content edge. */
+    :root { --max-wide: 1440px; }
+
     body {
       /* Same gutters as the rest of the site so the content edge never shifts. */
       padding-left: 180px;
@@ -30,9 +35,19 @@
     /* ── ABOUT HERO ── */
     /* Same section rhythm as the homepage: 168/112 under the nav, and the next
        section adds nothing on top, so the hero's own bottom padding is the
-       whole gap between the two. */
+       whole gap between the two.
+
+       The top is 168px + an optical nudge. The homepage's first visible mark is
+       an h1, whose glyphs start ~13px below the top of its line box: half of
+       the (1.172 - 1) leading, plus the font's ascent-to-cap-height gap. This
+       page leads with a photograph, which has no such gap — its box edge is its
+       visible edge. Without the nudge the portrait reads 13px high against the
+       homepage headline even though both boxes sit at 168px. Measured at
+       --h1-size's 64px ceiling; --hero-nudge drops at the mobile breakpoint,
+       where the headline it's matching is smaller. */
     #about-hero {
-      padding-top: 168px;
+      --hero-nudge: 13px;
+      padding-top: calc(168px + var(--hero-nudge));
       padding-bottom: 112px;
     }
     .about-grid {
@@ -44,6 +59,9 @@
          .about-body's own measure keeps the line length in check. */
       grid-template-columns: minmax(0, 1fr) clamp(320px, 33vw, 472px);
       gap: 64px;
+      /* Copy sits centred against the portrait, which is the taller of the two.
+         The portrait's own top edge is what carries the alignment to the
+         homepage — see the optical nudge on #about-hero. */
       align-items: center;
       /* Fill the wide-inner so the hero content starts at the same
          left edge as the homepage's wide content (no inset). */
@@ -173,8 +191,8 @@
     /* ── ART GALLERY (editorial, sits on the page — not in cards) ── */
     .art-gallery {
       --art-gap: 32px;   /* matches the homepage case-study grid gap */
-      /* Same wide container as the homepage: 1320 cap, 40px padding → 1240
-         usable, re-centered after #art-builds breaks out of the gutters.
+      /* Same wide container as the homepage: --max-wide cap, 40px padding,
+         re-centered after #art-builds breaks out of the gutters.
          Images grow to fill the extra width; the gap stays fixed. */
       max-width: var(--max-wide);
       margin: 80px auto 0;
@@ -268,7 +286,9 @@
     }
     /* Nav, footer and container gutters are handled in styles.css. */
     @media (max-width: 768px) {
-      #about-hero { padding: 116px 0 76px; }
+      /* Homepage mobile hero is 116px; --h1-size is down at its 38px floor
+         here, so the optical gap above its glyphs shrinks with it. */
+      #about-hero { --hero-nudge: 8px; padding: calc(116px + var(--hero-nudge)) 0 76px; }
       .statement { padding-left: 20px; padding-right: 20px; }
       #art-builds { padding-top: 0; padding-bottom: 80px; }
       .art-gallery { padding-left: 20px; padding-right: 20px; margin-top: 48px; }
@@ -312,7 +332,7 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html" class="active">About</a></li>
-      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
       <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
@@ -324,7 +344,7 @@
     </div>
     <nav class="mobile-nav-links">
       <a href="about.html" class="active" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
@@ -342,7 +362,7 @@
           </div>
         </div>
         <figure class="about-photo">
-          <img src="images/about/about-image.png" alt="Khanak Joshi" loading="lazy" decoding="async" />
+          <img width="1180" height="1634" src="images/about/about-image.webp" alt="Khanak Joshi" loading="lazy" decoding="async" />
         </figure>
       </div>
     </div>
@@ -360,25 +380,25 @@
       <!-- Movement 1: lead + companion -->
       <div class="art-movement">
         <figure class="art-lead">
-          <img src="images/about/art3.jpg" alt="Lead piece from a mental health portraiture series" loading="lazy" decoding="async" />
+          <img width="1917" height="1597" src="images/about/art3.webp" alt="Lead piece from a mental health portraiture series" loading="lazy" decoding="async" />
         </figure>
         <figure class="art-companion">
-          <img src="images/about/art.jpg" alt="Portrait study exploring mental health through body language" loading="lazy" decoding="async" />
+          <img width="1007" height="780" src="images/about/art.webp" alt="Portrait study exploring mental health through body language" loading="lazy" decoding="async" />
         </figure>
       </div>
 
       <!-- Movement 2: panoramic band -->
       <figure class="art-wide">
-        <img src="images/about/art1.jpg" alt="Wide composition from the mental health art series" loading="lazy" decoding="async" />
+        <img width="2559" height="1309" src="images/about/art1.webp" alt="Wide composition from the mental health art series" loading="lazy" decoding="async" />
       </figure>
 
       <!-- Movement 3: a pair -->
       <div class="art-pair">
         <figure class="a-square">
-          <img src="images/about/art2.jpg" alt="Symbolic portrait study from the series" loading="lazy" decoding="async" />
+          <img width="1820" height="1929" src="images/about/art2.webp" alt="Symbolic portrait study from the series" loading="lazy" decoding="async" />
         </figure>
         <figure class="a-wide">
-          <img src="images/about/art4.jpg" alt="Portrait exploring invisible experiences" loading="lazy" decoding="async" />
+          <img width="1825" height="1190" src="images/about/art4.webp" alt="Portrait exploring invisible experiences" loading="lazy" decoding="async" />
         </figure>
       </div>
     </div>
@@ -391,7 +411,7 @@
         <a class="footer-logo" href="index.html">Khanak Joshi</a>
         <ul class="footer-nav">
           <li><a href="about.html" class="active">About</a></li>
-          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
         </ul>

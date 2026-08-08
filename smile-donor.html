@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="side-nav.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
@@ -404,6 +405,18 @@
       margin-top: 240px;
     }
 
+    /* ── INTERVIEW QUOTE CARDS ──
+       Four square quote cards (780×780). A real class rather than an inline
+       grid, so it opts out of the blanket "stack every inline grid" rule
+       below: four full-width squares turn a short section into a long scroll.
+       Same sizing as the empathy boards on the Find My Size page. */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
     /* ── DIVIDERS ── */
     .divider { height: 1px; background: var(--border); margin: 64px 0; }
 
@@ -460,6 +473,10 @@
         gap: 16px !important;
       }
 
+      /* Quote cards hold their 2×2 here, capped below the desktop cell size
+         (342px) so they shrink with the column instead of filling it. */
+      .quote-grid { max-width: 560px; gap: 12px; }
+
       /* What I learned */
       .what-i-learned { padding: 32px 20px !important; }
 
@@ -480,6 +497,19 @@
       p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
     }
 
+    /* Phone: two columns finally give up too little card to read, so stack —
+       but hold them at 300px rather than filling the column. The persona goes
+       the other way: it's a dense document, so it takes the whole column here
+       instead of the 75% it holds at every larger size. */
+    @media (max-width: 600px) {
+      .quote-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        gap: 16px;
+      }
+      .persona-img { width: 100% !important; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       #hero .hero-inner > * { animation: none; }
     }
@@ -494,7 +524,7 @@
       padding: 40px 0 40px 32px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
       overflow-y: auto;
       z-index: 50;
     }
@@ -502,10 +532,10 @@
       font-family: var(--font-sans);
       font-size: var(--nav-size);
       font-weight: var(--w-regular);
-      color: var(--text-label);
+      color: var(--text-body);
       text-decoration: none;
       line-height: 1.4;
-      padding: 4px 0;
+      padding: 3px 0;
       transition: color 0.2s;
       border-left: 2px solid transparent;
       padding-left: 12px;
@@ -516,12 +546,12 @@
       display: flex;
       align-items: center;
       gap: var(--nav-arrow-gap);
-      color: var(--text-label) !important;
-      margin-bottom: 24px;
+      color: var(--text-body) !important;
+      margin-bottom: 16px;
     }
     .side-nav-back:hover { color: var(--accent) !important; }
     .side-nav a.active {
-      color: var(--text-heading);
+      color: var(--text-body);
       font-weight: 500;
       border-left-color: var(--accent);
     }
@@ -553,7 +583,7 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
       <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
@@ -565,7 +595,7 @@
     </div>
     <nav class="mobile-nav-links">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
@@ -636,11 +666,11 @@
       <!-- User Interview Quotes -->
       <div style="margin-top:56px;">
         <span class="section-label">User Interview Quotes</span>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
-          <img src="images/smile-donor/quote-user3.png" alt="User 3 quote" style="width:100%;border-radius:12px;display:block;" />
-          <img src="images/smile-donor/quote-user1.png" alt="User 1 quote" style="width:100%;border-radius:12px;display:block;" />
-          <img src="images/smile-donor/quote-user4.png" alt="User 4 quote" style="width:100%;border-radius:12px;display:block;" />
-          <img src="images/smile-donor/quote-user2.png" alt="User 2 quote" style="width:100%;border-radius:12px;display:block;" />
+        <div class="quote-grid">
+          <img width="780" height="780" src="images/smile-donor/quote-user3.webp" alt="User 3 quote" style="width:100%;border-radius:12px;display:block;" />
+          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user1.webp" alt="User 1 quote" style="width:100%;border-radius:12px;display:block;" />
+          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user4.webp" alt="User 4 quote" style="width:100%;border-radius:12px;display:block;" />
+          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user2.webp" alt="User 2 quote" style="width:100%;border-radius:12px;display:block;" />
         </div>
         <p class="body" style="margin-top:24px;">Three of four users said too many steps led to abandonment. Three of four cited limited payment options as a barrier. Two of four pointed to lack of transparency about fund use, and two of four said the absence of a tax receipt or post-donation confirmation added to that frustration. <span class="body-bold">Trust was the number one factor</span> in deciding whether to donate, but <span class="body-bold">friction in the process was just as likely to kill a donation as distrust of the organization itself.</span></p>
       </div>
@@ -649,7 +679,7 @@
       <div class="image-block">
         <span class="section-label">User Persona</span>
         <p class="body" style="margin-top:12px;">I synthesized the four into a composite persona, Sara Reyes, for the thesis documentation. But the spectrum is the finding: four trust strategies, one flow that has to serve them all.</p>
-        <img src="images/smile-donor/Joshi_340_HonorsPersona.png" alt="User Persona" style="width:75%;display:block;margin-top:20px;" />
+        <img width="1365" height="1500" loading="lazy" decoding="async" src="images/smile-donor/Joshi_340_HonorsPersona.webp" alt="User Persona" class="persona-img" style="width:75%;display:block;margin-top:20px;" />
       </div>
 
       <!-- Competitor analysis -->
@@ -660,17 +690,17 @@
 
         <div style="margin-top:56px;">
           <span class="section-label">St. Jude</span>
-          <img src="images/smile-donor/smile5.jpg" alt="St. Jude" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
+          <img width="896" height="140" loading="lazy" decoding="async" src="images/smile-donor/smile5.webp" alt="St. Jude" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
         </div>
 
         <div style="margin-top:56px;">
           <span class="section-label">Feeding America</span>
-          <img src="images/smile-donor/smile4.jpg" alt="Feeding America" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
+          <img width="900" height="279" loading="lazy" decoding="async" src="images/smile-donor/smile4.webp" alt="Feeding America" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
         </div>
 
         <div style="margin-top:56px;">
           <span class="section-label">Women for Women International</span>
-          <img src="images/smile-donor/smile3.jpg" alt="Women for Women International" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
+          <img width="900" height="182" loading="lazy" decoding="async" src="images/smile-donor/smile3.webp" alt="Women for Women International" style="max-width:360px;width:100%;height:auto;display:block;margin-top:12px;" />
         </div>
 
         <p class="body body-bold" style="margin-top:56px;">Smile Donor had none of these. Its donation form was a single open text field redirecting to an external PayPal page. The form had:</p>
@@ -679,16 +709,16 @@
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No trust signals</li>
           <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No receipt confirmation language</li>
         </ul>
-        <img src="images/smile-donor/smile2.jpg" alt="Smile Donor current site" style="max-width:360px;width:100%;height:auto;display:block;margin-top:24px;" />
+        <img width="900" height="401" loading="lazy" decoding="async" src="images/smile-donor/smile2.webp" alt="Smile Donor current site" style="max-width:360px;width:100%;height:auto;display:block;margin-top:24px;" />
         <p class="body" style="margin-top:24px;">The heuristic evaluation sharpened that finding. Smile Donor's strongest trust-building content, its 501(c)(3) status, 0% overhead model, vetting process, and project stories, already existed on the site. It was hidden in long body text and just wasn't where donors needed it. A first-time visitor going straight to the donation form would <span class="body-bold">encounter none of it.</span></p>
-        <img src="images/smile-donor/smile1.jpg" alt="Smile Donor heuristic evaluation" style="max-width:360px;width:100%;height:auto;display:block;margin-top:24px;" />
+        <img width="900" height="950" loading="lazy" decoding="async" src="images/smile-donor/smile1.webp" alt="Smile Donor heuristic evaluation" style="max-width:360px;width:100%;height:auto;display:block;margin-top:24px;" />
         <p class="body" style="margin-top:24px;">One opportunity emerged that no competitor had addressed: none allowed donors to direct their gift to a specific cause despite showing detailed cause content. Smile Donor already had that content. <span class="body-bold">Directed giving could be a meaningful differentiator.</span></p>
       </div>
 
       <div class="image-block">
         <span class="section-label">Proposed Sitemap</span>
         <p class="body" style="margin-top:12px;">To bridge research and redesign, I mapped a proposed information architecture and a set of prioritized fixes. The donation flow needed the most work: preset amounts, multiple payment methods, fund-use transparency, and post-donation confirmation were all missing. Smile Donor's existing credibility content needed to move to <span class="body-bold">where donors are actually deciding</span>, not buried elsewhere on the site. Directed giving was scoped as a medium-priority differentiator once the foundation was in place.</p>
-        <img src="images/smile-donor/Smile Donor, Sitemap.png" alt="Proposed Sitemap" style="width:100%;height:auto;display:block;margin-top:20px;" />
+        <img width="1820" height="1196" loading="lazy" decoding="async" src="images/smile-donor/Smile Donor, Sitemap.webp" alt="Proposed Sitemap" style="width:100%;height:auto;display:block;margin-top:20px;" />
       </div>
     </div>
   </section>
@@ -705,6 +735,36 @@
     </div>
   </section>
 
+  <!-- MORE WORK -->
+  <section id="more-work">
+    <div class="container">
+      <span class="section-label">More Work</span>
+      <div class="more-work-grid">
+        <a class="more-work-card" href="nielsen.html">
+          <video class="mw-media" src="images/nielsen/nielsen-hero-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Nielsen ONE measurement tool"></video>
+          <div class="mw-body">
+            <span class="mw-title">Nielsen ONE</span>
+            <span class="mw-year">UX Design &middot; 2025</span>
+          </div>
+        </a>
+        <a class="more-work-card" href="oxy.html">
+          <video class="mw-media" src="images/oxy/oxy-hero-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Oxy Design Agency site"></video>
+          <div class="mw-body">
+            <span class="mw-title">Oxy Design Agency</span>
+            <span class="mw-year">Product Design &middot; 2026</span>
+          </div>
+        </a>
+      </div>
+      <div class="more-work-cta">
+        <a class="btn-view-all" href="index.html#work">View All Work</a>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="wide-inner">
@@ -712,7 +772,7 @@
         <a class="footer-logo" href="index.html">Khanak Joshi</a>
         <ul class="footer-nav">
           <li><a href="about.html">About</a></li>
-          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
         </ul>
@@ -722,49 +782,6 @@
   </footer>
 
   <script>
-    // Smooth scroll for side nav links
-    document.querySelectorAll(".side-nav a").forEach(link => {
-      link.addEventListener("click", e => {
-        const href = link.getAttribute("href");
-        if (!href || !href.startsWith("#")) return;
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          const offset = 64;
-          const top = target.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Highlight active section on scroll
-    const sections = [
-      { id: 'hero',         link: 'a[href="#hero"]' },
-      { id: 'problem-band', link: 'a[href="#problem-band"]' },
-      { id: 'research',     link: 'a[href="#research"]' },
-      { id: 'hmw-band',     link: 'a[href="#hmw-band"]' },
-      { id: 'design',       link: 'a[href="#design"]' },
-      { id: 'testing',      link: 'a[href="#testing"]' },
-      { id: 'outcome',      link: 'a[href="#outcome"]' },
-    ];
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const section = sections.find(s => s.id === entry.target.id);
-        if (!section) return;
-        const link = document.querySelector('.side-nav ' + section.link);
-        if (!link) return;
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
-    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
 
     function toggleMobileNav() {
       const overlay = document.getElementById("mobileNav");

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="side-nav.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
@@ -406,6 +407,18 @@
       .footer-name { font-size: 15vw; margin-top: 20px; }
     }
 
+    /* ── LIGHT/DARK VARIANT MATRIX ──
+       Four near-square cards (1020×1072). A real class rather than an inline
+       grid, so it opts out of the blanket "stack every inline grid" rule below:
+       filling the column with a square card makes it taller than the copy it
+       illustrates. It keeps the 2×2 down to phone widths, then caps instead. */
+    .variant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
     /* ── DIVIDERS ── */
     .divider { height: 1px; background: var(--border); margin: 64px 0; }
 
@@ -462,6 +475,10 @@
         gap: 16px !important;
       }
 
+      /* Variant matrix holds its 2×2 here, capped below the desktop cell size
+         (342px) so the pair reads as a specimen sheet, not four hero images. */
+      .variant-grid { max-width: 560px; gap: 12px; }
+
       /* What I learned */
       .what-i-learned { padding: 32px 0 !important; }
 
@@ -482,6 +499,12 @@
       p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
     }
 
+    /* Phone: two columns finally give up too little card to read, so stack —
+       but hold the cards at 300px rather than letting them fill the column. */
+    @media (max-width: 600px) {
+      .variant-grid { grid-template-columns: 1fr; max-width: 300px; gap: 16px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       #hero .hero-inner > * { animation: none; }
     }
@@ -496,7 +519,7 @@
       padding: 40px 0 40px 32px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
       overflow-y: auto;
       z-index: 50;
     }
@@ -504,10 +527,10 @@
       font-family: var(--font-sans);
       font-size: var(--nav-size);
       font-weight: var(--w-regular);
-      color: var(--text-label);
+      color: var(--text-body);
       text-decoration: none;
       line-height: 1.4;
-      padding: 4px 0 4px 12px;
+      padding: 3px 0 3px 12px;
       margin-left: -12px;
       transition: color 0.2s;
       border-left: 2px solid transparent;
@@ -517,12 +540,12 @@
       display: flex;
       align-items: center;
       gap: var(--nav-arrow-gap);
-      color: var(--text-label) !important;
-      margin-bottom: 24px;
+      color: var(--text-body) !important;
+      margin-bottom: 16px;
     }
     .side-nav-back:hover { color: var(--accent) !important; }
     .side-nav a.active {
-      color: var(--text-heading);
+      color: var(--text-body);
       font-weight: 500;
       border-left-color: var(--accent);
     }
@@ -530,9 +553,9 @@
       font-family: var(--font-sans);
       font-size: var(--nav-size);
       font-weight: var(--w-medium);
-      color: var(--text-heading);
+      color: var(--text-body);
       text-decoration: none;
-      padding: 8px 0 2px 12px;
+      padding: 12px 0 2px 12px;
       margin-left: -12px;
       border-left: 2px solid transparent;
       letter-spacing: 0.02em;
@@ -570,7 +593,7 @@
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+      <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
       <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
     </ul>
   </nav>
@@ -582,7 +605,7 @@
     </div>
     <nav class="mobile-nav-links">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
-      <a href="resume.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
+      <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:khanak.art99@gmail.com" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
@@ -665,14 +688,14 @@
       <div style="margin-top:56px;">
         <span class="section-label">Lock Icon on the Planning Tab</span>
         <p class="body" style="margin-top:12px;">The first entry point was the Planning tab in the main navigation. My supervisor suggested using a lock icon to signal the feature was gated. I kept it small and inline with the tab label so it wouldn't disrupt the navigation's visual rhythm, informational rather than alarming. On hover, I added a bold outline state to make it feel clickable. Without it, users might have assumed the tab was simply disabled and <span class="body-bold">moved on.</span></p>
-        <img src="images/nielsen/n1cf-campaigns-upsell-hover.png" alt="Lock icon on Planning tab hover state" style="width:100%;display:block;margin-top:20px;" />
+        <img width="1820" height="831" src="images/nielsen/n1cf-campaigns-upsell-hover.webp" alt="Lock icon on Planning tab hover state" style="width:100%;display:block;margin-top:20px;" />
       </div>
 
       <!-- Upsell Modal -->
       <div style="margin-top:56px;">
         <span class="section-label">Upsell Modal</span>
         <p class="body" style="margin-top:12px;">Clicking the lock opens a modal rather than a redirect. Taking users to a new page mid-task would have broken their flow and made it harder to return. The modal keeps them in context: they can read about the feature and close it without losing their place. The Cancel button was intentional too. <span class="body-bold">A user who knows they can leave is more willing to stay and read.</span> The modal itself uses a short header, three scannable outcome statements, and a supporting image. <span class="body-bold">Enterprise users scan rather than read paragraphs.</span></p>
-        <img src="images/nielsen/upsell-mockup.png" alt="Upsell modal mockup" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+        <img width="1965" height="1340" loading="lazy" decoding="async" src="images/nielsen/upsell-mockup.webp" alt="Upsell modal mockup" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
       </div>
 
       <!-- Side Panel Card -->
@@ -680,18 +703,18 @@
         <span class="section-label">Side Panel Card</span>
         <p class="body" style="margin-top:12px;">A user who has clicked into Campaign Details is in a different mindset than someone browsing the nav. They're looking at a specific campaign, a natural moment to show them what Planning could do with that data. I designed a card with two CTAs. Preview Data was an existing feature that let users sample Planning with their own data, surfacing it here gave <span class="body-bold">a low-commitment way to try before upgrading.</span> Learn More served users who needed more context before deciding.</p>
         <p class="body" style="margin-top:16px;">After the first review, stakeholders felt the card needed more credibility. I added a social proof badge ('Join 2,500+ brands already using Planning') at the bottom of the card. For enterprise buyers, knowing that peers are already using something reduces the perceived risk of upgrading. <span class="body-bold">It was a small addition, but it shifted the card from a pitch to proof.</span></p>
-        <img src="images/nielsen/upsell-side-panel.png" alt="Upsell side panel card" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+        <img width="1965" height="1341" loading="lazy" decoding="async" src="images/nielsen/upsell-side-panel.webp" alt="Upsell side panel card" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
       </div>
 
       <!-- Light and Dark Mode Variants and Edge Cases -->
       <div style="margin-top:56px;">
         <span class="section-label">Light and Dark Mode Variants and Edge Cases</span>
         <p class="body" style="margin-top:12px;">The first color pass on the card clashed in both light and dark mode, making it feel visually jarring. I reworked the palette to sit more calmly within Nielsen's design system. I also built out short and long content variants using Figma component properties, something I added proactively <span class="body-bold">rather than because it was asked of me.</span> Real content is unpredictable, and a design that only works at one character count creates problems for developers. Having every state documented meant the team could build without guessing.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
-          <img src="images/nielsen/Content Size=Short, Mode=Light.png" alt="Short content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
-          <img src="images/nielsen/Content Size=Short, Mode=Dark.png" alt="Short content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
-          <img src="images/nielsen/Content Size=Long, Mode=Light.png" alt="Long content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
-          <img src="images/nielsen/Content Size=Long, Mode=Dark.png" alt="Long content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+        <div class="variant-grid">
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Light.webp" alt="Short content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Dark.webp" alt="Short content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Long, Mode=Light.webp" alt="Long content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Long, Mode=Dark.webp" alt="Long content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
         </div>
       </div>
 
@@ -731,23 +754,23 @@
       <div style="margin-top:56px;">
         <span class="section-label">Data Overlap Column</span>
         <p class="body" style="margin-top:12px;">I proposed adding a Data Overlap column to the Selected Campaigns table, showing available data as a ratio. '19/61 days' meaning 19 days of data existed within a 61-day selected range. I scoped it to the Selected Campaigns section only, not the full list of 512 campaigns above it. Showing it across the full table would have cluttered the UI and added unnecessary backend load. I anticipated this as a constraint <span class="body-bold">before starting</span> and confirmed it with the dev team. The column also carries through to the review step, giving users one final check before committing to generating a report.</p>
-        <img src="images/nielsen/n1a-ccb-step-details-selected-campaigns-data-overlap.png" alt="Step details - selected campaigns data overlap" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
+        <img width="626" height="855" loading="lazy" decoding="async" src="images/nielsen/n1a-ccb-step-details-selected-campaigns-data-overlap.webp" alt="Step details - selected campaigns data overlap" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
       </div>
 
       <!-- Info Icon and Tooltip -->
       <div style="margin-top:56px;">
         <span class="section-label">Info Icon and Tooltip</span>
         <p class="body" style="margin-top:12px;">The ratio format was a start, but it didn't tell users which months had data and which didn't. I added an info icon next to the column header, a standard Nielsen component users already recognize. On hover, a tooltip reads 'View detailed overlap.' I made it a click to open rather than hover to expand because the full table is dense. Users need time to scan it, and a hover state would have <span class="body-bold">disappeared the moment they moved their cursor.</span></p>
-        <img src="images/nielsen/Group 5.png" alt="Info icon and tooltip" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
+        <img width="629" height="845" loading="lazy" decoding="async" src="images/nielsen/Group 5.webp" alt="Info icon and tooltip" style="width:45%;display:block;margin-top:20px;border-radius:12px;" />
       </div>
 
       <!-- Redesigned Data Overlap Table -->
       <div style="margin-top:56px;">
         <span class="section-label">Redesigned Data Overlap Table</span>
         <p class="body" style="margin-top:12px;">Clicking opens a modal with a redesigned overlap table. The reference point I was working from was a raw backend spreadsheet with columns for CC ID, start dates, and data availability strings like '19 [May (9), Jun (10)]', built <span class="body-bold">for engineers rather than media buyers.</span></p>
-        <img src="images/nielsen/n1a-cc-monthly-details-enhancement 1.png" alt="Monthly details enhancement" style="width:100%;display:block;margin-top:20px;border-radius:12px;" />
+        <img width="1820" height="346" loading="lazy" decoding="async" src="images/nielsen/n1a-cc-monthly-details-enhancement 1.webp" alt="Monthly details enhancement" style="width:100%;display:block;margin-top:20px;border-radius:12px;" />
         <p class="body" style="margin-top:16px;">My version restructures the same data into a calendar-style layout organized by month, with each campaign as a row. Days within the selected range are highlighted in one color, days outside in another, with a legend at the bottom. The same information becomes immediately visual. You can see at a glance which campaigns have strong coverage for your window and which fall short, <span class="body-bold">without decoding anything.</span></p>
-        <img src="images/nielsen/modal.png" alt="Data overlap modal" style="width:100%;height:auto;display:block;margin-top:20px;" />
+        <img width="1820" height="797" loading="lazy" decoding="async" src="images/nielsen/modal.webp" alt="Data overlap modal" style="width:100%;height:auto;display:block;margin-top:20px;" />
       </div>
 
       <!-- Outcome P02 -->
@@ -755,13 +778,43 @@
         <span class="section-label">Outcome</span>
         <h2 class="section-h2" style="margin-top:12px;">From blind commitment to informed decisions</h2>
         <p class="body" style="margin-top:12px;">After two iterations, the designs were approved and handed to dev. Before this project, users had no way to know whether their selected campaigns actually had data for the date range they chose. They were committing to reports without enough information to make that call confidently. After handoff, the same workflow surfaced data availability at two levels: a quick ratio in the table for users who needed a scan, and a full calendar breakdown one click away for users who needed to go deeper. <span class="body-bold">The redesign didn't add new data. It made existing data legible at the right moment.</span></p>
-        <img src="images/nielsen/ccb-table.png" alt="CCB table" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
+        <img width="1965" height="1335" loading="lazy" decoding="async" src="images/nielsen/ccb-table.webp" alt="CCB table" style="width:100%;height:auto;display:block;margin-top:20px;border-radius:12px;transform:scale(1.08);transform-origin:center;" />
       </div>
 
       <!-- What I Learned P02 -->
       <div class="what-i-learned" style="margin-top:56px;">
         <span class="section-label">What I Learned</span>
         <p class="pullout-text" style="margin-top:16px;margin-left:0;border-left:2px solid var(--accent);padding-left:16px;">Working with complex backend data taught me that clarity is its own form of design. The data was already there. My job was to restructure it into something users could actually act on. That is a problem I want to keep solving.</p>
+    </div>
+  </section>
+
+  <!-- MORE WORK -->
+  <section id="more-work">
+    <div class="container">
+      <span class="section-label">More Work</span>
+      <div class="more-work-grid">
+        <a class="more-work-card" href="oxy.html">
+          <video class="mw-media" src="images/oxy/oxy-hero-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Oxy Design Agency site"></video>
+          <div class="mw-body">
+            <span class="mw-title">Oxy Design Agency</span>
+            <span class="mw-year">Product Design &middot; 2026</span>
+          </div>
+        </a>
+        <a class="more-work-card" href="find-my-size.html">
+          <video class="mw-media" src="images/find-my-size/find-my-size-hero-stacked-web.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Find My Size sizing flow"></video>
+          <div class="mw-body">
+            <span class="mw-title">Find My Size</span>
+            <span class="mw-year">End-to-End UX &middot; 2026</span>
+          </div>
+        </a>
+      </div>
+      <div class="more-work-cta">
+        <a class="btn-view-all" href="index.html#work">View All Work</a>
+      </div>
     </div>
   </section>
 
@@ -772,7 +825,7 @@
         <a class="footer-logo" href="index.html">Khanak Joshi</a>
         <ul class="footer-nav">
           <li><a href="about.html">About</a></li>
-          <li><a href="resume.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
+          <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="mailto:khanak.art99@gmail.com">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a></li>
           <li><a href="https://www.linkedin.com/in/khanak-joshi-5040b029a" target="_blank" rel="noopener">LinkedIn<span class="ext-arrow" aria-hidden="true"></span></a></li>
         </ul>
@@ -782,49 +835,6 @@
   </footer>
 
   <script>
-    // Smooth scroll for side nav links
-    document.querySelectorAll(".side-nav a").forEach(link => {
-      link.addEventListener("click", e => {
-        const href = link.getAttribute("href");
-        if (!href || !href.startsWith("#")) return;
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          const offset = 64;
-          const top = target.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Highlight active section on scroll
-    const sections = [
-      { id: 'overview',     link: 'a[href="#overview"]' },
-      { id: 'problem-band', link: 'a[href="#problem-band"]' },
-      { id: 'p01-approach', link: 'a[href="#p01-approach"]' },
-      { id: 'p01-outcome',  link: 'a[href="#p01-outcome"]' },
-      { id: 'p02-problem',  link: 'a[href="#p02-problem"]' },
-      { id: 'p02-approach', link: 'a[href="#p02-approach"]' },
-      { id: 'p02-outcome',  link: 'a[href="#p02-outcome"]' },
-    ];
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const section = sections.find(s => s.id === entry.target.id);
-        if (!section) return;
-        const link = document.querySelector('.side-nav ' + section.link);
-        if (!link) return;
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
-    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
 
     function toggleMobileNav() {
       const overlay = document.getElementById("mobileNav");
