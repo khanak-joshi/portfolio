@@ -9,3 +9,8 @@
 .claude/
 .agents/
 skills-lock.json
+
+# Full-res hero film masters. Kept next to each project on disk, but never
+# committed — only the encoded -web.mp4 cuts ship. See the ffmpeg recipe in
+# the commit that introduced them.
+images/*/masters/

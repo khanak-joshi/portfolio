@@ -76,16 +76,16 @@
        upright ones. Two independent stacks rather than a 2x2 grid — a real
        grid would force shared row heights and open gaps under the short cards.
 
-       The 1.9615 is what makes both columns bottom out level, and it holds at
+       The 1.9761 is what makes both columns bottom out level, and it holds at
        every width because the row gap and card bodies are identical in each.
        Stacked height per unit of column width:
-         left  = 960/1920 + 1186/1920 = 1.11771
-         right = 1016/842  + 830/842  = 2.19240
-       so left must be 2.19240 / 1.11771 = 1.9615x the width of right.
+         left  = 958/1920 + 1186/1920 = 1.11667
+         right = 1016/842  + 842/842  = 2.20665
+       so left must be 2.20665 / 1.11667 = 1.9761x the width of right.
        Re-derive this if a film is ever swapped for one of a different ratio. */
     .work-grid {
       display: grid;
-      grid-template-columns: 1.9615fr 1fr;
+      grid-template-columns: 1.9761fr 1fr;
       gap: 32px;
     }
     .work-col {
@@ -112,10 +112,10 @@
       background: var(--surface);
       transition: opacity 0.35s ease;
     }
-    .card-nielsen .card-media { aspect-ratio: 1920 / 960;  }  /* 2:1    */
+    .card-nielsen .card-media { aspect-ratio: 1920 / 958;  }  /* 2:1    */
     .card-oxy     .card-media { aspect-ratio: 1920 / 1186; }  /* 1.62:1 */
     .card-fms     .card-media { aspect-ratio: 842 / 1016;  }  /* 5:6    */
-    .card-smile   .card-media { aspect-ratio: 842 / 830;   }  /* 1:1    */
+    .card-smile   .card-media { aspect-ratio: 842 / 842;   }  /* 1:1    */
 
     .case-card:hover .card-media {
       opacity: 0.15;
