@@ -324,11 +324,8 @@ nav:not(.side-nav) {
   background: var(--nav-glass);
   -webkit-backdrop-filter: blur(12px) saturate(1.5);
           backdrop-filter: blur(12px) saturate(1.5);
-  /* Light at -45° reads as a bright top edge, with the pane's thickness
-     catching a faint shadow along the bottom. */
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -1px 0 rgba(26, 29, 33, 0.06);
+  /* Light at -45° reads as a bright top edge. */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 /* Without backdrop-filter a 10% off-white tint is effectively invisible and
    content would scroll straight through the bar, so fall back to opaque. */
@@ -339,14 +336,16 @@ nav:not(.side-nav) {
 nav .logo {
   font-family: var(--font-serif);
   font-style: normal;
-  font-size: var(--wordmark-size);
+  font-size: 24px;
   font-weight: var(--w-regular);
   line-height: 1.25;
   letter-spacing: 0;
   color: var(--text-heading);
   text-decoration: none;
   white-space: nowrap;
+  transition: color 0.2s;
 }
+nav .logo:hover { color: var(--accent); }
 nav .nav-links {
   display: flex;
   gap: var(--nav-gap);
@@ -550,32 +549,53 @@ body.nav-open nav:not(.side-nav) {
 /* Sits in .container (--max-w), not .wide-inner: every other block on a case
    study runs at 780px, so the row keeps the page's single content edge rather
    than breaking out the way the homepage grid does. */
+/* The four films are all different ratios (2:1 → 1.34:1). Holding the row at
+   one ratio and cropping into it cost too much on the widest film — Nielsen at
+   2:1 lost 20% of its width, which cut the modal's left rail and its Close
+   button clean off. So each film keeps its native ratio, as on the homepage,
+   and the films are bottom-aligned instead: they end on the same line, which is
+   what keeps the titles below them level. The shorter card carries the
+   difference as open space above it.
+
+   The row is two tracks — films, then titles — and each card is a subgrid
+   spanning both, so the alignment survives a title wrapping to two lines.
+   Bottom-aligning the cards themselves would not: "Oxy Design Agency" wraps at
+   this measure, and a taller body would push its film back up off the line. */
 .more-work-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  grid-template-rows: auto auto;
+  column-gap: 32px;
+  row-gap: 0;
   margin-top: 32px;
 }
-/* The four films are all different ratios (2:1 → 1.34:1). Left native they'd
-   give the two cards different heights and knock the titles out of line, so
-   the row is held at one ratio and the films are cropped into it. 16/10 is the
-   middle of the four, which keeps the crop shallow on every card. */
 .more-work-card {
-  display: block;
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
   text-decoration: none;
   color: inherit;
   cursor: none;
 }
+/* The film hangs off the bottom of the film track; the title sits at the top of
+   its own track so the two baselines stay level whatever the film heights are. */
 .more-work-card .mw-media {
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  align-self: end;
   display: block;
   border-radius: 2px;
   background: var(--surface);
   transition: opacity 0.35s ease;
 }
+.more-work-card .mw-body { align-self: start; }
+/* Declared rather than left to the file's intrinsic size so the row reserves
+   its height before the video metadata lands — same ratios the homepage cards
+   use, and the same reason. */
+.mw-nielsen { aspect-ratio: 1920 / 958;  }  /* 2:1    */
+.mw-oxy     { aspect-ratio: 1920 / 1186; }  /* 1.62:1 */
+.mw-fms     { aspect-ratio: 1110 / 798;  }  /* 1.39:1 */
+.mw-smile   { aspect-ratio: 1110 / 830;  }  /* 1.34:1 */
 .more-work-card:hover .mw-media { opacity: 0.55; }
 .more-work-card .mw-body {
   padding: 16px 0 0;
@@ -641,7 +661,10 @@ body.nav-open nav:not(.side-nav) {
 
 @media (max-width: 768px) {
   #more-work { padding-top: 56px; padding-bottom: 80px; }
-  .more-work-grid { grid-template-columns: 1fr; gap: 24px; }
+  /* One column: nothing to align against, so drop the subgrid and let each
+     card stack normally. */
+  .more-work-grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 24px; }
+  .more-work-card { display: block; grid-row: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

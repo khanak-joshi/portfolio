@@ -122,14 +122,15 @@
     }
     .card-hover-desc {
       position: absolute;
-      bottom: 24px;
+      bottom: 40px;
       left: 24px;
       right: 24px;
       font-family: var(--font-sans);
-      /* Body Large, regular */
+      /* H4 ramp, regular — tops out at 24px on desktop, steps down on narrow
+         viewports rather than overflowing the card. */
       font-weight: var(--w-regular);
-      font-size: var(--body-lg-size);
-      line-height: var(--body-lg-lh);
+      font-size: var(--h4-size);
+      line-height: var(--h4-lh);
       color: var(--text-body);
       opacity: 0;
       transform: translateY(6px);
@@ -265,7 +266,7 @@
             <video class="card-media" src="images/nielsen/nielsen-hero-web.mp4"
                    autoplay muted loop playsinline preload="metadata"
                    aria-label="Nielsen ONE measurement tool"></video>
-            <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media brands</div>
+            <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media&nbsp;brands</div>
           </div>
           <div class="card-body">
             <div class="card-title">Nielsen ONE</div>
@@ -315,7 +316,7 @@
                    data-src-stacked="images/smile-donor/smile-donor-hero-stacked-web.mp4"
                    autoplay muted loop playsinline preload="metadata"
                    aria-label="Smile Donor donation flow"></video>
-            <div class="card-hover-desc">Redesigning a nonprofit website to close the gap between mission and trust</div>
+            <div class="card-hover-desc">Redesigning a nonprofit website to close the gap between mission and&nbsp;trust</div>
           </div>
           <div class="card-body">
             <div class="card-title">Smile Donor</div>

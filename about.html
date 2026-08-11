@@ -23,13 +23,13 @@
     }
 
     /* Wide sections break out of the body gutters, then re-center. */
-    #about-hero, #art-builds, footer {
+    #about-hero, #art-builds, #collateral, footer {
       margin-left: -180px;
       margin-right: -180px;
     }
     @media (max-width: 960px) {
       body { padding-left: 0; padding-right: 0; }
-      #about-hero, #art-builds, footer { margin-left: 0; margin-right: 0; }
+      #about-hero, #art-builds, #collateral, footer { margin-left: 0; margin-right: 0; }
     }
 
     /* ── ABOUT HERO ── */
@@ -148,16 +148,23 @@
       padding-top: 0;
       padding-bottom: 120px;
     }
-    .statement {
-      /* Same wide container as the gallery so the block starts at the
-         section's left edge, then the text keeps its narrow measure. */
+    /* The hinge itself: the words and piece 01 share one frame. The wide
+       container lives here so the text column starts on the section's left
+       edge and the anchor piece runs out to the right edge. */
+    .art-hinge {
       max-width: var(--max-wide);
       margin: 0 auto;
       padding: 0 var(--section-h);
+      display: flex;
+      gap: var(--block-gap);
+      align-items: flex-start;
     }
+    /* 44% lands the measure near 540px — inside the 720px cap the copy used to
+       sit at, so the lines only get easier to read as the image takes the rest. */
+    .statement { flex: 0 0 44%; }
     .statement > * { max-width: 720px; }
     /* H3 */
-    .statement h2 {
+    .statement h2, .collateral-head h2 {
       font-family: var(--font-serif);
       font-weight: var(--w-light);
       font-size: var(--h3-size);
@@ -188,22 +195,13 @@
       margin-top: 40px;
     }
 
-    /* ── ART GALLERY (editorial, sits on the page — not in cards) ── */
-    .art-gallery {
-      --art-gap: 32px;   /* matches the homepage case-study grid gap */
-      /* Same wide container as the homepage: --max-wide cap, 40px padding,
-         re-centered after #art-builds breaks out of the gutters.
-         Images grow to fill the extra width; the gap stays fixed. */
-      max-width: var(--max-wide);
-      margin: 80px auto 0;
-      padding: 0 var(--section-h);
-    }
-    .art-gallery figure {
+    /* ── ART PIECES (editorial, sit on the page — not in cards) ── */
+    #art-builds figure {
       margin: 0;
       overflow: hidden;
       border-radius: 2px;
     }
-    .art-gallery img {
+    #art-builds img {
       width: 100%;
       height: auto;
       display: block;
@@ -211,50 +209,114 @@
       background: var(--surface);
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-    .art-gallery figure:hover img { transform: scale(1.025); }
+    #art-builds figure:hover img { transform: scale(1.025); }
 
-    /* Movement 1 — lead piece + a smaller companion dropped low */
-    .art-movement {
-      display: flex;
-      gap: var(--art-gap);
-      align-items: flex-start;
-    }
-    .art-lead { flex: 0 0 60%; }
-    /* .art-gallery prefix needed to outrank `.art-gallery figure { margin: 0 }` */
-    .art-gallery .art-companion {
-      flex: 0 0 calc(40% - var(--art-gap));
-      margin-top: 104px;
-    }
+    /* Piece 01 — the anchor, taking whatever the copy column leaves. */
+    .art-anchor { flex: 1 1 auto; min-width: 0; }
 
-    /* Movement 2 — panoramic band, inset to the right */
-    .art-gallery .art-wide {
-      width: 86%;
-      margin: var(--art-gap) 0 0 auto;
+    /* Pieces 02–05 — a staggered 2×2 hang. Same wide container as the hinge
+       above, so the pair spans the full section width and both outer edges line
+       up with the anchor piece and the copy. */
+    .art-hang {
+      max-width: var(--max-wide);
+      margin: var(--block-gap) auto 0;
+      padding: 0 var(--section-h);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--media-gap);
+      align-items: start;
     }
-
-    /* Movement 3 — a pair, the square dropped low */
-    .art-pair {
-      display: flex;
-      gap: var(--art-gap);
-      align-items: flex-start;
-      margin-top: var(--art-gap);
-    }
-    .art-pair .a-square { flex: 0 0 44%; margin-top: 88px; }
-    .art-pair .a-wide  { flex: 0 0 calc(56% - var(--art-gap)); }
+    /* The stagger. The top row's height is set by the taller of its two pieces;
+       hanging the shorter one from the row's floor aligns 02/03 along the bottom
+       and opens the offset above it instead. 04/05 then start on the shared row
+       line, so their tops align for free. Doing it with the grid rather than a
+       margin keeps both alignments exact at every width — the offset is whatever
+       the two aspect ratios differ by, not a number that only lands at one
+       viewport size. */
+    .art-hang .hangs-low { align-self: end; }
 
     /* Scroll reveal (progressive enhancement — no-JS shows everything) */
-    .js-reveal .art-gallery figure {
+    .js-reveal #art-builds figure,
+    .js-reveal .marquee {
       opacity: 0;
       transform: translateY(28px);
       transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-    .js-reveal .art-gallery figure.in {
+    .js-reveal #art-builds figure.in,
+    .js-reveal .marquee.in {
       opacity: 1;
       transform: none;
     }
     @media (prefers-reduced-motion: reduce) {
-      .js-reveal .art-gallery figure { opacity: 1; transform: none; transition: none; }
-      .art-gallery img { transition: none; }
+      .js-reveal #art-builds figure { opacity: 1; transform: none; transition: none; }
+      #art-builds img { transition: none; }
+    }
+
+    /* ── GRAPHIC DESIGN & COLLATERAL (the rail) ── */
+    #collateral { padding-bottom: 120px; }
+    /* Same content edge as everything above it, so the heading and the first
+       tile start on the line the statement copy and the art pieces do. */
+    .collateral-head {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      padding: 0 var(--section-h);
+    }
+
+    /* The rail spans the content column, not the page: same wide container as
+       the hinge and the hang above it, so the first tile starts on the shared
+       left edge and tiles leave on the right edge the art pieces end at.
+       The clip lives on an inner window because overflow cuts at the padding
+       box — on the container itself the tiles would bleed into both gutters. */
+    .marquee {
+      max-width: var(--max-wide);
+      margin: var(--block-gap) auto 0;
+      padding: 0 var(--section-h);
+      box-sizing: border-box;
+    }
+    .marquee-window { overflow: hidden; }
+    /* Two identical copies of the tiles, sliding exactly one copy's width, so
+       the seam never lands on screen and there's nothing for JS to drift.
+       The spacing is each tile's margin-right rather than a flex `gap`: with
+       `gap` the track measures 2·tiles + (2n−1)·gap, which leaves −50% half a
+       gap short of one copy and the loop creeps. Giving every tile its own
+       trailing space makes the track 2·(tiles + gap), and −50% exact. */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-drift 56s linear infinite;
+      will-change: transform;
+    }
+    @keyframes marquee-drift {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+    /* Read-only rail — hovering holds it still, but nothing here is a link. */
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    .marquee figure {
+      margin: 0 var(--media-gap) 0 0;
+      flex: none;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    /* One shared height, natural widths — the mixed aspect ratios are what
+       give the row its rhythm. */
+    .marquee img {
+      display: block;
+      height: 380px;
+      width: auto;
+      border-radius: 2px;
+      background: var(--surface);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      /* No drift. The second copy only existed to feed the loop, so it goes,
+         and the row becomes something you move by hand instead. */
+      .marquee-track { animation: none; }
+      .marquee-window { overflow-x: auto; overflow-y: hidden; }
+      .marquee .dupe { display: none; }
+      /* Reveal comes down to a plain fade. */
+      .js-reveal .marquee { transform: none; transition: opacity 0.5s ease; }
     }
 
     /* Staggered load reveal */
@@ -289,13 +351,25 @@
       /* Homepage mobile hero is 116px; --h1-size is down at its 38px floor
          here, so the optical gap above its glyphs shrinks with it. */
       #about-hero { --hero-nudge: 8px; padding: calc(120px + var(--hero-nudge)) 0 80px; }
-      .statement { padding-left: var(--section-h); padding-right: var(--section-h); }
       #art-builds { padding-top: 0; padding-bottom: 80px; }
-      .art-gallery { padding-left: var(--section-h); padding-right: var(--section-h); margin-top: 48px; }
-      .art-movement { flex-direction: column; gap: 24px; }
-      .art-pair { flex-direction: column; gap: 24px; margin-top: 24px; }
-      .art-gallery .art-companion, .art-pair .a-square { margin-top: 0; }
-      .art-gallery .art-wide { width: 100%; margin: 24px 0 0 0; }
+      /* One column: the stagger has nothing to stagger against. */
+      .art-hinge { flex-direction: column; gap: var(--elem-gap); }
+      .statement { flex: 0 0 auto; }
+      .art-anchor { width: 100%; }
+      .art-hang { grid-template-columns: 1fr; gap: var(--elem-gap); margin-top: var(--elem-gap); }
+      .art-hang .hangs-low { align-self: auto; }
+      #collateral { padding-bottom: 80px; }
+    }
+
+    /* Tablet and phone: the same rule as desktop — one shared height, natural
+       widths — with the height measured off the viewport so the rail holds a
+       tile or two on screen instead of five. 57vw is set by the widest piece in
+       the set (1.46:1): at that height it very nearly fills the column, and the
+       narrowest still lands at about two across. */
+    @media (max-width: 900px) {
+      .marquee img { height: min(57vw, 340px); }
+      /* Shorter copy at this size, so a shorter pass holds the drift rate. */
+      .marquee-track { animation-duration: 40s; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -370,36 +444,69 @@
 
   <!-- ART BUILDS DESIGN (the hinge) -->
   <section id="art-builds">
-    <div class="statement">
-      <h2>Art builds design.</h2>
-      <p class="statement-body">Traditional art shaped how I see the world. This series from my AP Studio Art portfolio explored mental health through portraiture, symbolism, and body language. Developed during my time as President of the Awareness Committee at the Teen Mental Health Initiative, each piece asked the same question: how do you make invisible experiences visible?</p>
-      <p class="statement-quote">It's the same question I bring to design.</p>
+    <!-- The words and piece 01 in the same frame -->
+    <div class="art-hinge">
+      <div class="statement">
+        <h2>Art builds design.</h2>
+        <p class="statement-body">Traditional art shaped how I see the world. This series from my AP Studio Art portfolio explored mental health through portraiture, symbolism, and body language. Developed during my time as President of the Awareness Committee at the Teen Mental Health Initiative, each piece asked the same question: how do you make invisible experiences visible?</p>
+        <p class="statement-quote">It's the same question I bring to design.</p>
+      </div>
+      <figure class="art-anchor">
+        <img width="1917" height="1597" src="images/about/art3.webp" alt="Lead piece from a mental health portraiture series" loading="lazy" decoding="async" />
+      </figure>
     </div>
 
-    <div class="art-gallery">
-      <!-- Movement 1: lead + companion -->
-      <div class="art-movement">
-        <figure class="art-lead">
-          <img width="1917" height="1597" src="images/about/art3.webp" alt="Lead piece from a mental health portraiture series" loading="lazy" decoding="async" />
-        </figure>
-        <figure class="art-companion">
-          <img width="1007" height="780" src="images/about/art.webp" alt="Portrait study exploring mental health through body language" loading="lazy" decoding="async" />
-        </figure>
-      </div>
-
-      <!-- Movement 2: panoramic band -->
-      <figure class="art-wide">
+    <!-- Pieces 02–05, staggered -->
+    <div class="art-hang">
+      <!-- Row 1: the tall piece sets the row height, the short one hangs off its floor -->
+      <figure>
+        <img width="1820" height="1914" src="images/about/art2.webp" alt="Symbolic portrait study from the series" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="hangs-low">
+        <img width="1007" height="780" src="images/about/art.webp" alt="Portrait study exploring mental health through body language" loading="lazy" decoding="async" />
+      </figure>
+      <!-- Row 2: both start on the shared row line -->
+      <figure>
+        <img width="1825" height="1190" src="images/about/art4.webp" alt="Portrait exploring invisible experiences" loading="lazy" decoding="async" />
+      </figure>
+      <figure>
         <img width="2559" height="1309" src="images/about/art1.webp" alt="Wide composition from the mental health art series" loading="lazy" decoding="async" />
       </figure>
+    </div>
+  </section>
 
-      <!-- Movement 3: a pair -->
-      <div class="art-pair">
-        <figure class="a-square">
-          <img width="1820" height="1929" src="images/about/art2.webp" alt="Symbolic portrait study from the series" loading="lazy" decoding="async" />
-        </figure>
-        <figure class="a-wide">
-          <img width="1825" height="1190" src="images/about/art4.webp" alt="Portrait exploring invisible experiences" loading="lazy" decoding="async" />
-        </figure>
+  <!-- GRAPHIC DESIGN & COLLATERAL (the rail) -->
+  <section id="collateral">
+    <div class="collateral-head">
+      <h2>Off the canvas.</h2>
+    </div>
+
+    <!-- Two identical passes of the same nine tiles. The first carries the alt
+         text; the second is decorative and exists only so the loop has
+         somewhere to go, so it's hidden from the accessibility tree. -->
+    <div class="marquee">
+      <div class="marquee-window">
+        <div class="marquee-track">
+          <figure><img width="1168" height="800" src="images/about/diner-window-cling.webp" alt="Storefront window cling for diner promoting a dining rewards offer" loading="lazy" decoding="async" /></figure>
+          <figure><img width="717" height="800" src="images/about/chanel-poster.webp" alt="Chanel Chance fragrance poster on a street display" loading="lazy" decoding="async" /></figure>
+          <figure><img width="803" height="800" src="images/about/lexi-tote.webp" alt="LEXI tote bag for the ASU Learning Engineering Institute" loading="lazy" decoding="async" /></figure>
+          <figure><img width="732" height="800" src="images/about/vogue-cover.webp" alt="Vogue spring issue cover concept" loading="lazy" decoding="async" /></figure>
+          <figure><img width="1015" height="800" src="images/about/diner-loyalty-card.webp" alt="diner loyalty card, front and back" loading="lazy" decoding="async" /></figure>
+          <figure><img width="777" height="800" src="images/about/lexi-one-pager.webp" alt="LEXI 2026 Workshop event one-pager" loading="lazy" decoding="async" /></figure>
+          <figure><img width="781" height="800" src="images/about/summit-backdrop.webp" alt="Tech Talent Summit step-and-repeat backdrop" loading="lazy" decoding="async" /></figure>
+          <figure><img width="573" height="800" src="images/about/lexi-bottle.webp" alt="LEXI water bottle for the ASU Learning Engineering Institute" loading="lazy" decoding="async" /></figure>
+          <figure><img width="1000" height="800" src="images/about/postino-card.webp" alt="Postino promotional card for diner, front and back" loading="lazy" decoding="async" /></figure>
+
+          <figure class="dupe" aria-hidden="true"><img width="1168" height="800" src="images/about/diner-window-cling.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="717" height="800" src="images/about/chanel-poster.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="803" height="800" src="images/about/lexi-tote.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="732" height="800" src="images/about/vogue-cover.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="1015" height="800" src="images/about/diner-loyalty-card.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="777" height="800" src="images/about/lexi-one-pager.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="781" height="800" src="images/about/summit-backdrop.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="573" height="800" src="images/about/lexi-bottle.webp" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="dupe" aria-hidden="true"><img width="1000" height="800" src="images/about/postino-card.webp" alt="" loading="lazy" decoding="async" /></figure>
+        </div>
       </div>
     </div>
   </section>
@@ -435,13 +542,15 @@
     // Staggered scroll reveal for the art gallery (progressive enhancement)
     if ('IntersectionObserver' in window) {
       document.body.classList.add('js-reveal');
-      const figs = document.querySelectorAll('.art-gallery figure');
+      const figs = document.querySelectorAll('#art-builds figure');
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
         });
       }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
       figs.forEach((f, i) => { f.style.transitionDelay = (i * 90) + 'ms'; io.observe(f); });
+      // The rail reveals as one object — the stagger belongs to the art hang.
+      document.querySelectorAll('#collateral .marquee').forEach(m => io.observe(m));
     }
 
     function toggleMobileNav() {
