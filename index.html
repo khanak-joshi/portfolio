@@ -181,13 +181,17 @@
       letter-spacing: var(--h4-ls);
       color: var(--text-heading);
     }
-    /* Label Small */
+    /* Section Label — the same 16px the case study eyebrows and meta labels
+       (Role, Duration, Tool) run at. It was Label Small, which left the one
+       uppercase grey label the homepage has reading smaller than every other
+       label on the site. Tracking goes to 0 with it: the 0.08em belongs to
+       12px uppercase and is too loose at this size. */
     .card-year {
       font-family: var(--font-sans);
       font-weight: var(--w-medium);
-      font-size: var(--label-sm-size);
-      line-height: var(--label-sm-lh);
-      letter-spacing: var(--label-sm-ls);
+      font-size: var(--label-size);
+      line-height: var(--label-lh);
+      letter-spacing: 0;
       text-transform: uppercase;
       color: var(--text-label);
       flex-shrink: 0;

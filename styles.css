@@ -621,12 +621,14 @@ body.nav-open nav:not(.side-nav) {
   letter-spacing: var(--h4-ls);
   color: var(--text-heading);
 }
+/* Section Label, matching .card-year on the homepage — this is the same card
+   meta in a second place, so the two move together. */
 .more-work-card .mw-year {
   font-family: var(--font-sans);
   font-weight: var(--w-medium);
-  font-size: var(--label-sm-size);
-  line-height: var(--label-sm-lh);
-  letter-spacing: var(--label-sm-ls);
+  font-size: var(--label-size);
+  line-height: var(--label-lh);
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--text-label);
   flex-shrink: 0;
