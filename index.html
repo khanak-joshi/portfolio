@@ -126,10 +126,11 @@
       left: 24px;
       right: 24px;
       font-family: var(--font-sans);
-      /* H4 ramp, regular — tops out at 24px on desktop, steps down on narrow
-         viewports rather than overflowing the card. */
+      /* Flat 24px rather than the H4 ramp: this only ever shows on hover, so it
+         is only ever read on a pointer device, where the card is wide enough to
+         hold it. No need to scale it down for widths it won't be seen at. */
       font-weight: var(--w-regular);
-      font-size: var(--h4-size);
+      font-size: 24px;
       line-height: var(--h4-lh);
       color: var(--text-body);
       opacity: 0;
@@ -248,7 +249,9 @@
   <!-- HERO -->
   <section id="hero">
     <div class="wide-inner">
-      <h1>I'm Khanak Joshi,<br><em>an artist who designs products.</em></h1>
+      <!-- "designs products." is bound with an nbsp so the pair wraps together
+           and "products." is never left hanging on a line of its own. -->
+      <h1>I'm Khanak Joshi,<br><em>an artist who designs&nbsp;products.</em></h1>
     </div>
   </section>
 

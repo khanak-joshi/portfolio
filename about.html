@@ -391,11 +391,7 @@
       transition: opacity 0.15s ease;
     }
     #custom-cursor.active { opacity: 1; }
-    @media (max-width: 768px) {
-      body { cursor: auto; }
-      a { cursor: pointer; }
-      #custom-cursor { display: none; }
-    }
+    /* Touch devices are handled globally in styles.css — no local override. */
   </style>
 </head>
 <body>
@@ -428,7 +424,9 @@
     <div class="wide-inner">
       <div class="about-grid">
         <div class="about-text">
-          <h1>I started as an artist<br><em>before I knew what UX was.</em></h1>
+          <!-- "UX was." is bound with an nbsp so the pair wraps together and
+               "was." is never left hanging on a line of its own. -->
+          <h1>I started as an artist<br><em>before I knew what UX&nbsp;was.</em></h1>
           <div class="about-body">
             <p>Sketchbooks before wireframes, learning to communicate what can't be said directly. That's still the question I'm asking, just in Figma now.</p>
             <p>I'm currently a product design intern at Oxy and a UI/UX Designer Aide at ASU's Learning Engineering Institute, designing AI-powered tools for student learning outcomes.</p>

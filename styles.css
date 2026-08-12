@@ -122,9 +122,9 @@
   /* Nav / Button Label — Aktiv Medium Title Case · 16/19 · 0 */
   --nav-size: 16px;
   --nav-lh: 1.1875;
-  /* Same label one step up the 4pt scale, for the full-screen mobile menu
-     where 16px reads as fine print. */
-  --nav-lg-size: 20px;
+  /* Well up the 4pt scale, for the full-screen mobile menu where the bar's 16px
+     reads as fine print against an otherwise empty sheet. */
+  --nav-lg-size: 36px;
 
   /* Nav chrome (Figma "Portfolio" → Navbar, node 385-716) */
   --nav-h: 72px;             /* bar height */
@@ -457,10 +457,11 @@ body.nav-open nav:not(.side-nav) {
   inset: 0;
   background: var(--bg);
   z-index: 200;
-  /* Right inset lands the links under the close ×. The × is the hamburger
-     morphed in place: a 44px button 20px off the edge, whose 34px bars rotate
-     to a mark ~26px wide — so its right tip sits 29px in from the viewport. */
-  padding: 24px 29px 40px;
+  /* Horizontal inset is the bar's own, so the labels start on the same line as
+     the wordmark above them and hold it at every width. Safe here for the same
+     reason it is on the nav: this is position:fixed, so its 100% is the
+     viewport. */
+  padding: 24px var(--content-inset) 40px;
   flex-direction: column;
 }
 .mobile-nav-overlay.open { display: flex; }
@@ -501,14 +502,14 @@ body.nav-open nav:not(.side-nav) {
   padding: 0;
   display: flex;
   flex-direction: column;
-  /* Right-aligned so every label ends on the × above it. */
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-start;
-  text-align: right;
+  text-align: left;
   gap: 8px;
-  /* 24px of overlay padding + this = --nav-h, so the list opens right where
-     the bar carrying the × ends rather than floating below it. */
-  margin-top: 48px;
+  /* 24px of overlay padding + this clears --nav-h (72px) and then drops the
+     list a further 72px, so it sits away from the bar carrying the × instead of
+     starting immediately under it. */
+  margin-top: 120px;
 }
 /* Same Aktiv Medium as the desktop bar, one step up the scale. */
 .mobile-nav-overlay .mobile-nav-links a {
@@ -528,6 +529,13 @@ body.nav-open nav:not(.side-nav) {
   align-items: center;
 }
 .mobile-nav-overlay .mobile-nav-links a:hover { color: var(--accent); }
+/* The ↗ is a fixed 21x20 everywhere else, drawn against the bar's 16px label.
+   At this size that leaves it undersized, so it is restated in em — the same
+   21/16 and 20/16 ratios — and it now tracks --nav-lg-size on its own. */
+.mobile-nav-overlay .mobile-nav-links .ext-arrow {
+  width: 1.3125em;
+  height: 1.25em;
+}
 
 /* ==========================================================================
    MORE WORK
@@ -805,6 +813,19 @@ footer {
   color: var(--accent);
 }
 #custom-cursor.on-card .ext-arrow { opacity: 1; }
+
+/* A tap on a touchscreen fires a synthetic mousemove, so the scripts that drive
+   these elements light them up on the first touch and then strand them wherever
+   the finger last landed. Keyed to the pointer rather than a width: a touch
+   laptop at 1400px has the same problem, and a narrow desktop window doesn't.
+   Hiding them here means the pages need no cursor logic of their own. */
+@media (hover: none), (pointer: coarse) {
+  #dot-cursor, #custom-cursor { display: none; }
+  /* Give the system cursor back — it was suppressed only to clear the way for
+     the custom one, which no longer renders. */
+  body, .more-work-card { cursor: auto; }
+  a { cursor: pointer; }
+}
 
 /* ==========================================================================
    RESPONSIVE
