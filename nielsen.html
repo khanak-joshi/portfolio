@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
   <script src="side-nav.js" defer></script>
+  <script src="cursor.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
@@ -821,15 +822,13 @@
 
   </script>
 
-  <div id="dot-cursor"></div>
-  <script>
-    const dotCursor = document.getElementById('dot-cursor');
-    document.addEventListener('mousemove', e => {
-      dotCursor.style.left = e.clientX + 'px';
-      dotCursor.style.top = e.clientY + 'px';
-      dotCursor.classList.add('active');
-    });
-    document.addEventListener('mouseleave', () => dotCursor.classList.remove('active'));
-  </script>
+  <!-- CUSTOM CURSOR
+       The same element and the same copy as the homepage. At rest it is the purple
+       dot this page used to draw for itself; over a More Work card it morphs into
+       the "View Case Study" pill, so the cards hover alike in both places.
+       Driven by cursor.js. -->
+  <div id="custom-cursor">
+    View Case Study
+  </div>
 </body>
 </html>

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="cursor.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
 
@@ -359,21 +360,8 @@
   </div>
 
   <script>
-    const cursor = document.getElementById('custom-cursor');
-    const cards = document.querySelectorAll('.case-card');
-
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      cursor.classList.add('active');
-    });
-
-    document.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', () => cursor.classList.add('on-card'));
-      card.addEventListener('mouseleave', () => cursor.classList.remove('on-card'));
-    });
+    /* The cursor and its on-card pill now live in cursor.js, shared with the four
+       case studies so the More Work cards there hover the same way. */
 
     /* Below 900px the work grid collapses to one column and the upright films
        run too tall, so those two switch to their rectangular cuts. Paired with

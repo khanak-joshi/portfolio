@@ -158,11 +158,21 @@ body {
   color: var(--text-heading);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+}
+/* `cursor` inherits, so one declaration high up covers the whole page — but it
+   has to sit on <html>, not <body>. Below a short page, and in the gutter beside
+   a centred one, the pointer is over the root element, and a body-only rule let
+   the system arrow back in there alongside the purple dot.
+   The scrollbar keeps its own arrow; that is the browser's chrome, not ours. */
+html, body { cursor: none; }
+/* Anything the UA gives a cursor of its own overrides that inherited `none` and
+   shows two cursors at once: links and buttons get an arrow, form fields an
+   I-beam, and the pointer sits over one of these on most of the page. Listed in
+   one place so a new interactive element is covered by default — and restored
+   wholesale in the (hover: none) block at the foot of the cursor section. */
+a, button, input, textarea, select, label, summary, [role="button"] {
   cursor: none;
 }
-/* Links get a UA pointer cursor that overrides body's cursor:none —
-   suppress it so only the custom dot shows on hover. */
-a { cursor: none; }
 
 /* Every <img> carries width/height attributes so the browser can reserve the
    right box before the file lands. Those attributes are presentational hints,
@@ -422,7 +432,6 @@ nav .nav-links a.active .ext-arrow { display: none; }
   height: 44px;
   background: none;
   border: none;
-  cursor: pointer;
   padding: 0;
 }
 .nav-toggle span {
@@ -479,7 +488,6 @@ body.nav-open nav:not(.side-nav) {
   background: none;
   border: none;
   font-size: 28px;
-  cursor: pointer;
   color: var(--text-heading);
   min-width: 44px;
   min-height: 44px;
@@ -759,23 +767,10 @@ footer {
    CURSOR
    ========================================================================== */
 
-#dot-cursor {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  width: 16px;
-  height: 16px;
-  background: var(--accent);
-  border-radius: 50%;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.15s ease;
-  top: 0; left: 0;
-}
-#dot-cursor.active { opacity: 1; }
-
 /* Default state is the purple dot; over a case study card it morphs into the
-   outlined "View Case Study ↗" pill from the Button spec. */
+   outlined "View Case Study ↗" pill from the Button spec. Every page runs this
+   one element — the case studies used to draw a separate #dot-cursor that could
+   only ever be the dot, which is why their More Work cards had no pill. */
 #custom-cursor {
   position: fixed;
   pointer-events: none;
@@ -824,9 +819,13 @@ footer {
 @media (hover: none), (pointer: coarse) {
   #dot-cursor, #custom-cursor { display: none; }
   /* Give the system cursor back — it was suppressed only to clear the way for
-     the custom one, which no longer renders. */
-  body, .more-work-card { cursor: auto; }
-  a { cursor: pointer; }
+     the custom one, which no longer renders. Mirrors the two base rules above:
+     the root and its inheritors go back to `auto`, and everything interactive
+     gets its own cursor again. A touch laptop with a trackpad is the case that
+     needs this; a phone simply never draws a cursor. */
+  html, body, .case-card, .more-work-card { cursor: auto; }
+  input, textarea, select { cursor: auto; }
+  a, button, label, summary, [role="button"] { cursor: pointer; }
 }
 
 /* ==========================================================================
