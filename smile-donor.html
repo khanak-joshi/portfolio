@@ -388,12 +388,17 @@
 
     /* Footer lives in styles.css; only the breakout margins are page-specific. */
     footer {
-      /* Sit above the fixed side-nav (z-index 50) so it covers it. */
+      /* The side-nav is position:fixed and capped at the viewport height, so it
+         never enters the flow and nothing here can collide with it — at z-index
+         60 against its 50, the footer simply paints over its lower half on the
+         way past. So there is no clearance to leave: #more-work's own 120px
+         padding-bottom is the entire pre-footer gap, the same one the homepage
+         leaves after #work. The 240px that used to sit here was on top of that
+         120px, which is what left the footer stranded three screens down. */
       position: relative;
       z-index: 60;
       margin-left: -180px;
       margin-right: -180px;
-      margin-top: 240px;
     }
 
     /* ── INTERVIEW QUOTE CARDS ──
@@ -429,7 +434,6 @@
       nav .nav-links { display: none; }
 
       /* Hero */
-      #hero { padding-top: 72px; }
       #hero .hero-meta {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
@@ -465,7 +469,6 @@
         padding: 40px var(--section-h) !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        margin-top: 64px;
       }
       .footer-nav { gap: 8px 24px; padding-top: 32px; }
 
@@ -540,10 +543,44 @@
       padding-right: 180px;
     }
     @media (max-width: 960px) {
-      .side-nav { display: none; }
       body { padding-left: 0; padding-right: 0; }
       /* Footer breaks out by -180px; drop that once the body gutters are gone. */
       footer { margin-left: 0; margin-right: 0; }
+
+      /* There is no rail to live in below 960px, so the side-nav flattens to
+         just its Back link and rejoins the flow as the first thing under the
+         bar — it used to display:none, which left these pages with no way back
+         to the work grid short of the browser control. The section anchors go
+         with the rail: with no persistent column to hold them, the whole run of
+         section anchors would stand between the reader and the hero. Boxed to
+         match #hero .hero-inner so Back lands on the same left edge as the
+         title beneath it. */
+      .side-nav {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        max-width: var(--max-w);
+        margin: var(--nav-h) auto 0;
+        padding: 32px var(--section-h) 0;
+      }
+      .side-nav a:not(.side-nav-back),
+      .side-nav .nav-group-label { display: none; }
+      /* Undo the active-state rail's 12px inset so Back sits flush with the
+         content edge; the 3px vertical padding on .side-nav a stays. Needs the
+         element in the selector: `.side-nav a` scores (0,1,1) and would outrank
+         a bare `.side-nav-back` at (0,1,0), which left Back hanging 12px into
+         the gutter, out of line with the title under it. */
+      .side-nav a.side-nav-back {
+        margin: 0;
+        padding-left: 0;
+        border-left: 0;
+      }
+      /* Back now holds the space under the bar that this padding used to.
+         More room below it than above (40 vs 32): the tighter gap groups Back
+         with the bar it belongs to, and the wider one keeps it from reading as
+         part of the title block underneath. */
+      #hero { padding-top: 40px; }
     }
 
 
