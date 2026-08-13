@@ -113,8 +113,10 @@
   --label-lh: 1.1875;
 
   /* Label Small — extension to the Figma scale, on the 4pt grid.
-     Badges, card meta, captions and footer copy, which the spec's 16px
-     floor would otherwise inflate. Uppercase at 12px needs tracking. */
+     Badges, card meta and captions, which the spec's 16px floor would otherwise
+     inflate. Uppercase at 12px needs tracking — and that tracking is the tell
+     that this token is for caps only. The footer copy is sentence case and used
+     to borrow it; it runs at Body now, subordinated by colour instead. */
   --label-sm-size: 12px;
   --label-sm-lh: 1.333;
   --label-sm-ls: 0.08em;
@@ -135,7 +137,7 @@
 
   /* Footer chrome (Figma "Portfolio" → Footer / 4 /, node 388-897) */
   --footer-pad-y: 48px;
-  --footer-row-gap: 48px;    /* links row → credit line */
+  --footer-row-gap: 16px;    /* links row → credit line */
 
   /* Side inset that lands the nav on the homepage's content edge. Reproduces
      .wide-inner's math (max-width centred, then --section-h), so the wordmark
@@ -722,7 +724,11 @@ footer {
   color: var(--text-heading);
   text-decoration: none;
   white-space: nowrap;
+  transition: color 0.2s;
 }
+/* Same purple-on-hover as the nav wordmark — it is the same link to the same
+   place, so it answers the pointer the same way. */
+.footer-logo:hover { color: var(--accent); }
 /* Links match the nav exactly, plus LinkedIn. */
 .footer-nav {
   list-style: none;
@@ -750,14 +756,20 @@ footer {
   transition: color 0.2s;
 }
 .footer-nav a:hover { color: var(--accent); }
-/* Sentence case, not the uppercase treatment this used to have. */
+/* Sentence case, not the uppercase treatment this used to have — and Body, not
+   Label Small. That 12px token is shaped for uppercase badges and card meta,
+   where caps carry the x-height; this was the one place spending it on sentence
+   case, at the lightest weight, in the second-lightest grey, which stacked three
+   things against legibility at once. Medium Grey alone marks it as boilerplate:
+   colour is the strong signal for subordinate text, size the weak one, and this
+   was paying with both. Now the full Body style, held apart by colour only. */
 .footer-copy {
   display: block;
   margin-top: var(--footer-row-gap);
   font-family: var(--font-sans);
   font-weight: var(--w-regular);
-  font-size: var(--label-sm-size);
-  line-height: 1.5;
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
   letter-spacing: 0;
   text-transform: none;
   color: var(--text-label);
@@ -863,7 +875,8 @@ footer {
     margin-left: calc(var(--nav-pad-h) * -1);
     margin-right: 0;
   }
-  .footer-copy { margin-top: 32px; }
+  /* No .footer-copy override: --footer-row-gap is already tight enough to hold
+     on mobile, and the old 32px here would now be looser than the desktop gap. */
 
   /* Prevent long words/URLs from overflowing */
   p, li, h1, h2, h3, span { overflow-wrap: break-word; word-break: break-word; }
