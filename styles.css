@@ -42,7 +42,26 @@
      One aligned content edge across the homepage and case studies:
      body text stays in the narrow column, heroes and grids go wide. */
   --max-w: 780px;
-  --max-wide: 1320px;
+  /* 1440, not 1320: the homepage and about both used to override this to 1440
+     in their own <style>, each with a note to keep the other in step, while
+     the case studies were left on the 1320 nobody had revisited. Since
+     --content-inset derives from this, that gap put the case studies' bar and
+     footer 60px further in than the same chrome on every other page. One
+     value here, no overrides, and the margin is the same margin everywhere. */
+  --max-wide: 1440px;
+
+  /* Width of the case studies' fixed side-nav rail. The rail no longer starts
+     at the viewport edge — it starts on --content-inset, the same margin the
+     homepage and about use — so this is purely how much room it occupies once
+     it gets there, and therefore how far the case study content is pushed
+     past it. Read by both the rail and the body gutters that clear it, so the
+     two can't drift apart. Fixed chrome, exempt from the 8pt rule. */
+  --rail-w: 180px;
+
+  /* Where a case study's first line of text starts, measured from the page
+     top. The rail reads it too, so Back sits on that same line — which is why
+     it lives here rather than staying a bare number in each page's #hero. */
+  --hero-top: 104px;
 
   /* ── SPACING ──
      Strict 8pt grid: every layout margin, padding and gap below is a multiple
@@ -360,6 +379,87 @@ nav:not(.side-nav) {
    content would scroll straight through the bar, so fall back to opaque. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   nav:not(.side-nav) { background: var(--bg); }
+}
+
+/* ── CASE-STUDY RAIL AND GUTTERS ──
+   Case studies used to run on their own geometry: the rail sat hard against
+   the viewport edge at 32px and the body reserved a flat 180px on each side
+   for it, which put the wordmark, the rail and the content on three different
+   left edges — none of them the homepage's.
+
+   Now all three answer to --content-inset, the homepage/about margin. The bar
+   and footer already use it, so they need nothing here; the rail moves onto it
+   below.
+
+   The body gutters exist only to keep the rail off the text. They are
+   symmetric on purpose, and that is the whole trick: equal gutters leave the
+   body box centred in the viewport, so the reading column centred inside it
+   lands exactly where the homepage's does. Case study margins and homepage
+   margins are then the same margins, not two values that happen to look
+   close.
+
+   Sizing them --content-inset + --rail-w leaves a constant 880px box at every
+   width ≥1320px — clear of the rail, and still 100px more than the 780px the
+   column asks for, so the column is never squeezed and never moved. Below
+   1320px --content-inset bottoms out at --section-h and the box narrows with
+   the viewport; from about 1220px down the column starts giving up width to
+   stay clear of the rail, which is the one place these pages part company with
+   the homepage, and the alternative is text under the rail.
+
+   Bounded at 961px, where the rail flattens into the flow and the gutters go
+   away entirely. */
+@media (min-width: 961px) {
+  body.case-study {
+    padding-left: calc(var(--content-inset) + var(--rail-w));
+    padding-right: calc(var(--content-inset) + var(--rail-w));
+  }
+  /* Fixed, so the percentage inside --content-inset measures the viewport —
+     the same base the bar resolves against, which is what lands Back directly
+     under the wordmark. The old 32px of left padding goes with the move: the
+     rail's text edge is now the box edge.
+
+     padding-top sits Back on the hero's first line rather than 40px below the
+     bar: --hero-top is where that line starts, less the height of the bar the
+     rail hangs from, less the 3px .side-nav a reserves above its text for the
+     active-state rule. The ~2px left over is the two line-heights' differing
+     half-leading, which is under the threshold where anyone reads it as a
+     misalignment. */
+  body.case-study .side-nav {
+    left: var(--content-inset);
+    width: var(--rail-w);
+    padding: calc(var(--hero-top) - var(--nav-h) - 3px) 0 40px;
+  }
+  /* Full-bleed again, so its own .wide-inner sits it on --content-inset
+     instead of measuring against the body's gutters. */
+  body.case-study footer {
+    margin-left: calc((var(--content-inset) + var(--rail-w)) * -1);
+    margin-right: calc((var(--content-inset) + var(--rail-w)) * -1);
+  }
+}
+
+/* ── CASE-STUDY NARROW COLUMN, TABLET AND DOWN ──
+   Below 961px the rail flattens and the body gutters go, so the bar sits one
+   --section-h off the viewport edge. The narrow boxes, though, stay centred in
+   the viewport — and a centred 780px box inside a 900px screen starts 60px
+   further right than the wordmark does, which is what left the hero title,
+   the body copy and Back all out of line with the name above them.
+
+   Left-aligning them closes that: the box keeps its cap and its own
+   --section-h gutter, it just stops being centred, so its content edge lands
+   on --section-h — the wordmark's edge — at every width in this range. Phones
+   already agreed (the box is narrower than its cap there, so centring was a
+   no-op); this only bites in the ~780–960px band.
+
+   .wide-inner is deliberately untouched: at these widths it is already wider
+   than the screen, so it is flush and aligned as-is. Desktop is untouched too
+   — the whole rule is bounded to where the rail is gone. */
+@media (max-width: 960px) {
+  body.case-study .container,
+  body.case-study #hero .hero-inner,
+  body.case-study .side-nav {
+    margin-left: 0;
+    margin-right: auto;
+  }
 }
 /* Wordmark — New Spirit upright (not italic, as it used to be). */
 nav .logo {

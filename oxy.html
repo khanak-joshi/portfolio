@@ -49,7 +49,7 @@
     /* ── HERO ── */
     #hero {
       background: var(--bg);
-      padding-top: 104px;
+      padding-top: var(--hero-top);
       padding-bottom: var(--section-v);
     }
     @keyframes fadeUp {
@@ -396,8 +396,6 @@
          120px, which is what left the footer stranded three screens down. */
       position: relative;
       z-index: 60;
-      margin-left: -180px;
-      margin-right: -180px;
     }
 
     /* ── DIVIDERS ── */
@@ -470,10 +468,7 @@
     .side-nav {
       position: fixed;
       top: var(--nav-h);
-      left: 0;
-      width: 180px;
       height: calc(100vh - var(--nav-h));
-      padding: 40px 0 40px 32px;
       display: flex;
       flex-direction: column;
       gap: 0;
@@ -526,16 +521,7 @@
     .side-nav .nav-sub {
       padding-left: 28px;
     }
-    /* Shift main content right to make room */
-    body {
-      padding-left: 180px;
-      padding-right: 180px;
-    }
     @media (max-width: 960px) {
-      body { padding-left: 0; padding-right: 0; }
-      /* Footer breaks out by -180px; drop that once the body gutters are gone. */
-      footer { margin-left: 0; margin-right: 0; }
-
       /* There is no rail to live in below 960px, so the side-nav flattens to
          just its Back link and rejoins the flow as the first thing under the
          bar — it used to display:none, which left these pages with no way back
@@ -580,7 +566,7 @@
 
   </style>
 </head>
-<body>
+<body class="case-study">
 
   <!-- NAV -->
   <nav>
