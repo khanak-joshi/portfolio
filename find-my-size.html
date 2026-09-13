@@ -618,6 +618,22 @@
       #hero { padding-top: 40px; }
     }
 
+    /* ── FIGMA MAKE PROTOTYPE ──
+       The recording was a phone on a flat grey backdrop. The film is cropped to
+       the phone with the backdrop painted over in --bg (#F9FAFB) at encode
+       time, so the phone sits straight on the page ground. Baked in rather than
+       a CSS mask: a mask image that fails to load hides the whole video, and
+       Chrome refuses to load one over file://. Re-encode if --bg changes. */
+    .prototype-film {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 726 / 1492;
+      height: auto;
+    }
+    .prototype-cta { margin-top: var(--media-gap); }
+    .prototype-cta .btn-view-all { gap: var(--nav-arrow-gap); }
+
 
 
     @media (max-width: 768px) {
@@ -659,6 +675,7 @@
     <a href="#research">Research</a>
     <a href="#hmw-band">How Might We</a>
     <a href="#design">Design</a>
+    <a href="#prototype">Figma Make Prototype</a>
     <a href="#testing">Testing</a>
     <a href="#outcome">Outcome</a>
   </nav>
@@ -832,6 +849,19 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIGMA MAKE PROTOTYPE -->
+  <section id="prototype">
+    <div class="container">
+      <span class="section-label">Figma Make Prototype</span>
+      <video class="prototype-film mt-media" src="images/find-my-size/find-my-size-prototype-web.mp4"
+             width="726" height="1492" autoplay muted loop playsinline preload="metadata"
+             aria-label="Screen recording of the Find My Size prototype, from the product page through the sizing form"></video>
+      <div class="prototype-cta">
+        <a class="btn-view-all" href="https://www.figma.com/make/H42mP7h8i321E4X6YMg6TR/Find-My-Size?fullscreen=1&amp;t=KwWKkUaJMQHySyFP-1&amp;code-node-id=0-9" target="_blank" rel="noopener">View Live Prototype<span class="ext-arrow" aria-hidden="true"></span></a>
       </div>
     </div>
   </section>
