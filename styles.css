@@ -895,6 +895,8 @@ footer {
   text-transform: none;
   color: var(--text-label);
 }
+/* Later credit lines stack under the copyright as one block, not a new row. */
+.footer-copy + .footer-copy { margin-top: 0; }
 
 /* ==========================================================================
    CURSOR
