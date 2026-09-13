@@ -423,11 +423,16 @@ nav:not(.side-nav) {
      rail hangs from, less the 3px .side-nav a reserves above its text for the
      active-state rule. The ~2px left over is the two line-heights' differing
      half-leading, which is under the threshold where anyone reads it as a
-     misalignment. */
+     misalignment.
+
+     The links hang their purple active rule 12px left of their text, and the
+     rail's overflow-y:auto clips anything outside its box. So the box starts
+     12px early and pads that back: the text stays on --content-inset and the
+     rule has room to show. */
   body.case-study .side-nav {
-    left: var(--content-inset);
-    width: var(--rail-w);
-    padding: calc(var(--hero-top) - var(--nav-h) - 3px) 0 40px;
+    left: calc(var(--content-inset) - 12px);
+    width: calc(var(--rail-w) + 12px);
+    padding: calc(var(--hero-top) - var(--nav-h) - 3px) 0 40px 12px;
   }
   /* Full-bleed again, so its own .wide-inner sits it on --content-inset
      instead of measuring against the body's gutters. */
