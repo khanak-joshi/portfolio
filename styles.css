@@ -74,6 +74,11 @@
   --elem-gap: 24px;          /* element → element within a block */
   --media-gap: 32px;         /* paragraph → its illustrating image/video */
   --block-gap: 56px;         /* sub-block → sub-block within a section */
+  /* Horizontal sibling — two blocks sharing a row, e.g. the homepage hero's
+     headline and standfirst. Wider than --block-gap because a gap read across
+     a 64px headline has to clear far more type than the same gap read down a
+     column; 56px there leaves the two looking fused. */
+  --col-gap: 96px;           /* block → block, side by side in one row */
 
   /* ── FAMILIES ──
      Only the faces below exist in the kit. Anything else synthesises. */

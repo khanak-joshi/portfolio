@@ -61,12 +61,49 @@
       max-width: 900px;
     }
     #hero h1 em { font-style: italic; font-weight: var(--w-light); }
+
+    /* Headline and standfirst run side by side on desktop. Baseline alignment,
+       not flex-start: the two first baselines lining up is what reads as
+       deliberate, and unlike a hand-tuned top offset it holds as --h1-size
+       clamps down. The h1 doesn't shrink — its two lines are hard-broken by
+       <br>, so squeezing it would fold them into three. The standfirst takes
+       whatever is left — growing to the content edge at full width, so the
+       hero is flush on both sides — and stacks below 1320px, where what's
+       left stops being wide enough to hold a readable line. The breakpoint
+       tracks --col-gap: widen that and this has to follow, or the standfirst
+       spends the widths in between as a 30-character ribbon. */
+    #hero .hero-inner {
+      display: flex;
+      /* The two blocks bottom out together. `last baseline`, not `flex-end`:
+         flex-end would line up the boxes, and because the h1's 75px line box
+         carries far more descender room than the standfirst's 28px one, that
+         drops the standfirst's last line ~12px below the h1's. Aligning the
+         last baselines is what actually reads as level. flex-end first, as
+         the fallback for anything that doesn't know the keyword. */
+      align-items: flex-end;
+      align-items: last baseline;
+      gap: var(--col-gap);
+    }
+    #hero h1 { flex: 0 0 auto; }
+    /* Body Large — the type scale's 20/28 Aktiv Regular, in Dark Grey.
+       Left-aligned; it is the column that ends on the content edge, via the
+       flex-grow above — the lines rag inside it as body copy should. */
+    #hero .hero-sub {
+      flex: 1 1 360px;
+      min-width: 0;
+      font-family: var(--font-sans);
+      font-weight: var(--w-regular);
+      font-size: var(--body-lg-size);
+      line-height: var(--body-lg-lh);
+      color: var(--text-body);
+    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     #hero .kicker { animation: fadeUp 0.6s ease both 0.05s; }
     #hero h1 { animation: fadeUp 0.6s ease both 0.12s; }
+    #hero .hero-sub { animation: fadeUp 0.6s ease both 0.2s; }
 
     /* ── WORK GRID ── */
     #work {
@@ -198,6 +235,17 @@
     }
 
     /* ── RESPONSIVE ── */
+    /* Standfirst drops under the headline before its column gets too narrow
+       to hold a line of Body Large. */
+    @media (max-width: 1320px) {
+      #hero .hero-inner {
+        display: block;
+      }
+      #hero .hero-sub {
+        max-width: 560px;
+        margin-top: var(--elem-gap);
+      }
+    }
     /* Stack the work cards a little earlier, before they get cramped at two-up.
        Collapsing to one column flows them nielsen → oxy → find my size → smile.
 
@@ -220,7 +268,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      #hero .kicker, #hero h1 { animation: none; }
+      #hero .kicker, #hero h1, #hero .hero-sub { animation: none; }
       .case-card { transition: none; }
     }
   </style>
@@ -252,10 +300,11 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="wide-inner">
+    <div class="wide-inner hero-inner">
       <!-- "designs products." is bound with an nbsp so the pair wraps together
            and "products." is never left hanging on a line of its own. -->
       <h1>I'm Khanak Joshi,<br><em>an artist who designs&nbsp;products.</em></h1>
+      <p class="hero-sub">At some point I realized I love using creativity to solve problems, not only to make something people look&nbsp;at.</p>
     </div>
   </section>
 
