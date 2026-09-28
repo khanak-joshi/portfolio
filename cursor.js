@@ -22,8 +22,12 @@
 
   document.addEventListener('mouseleave', () => cursor.classList.remove('active'));
 
-  document.querySelectorAll('.case-card, .more-work-card').forEach(card => {
-    card.addEventListener('mouseenter', () => cursor.classList.add('on-card'));
-    card.addEventListener('mouseleave', () => cursor.classList.remove('on-card'));
+  /* The pill means "this click opens the case study", so it drops back to the
+     dot over a film's pause button (video-controls.js), which does something
+     else. Delegated, because those buttons are added after this runs. */
+  document.addEventListener('mouseover', e => {
+    const onCard = e.target.closest('.case-card, .more-work-card');
+    const onControl = e.target.closest('.video-toggle');
+    cursor.classList.toggle('on-card', !!onCard && !onControl);
   });
 })();

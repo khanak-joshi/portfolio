@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khanak Joshi</title>
+  <title>Nielsen ONE — Khanak Joshi</title>
+  <meta name="description" content="Designing for a cross-platform measurement tool used by the world's largest media brands." />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Khanak Joshi" />
+  <meta property="og:title" content="Nielsen ONE — Khanak Joshi" />
+  <meta property="og:description" content="Designing for a cross-platform measurement tool used by the world's largest media brands." />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="mobile-nav.js" defer></script>
+  <script src="video-controls.js" defer></script>
   <script src="side-nav.js" defer></script>
   <script src="cursor.js" defer></script>
   <style>
@@ -588,10 +597,12 @@
 </head>
 <body class="case-study">
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a class="logo" href="index.html">Khanak Joshi</a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
@@ -599,12 +610,12 @@
     </ul>
   </nav>
 
-  <div class="mobile-nav-overlay" id="mobileNav">
+  <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="mobile-nav-header">
       <span class="mobile-nav-logo">Khanak Joshi</span>
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
-    <nav class="mobile-nav-links">
+    <nav class="mobile-nav-links" aria-label="Menu">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
       <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:kvjoshi@asu.edu" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
@@ -612,7 +623,7 @@
   </div>
 
   <!-- SIDE NAV -->
-  <nav class="side-nav">
+  <nav class="side-nav" aria-label="Case study sections">
     <a href="index.html" class="side-nav-back"><span class="ext-arrow back-arrow" aria-hidden="true"></span> Back</a>
     <a href="#overview">Overview</a>
     <span class="nav-group-label">Project 01</span>
@@ -625,12 +636,14 @@
     <a href="#p02-outcome" class="nav-sub">Outcome</a>
   </nav>
 
+  <main id="main" tabindex="-1">
+
   <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
       <span class="section-label">UX DESIGN INTERNSHIP · NIELSEN · 2025</span>
       <h1>Nielsen ONE</h1>
-      <video class="hero-image" src="images/nielsen/nielsen-hero-web.mp4"
+      <video class="hero-image" data-name="hero" src="images/nielsen/nielsen-hero-web.mp4"
              autoplay muted loop playsinline preload="metadata"
              aria-label="Nielsen ONE measurement tool"></video>
       <h2 class="section-h2 mt-elem">Designing for a cross-platform measurement tool used by the world's largest media brands.</h2>
@@ -689,14 +702,14 @@
       <div class="mt-block">
         <span class="section-label">Lock Icon on the Planning Tab</span>
         <p class="body mt-label">The first entry point was the Planning tab in the main navigation. My supervisor suggested using a lock icon to signal the feature was gated. I kept it small and inline with the tab label so it wouldn't disrupt the navigation's visual rhythm, informational rather than alarming. On hover, I added a bold outline state to make it feel clickable. Without it, users might have assumed the tab was simply disabled and <span class="body-bold">moved on.</span></p>
-        <img width="1820" height="831" src="images/nielsen/n1cf-campaigns-upsell-hover.webp" alt="Lock icon on Planning tab hover state" class="mt-media" style="width:100%;display:block;" />
+        <img width="1820" height="831" src="images/nielsen/n1cf-campaigns-upsell-hover.webp" alt="The Planning tab in the Campaigns view with a small lock icon beside it, shown in its hover state." class="mt-media" style="width:100%;display:block;" />
       </div>
 
       <!-- Upsell Modal -->
       <div class="mt-block">
         <span class="section-label">Upsell Modal</span>
         <p class="body mt-label">Clicking the lock opens a modal rather than a redirect. Taking users to a new page mid-task would have broken their flow and made it harder to return. The modal keeps them in context: they can read about the feature and close it without losing their place. The Cancel button was intentional too. <span class="body-bold">A user who knows they can leave is more willing to stay and read.</span> The modal itself uses a short header, three scannable outcome statements, and a supporting image. <span class="body-bold">Enterprise users scan rather than read paragraphs.</span></p>
-        <div class="media-crop mt-media"><img width="1965" height="1340" loading="lazy" decoding="async" src="images/nielsen/upsell-mockup.webp" alt="Upsell modal mockup" style="transform:scale(1.08);transform-origin:center;" /></div>
+        <div class="media-crop mt-media"><img width="1965" height="1340" loading="lazy" decoding="async" src="images/nielsen/upsell-mockup.webp" alt="“Unlock Planning” modal over the Campaigns table, listing three benefits with Cancel and Learn More buttons." style="transform:scale(1.08);transform-origin:center;" /></div>
       </div>
 
       <!-- Side Panel Card -->
@@ -704,7 +717,7 @@
         <span class="section-label">Side Panel Card</span>
         <p class="body mt-label">A user who has clicked into Campaign Details is in a different mindset than someone browsing the nav. They're looking at a specific campaign, a natural moment to show them what Planning could do with that data. I designed a card with two CTAs. Preview Data was an existing feature that let users sample Planning with their own data, surfacing it here gave <span class="body-bold">a low-commitment way to try before upgrading.</span> Learn More served users who needed more context before deciding.</p>
         <p class="body mt-label">After the first review, stakeholders felt the card needed more credibility. I added a social proof badge ('Join 2,500+ brands already using Planning') at the bottom of the card. For enterprise buyers, knowing that peers are already using something reduces the perceived risk of upgrading. <span class="body-bold">It was a small addition, but it shifted the card from a pitch to proof.</span></p>
-        <div class="media-crop mt-media"><img width="1965" height="1341" loading="lazy" decoding="async" src="images/nielsen/upsell-side-panel.webp" alt="Upsell side panel card" style="transform:scale(1.08);transform-origin:center;" /></div>
+        <div class="media-crop mt-media"><img width="1965" height="1341" loading="lazy" decoding="async" src="images/nielsen/upsell-side-panel.webp" alt="“Unlock Planning” upsell card in the Campaign Details side panel, with a “Join 2,500+ brands” line and Preview Data and Learn More buttons." style="transform:scale(1.08);transform-origin:center;" /></div>
       </div>
 
       <!-- Light and Dark Mode Variants and Edge Cases -->
@@ -712,10 +725,10 @@
         <span class="section-label">Light and Dark Mode Variants and Edge Cases</span>
         <p class="body mt-label">The first color pass on the card clashed in both light and dark mode, making it feel visually jarring. I reworked the palette to sit more calmly within Nielsen's design system. I also built out short and long content variants using Figma component properties, something I added proactively <span class="body-bold">rather than because it was asked of me.</span> Real content is unpredictable, and a design that only works at one character count creates problems for developers. Having every state documented meant the team could build without guessing.</p>
         <div class="variant-grid">
-          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Light.webp" alt="Short content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
-          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Dark.webp" alt="Short content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
-          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Long, Mode=Light.webp" alt="Long content, light mode" style="width:100%;height:auto;display:block;border-radius:0;" />
-          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Long, Mode=Dark.webp" alt="Long content, dark mode" style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Light.webp" alt="Upsell card variant: short copy on light blue." style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Short, Mode=Dark.webp" alt="Upsell card variant: short copy on dark blue." style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Long, Mode=Light.webp" alt="Upsell card variant: long copy on light blue." style="width:100%;height:auto;display:block;border-radius:0;" />
+          <img width="855" height="899" loading="lazy" decoding="async" src="images/nielsen/Content Size=Long, Mode=Dark.webp" alt="Upsell card variant: long copy on dark blue, with a “40% better performance” stat." style="width:100%;height:auto;display:block;border-radius:0;" />
         </div>
       </div>
 
@@ -755,23 +768,23 @@
       <div class="mt-block">
         <span class="section-label">Data Overlap Column</span>
         <p class="body mt-label">I proposed adding a Data Overlap column to the Selected Campaigns table, showing available data as a ratio. '19/61 days' meaning 19 days of data existed within a 61-day selected range. I scoped it to the Selected Campaigns section only, not the full list of 512 campaigns above it. Showing it across the full table would have cluttered the UI and added unnecessary backend load. I anticipated this as a constraint <span class="body-bold">before starting</span> and confirmed it with the dev team. The column also carries through to the review step, giving users one final check before committing to generating a report.</p>
-        <img width="626" height="855" loading="lazy" decoding="async" src="images/nielsen/n1a-ccb-step-details-selected-campaigns-data-overlap.webp" alt="Step details - selected campaigns data overlap" class="mt-media" style="width:45%;display:block;border-radius:12px;" />
+        <img width="626" height="855" loading="lazy" decoding="async" src="images/nielsen/n1a-ccb-step-details-selected-campaigns-data-overlap.webp" alt="Data Overlap column in the campaign table, showing days of data per campaign as ratios like 19/61 days." class="mt-media" style="width:45%;display:block;border-radius:12px;" />
       </div>
 
       <!-- Info Icon and Tooltip -->
       <div class="mt-block">
         <span class="section-label">Info Icon and Tooltip</span>
         <p class="body mt-label">The ratio format was a start, but it didn't tell users which months had data and which didn't. I added an info icon next to the column header, a standard Nielsen component users already recognize. On hover, a tooltip reads 'View detailed overlap.' I made it a click to open rather than hover to expand because the full table is dense. Users need time to scan it, and a hover state would have <span class="body-bold">disappeared the moment they moved their cursor.</span></p>
-        <img width="629" height="845" loading="lazy" decoding="async" src="images/nielsen/Group 5.webp" alt="Info icon and tooltip" class="mt-media" style="width:45%;display:block;border-radius:12px;" />
+        <img width="629" height="845" loading="lazy" decoding="async" src="images/nielsen/Group 5.webp" alt="Info icon on the Data Overlap header, with the tooltip “View detailed overlap.”" class="mt-media" style="width:45%;display:block;border-radius:12px;" />
       </div>
 
       <!-- Redesigned Data Overlap Table -->
       <div class="mt-block">
         <span class="section-label">Redesigned Data Overlap Table</span>
         <p class="body mt-label">Clicking opens a modal with a redesigned overlap table. The reference point I was working from was a raw backend spreadsheet with columns for CC ID, start dates, and data availability strings like '19 [May (9), Jun (10)]', built <span class="body-bold">for engineers rather than media buyers.</span></p>
-        <img width="1820" height="346" loading="lazy" decoding="async" src="images/nielsen/n1a-cc-monthly-details-enhancement 1.webp" alt="Monthly details enhancement" class="mt-media" style="width:100%;display:block;border-radius:12px;" />
+        <img width="1820" height="346" loading="lazy" decoding="async" src="images/nielsen/n1a-cc-monthly-details-enhancement 1.webp" alt="Raw backend spreadsheet of campaign dates and data availability, with a month-by-month grid below it." class="mt-media" style="width:100%;display:block;border-radius:12px;" />
         <p class="body mt-label">My version restructures the same data into a calendar-style layout organized by month, with each campaign as a row. Days within the selected range are highlighted in one color, days outside in another, with a legend at the bottom. The same information becomes immediately visual. You can see at a glance which campaigns have strong coverage for your window and which fall short, <span class="body-bold">without decoding anything.</span></p>
-        <img width="1820" height="797" loading="lazy" decoding="async" src="images/nielsen/modal.webp" alt="Data overlap modal" class="mt-media" style="width:100%;height:auto;display:block;" />
+        <img width="1820" height="797" loading="lazy" decoding="async" src="images/nielsen/modal.webp" alt="Redesigned data overlap modal, close up: a month-by-month table of available data days for six campaigns, with the selected May–June range highlighted in purple and data outside it in blue." class="mt-media" style="width:100%;height:auto;display:block;" />
       </div>
 
       <!-- Outcome P02 -->
@@ -779,7 +792,7 @@
         <span class="section-label">Outcome</span>
         <h2 class="section-h2 mt-label">From blind commitment to informed decisions.</h2>
         <p class="body mt-label">After two iterations, the designs were approved and handed to dev. Before this project, users had no way to know whether their selected campaigns actually had data for the date range they chose. They were committing to reports without enough information to make that call confidently. After handoff, the same workflow surfaced data availability at two levels: a quick ratio in the table for users who needed a scan, and a full calendar breakdown one click away for users who needed to go deeper. <span class="body-bold">The redesign didn't add new data. It made existing data legible at the right moment.</span></p>
-        <div class="media-crop mt-media"><img width="1965" height="1335" loading="lazy" decoding="async" src="images/nielsen/ccb-table.webp" alt="CCB table" style="transform:scale(1.08);transform-origin:center;" /></div>
+        <div class="media-crop mt-media"><img width="1965" height="1335" loading="lazy" decoding="async" src="images/nielsen/ccb-table.webp" alt="The redesigned data overlap modal in context, open over the Select Campaigns step of Nielsen ONE Ads on a laptop." style="transform:scale(1.08);transform-origin:center;" /></div>
       </div>
 
       <!-- What I Learned P02 -->
@@ -794,30 +807,30 @@
     <div class="container">
       <span class="section-label">More Work</span>
       <div class="more-work-grid">
-        <a class="more-work-card" href="oxy.html">
+        <div class="more-work-card">
           <video class="mw-media mw-oxy" src="images/oxy/oxy-hero-web.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Oxy Design Agency site"></video>
+                 autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <div class="mw-body">
-            <span class="mw-title">Oxy Design Agency</span>
+            <a class="mw-title card-link" href="oxy.html">Oxy Design Agency</a>
             <span class="mw-year">Product Design &middot; 2026</span>
           </div>
-        </a>
-        <a class="more-work-card" href="find-my-size.html">
+        </div>
+        <div class="more-work-card">
           <video class="mw-media mw-fms" src="images/find-my-size/find-my-size-hero-stacked-web.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Find My Size sizing flow"></video>
+                 autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <div class="mw-body">
-            <span class="mw-title">Find My Size</span>
+            <a class="mw-title card-link" href="find-my-size.html">Find My Size</a>
             <span class="mw-year">End-to-End UX &middot; 2026</span>
           </div>
-        </a>
+        </div>
       </div>
       <div class="more-work-cta">
         <a class="btn-view-all" href="index.html#work">View All Work</a>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -836,25 +849,13 @@
     </div>
   </footer>
 
-  <script>
-
-    function toggleMobileNav() {
-      const overlay = document.getElementById("mobileNav");
-      const open = !overlay.classList.contains("open");
-      overlay.classList.toggle("open", open);
-      document.querySelector(".nav-toggle").classList.toggle("open", open);
-      document.body.classList.toggle("nav-open", open);
-      document.body.style.overflow = open ? "hidden" : "";
-    }
-
-  </script>
 
   <!-- CUSTOM CURSOR
        The same element and the same copy as the homepage. At rest it is the purple
        dot this page used to draw for itself; over a More Work card it morphs into
        the "View Case Study" pill, so the cards hover alike in both places.
        Driven by cursor.js. -->
-  <div id="custom-cursor">
+  <div id="custom-cursor" aria-hidden="true">
     View Case Study
   </div>
 </body>

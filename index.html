@@ -4,13 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Khanak Joshi</title>
+  <meta name="description" content="I'm Khanak Joshi, an artist who designs products. I use art to see differently and design to solve meaningfully." />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Khanak Joshi" />
+  <meta property="og:title" content="Khanak Joshi" />
+  <meta property="og:description" content="I'm Khanak Joshi, an artist who designs products. I use art to see differently and design to solve meaningfully." />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="mobile-nav.js" defer></script>
+  <script src="video-controls.js" defer></script>
   <script src="cursor.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and cursor now live in styles.css. */
@@ -275,10 +284,12 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a class="logo" href="index.html">Khanak Joshi</a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
@@ -286,17 +297,19 @@
     </ul>
   </nav>
 
-  <div class="mobile-nav-overlay" id="mobileNav">
+  <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="mobile-nav-header">
       <span class="mobile-nav-logo">Khanak Joshi</span>
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
-    <nav class="mobile-nav-links">
+    <nav class="mobile-nav-links" aria-label="Menu">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
       <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:kvjoshi@asu.edu" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
+
+  <main id="main" tabindex="-1">
 
   <!-- HERO -->
   <section id="hero">
@@ -317,32 +330,30 @@
       <div class="work-col">
 
         <!-- Nielsen -->
-        <a class="case-card card-nielsen" href="nielsen.html">
+        <div class="case-card card-nielsen">
           <div class="card-image-wrap">
             <video class="card-media" src="images/nielsen/nielsen-hero-web.mp4"
-                   autoplay muted loop playsinline preload="metadata"
-                   aria-label="Nielsen ONE measurement tool"></video>
+                   autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
             <div class="card-hover-desc">A cross-platform measurement tool used by the world's largest media&nbsp;brands.</div>
           </div>
           <div class="card-body">
-            <div class="card-title">Nielsen ONE</div>
+            <div class="card-title"><a class="card-link" href="nielsen.html">Nielsen ONE</a></div>
             <span class="card-year">UX Design · 2025</span>
           </div>
-        </a>
+        </div>
 
         <!-- Oxy -->
-        <a class="case-card card-oxy" href="oxy.html">
+        <div class="case-card card-oxy">
           <div class="card-image-wrap">
             <video class="card-media" src="images/oxy/oxy-hero-web.mp4"
-                   autoplay muted loop playsinline preload="metadata"
-                   aria-label="Oxy Design Agency site"></video>
+                   autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
             <div class="card-hover-desc">Designing across strategy, research, and visual design for a creative agency and its clients.</div>
           </div>
           <div class="card-body">
-            <div class="card-title">Oxy Design Agency</div>
+            <div class="card-title"><a class="card-link" href="oxy.html">Oxy Design Agency</a></div>
             <span class="card-year">Product Design · 2026</span>
           </div>
-        </a>
+        </div>
 
       </div>
 
@@ -350,41 +361,41 @@
       <div class="work-col">
 
         <!-- Find My Size -->
-        <a class="case-card card-fms" href="find-my-size.html">
+        <div class="case-card card-fms">
           <div class="card-image-wrap">
             <video class="card-media" src="images/find-my-size/find-my-size-hero-web.mp4"
                    data-src-stacked="images/find-my-size/find-my-size-hero-stacked-web.mp4"
-                   autoplay muted loop playsinline preload="metadata"
-                   aria-label="Find My Size sizing flow"></video>
+                   autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
             <div class="card-hover-desc">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer.</div>
           </div>
           <div class="card-body">
-            <div class="card-title">Find My Size</div>
+            <div class="card-title"><a class="card-link" href="find-my-size.html">Find My Size</a></div>
             <span class="card-year">End-to-End UX · 2026</span>
           </div>
-        </a>
+        </div>
 
         <!-- Smile Donor -->
-        <a class="case-card card-smile" href="smile-donor.html">
+        <div class="case-card card-smile">
           <div class="card-image-wrap">
             <span class="card-status">In progress</span>
             <video class="card-media" src="images/smile-donor/smile-donor-hero-web.mp4"
                    data-src-stacked="images/smile-donor/smile-donor-hero-stacked-web.mp4"
-                   autoplay muted loop playsinline preload="metadata"
-                   aria-label="Smile Donor donation flow"></video>
+                   autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
             <div class="card-hover-desc">Redesigning a nonprofit website to close the gap between mission and&nbsp;trust.</div>
           </div>
           <div class="card-body">
-            <div class="card-title">Smile Donor</div>
+            <div class="card-title"><a class="card-link" href="smile-donor.html">Smile Donor</a></div>
             <span class="card-year">End-to-End UX · 2026</span>
           </div>
-        </a>
+        </div>
 
       </div>
 
     </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -404,7 +415,7 @@
   </footer>
 
   <!-- CUSTOM CURSOR -->
-  <div id="custom-cursor">
+  <div id="custom-cursor" aria-hidden="true">
     View Case Study
   </div>
 
@@ -438,14 +449,6 @@
     pickFilmCuts();
     isStacked.addEventListener('change', pickFilmCuts);
 
-    function toggleMobileNav() {
-      const overlay = document.getElementById('mobileNav');
-      const open = !overlay.classList.contains('open');
-      overlay.classList.toggle('open', open);
-      document.querySelector('.nav-toggle').classList.toggle('open', open);
-      document.body.classList.toggle('nav-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    }
 
   </script>
 

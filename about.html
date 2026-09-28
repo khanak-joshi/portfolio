@@ -3,14 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khanak Joshi</title>
+  <title>About — Khanak Joshi</title>
+  <meta name="description" content="I started as an artist before I knew what UX was." />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Khanak Joshi" />
+  <meta property="og:title" content="About — Khanak Joshi" />
+  <meta property="og:description" content="I started as an artist before I knew what UX was." />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="mobile-nav.js" defer></script>
   <style>
     /* Reset, tokens, nav, footer and containers now live in styles.css. */
 
@@ -394,10 +402,12 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a class="logo" href="index.html">Khanak Joshi</a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
@@ -405,17 +415,19 @@
     </ul>
   </nav>
 
-  <div class="mobile-nav-overlay" id="mobileNav">
+  <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="mobile-nav-header">
       <span class="mobile-nav-logo">Khanak Joshi</span>
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
-    <nav class="mobile-nav-links">
+    <nav class="mobile-nav-links" aria-label="Menu">
       <a href="about.html" class="active" onclick="toggleMobileNav()">About</a>
       <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:kvjoshi@asu.edu" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
     </nav>
   </div>
+
+  <main id="main" tabindex="-1">
 
   <!-- ABOUT HERO -->
   <section id="about-hero">
@@ -509,6 +521,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
     <div class="wide-inner">
@@ -527,7 +541,7 @@
   </footer>
 
   <!-- CUSTOM CURSOR -->
-  <div id="custom-cursor"></div>
+  <div id="custom-cursor" aria-hidden="true"></div>
 
   <script>
     const cursor = document.getElementById('custom-cursor');
@@ -552,14 +566,6 @@
       document.querySelectorAll('#collateral .marquee').forEach(m => io.observe(m));
     }
 
-    function toggleMobileNav() {
-      const overlay = document.getElementById('mobileNav');
-      const open = !overlay.classList.contains('open');
-      overlay.classList.toggle('open', open);
-      document.querySelector('.nav-toggle').classList.toggle('open', open);
-      document.body.classList.toggle('nav-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    }
   </script>
 
 </body>

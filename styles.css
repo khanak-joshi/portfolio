@@ -34,9 +34,11 @@
   --border: #E3E5E8;         /* hairlines & dividers, between light/medium grey */
 
   /* Functional — case study findings. Outside the brand palette; these are
-     carried over from the previous scheme so pass/fail stays legible. */
-  --pos: #8EB497;
-  --neg: #D07D7D;
+     carried over from the previous scheme so pass/fail stays legible.
+     Darkened from #8EB497 / #D07D7D (2.2:1 and 2.9:1) to clear the 3:1 that
+     WCAG asks of a meaningful icon on --bg; same hues, only lightness moved. */
+  --pos: #629670;
+  --neg: #C96F6F;
 
   /* ── LAYOUT ──
      One aligned content edge across the homepage and case studies:
@@ -216,6 +218,125 @@ html, body { cursor: none; }
 a, button, input, textarea, select, label, summary, [role="button"] {
   cursor: none;
 }
+
+/* ── FOCUS ──
+   One keyboard focus ring for the whole site: 2px of Near Black, never purple
+   (purple is hover and buttons only). :focus-visible, so a mouse click never
+   draws it — only Tab and the like.
+
+   The ring follows the concentric-corner rule, outer radius = inner radius +
+   gap. Browsers already grow an outline's corners by its offset, so each
+   element only needs its real radius: the 30px pill gets a 34px ring, a card's
+   2px media gets 6px. Elements with no visible shape stay square.
+
+   The 4px gap is for things whose box is their visible edge (wordmark, cards,
+   pill). Links that already carry padding for their hit area — the bar, the
+   mobile overlay, the rail — take the ring on that padded edge instead, so it
+   reads as a button-sized box and never overlaps the link next to it. */
+:root {
+  --focus-ring: 2px;
+  --focus-offset: 4px;
+}
+:focus-visible {
+  outline: var(--focus-ring) solid var(--text-heading);
+  outline-offset: var(--focus-offset);
+}
+nav .nav-links a,
+.mobile-nav-overlay a,
+.mobile-nav-overlay button,
+.side-nav a {
+  outline-offset: 0;
+}
+/* Skip link — the first stop for Tab on every page. Parked above the viewport
+   until focused, then drops in over the bar's wordmark, styled like a nav pill. */
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: var(--content-inset);
+  z-index: 10000;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: var(--bg);
+  color: var(--text-heading);
+  font-family: var(--font-sans);
+  font-weight: var(--w-medium);
+  font-size: var(--nav-size);
+  line-height: var(--nav-lh);
+  text-decoration: none;
+  transform: translateY(calc(-100% - 24px));
+}
+.skip-link:focus-visible { transform: none; }
+/* <main> takes focus from the skip link only so the next Tab starts inside
+   it; it is not a control, so it gets no ring. */
+#main:focus { outline: none; }
+
+/* ── CARDS ──
+   Each work card is a box with one real link, its title, stretched over the
+   whole card by a ::after — the standard accessible card. The card is still
+   clickable everywhere, but a screen reader hears "Oxy Design Agency, link"
+   rather than the whole card read out as one long link name, and the film's
+   pause button can sit in the card without being nested inside a link.
+
+   The ring belongs to the card, not the title, so it's drawn on the card when
+   its link has keyboard focus. The cards draw no box of their own; their
+   corners are the media's, hence the 2px. */
+.case-card,
+.more-work-card {
+  position: relative;
+  border-radius: 2px;
+}
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.card-link:focus-visible { outline: none; }
+.case-card:has(.card-link:focus-visible),
+.more-work-card:has(.card-link:focus-visible) {
+  outline: var(--focus-ring) solid var(--text-heading);
+  outline-offset: var(--focus-offset);
+}
+
+/* ── FILMS ──
+   Every looping film gets a pause/play button (added by video-controls.js),
+   --label-gap in from the film's top-left corner on every film — clear of the
+   "In progress" badge (top-right) and the homepage hover copy (bottom). Near
+   Black at rest so it reads on light and dark footage alike; purple only on
+   hover, per the palette. 44px, the site's touch-target size. */
+.video-frame { position: relative; }
+.video-toggle {
+  position: absolute;
+  top: var(--label-gap);
+  left: var(--label-gap);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(26, 29, 33, 0.72);
+  color: #FFFFFF;
+  transition: background-color 0.2s ease;
+}
+.video-toggle:hover { background: var(--accent); }
+.video-toggle svg { display: block; }
+.more-work-card .video-frame { align-self: end; }
+.more-work-card .video-frame .mw-media { width: 100%; }
+
+/* ✓ / ✕ markers beside case study findings. */
+.mark {
+  flex-shrink: 0;
+  font-weight: 600;
+}
+.mark-pos { color: var(--pos); }
+.mark-neg { color: var(--neg); }
 
 /* Every <img> carries width/height attributes so the browser can reserve the
    right box before the file lands. Those attributes are presentational hints,
@@ -433,11 +554,15 @@ nav:not(.side-nav) {
      The links hang their purple active rule 12px left of their text, and the
      rail's overflow-y:auto clips anything outside its box. So the box starts
      12px early and pads that back: the text stays on --content-inset and the
-     rule has room to show. */
+     rule has room to show.
+
+     The focus ring needs the same courtesy: it sits --focus-ring outside each
+     link, which is outside the box on both sides, so the box grows by that
+     much left and right and pads it back. */
   body.case-study .side-nav {
-    left: calc(var(--content-inset) - 12px);
-    width: calc(var(--rail-w) + 12px);
-    padding: calc(var(--hero-top) - var(--nav-h) - 3px) 0 40px 12px;
+    left: calc(var(--content-inset) - 12px - var(--focus-ring));
+    width: calc(var(--rail-w) + 12px + var(--focus-ring) * 2);
+    padding: calc(var(--hero-top) - var(--nav-h) - 3px) var(--focus-ring) 40px calc(12px + var(--focus-ring));
   }
   /* Full-bleed again, so its own .wide-inner sits it on --content-inset
      instead of measuring against the body's gutters. */

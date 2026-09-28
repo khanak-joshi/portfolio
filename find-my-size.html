@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khanak Joshi</title>
+  <title>Find My Size — Khanak Joshi</title>
+  <meta name="description" content="A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer." />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Khanak Joshi" />
+  <meta property="og:title" content="Find My Size — Khanak Joshi" />
+  <meta property="og:description" content="A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer." />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="mobile-nav.js" defer></script>
+  <script src="video-controls.js" defer></script>
   <script src="side-nav.js" defer></script>
   <script src="cursor.js" defer></script>
   <style>
@@ -644,10 +653,12 @@
 </head>
 <body class="case-study">
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a class="logo" href="index.html">Khanak Joshi</a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
@@ -655,12 +666,12 @@
     </ul>
   </nav>
 
-  <div class="mobile-nav-overlay" id="mobileNav">
+  <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="mobile-nav-header">
       <span class="mobile-nav-logo">Khanak Joshi</span>
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
-    <nav class="mobile-nav-links">
+    <nav class="mobile-nav-links" aria-label="Menu">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
       <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:kvjoshi@asu.edu" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
@@ -668,7 +679,7 @@
   </div>
 
   <!-- SIDE NAV -->
-  <nav class="side-nav">
+  <nav class="side-nav" aria-label="Case study sections">
     <a href="index.html" class="side-nav-back"><span class="ext-arrow back-arrow" aria-hidden="true"></span> Back</a>
     <a href="#hero">Overview</a>
     <a href="#problem-band">The Problem</a>
@@ -680,12 +691,14 @@
     <a href="#outcome">Outcome</a>
   </nav>
 
+  <main id="main" tabindex="-1">
+
   <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
       <span class="section-label">End-to-end UX · GIT 340 · 2026</span>
       <h1>Find My Size</h1>
-      <video class="hero-image" src="images/find-my-size/find-my-size-hero-stacked-web.mp4"
+      <video class="hero-image" data-name="hero" src="images/find-my-size/find-my-size-hero-stacked-web.mp4"
              autoplay muted loop playsinline preload="metadata"
              aria-label="Find My Size sizing flow"></video>
       <h2 class="section-h2 mt-elem">A sizing confidence tool for online clothing shoppers designed to show its work, not just its answer.</h2>
@@ -732,8 +745,8 @@
       <div class="mt-block">
         <span class="section-label">User Interview Quotes</span>
         <div class="empathy-grid">
-          <img width="875" height="875" src="images/find-my-size/empathy-map-1.webp" alt="Empathy map 1" style="width:100%;border-radius:12px;display:block;" />
-          <img width="875" height="875" loading="lazy" decoding="async" src="images/find-my-size/empathy-map-2.webp" alt="Empathy map 2" style="width:100%;border-radius:12px;display:block;" />
+          <img width="875" height="875" src="images/find-my-size/empathy-map-1.webp" alt="“For a new store, the first couple of purchases are just about figuring out sizing.” User 1, the Busy Shopper" style="width:100%;border-radius:12px;display:block;" />
+          <img width="875" height="875" loading="lazy" decoding="async" src="images/find-my-size/empathy-map-2.webp" alt="“Uncertainty happens all the time. I have doubts with online clothes.” User 2, the Budget-Conscious Student" style="width:100%;border-radius:12px;display:block;" />
         </div>
       </div>
 
@@ -741,14 +754,14 @@
       <div class="image-block">
         <span class="section-label">User Persona</span>
         <p class="body mt-label">I synthesized both interviews into a composite shopper. She loves the convenience and dreads the guesswork. That tension, not a demographic profile, is what the design had to resolve.</p>
-        <img width="1365" height="1424" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Persona_2.webp" alt="User Persona" class="persona-img mt-media" style="width:75%;display:block;" />
+        <img width="1365" height="1424" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Persona_2.webp" alt="Persona: Sophie Montgomery, early 20s to early 30s, the Online-First Shopper. She wants clothes that fit without multiple returns, but finds size charts and fit tools unreliable." class="persona-img mt-media" style="width:75%;display:block;" />
       </div>
 
       <!-- Journey Map -->
       <div class="image-block">
         <span class="section-label">Journey Map</span>
         <p class="body mt-label">Emotion stays neutral through browsing, then drops sharply at Compare & Decide, the exact moment she's weighing whether the sizing risk is worth it. Once she commits, mood recovers immediately. The problem isn't the order; <span class="body-bold">it's the decision before it.</span> That dip became the design target.</p>
-        <img width="1820" height="816" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_JourneyMap.webp" alt="Journey Map" class="mt-media" style="width:100%;display:block;" />
+        <img width="1820" height="816" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_JourneyMap.webp" alt="Journey map across five stages, from Recognize Need to Try On &amp; Decide. Confidence dips lowest at Compare &amp; Decide (“Is this worth it if I might have to return it?”), then splits after delivery between “This actually works” and “Ugh, I need to return this.”" class="mt-media" style="width:100%;display:block;" />
       </div>
 
       <!-- Competitor analysis -->
@@ -758,17 +771,17 @@
         <p class="body mt-label">I analyzed three existing sizing tools, PacSun's True Fit integration, Aritzia's size chart, and Fytted, then conducted a heuristic evaluation of Aritzia's full shopping flow.</p>
 
         <div class="comp-logos">
-          <img width="363" height="120" loading="lazy" decoding="async" src="images/find-my-size/true-fit-logo.webp" alt="True Fit" style="height:48px;object-fit:contain;" />
-          <img width="180" height="120" loading="lazy" decoding="async" src="images/find-my-size/aritizia-logo.webp" alt="Aritzia" style="height:48px;object-fit:contain;" />
-          <img width="120" height="120" loading="lazy" decoding="async" src="images/find-my-size/fytted-logo.webp" alt="Fytted" style="height:48px;object-fit:contain;" />
+          <img width="363" height="120" loading="lazy" decoding="async" src="images/find-my-size/true-fit-logo.webp" alt="True Fit logo" style="height:48px;object-fit:contain;" />
+          <img width="180" height="120" loading="lazy" decoding="async" src="images/find-my-size/aritizia-logo.webp" alt="Aritzia logo" style="height:48px;object-fit:contain;" />
+          <img width="120" height="120" loading="lazy" decoding="async" src="images/find-my-size/fytted-logo.webp" alt="Fytted logo" style="height:48px;object-fit:contain;" />
         </div>
 
         <p class="body body-bold mt-block">Each had real strengths. But the gap was consistent across all three:</p>
         <ul class="mt-label" style="list-style:none;display:flex;flex-direction:column;gap:16px;">
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>None explained how a recommendation was generated</li>
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>None tied fit-related social proof directly to the sizing decision moment</li>
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>None addressed return anxiety within the sizing experience itself</li>
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>Fytted required a full app download - completely separate from the checkout flow</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>None explained how a recommendation was generated</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>None tied fit-related social proof directly to the sizing decision moment</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>None addressed return anxiety within the sizing experience itself</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>Fytted required a full app download - completely separate from the checkout flow</li>
         </ul>
       </div>
     </div>
@@ -791,29 +804,29 @@
       <h2 class="section-h2">Embedded, not extracted.</h2>
       <p class="body mt-label"><span class="body-bold">The dip at Compare & Decide was the brief.</span> Every design decision that followed was an answer to the same question: what does a shopper need at that exact moment to feel confident enough to commit?</p>
       <span class="section-label mt-block">Task Flow</span>
-      <img width="1880" height="1301" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Task_flow.webp" alt="Task Flow" class="mt-media" style="width:calc(100% + 24px);max-width:none;display:block;margin-left:-24px;" />
+      <img width="1880" height="1301" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Task_flow.webp" alt="Task flow: from the product page, the user expands Find My Size, enters height, weight and fit preference, sees a recommended size with an explanation, and selects it." class="mt-media" style="width:calc(100% + 24px);max-width:none;display:block;margin-left:-24px;" />
 
       <!-- Sketches to hi-fi -->
       <div class="mt-block">
         <span class="section-label">From sketches to hi-fi</span>
-        <img width="1820" height="942" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Wireframe copy.webp" alt="Paper Sketches" class="mt-media" style="width:100%;max-width:100%;display:block;" />
+        <img width="1820" height="942" loading="lazy" decoding="async" src="images/find-my-size/Joshi_340_Wireframe copy.webp" alt="Paper sketches of four phone screens: product page, sizing form, recommendation with explanation and returns info, and the product page with the recommended size applied." class="mt-media" style="width:100%;max-width:100%;display:block;" />
       </div>
 
       <!-- Key design decisions -->
       <div class="mt-block decisions">
         <span class="section-label">Key design decisions</span>
         <p class="body mt-label">Find My Size lives directly above the size selector on the product page: <span class="body-bold">no app download, no account, no body scan.</span> I considered a standalone app like Fytted, but separating the tool from checkout breaks the exact moment the journey map identified. Keeping it embedded wasn't just simpler, it was the right answer to the HMW.</p>
-        <img width="1383" height="1386" loading="lazy" decoding="async" src="images/find-my-size/product-page.webp" alt="Product page" class="mt-media" style="width:100%;height:auto;display:block;" />
+        <img width="1383" height="1386" loading="lazy" decoding="async" src="images/find-my-size/product-page.webp" alt="Threadly product page for a pink knit top, with the model’s height and size, a Find My Size button, and a Size Chart link." class="mt-media" style="width:100%;height:auto;display:block;" />
 
         <div class="mt-block">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
             <div class="text-above-img">
-              <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i1.webp" alt="Iteration 1" style="width:100%;height:auto;display:block;" />
+              <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i1.webp" alt="Iteration 1: the sizing form with a two-dot progress indicator and no required-field markers." style="width:100%;height:auto;display:block;" />
               <p class="body body-bold mt-label">Progressive disclosure on the form</p>
               <p class="body" style="margin-top:8px;">Height, weight, and fit preference are asked upfront, which is the minimum for a useful recommendation. Body measurements live in a collapsible section and usual size is an added field, keeping the experience light while giving detail-oriented users a path to more accuracy.</p>
             </div>
             <div class="text-above-img">
-              <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i2.webp" alt="Iteration 2" style="width:100%;height:auto;display:block;" />
+              <img width="1100" height="1270" loading="lazy" decoding="async" src="images/find-my-size/i2.webp" alt="Iteration 2: a progress bar replaces the dots, required fields are marked, and an empty weight field shows “This field is required.”" style="width:100%;height:auto;display:block;" />
               <p class="body body-bold mt-label">Progress bar over step counter</p>
               <p class="body" style="margin-top:8px;">An earlier iteration used a step counter. I replaced it with a progress bar: it communicates progress made rather than work remaining, which is the gentler frame for a form you want people to finish.</p>
             </div>
@@ -822,7 +835,7 @@
 
         <div class="mt-block">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
-            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/opt-measurements.webp" alt="Visual hierarchy" style="width:100%;height:auto;display:block;" />
+            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/opt-measurements.webp" alt="Optional measurements section, expanded: bust, waist and hip fields, each with a help icon, and a row of usual-size chips from XS to XL." style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
               <p class="body body-bold">Visual hierarchy refinement</p>
               <p class="body" style="margin-top:8px;">Toggle buttons for IN/CM, LB/KG, and fit preference were pulled to a lighter purple in the second iteration. Everything competed equally before so dialing them back made "Get Size Recommendation" the clear visual anchor.</p>
@@ -832,7 +845,7 @@
 
         <div class="mt-block">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
-            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/help-modal.webp" alt="Inline measurement guides" style="width:100%;height:auto;display:block;" />
+            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/help-modal.webp" alt="“How to Measure Your Bust” help modal with a photo showing where to measure and a “Got It” button." style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
               <p class="body body-bold">Inline measurement guides</p>
               <p class="body" style="margin-top:8px;">A heuristic evaluation of Aritzia revealed that users benefited from visual measurement guides inline. I adopted the same idea so users who didn't know their bust or waist measurement had a reference right there, without leaving the flow.</p>
@@ -842,7 +855,7 @@
 
         <div class="decision-block">
           <div class="img-text-block" style="display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:center;">
-            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/rec-screen.webp" alt="Recommendation screen" style="width:100%;height:auto;display:block;" />
+            <img width="1100" height="1103" loading="lazy" decoding="async" src="images/find-my-size/rec-screen.webp" alt="Recommendation screen: size S, “82% of similar shoppers chose S,” “Free returns available,” and buttons to Select Size S or Edit Inputs." style="width:100%;height:auto;display:block;" />
             <div style="align-self:center;">
               <p class="body body-bold">The recommendation screen shows its work</p>
               <p class="body" style="margin-top:8px;">The result screen shows the suggested size, how it was determined, what percentage of similar shoppers chose it, whether the item runs true to size, and a free returns note with a link to the return policy. Most tools give you an answer. This one explains the reasoning behind it.</p>
@@ -857,7 +870,7 @@
   <section id="prototype">
     <div class="container">
       <span class="section-label">Figma Make Prototype</span>
-      <video class="prototype-film mt-media" src="images/find-my-size/find-my-size-prototype-web.mp4"
+      <video data-name="prototype" class="prototype-film mt-media" src="images/find-my-size/find-my-size-prototype-web.mp4"
              width="726" height="1492" autoplay muted loop playsinline preload="metadata"
              aria-label="Screen recording of the Find My Size prototype, from the product page through the sizing form"></video>
       <div class="prototype-cta">
@@ -874,12 +887,12 @@
       <p class="body mt-label" style="margin-bottom:56px;">I tested the Figma Make prototype in person with two participants who shopped online monthly on mobile and had returned items due to sizing before, different from the research interviewees.</p>
 
       <ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
-        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--pos);font-weight:600;flex-shrink:0;">✓</span>Both users found Find My Size independently within 10 seconds</li>
-        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--pos);font-weight:600;flex-shrink:0;">✓</span>Both rated ease of use 5/5 and post-recommendation confidence 4/5 and 5/5</li>
-        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--pos);font-weight:600;flex-shrink:0;">✓</span>The model height callout and return reassurance were noticed unprompted — the right details in the right places</li>
-        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>One user tapped X instead of "Select Size S," not knowing it auto-applies the recommended size</li>
-        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>The help icon next to bust was too small — one user asked aloud how to measure instead of tapping it</li>
-        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>Both users were unsure whether Find My Size and the "Size and Fit" link did the same thing</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-pos" role="img" aria-label="Worked:">✓</span>Both users found Find My Size independently within 10 seconds</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-pos" role="img" aria-label="Worked:">✓</span>Both rated ease of use 5/5 and post-recommendation confidence 4/5 and 5/5</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-pos" role="img" aria-label="Worked:">✓</span>The model height callout and return reassurance were noticed unprompted — the right details in the right places</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>One user tapped X instead of "Select Size S," not knowing it auto-applies the recommended size</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>The help icon next to bust was too small — one user asked aloud how to measure instead of tapping it</li>
+        <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>Both users were unsure whether Find My Size and the "Size and Fit" link did the same thing</li>
       </ul>
 
       <div style="margin-top:32px;">
@@ -889,8 +902,8 @@
       </div>
 
       <div class="testing-shots mt-media" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <img width="922" height="924" loading="lazy" decoding="async" src="images/find-my-size/testing-1.webp" alt="Annotated measurements form" style="width:100%;height:auto;display:block;" />
-        <img width="922" height="924" loading="lazy" decoding="async" src="images/find-my-size/testing-2.webp" alt="Annotated recommendation screen" style="width:100%;height:auto;display:block;" />
+        <img width="922" height="924" loading="lazy" decoding="async" src="images/find-my-size/testing-1.webp" alt="Measurements form annotated with arrows at the optional measurements toggle and the small bust help icon one tester missed." style="width:100%;height:auto;display:block;" />
+        <img width="922" height="924" loading="lazy" decoding="async" src="images/find-my-size/testing-2.webp" alt="Recommendation screen annotated with arrows at the close X one tester tapped and the “Select Size S” button they skipped." style="width:100%;height:auto;display:block;" />
       </div>
 
       <div class="recommendations">
@@ -932,30 +945,30 @@
     <div class="container">
       <span class="section-label">More Work</span>
       <div class="more-work-grid">
-        <a class="more-work-card" href="smile-donor.html">
+        <div class="more-work-card">
           <video class="mw-media mw-smile" src="images/smile-donor/smile-donor-hero-stacked-web.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Smile Donor donation flow"></video>
+                 autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <div class="mw-body">
-            <span class="mw-title">Smile Donor</span>
+            <a class="mw-title card-link" href="smile-donor.html">Smile Donor</a>
             <span class="mw-year">End-to-End UX &middot; 2026</span>
           </div>
-        </a>
-        <a class="more-work-card" href="nielsen.html">
+        </div>
+        <div class="more-work-card">
           <video class="mw-media mw-nielsen" src="images/nielsen/nielsen-hero-web.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Nielsen ONE measurement tool"></video>
+                 autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <div class="mw-body">
-            <span class="mw-title">Nielsen ONE</span>
+            <a class="mw-title card-link" href="nielsen.html">Nielsen ONE</a>
             <span class="mw-year">UX Design &middot; 2025</span>
           </div>
-        </a>
+        </div>
       </div>
       <div class="more-work-cta">
         <a class="btn-view-all" href="index.html#work">View All Work</a>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -974,25 +987,13 @@
     </div>
   </footer>
 
-  <script>
-
-    function toggleMobileNav() {
-      const overlay = document.getElementById("mobileNav");
-      const open = !overlay.classList.contains("open");
-      overlay.classList.toggle("open", open);
-      document.querySelector(".nav-toggle").classList.toggle("open", open);
-      document.body.classList.toggle("nav-open", open);
-      document.body.style.overflow = open ? "hidden" : "";
-    }
-
-  </script>
 
   <!-- CUSTOM CURSOR
        The same element and the same copy as the homepage. At rest it is the purple
        dot this page used to draw for itself; over a More Work card it morphs into
        the "View Case Study" pill, so the cards hover alike in both places.
        Driven by cursor.js. -->
-  <div id="custom-cursor">
+  <div id="custom-cursor" aria-hidden="true">
     View Case Study
   </div>
 </body>

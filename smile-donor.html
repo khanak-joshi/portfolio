@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khanak Joshi</title>
+  <title>Smile Donor — Khanak Joshi</title>
+  <meta name="description" content="Redesigning a nonprofit website to close the gap between mission and trust." />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Khanak Joshi" />
+  <meta property="og:title" content="Smile Donor — Khanak Joshi" />
+  <meta property="og:description" content="Redesigning a nonprofit website to close the gap between mission and trust." />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://use.typekit.net" crossorigin />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/kyx4cmh.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="mobile-nav.js" defer></script>
+  <script src="video-controls.js" defer></script>
   <script src="side-nav.js" defer></script>
   <script src="cursor.js" defer></script>
   <style>
@@ -582,10 +591,12 @@
 </head>
 <body class="case-study">
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a class="logo" href="index.html">Khanak Joshi</a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()"><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()"><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener">Resume<span class="ext-arrow" aria-hidden="true"></span></a></li>
@@ -593,12 +604,12 @@
     </ul>
   </nav>
 
-  <div class="mobile-nav-overlay" id="mobileNav">
+  <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="mobile-nav-header">
       <span class="mobile-nav-logo">Khanak Joshi</span>
       <button class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">&#215;</button>
     </div>
-    <nav class="mobile-nav-links">
+    <nav class="mobile-nav-links" aria-label="Menu">
       <a href="about.html" onclick="toggleMobileNav()">About</a>
       <a href="resume-khanak-joshi.pdf" target="_blank" rel="noopener" onclick="toggleMobileNav()">Resume<span class="ext-arrow" aria-hidden="true"></span></a>
       <a href="mailto:kvjoshi@asu.edu" onclick="toggleMobileNav()">Contact Me<span class="ext-arrow" aria-hidden="true"></span></a>
@@ -606,19 +617,21 @@
   </div>
 
   <!-- SIDE NAV -->
-  <nav class="side-nav">
+  <nav class="side-nav" aria-label="Case study sections">
     <a href="index.html" class="side-nav-back"><span class="ext-arrow back-arrow" aria-hidden="true"></span> Back</a>
     <a href="#hero">Overview</a>
     <a href="#problem-band">The Problem</a>
     <a href="#research">Research</a>
   </nav>
 
+  <main id="main" tabindex="-1">
+
   <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
       <span class="section-label">End-to-end UX · ASU Barrett Honors Thesis · 2026</span>
       <h1>Smile Donor</h1>
-      <video class="hero-image" src="images/smile-donor/smile-donor-hero-stacked-web.mp4"
+      <video class="hero-image" data-name="hero" src="images/smile-donor/smile-donor-hero-stacked-web.mp4"
              autoplay muted loop playsinline preload="metadata"
              aria-label="Smile Donor donation flow"></video>
       <h2 class="section-h2 mt-elem">Redesigning a nonprofit website to close the gap between mission and trust.</h2>
@@ -672,10 +685,10 @@
       <div class="mt-block">
         <span class="section-label">User Interview Quotes</span>
         <div class="quote-grid">
-          <img width="780" height="780" src="images/smile-donor/quote-user1.webp" alt="User 1 quote" style="width:100%;border-radius:12px;display:block;" />
-          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user2.webp" alt="User 2 quote" style="width:100%;border-radius:12px;display:block;" />
-          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user3.webp" alt="User 3 quote" style="width:100%;border-radius:12px;display:block;" />
-          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user4.webp" alt="User 4 quote" style="width:100%;border-radius:12px;display:block;" />
+          <img width="780" height="780" src="images/smile-donor/quote-user1.webp" alt="“If information is not very transparent, I don’t feel comfortable donating.” User 1, the Time-Conscious Donor" style="width:100%;border-radius:12px;display:block;" />
+          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user2.webp" alt="“Sometimes websites don’t capture the real impact.” User 2, the Purpose-Driven Donor" style="width:100%;border-radius:12px;display:block;" />
+          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user3.webp" alt="“If I have to do too many steps, it’s not going to happen.” User 3, the Socially-Motivated Donor" style="width:100%;border-radius:12px;display:block;" />
+          <img width="780" height="780" loading="lazy" decoding="async" src="images/smile-donor/quote-user4.webp" alt="“It just takes one thing to go wrong and you don’t donate.” User 4, the Trust-Driven Donor" style="width:100%;border-radius:12px;display:block;" />
         </div>
         <p class="body mt-media">Three of four users said too many steps led to abandonment. Three of four cited limited payment options as a barrier. Two of four pointed to lack of transparency about fund use, and two of four said the absence of a tax receipt or post-donation confirmation added to that frustration. <span class="body-bold">Trust was the number one factor</span> in deciding whether to donate, but <span class="body-bold">friction in the process was just as likely to kill a donation as distrust of the organization itself.</span></p>
       </div>
@@ -684,7 +697,7 @@
       <div class="image-block">
         <span class="section-label">User Persona</span>
         <p class="body mt-label">I synthesized the four into a composite persona, Sara Reyes, for the thesis documentation. But the spectrum is the finding: four trust strategies, one flow that has to serve them all.</p>
-        <img width="1365" height="1500" loading="lazy" decoding="async" src="images/smile-donor/Joshi_340_HonorsPersona.webp" alt="User Persona" class="persona-img mt-media" style="width:75%;display:block;" />
+        <img width="1365" height="1500" loading="lazy" decoding="async" src="images/smile-donor/Joshi_340_HonorsPersona.webp" alt="Persona: Sara Reyes, 42, the Intentional Online Donor. She wants to see where money goes, donate in one or two clicks with Apple Pay or PayPal, and get an instant receipt. Buried information, long forms and limited payment options make her abandon." class="persona-img mt-media" style="width:75%;display:block;" />
       </div>
 
       <!-- Competitor analysis -->
@@ -695,35 +708,35 @@
 
         <div class="mt-block">
           <span class="section-label">St. Jude</span>
-          <img width="896" height="140" loading="lazy" decoding="async" src="images/smile-donor/smile5.webp" alt="St. Jude" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
+          <img width="896" height="140" loading="lazy" decoding="async" src="images/smile-donor/smile5.webp" alt="St. Jude donation form note: “We’ll use your email to send you a receipt,” with a privacy policy link." class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         </div>
 
         <div class="mt-block">
           <span class="section-label">Feeding America</span>
-          <img width="900" height="279" loading="lazy" decoding="async" src="images/smile-donor/smile4.webp" alt="Feeding America" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
+          <img width="900" height="279" loading="lazy" decoding="async" src="images/smile-donor/smile4.webp" alt="Feeding America fund-use callout: a ring chart showing 98% of donations go directly to programs." class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         </div>
 
         <div class="mt-block">
           <span class="section-label">Women for Women International</span>
-          <img width="900" height="182" loading="lazy" decoding="async" src="images/smile-donor/smile3.webp" alt="Women for Women International" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
+          <img width="900" height="182" loading="lazy" decoding="async" src="images/smile-donor/smile3.webp" alt="Women for Women International impact story: a program participant describes how joining the Adolescent Girls program changed her life." class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         </div>
 
         <p class="body body-bold mt-block">Smile Donor had none of these. Its donation form was a single open text field redirecting to an external PayPal page. The form had:</p>
         <ul class="mt-label" style="list-style:none;display:flex;flex-direction:column;gap:16px;">
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No fund-use information</li>
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No trust signals</li>
-          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--neg);font-weight:600;flex-shrink:0;">✕</span>No receipt confirmation language</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>No fund-use information</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>No trust signals</li>
+          <li class="body" style="display:flex;gap:12px;align-items:flex-start;"><span class="mark mark-neg" role="img" aria-label="Issue:">✕</span>No receipt confirmation language</li>
         </ul>
-        <img width="900" height="401" loading="lazy" decoding="async" src="images/smile-donor/smile2.webp" alt="Smile Donor current site" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
+        <img width="900" height="401" loading="lazy" decoding="async" src="images/smile-donor/smile2.webp" alt="Smile Donor’s current donation form: one-time or recurring payment, a single open “Donation Amount” field, and a Donate button that redirects to PayPal." class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         <p class="body mt-media">The heuristic evaluation sharpened that finding. Smile Donor's strongest trust-building content, its 501(c)(3) status, 0% overhead model, vetting process, and project stories, already existed on the site. It was hidden in long body text and just wasn't where donors needed it. A first-time visitor going straight to the donation form would <span class="body-bold">encounter none of it.</span></p>
-        <img width="900" height="950" loading="lazy" decoding="async" src="images/smile-donor/smile1.webp" alt="Smile Donor heuristic evaluation" class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
+        <img width="900" height="950" loading="lazy" decoding="async" src="images/smile-donor/smile1.webp" alt="Smile Donor’s current About page: long paragraphs covering its 501(c)(3) status, mission, and eight-step NGO vetting process." class="mt-media" style="max-width:360px;width:100%;height:auto;display:block;" />
         <p class="body mt-media">One opportunity emerged that no competitor had addressed: none allowed donors to direct their gift to a specific cause despite showing detailed cause content. Smile Donor already had that content. <span class="body-bold">Directed giving could be a meaningful differentiator.</span></p>
       </div>
 
       <div class="image-block">
         <span class="section-label">Proposed Sitemap</span>
         <p class="body mt-label">To bridge research and redesign, I mapped a proposed information architecture and a set of prioritized fixes. The donation flow needed the most work: preset amounts, multiple payment methods, fund-use transparency, and post-donation confirmation were all missing. Smile Donor's existing credibility content needed to move to <span class="body-bold">where donors are actually deciding</span>, not buried elsewhere on the site. Directed giving was scoped as a medium-priority differentiator once the foundation was in place.</p>
-        <img width="1820" height="1196" loading="lazy" decoding="async" src="images/smile-donor/Smile Donor, Sitemap.webp" alt="Proposed Sitemap" class="mt-media" style="width:100%;height:auto;display:block;" />
+        <img width="1820" height="1196" loading="lazy" decoding="async" src="images/smile-donor/Smile Donor, Sitemap.webp" alt="Proposed sitemap with five sections: Home, About Us, Our Work, Get Involved, and Donate. Donate holds the donation form, fund-use social proof, and receipt and tax info." class="mt-media" style="width:100%;height:auto;display:block;" />
       </div>
     </div>
   </section>
@@ -745,30 +758,30 @@
     <div class="container">
       <span class="section-label">More Work</span>
       <div class="more-work-grid">
-        <a class="more-work-card" href="nielsen.html">
+        <div class="more-work-card">
           <video class="mw-media mw-nielsen" src="images/nielsen/nielsen-hero-web.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Nielsen ONE measurement tool"></video>
+                 autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <div class="mw-body">
-            <span class="mw-title">Nielsen ONE</span>
+            <a class="mw-title card-link" href="nielsen.html">Nielsen ONE</a>
             <span class="mw-year">UX Design &middot; 2025</span>
           </div>
-        </a>
-        <a class="more-work-card" href="oxy.html">
+        </div>
+        <div class="more-work-card">
           <video class="mw-media mw-oxy" src="images/oxy/oxy-hero-web.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Oxy Design Agency site"></video>
+                 autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <div class="mw-body">
-            <span class="mw-title">Oxy Design Agency</span>
+            <a class="mw-title card-link" href="oxy.html">Oxy Design Agency</a>
             <span class="mw-year">Product Design &middot; 2026</span>
           </div>
-        </a>
+        </div>
       </div>
       <div class="more-work-cta">
         <a class="btn-view-all" href="index.html#work">View All Work</a>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -787,25 +800,13 @@
     </div>
   </footer>
 
-  <script>
-
-    function toggleMobileNav() {
-      const overlay = document.getElementById("mobileNav");
-      const open = !overlay.classList.contains("open");
-      overlay.classList.toggle("open", open);
-      document.querySelector(".nav-toggle").classList.toggle("open", open);
-      document.body.classList.toggle("nav-open", open);
-      document.body.style.overflow = open ? "hidden" : "";
-    }
-
-  </script>
 
   <!-- CUSTOM CURSOR
        The same element and the same copy as the homepage. At rest it is the purple
        dot this page used to draw for itself; over a More Work card it morphs into
        the "View Case Study" pill, so the cards hover alike in both places.
        Driven by cursor.js. -->
-  <div id="custom-cursor">
+  <div id="custom-cursor" aria-hidden="true">
     View Case Study
   </div>
 </body>
