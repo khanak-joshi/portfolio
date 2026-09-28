@@ -248,10 +248,12 @@ nav .nav-links a,
   outline-offset: 0;
 }
 /* Skip link — the first stop for Tab on every page. Parked above the viewport
-   until focused, then drops in over the bar's wordmark, styled like a nav pill. */
+   until focused, then drops in just under the bar, on the content edge, styled
+   like a nav pill. Under the bar rather than over the wordmark: the wordmark is
+   wider than the pill, so its tail showed around the pill's rounded end. */
 .skip-link {
   position: fixed;
-  top: 16px;
+  top: calc(var(--nav-h) + var(--label-gap));
   left: var(--content-inset);
   z-index: 10000;
   padding: 8px 16px;
@@ -263,7 +265,7 @@ nav .nav-links a,
   font-size: var(--nav-size);
   line-height: var(--nav-lh);
   text-decoration: none;
-  transform: translateY(calc(-100% - 24px));
+  transform: translateY(calc(-100% - var(--nav-h) - var(--label-gap) * 2));
 }
 .skip-link:focus-visible { transform: none; }
 /* <main> takes focus from the skip link only so the next Tab starts inside
@@ -306,8 +308,13 @@ nav .nav-links a,
    Every looping film gets a pause/play button (added by video-controls.js),
    --label-gap in from the film's top-left corner on every film — clear of the
    "In progress" badge (top-right) and the homepage hover copy (bottom). Near
-   Black at rest so it reads on light and dark footage alike; purple only on
-   hover, per the palette. 44px, the site's touch-target size. */
+   Black at rest so it reads on light and dark footage alike. 44px, the site's
+   touch-target size.
+
+   Hover is the View All Work treatment — tint fill, purple rule and icon —
+   not a solid purple fill: the cursor dot is solid purple, and over a solid
+   purple button it vanished. The tint is opaque here (--accent-tint rather
+   than the pill's 10% wash) because this sits on moving footage. */
 .video-frame { position: relative; }
 .video-toggle {
   position: absolute;
@@ -319,13 +326,17 @@ nav .nav-links a,
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 50%;
   background: rgba(26, 29, 33, 0.72);
   color: #FFFFFF;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
-.video-toggle:hover { background: var(--accent); }
+.video-toggle:hover {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
 .video-toggle svg { display: block; }
 .more-work-card .video-frame { align-self: end; }
 .more-work-card .video-frame .mw-media { width: 100%; }
