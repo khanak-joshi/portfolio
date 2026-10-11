@@ -169,9 +169,6 @@
     .card-fms     .card-media { aspect-ratio: 842 / 1016;  }  /* 5:6    */
     .card-smile   .card-media { aspect-ratio: 842 / 842;   }  /* 1:1    */
 
-    .case-card:hover .card-media {
-      opacity: 0.15;
-    }
     .card-hover-desc {
       position: absolute;
       bottom: 40px;
@@ -190,9 +187,18 @@
       transition: opacity 0.28s ease, transform 0.28s ease;
       pointer-events: none;
     }
-    .case-card:hover .card-hover-desc {
-      opacity: 1;
-      transform: translateY(0);
+    /* The hover state is for mouse users only. On a touchscreen a tap leaves
+       :hover stuck on the card, so tapping the film's pause button would fade
+       the film and strand the description over it. Touch shows the plain card;
+       its title already carries the link. */
+    @media (hover: hover) and (pointer: fine) {
+      .case-card:hover .card-media {
+        opacity: 0.15;
+      }
+      .case-card:hover .card-hover-desc {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* "In progress" status badge — top-right of the card image, clear of the
